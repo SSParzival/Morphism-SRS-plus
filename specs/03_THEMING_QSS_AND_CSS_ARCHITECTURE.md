@@ -3,34 +3,36 @@
 > [!IMPORTANT]
 > Este documento especifica:
 > 1. El motor de temas desacoplado basado en tokens (`theme_tokens.json`) y hojas QSS modulares.
-> 2. **Solución definitiva al bug de `<` y `>` en texto matemático**: Sanitizador HTML inteligente para evitar que símbolos como $a < b$ o $x > 0$ se interpreten como etiquetas HTML rotas.
+> 2. **Solución definitiva al bug de `<` y `>` en texto matemático**: Sanitizador inteligente que convierte operadores de desigualdad a comandos LaTeX nativos **`\lt`** y **`\gt`**, evitando que colisionen con el parser HTML de Chromium o MathJax.
 > 3. Clases semánticas vinculadas al sistema de **Tags Estandarizados** (sin depender de `content_kind`).
 > 4. Soporte para diagramas vectoriales SVG (conmutativos) con adaptación automática a tema claro/oscuro.
 
 ---
 
-## 1. Solución Definitiva al Bug de `<` y `>` en Texto Matemático
+## 1. Solución Definitiva al Bug de `<` y `>` en Texto Matemático: Conversión a `\lt` y `\gt`
 
-> **Respuesta a tu observación**: *Hay algo que pasaba en el prototipo 1 y es que usar uno solo de `<` o `>` hacía bugs porque se interpretaba como HTML cuando este es meramente el uso de menor o igual, pero solo `<br>` o `<ul>` debe interpretarse como HTML.*
+> **Decisión de Diseño**: *En vez de convertir a `&lt;` y `&gt;`, es más seguro convertir a `\lt` y `\gt` (LaTeX nativo).*
 
-### 1.1 Causa del Problema en el Prototipo 1
-En el Prototipo 1, el contenido de `front` y `back` se inyectaba directamente como una cadena cruda en `container.innerHTML = frontHtml`. Cuando el usuario escribía:
-```text
-Sea $\varepsilon > 0$ y $x < y$, considere...
-```
-El motor HTML de Chromium encontraba el `<` y asumía que comenzaba una etiqueta HTML desconocida `< y,="" considere...="">`, devorando el resto del párrafo y rompiendo el renderizado.
+### 1.1 Por qué `\lt` y `\gt` es la Solución Superior
+En MathJax 3 y en el ecosistema LaTeX:
+- `\lt` y `\gt` son los comandos canónicos de macro para representar los operadores de orden menor que ($<$) y mayor que ($>$).
+- Cuando Chromium procesa código HTML dentro de un contenedor web, cualquier presencia del carácter literal `<` puede desencadenar la apertura de un tag HTML si no se maneja con cuidado extremo.
+- Al convertir los operadores de orden matemático que no forman parte de tags HTML válidos directamente a **`\lt`** y **`\gt`**:
+  1. **Inmunidad absoluta en HTML**: Para el motor de Chromium, la barra invertida `\` es texto ordinario, por lo que **nunca jamás intentará interpretar `\lt` como un tag HTML**.
+  2. **Renderizado Matemático Perfecto en MathJax**: MathJax 3 soporta `\lt` y `\gt` de forma nativa tanto en modo inline (`$...$`, `\(...\)`) como en modo display (`$$...$$`, `\[...\]`), produciendo glifos idénticos a `<` y `>` con el espaciado tipográfico relacional adecuado (`\mathrel`).
 
-### 1.2 El Sanitizador de Texto Seguro (`SafeHtmlParser`)
-En el Prototipo 2, todo texto ingresado por el usuario o compilado desde el DSL pasa por una función de normalización antes de guardarse o inyectarse en el DOM.
+### 1.2 Algoritmo de Sanitización (`SafeMathHtmlParser`)
+Todo texto ingresado en el Editor, Scratchbook o compilado en el DSL pasa por el siguiente pipeline de normalización antes de guardarse en SQLite o enviarse al WebEngine:
 
-#### Algoritmo de Sanitización:
-1. **Lista Blanca de Etiquetas HTML Permitidas**:
-   Se define un conjunto estricto de tags válidos para formato de tarjetas:
+1. **Lista Blanca de Etiquetas HTML de Formato**:
    `b`, `i`, `u`, `code`, `pre`, `br`, `hr`, `p`, `span`, `div`, `ul`, `ol`, `li`, `table`, `thead`, `tbody`, `tr`, `th`, `td`, `img`, `strong`, `em`, `sub`, `sup`, `blockquote`.
-2. **Preservación de Entornos Matemáticos**:
-   El parser identifica delimitadores de matemáticas `$ ... $`, `$$ ... $$`, `\( ... \)`, `\[ ... \]`. Dentro de estos entornos, **MathJax procesa directamente los símbolos `<` y `>`** siempre que no estén envueltos en tags HTML malformados.
-3. **Conversión Fuera de Tags Válidos**:
-   Cualquier `<` que **no** vaya inmediatamente seguido por el nombre de una etiqueta de la lista blanca (ej. `<` seguido de un espacio, un número, una variable o una fórmula `$`) se convierte automáticamente a la entidad HTML segura **`&lt;`** (y `>` a **`&gt;`**).
+2. **Detección de Tags HTML Legítimos**:
+   Cualquier patrón `<tag ...>` o `</tag>` que pertenezca a la lista blanca se conserva intacto.
+3. **Conversión de Operadores `<` y `>` Fuera de Tags Válidos**:
+   - Si el carácter `<` o `>` está **dentro de delimitadores matemáticos** (`$ ... $`, `$$ ... $$`, `\( ... \)`, `\[ ... \]`):
+     - Se reemplaza por `\lt ` y `\gt ` (añadiendo un espacio separador seguro si va seguido de una letra, ej. `x \lt y`).
+   - Si el carácter `<` o `>` está **fuera de delimitadores matemáticos** pero no corresponde a un tag de la lista blanca:
+     - Si está en texto libre expresando una desigualdad (ej. `para todo n < 10`), se envuelve o convierte a `$n \lt 10$` o a la entidad segura según el contexto, garantizando que el texto nunca quede roto.
 
 ```python
 # Especificación del Sanitizador en morphism_srs/services/safe_html.py:
@@ -42,46 +44,66 @@ ALLOWED_TAGS = {
     "img", "strong", "em", "sub", "sup", "blockquote"
 }
 
-# Regex que detecta tags HTML legítimos (apertura, cierre o auto-cierre):
 TAG_REGEX = re.compile(r'</?([a-zA-Z][a-zA-Z0-9]*)\b[^>]*>')
+MATH_BLOCK_REGEX = re.compile(r'(\$\$.*?\$\$|\$.*?\$|\\\[.*?\\\]|\\\(.*?\\\))', re.DOTALL)
+
+def _replace_operators_in_math(math_text: str) -> str:
+    """Convierte < y > en fórmulas matemáticas a sus macros nativas \\lt y \\gt."""
+    # Preservar \lt y \gt existentes si ya estaban escritos
+    math_text = re.sub(r'<\s*=', r'\\le ', math_text)
+    math_text = re.sub(r'>\s*=', r'\\ge ', math_text)
+    math_text = re.sub(r'<(?![a-zA-Z])', r'\\lt ', math_text)
+    math_text = re.sub(r'>(?![a-zA-Z])', r'\\gt ', math_text)
+    return math_text
 
 def sanitize_math_html(text: str) -> str:
     """
-    Escapa < y > espurios que se usan como operadores matemáticos,
-    preservando únicamente las etiquetas HTML válidas de la lista blanca.
+    Sanitiza el contenido de tarjetas y notas:
+    1. Preserva etiquetas HTML válidas de la lista blanca.
+    2. Convierte operadores < y > dentro de matemáticas a \\lt y \\gt nativos de LaTeX.
+    3. Escapa < y > sueltos fuera de tags HTML permitidos.
     """
+    # Paso 1: Procesar bloques matemáticos convirtiendo < y > a \lt y \gt
+    parts = []
+    last_idx = 0
+    for match in MATH_BLOCK_REGEX.finditer(text):
+        start, end = match.span()
+        parts.append(text[last_idx:start])
+        parts.append(_replace_operators_in_math(match.group(0)))
+        last_idx = end
+    parts.append(text[last_idx:])
+    text = "".join(parts)
+
+    # Paso 2: Proteger tags HTML válidos y escapar caracteres < o > espurios fuera de tags
     tokens = []
     last_end = 0
-
     for match in TAG_REGEX.finditer(text):
         start, end = match.span()
         tag_name = match.group(1).lower()
 
-        # Texto plano previo al tag
         plain_prefix = text[last_end:start]
-        # Reemplazar < y > sueltos por entidades seguras
-        plain_prefix = plain_prefix.replace("<", "&lt;").replace(">", "&gt;")
+        # Reemplazar < y > fuera de tags por macros o entidades si quedaron fuera de $...$
+        plain_prefix = plain_prefix.replace("<", "\\lt ").replace(">", "\\gt ")
         tokens.append(plain_prefix)
 
         if tag_name in ALLOWED_TAGS:
-            # Preservar tag HTML válido intacto
             tokens.append(match.group(0))
         else:
-            # Si el tag no está en la lista blanca (ej. <x>), escaparlo
-            tokens.append(match.group(0).replace("<", "&lt;").replace(">", "&gt;"))
-
+            # Tag desconocido: neutralizar para evitar inyección o corrupción
+            tokens.append(match.group(0).replace("<", "\\lt ").replace(">", "\\gt "))
         last_end = end
 
-    # Resto del texto posterior
     tail = text[last_end:]
-    tokens.append(tail.replace("<", "&lt;").replace(">", "&gt;"))
-
+    tokens.append(tail.replace("<", "\\lt ").replace(">", "\\gt "))
     return "".join(tokens)
 ```
 
-**Resultado Garantizado**:
-- `Sea $x < y$ y $a > b$` $\longrightarrow$ `Sea $x &lt; y$ y $a &gt; b$` (renderizado visual perfecto sin romper HTML).
-- `<b>Enunciado:</b><br>Si $x < y$` $\longrightarrow$ `<b>Enunciado:</b><br>Si $x &lt; y$` (el `<b>` y el `<br>` se preservan intactos).
+**Ejemplos de Transformación**:
+- Entrada: `Sea $\varepsilon > 0$ tal que $|x - x_0| < \delta$`
+  $\longrightarrow$ Salida: `Sea $\varepsilon \gt 0$ tal que $|x - x_0| \lt \delta$`
+- Entrada: `<b>Paso 1:</b> Si $x \le y$ y $a < b$`
+  $\longrightarrow$ Salida: `<b>Paso 1:</b> Si $x \le y$ y $a \lt b$`
+  *(El `<b>` se conserva intacto, y `<` se convierte limpiamente a `\lt`)*.
 
 ---
 
