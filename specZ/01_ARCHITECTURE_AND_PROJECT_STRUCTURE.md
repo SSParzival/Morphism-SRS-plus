@@ -86,8 +86,7 @@ Morphism SRS proto2/
 │       │   ├── import_export/
 │       │   │   ├── __init__.py
 │       │   │   ├── mpkg_service.py    # Empaquetado/desempaquetado ZIP (.mpkg) con UUIDs e imágenes/SVGs incluidos
-│       │   │   ├── json_service.py    # Importación/exportación JSON v2 y compatibilidad con scripts IA
-│       │   │   └── proto1_migrator.py # Migrador automático desde una carpeta de Prototipo 1 a SQLite v2
+│       │   │   └── json_service.py    # Importación/exportación JSON v2 y compatibilidad con lotes IA
 │       │   ├── layout_service.py      # Algoritmo Sugiyama / jerárquico topológico para posicionar grafos
 │       │   └── mobile_server.py       # Servidor HTTP efímero (activo sólo mientras el diálogo QR está abierto)
 │       │
@@ -165,7 +164,10 @@ Morphism SRS proto2/
 │                   ├── barplot.html
 │                   └── decay_chart.html
 │
-└── tests/                             # Suite de Pruebas Automatizadas (pytest + pytest-qt)
+├── tools/                             # Herramientas Externas Desacopladas del Core
+│   └── migrate_proto1.py              # Migrador autónomo Prototipo 1 -> SQLite v2 (100% separado de src/)
+│
+└── tests/                             # Suite de Pruebas Automatizadas (pytest + unittest)
     ├── test_sql_schema_and_repos.py
     ├── test_safe_html_sanitizer.py
     ├── test_dsl_compiler.py

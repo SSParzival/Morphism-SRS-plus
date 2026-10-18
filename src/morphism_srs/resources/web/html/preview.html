@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Morphism SRS Live Preview</title>
+    <link rel="stylesheet" href="morphism://app/css/cards.css">
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                macros: {}
+            },
+            svg: {
+                fontCache: 'local'
+            },
+            startup: {
+                typeset: false
+            }
+        };
+    </script>
+    <script src="morphism://app/vendor/mathjax/tex-svg-full.js"></script>
+</head>
+<body>
+    <div id="preview-root" class="review-shell">
+        <div class="note-header">
+            <span id="preview-title" class="note-title">Live Preview</span>
+            <span id="preview-mode" class="mode-badge">STANDARD</span>
+        </div>
+        <div id="preview-tags" class="tag-row"></div>
+        <div id="preview-premise-box" class="premise-box" style="display: none;">
+            <div class="premise-label">Premise</div>
+            <div id="preview-premise"></div>
+        </div>
+        <div id="preview-cards"></div>
+    </div>
+    <script src="morphism://app/js/preview_renderer.js"></script>
+</body>
+</html>

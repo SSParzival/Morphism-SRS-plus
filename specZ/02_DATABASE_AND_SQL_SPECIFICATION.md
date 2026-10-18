@@ -743,9 +743,12 @@ Cuando el usuario selecciona $N$ notas en el `NoteBrowserView` o con el rectáng
 
 ---
 
-## 5. Migrador Automático Prototipo 1 $\to$ Prototipo 2 (`proto1_migrator.py`)
+## 5. Módulo Autónomo de Migración Prototipo 1 $\to$ Prototipo 2 (`tools/migrate_proto1.py`)
 
-Para asegurar que ningún curso, tarjeta, horario FSRS ni historial de estudio creado en `c:\repos\New SRS Project` se pierda, `ImportExportService.migrate_proto1_workspace(source_dir)` ejecuta el siguiente flujo transaccional:
+> [!NOTE]
+> **Desacoplamiento Estricto**: Dado que el Prototipo 2 reemplaza al 100% al Prototipo 1, el migrador **no forma parte del paquete `src/morphism_srs/`**. Reside como una herramienta externa e independiente en `tools/migrate_proto1.py` para evitar arrastrar código legacy o acoplamiento con el formato antiguo dentro del núcleo de la aplicación.
+
+Para asegurar que ningún curso, tarjeta, horario FSRS ni historial de estudio creado en `c:\repos\New SRS Project` se pierda, `tools/migrate_proto1.py` ejecuta el siguiente flujo transaccional directo hacia `morphism.db`:
 
 1. **Siembra Inicial del Catálogo de Tags (`specZ/tags_default.csv`)**:
    - Carga las 2,000 etiquetas estándar (`tag_name,category,scope`) en la tabla `tags` con `is_standard = 1`.
