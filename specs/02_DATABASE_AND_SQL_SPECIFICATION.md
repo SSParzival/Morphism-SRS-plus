@@ -49,10 +49,11 @@ review_mode TEXT NOT NULL DEFAULT 'standard' CHECK (review_mode IN ('standard', 
 
 1. **Eliminación**: Se remueve la columna `content_kind` de la tabla `notes`.
 2. **Unificación con Tags**: La naturaleza epistemológica de una nota se gestiona mediante el sistema relacional `tags` y `note_tags`.
-3. **Lista Estándar de Tags Preinstalada**: Para evitar que un usuario escriba `#teorema`, otro `#teor`, y otro `#theorem` generando fragmentación, la aplicación provee un catálogo base de etiquetas de fábrica (que el usuario puede usar o extender):
-   - **Tipos Matemáticos**: `#definición`, `#teorema`, `#lema`, `#corolario`, `#proposición`, `#demostración`, `#ejercicio`, `#ejemplo`, `#contraejemplo`, `#axioma`.
-   - **Campos**: `#análisis`, `#álgebra`, `#topología`, `#geometría`, `#lógica`, `#probabilidad`, `#física`.
-4. **Vínculo con Estilos Visuales**: En lugar de depender de `content_kind`, las clases CSS (`.math-theorem`, `.math-definition`) se aplican automáticamente en el renderizador si la nota posee la etiqueta estandarizada correspondiente (o mediante bloques semánticos en el DSL).
+3. **Catálogo Estándar de Tags (`specs/tags_default.csv`)**: Para evitar fragmentación terminológica (`#teorema`, `#teor`, `#theorem`), la aplicación provee un catálogo base de etiquetas estándar preconfiguradas en inglés bajo formato canónico `snake_case` (`name_of_tag_with_underscores`), definido en `specs/tags_default.csv` (2,000 tags matemáticos y científicos rigurosamente curados y sin duplicados semánticos).
+   - **Tipos Epistémicos**: `definition`, `theorem`, `lemma`, `corollary`, `proposition`, `proof`, `exercise`, `example`, `counterexample`, `axiom`, etc.
+   - **Campos y Teorías**: `abstract_algebra`, `algebraic_topology`, `real_analysis`, `complex_analysis`, `differential_geometry`, `category_theory`, `mathematical_logic`, etc.
+   - **Carga en Base de Datos**: No se insertan de forma rígida (*hardcoded*) en el DDL, sino que el servicio de inicialización / migraciones importa `specs/tags_default.csv` marcando `is_standard = 1`. El usuario puede crear libremente tags personalizados adicionales (`is_standard = 0`).
+4. **Vínculo con Estilos Visuales**: En lugar de depender de `content_kind`, las clases CSS (`.math-theorem`, `.math-definition`) se aplican automáticamente en el renderizador si la nota posee la etiqueta estandarizada correspondiente (o mediante directivas de bloque en el DSL).
 
 ---
 
@@ -301,17 +302,9 @@ CREATE TABLE tags (
     color_hex               TEXT NOT NULL DEFAULT '#38bdf8'
 ) STRICT;
 
--- Catálogo de Tags Estándar de Fábrica
-INSERT INTO tags (name, is_standard, color_hex) VALUES
-('definicion', 1, '#38bdf8'),
-('teorema', 1, '#6366f1'),
-('lema', 1, '#8b5cf6'),
-('demostracion', 1, '#10b981'),
-('proposicion', 1, '#a855f7'),
-('corolario', 1, '#06b6d4'),
-('ejercicio', 1, '#f59e0b'),
-('ejemplo', 1, '#ec4899'),
-('axioma', 1, '#14b8a6');
+-- NOTA: El catálogo estándar (2,000 tags científicos en formato name_with_underscores)
+-- NO se inserta de forma fija en este DDL. Se carga automáticamente durante la inicialización 
+-- del repositorio / base de datos leyendo el archivo `specs/tags_default.csv` con is_standard=1.
 
 CREATE TABLE note_tags (
     note_id                 INTEGER NOT NULL REFERENCES notes(id) ON DELETE CASCADE,
