@@ -52,7 +52,6 @@ review_mode TEXT NOT NULL DEFAULT 'standard' CHECK (review_mode IN ('standard', 
 3. **Lista Estándar de Tags Preinstalada**: Para evitar que un usuario escriba `#teorema`, otro `#teor`, y otro `#theorem` generando fragmentación, la aplicación provee un catálogo base de etiquetas de fábrica (que el usuario puede usar o extender):
    - **Tipos Matemáticos**: `#definición`, `#teorema`, `#lema`, `#corolario`, `#proposición`, `#demostración`, `#ejercicio`, `#ejemplo`, `#contraejemplo`, `#axioma`.
    - **Campos**: `#análisis`, `#álgebra`, `#topología`, `#geometría`, `#lógica`, `#probabilidad`, `#física`.
-   - **Organización**: `#ch1`, `#ch2`, `#examen1`, `#ayudantía`.
 4. **Vínculo con Estilos Visuales**: En lugar de depender de `content_kind`, las clases CSS (`.math-theorem`, `.math-definition`) se aplican automáticamente en el renderizador si la nota posee la etiqueta estandarizada correspondiente (o mediante bloques semánticos en el DSL).
 
 ---
