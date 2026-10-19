@@ -65,6 +65,7 @@ def main(argv: list[str] | None = None) -> int:
         media_vault=media_vault,
         theme_manager=theme_manager,
         web_profile=web_profile,
+        version=config.version,
     )
     window.show()
 

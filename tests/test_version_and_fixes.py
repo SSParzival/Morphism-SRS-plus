@@ -37,6 +37,7 @@ from morphism_srs.theming.theme_manager import ThemeManager
 from morphism_srs.ui.dialogs.mobile_qr_dialog import MobileQRDialog
 from morphism_srs.ui.dialogs.node_editor_dialog import NodeEditorDialog
 from morphism_srs.ui.dialogs.scratchbook_dialog import ScratchbookDialog
+from morphism_srs.ui.main_window import MainWindow
 from morphism_srs.ui.views.explorer_view import GraphEdgeItem, GraphNodeItem
 from morphism_srs.web_engine.scheme_handler import register_morphism_scheme
 from morphism_srs.web_engine.web_profile import WebEngineProfileManager
@@ -83,8 +84,28 @@ def _make_test_env(tmp_dir: Path):
 
 
 class TestV020Fixes(unittest.TestCase):
-    def test_version_is_0_2_1(self):
-        self.assertEqual(__version__, "0.2.1")
+    def test_version_is_0_2_2(self):
+        self.assertEqual(__version__, "0.2.2")
+
+    def test_main_window_version_parameter(self):
+        _get_qapp()
+        with tempfile.TemporaryDirectory() as tmp:
+            _, config, db, media_vault, theme_manager, web_profile = _make_test_env(Path(tmp))
+            try:
+                win = MainWindow(
+                    conn=db.connection,
+                    config=config,
+                    media_vault=media_vault,
+                    theme_manager=theme_manager,
+                    web_profile=web_profile,
+                    version="0.2.2-custom",
+                )
+                self.assertEqual(win.app_version, "0.2.2-custom")
+                self.assertIn("v0.2.2-custom", win.windowTitle())
+                win.close()
+            finally:
+                web_profile.cleanup_all_views()
+                db.close()
 
     def test_canonical_mdsl_compiler_and_to_import_test_file(self):
         test_mdsl_path = Path(__file__).resolve().parents[1] / "to_import" / "test.mdsl"

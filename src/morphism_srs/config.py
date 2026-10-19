@@ -133,6 +133,12 @@ class AppConfig:
         if auto_save:
             self.save()
 
+    @property
+    def version(self) -> str:
+        """Application version string as configured or package default."""
+        from morphism_srs import __version__
+        return str(self.get("version", __version__))
+
     def _load_default_mathjax_config(self) -> dict[str, Any]:
         default_file = self.paths.defaults_dir / "mathjax_macros.json"
         if default_file.exists():

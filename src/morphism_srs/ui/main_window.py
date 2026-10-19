@@ -45,9 +45,11 @@ class MainWindow(QMainWindow):
         media_vault: MediaVault,
         theme_manager: ThemeManager,
         web_profile: WebEngineProfileManager,
+        version: str | None = None,
     ) -> None:
         super().__init__()
-        self.setWindowTitle("Morphism SRS Prototype 2 (v0.2.1) — Mathematical Knowledge Graph & Spaced Repetition")
+        self.app_version = version or getattr(config, "version", "0.2.2")
+        self.setWindowTitle(f"Morphism SRS Prototype 2 (v{self.app_version}) — Mathematical Knowledge Graph & Spaced Repetition")
 
         icon_path = config.paths.icons_dir / "icon.png"
         if icon_path.exists():
@@ -99,7 +101,7 @@ class MainWindow(QMainWindow):
         set_widget_props(brand, role="title")
         sb_layout.addWidget(brand)
 
-        sub_brand = QLabel("Prototype 2 • v0.2.1", sidebar)
+        sub_brand = QLabel(f"Prototype 2 • v{self.app_version}", sidebar)
         set_widget_props(sub_brand, role="muted")
         sb_layout.addWidget(sub_brand)
         sb_layout.addSpacing(12)
@@ -187,7 +189,7 @@ class MainWindow(QMainWindow):
 
         status_bar = QStatusBar(self)
         self.setStatusBar(status_bar)
-        status_bar.showMessage("Morphism SRS Prototype 2 (v0.2.1) Ready — Offline MathJax 3 + SQLite WAL + FSRS v5", 5000)
+        status_bar.showMessage(f"Morphism SRS Prototype 2 (v{self.app_version}) Ready — Offline MathJax 3 + SQLite WAL + FSRS v5", 5000)
 
         self.switch_tab("courses")
 
