@@ -54,6 +54,8 @@ def main(argv: list[str] | None = None) -> int:
         web_root=paths.web_dir,
         media_vault=media_vault,
         theme_manager=theme_manager,
+        config=config,
+        parent=app,
     )
 
     # 6. Show MainWindow
@@ -67,6 +69,8 @@ def main(argv: list[str] | None = None) -> int:
     window.show()
 
     exit_code = app.exec()
+    web_profile.cleanup_all_views()
+    del window
     db_manager.close()
     return exit_code
 

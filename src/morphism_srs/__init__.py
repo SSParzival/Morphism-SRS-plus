@@ -1,3 +1,3 @@
 """Morphism SRS — Prototype 2 package."""
 
-__version__ = "2.0.0"
+__version__ = "0.2.1"

@@ -47,7 +47,7 @@ class MainWindow(QMainWindow):
         web_profile: WebEngineProfileManager,
     ) -> None:
         super().__init__()
-        self.setWindowTitle("Morphism SRS v2 — Mathematical Knowledge Graph & Spaced Repetition")
+        self.setWindowTitle("Morphism SRS Prototype 2 (v0.2.1) — Mathematical Knowledge Graph & Spaced Repetition")
 
         icon_path = config.paths.icons_dir / "icon.png"
         if icon_path.exists():
@@ -99,7 +99,7 @@ class MainWindow(QMainWindow):
         set_widget_props(brand, role="title")
         sb_layout.addWidget(brand)
 
-        sub_brand = QLabel("v2.0 • FSRS v5 • DAG", sidebar)
+        sub_brand = QLabel("Prototype 2 • v0.2.1", sidebar)
         set_widget_props(sub_brand, role="muted")
         sb_layout.addWidget(sub_brand)
         sb_layout.addSpacing(12)
@@ -120,7 +120,7 @@ class MainWindow(QMainWindow):
 
         sb_layout.addStretch(1)
 
-        scratch_btn = QPushButton("📝  Scratchbook / DSL", sidebar)
+        scratch_btn = QPushButton("✏️  Scratchbook", sidebar)
         set_widget_props(scratch_btn, nav="true", active="false")
         scratch_btn.clicked.connect(self._on_open_scratchbook)
         sb_layout.addWidget(scratch_btn)
@@ -139,6 +139,7 @@ class MainWindow(QMainWindow):
 
         # Central Stacked Views
         self.stack = QStackedWidget(central)
+        self.stack.setMinimumWidth(680)
         self.courses_view = CoursesView(self.conn, self.media_vault, self.review_controller, self.event_bus, self.stack)
         self.explorer_view = ExplorerView(
             self.conn,
@@ -186,7 +187,7 @@ class MainWindow(QMainWindow):
 
         status_bar = QStatusBar(self)
         self.setStatusBar(status_bar)
-        status_bar.showMessage("Morphism SRS v2 Ready — Offline MathJax 3 + SQLite WAL + FSRS v5", 5000)
+        status_bar.showMessage("Morphism SRS Prototype 2 (v0.2.1) Ready — Offline MathJax 3 + SQLite WAL + FSRS v5", 5000)
 
         self.switch_tab("courses")
 
@@ -209,7 +210,7 @@ class MainWindow(QMainWindow):
             self.statusBar().showMessage(msg, timeout_ms)
 
     def _on_open_scratchbook(self) -> None:
-        dlg = ScratchbookDialog(self.conn, self.web_profile, self.event_bus, parent=self)
+        dlg = ScratchbookDialog(self.conn, self.web_profile, self.event_bus, config=self.config, parent=self)
         dlg.exec()
 
     def _on_open_mobile_qr(self) -> None:
@@ -226,3 +227,7 @@ class MainWindow(QMainWindow):
     def _on_open_settings(self) -> None:
         dlg = SettingsDialog(self.conn, self.config, self.theme_manager, parent=self)
         dlg.exec()
+
+    def closeEvent(self, event) -> None:
+        self.web_profile.cleanup_all_views()
+        super().closeEvent(event)

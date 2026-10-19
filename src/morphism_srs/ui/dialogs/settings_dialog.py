@@ -27,7 +27,7 @@ from morphism_srs.storage.repositories.review_repo import ReviewRepository
 from morphism_srs.storage.unit_of_work import UnitOfWork
 from morphism_srs.theming.delegates import set_widget_props
 from morphism_srs.theming.theme_manager import ThemeManager
-from morphism_srs.ui.window_sizing import apply_relative_geometry
+from morphism_srs.ui.window_sizing import apply_relative_geometry, wrap_in_scroll_area
 
 
 class SettingsDialog(QDialog):
@@ -51,11 +51,15 @@ class SettingsDialog(QDialog):
         self.card_repo = CardRepository(conn)
         self.review_repo = ReviewRepository(conn)
 
-        root = QVBoxLayout(self)
+        outer = QVBoxLayout(self)
+        outer.setContentsMargins(0, 0, 0, 0)
+
+        container = QWidget(self)
+        root = QVBoxLayout(container)
         root.setContentsMargins(16, 16, 16, 16)
         root.setSpacing(12)
 
-        self.tabs = QTabWidget(self)
+        self.tabs = QTabWidget(container)
         self.tabs.addTab(self._build_general_tab(), "Appearance & General")
         self.tabs.addTab(self._build_fsrs_tab(), "FSRS v5 & Rescheduling")
         self.tabs.addTab(self._build_macros_tab(), "LaTeX Macros & Snippets")
@@ -63,14 +67,17 @@ class SettingsDialog(QDialog):
 
         btn_row = QHBoxLayout()
         btn_row.addStretch(1)
-        cancel_btn = QPushButton("Cancel", self)
+        cancel_btn = QPushButton("Cancel", container)
         cancel_btn.clicked.connect(self.reject)
-        save_btn = QPushButton("Save & Apply", self)
+        save_btn = QPushButton("Save & Apply", container)
         set_widget_props(save_btn, variant="primary")
         save_btn.clicked.connect(self._on_save)
         btn_row.addWidget(cancel_btn)
         btn_row.addWidget(save_btn)
         root.addLayout(btn_row)
+
+        scroll = wrap_in_scroll_area(container, self, min_width=540, min_height=410)
+        outer.addWidget(scroll)
 
     def _build_general_tab(self) -> QWidget:
         w = QWidget(self)
@@ -117,7 +124,7 @@ class SettingsDialog(QDialog):
         layout.addWidget(lbl)
 
         self.weights_edit = QPlainTextEdit(w)
-        self.weights_edit.setMaximumHeight(90)
+        self.weights_edit.setMinimumHeight(80)
         layout.addWidget(self.weights_edit)
         self._load_scope_weights()
 
@@ -137,6 +144,7 @@ class SettingsDialog(QDialog):
         layout.addWidget(lbl)
 
         self.macros_edit = QPlainTextEdit(w)
+        self.macros_edit.setMinimumHeight(180)
         self.macros_edit.setPlainText(json.dumps(self.config.load_mathjax_macros(), indent=2, ensure_ascii=False))
         layout.addWidget(self.macros_edit, 1)
         return w

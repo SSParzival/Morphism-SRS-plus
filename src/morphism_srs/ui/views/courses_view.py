@@ -23,6 +23,7 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
+from morphism_srs.config import get_project_root
 from morphism_srs.controllers.event_bus import EventBus
 from morphism_srs.controllers.review_controller import ReviewController
 from morphism_srs.domain.models import CourseFolderModel, CourseModel
@@ -36,7 +37,7 @@ from morphism_srs.storage.repositories.note_repo import NoteRepository
 from morphism_srs.storage.unit_of_work import UnitOfWork
 from morphism_srs.theming.delegates import set_widget_props
 from morphism_srs.ui.dialogs.custom_study_dialog import CustomStudyDialog
-from morphism_srs.ui.window_sizing import apply_relative_geometry
+from morphism_srs.ui.window_sizing import apply_relative_geometry, wrap_in_scroll_area
 
 
 class CourseEditDialog(QDialog):
@@ -107,7 +108,7 @@ class CourseEditDialog(QDialog):
 
 
 class CoursesView(QWidget):
-    """Hierarchical Folder & Course Tree View with Auto-Study, Custom Study, and Import/Export (.mpkg, .json, .mdsl)."""
+    """Hierarchical Folder & Course Tree View with Graph Explorer launcher, Import/Export (.mdsl, .mpkg, .json), and Custom Study."""
 
     ITEM_TYPE_ROLE = Qt.ItemDataRole.UserRole
     ITEM_ID_ROLE = Qt.ItemDataRole.UserRole + 1
@@ -140,41 +141,52 @@ class CoursesView(QWidget):
         self.refresh_tree()
 
     def _build_ui(self) -> None:
-        root = QVBoxLayout(self)
+        outer = QVBoxLayout(self)
+        outer.setContentsMargins(0, 0, 0, 0)
+
+        container = QWidget(self)
+        root = QVBoxLayout(container)
         root.setContentsMargins(18, 16, 18, 16)
         root.setSpacing(12)
 
         header_row = QHBoxLayout()
-        title = QLabel("Courses & Knowledge Folders", self)
+        title = QLabel("Courses & Knowledge Folders", container)
         set_widget_props(title, role="title")
         header_row.addWidget(title)
         header_row.addStretch(1)
 
-        new_folder_btn = QPushButton("+ New Folder", self)
+        open_dag_btn = QPushButton("🕸️ Open in Graph Explorer", container)
+        set_widget_props(open_dag_btn, variant="primary")
+        open_dag_btn.clicked.connect(self._on_open_selected_in_explorer)
+        header_row.addWidget(open_dag_btn)
+
+        new_folder_btn = QPushButton("+ New Folder", container)
         new_folder_btn.clicked.connect(self._on_new_folder)
         header_row.addWidget(new_folder_btn)
 
-        new_course_btn = QPushButton("+ New Course", self)
-        set_widget_props(new_course_btn, variant="primary")
+        new_course_btn = QPushButton("+ New Course", container)
         new_course_btn.clicked.connect(self._on_new_course)
         header_row.addWidget(new_course_btn)
 
-        import_btn = QPushButton("Import Deck (.mpkg / .json / .mdsl)...", self)
+        import_btn = QPushButton("📥 Import (to_import/ .mdsl / .json / .mpkg)...", container)
         import_btn.clicked.connect(self._on_import_deck)
         header_row.addWidget(import_btn)
 
-        auto_study_btn = QPushButton("Auto-Study Due", self)
-        set_widget_props(auto_study_btn, variant="success")
-        auto_study_btn.clicked.connect(self._on_auto_study_selected)
-        header_row.addWidget(auto_study_btn)
-
-        custom_study_btn = QPushButton("Custom Study...", self)
+        custom_study_btn = QPushButton("Custom Study...", container)
+        set_widget_props(custom_study_btn, variant="ghost")
         custom_study_btn.clicked.connect(self._on_custom_study_selected)
         header_row.addWidget(custom_study_btn)
 
+        auto_study_btn = QPushButton("Auto-Study Due", container)
+        set_widget_props(auto_study_btn, variant="ghost")
+        auto_study_btn.setToolTip("Secondary mode: queue due cards automatically (Primary mode is clicking nodes in Graph Explorer)")
+        auto_study_btn.clicked.connect(self._on_auto_study_selected)
+        header_row.addWidget(auto_study_btn)
+
         root.addLayout(header_row)
 
-        self.tree = QTreeWidget(self)
+        self.tree = QTreeWidget(container)
+        self.tree.setMinimumHeight(260)
         self.tree.setColumnCount(5)
         self.tree.setHeaderLabels(["Folder / Course", "Notes", "Cards", "Due Now", "New"])
         self.tree.header().setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)
@@ -184,6 +196,15 @@ class CoursesView(QWidget):
         self.tree.customContextMenuRequested.connect(self._on_context_menu)
         self.tree.itemDoubleClicked.connect(self._on_item_double_clicked)
         root.addWidget(self.tree, 1)
+
+        scroll = wrap_in_scroll_area(container, self, min_width=640, min_height=420)
+        outer.addWidget(scroll)
+
+    def _on_open_selected_in_explorer(self) -> None:
+        kind, item_id = self._selected_type_and_id()
+        if kind == "course" and item_id is not None:
+            self.event_bus.course_selected.emit(int(item_id))
+        self.event_bus.navigate_to_tab.emit("explorer")
 
     def refresh_tree(self) -> None:
         self.tree.clear()
@@ -288,22 +309,30 @@ class CoursesView(QWidget):
             self.event_bus.navigate_to_tab.emit("review")
 
     def _on_import_deck(self) -> None:
+        to_import_dir = get_project_root() / "to_import"
+        start_dir = str(to_import_dir) if to_import_dir.exists() else ""
         path_str, _ = QFileDialog.getOpenFileName(
             self,
-            "Import Morphism Deck",
-            "",
-            "Morphism Decks (*.mpkg *.json *.mdsl)",
+            "Import Morphism Deck (.mdsl / .json / .mpkg)",
+            start_dir,
+            "Morphism Decks (*.mdsl *.json *.mpkg)",
         )
         if not path_str:
             return
         p = Path(path_str)
+        kind, item_id = self._selected_type_and_id()
+        selected_course_id = int(item_id) if kind == "course" and item_id is not None else None
         try:
             if p.suffix.lower() == ".mpkg":
                 cid = self.mpkg_service.import_mpkg(p, include_scheduling=True)
             elif p.suffix.lower() == ".json":
                 cid = self.json_service.import_course_file(p, include_scheduling=True)
             else:
-                res = self.dsl_compiler.compile_and_commit(p.read_text(encoding="utf-8"), auto_layout=True)
+                res = self.dsl_compiler.compile_and_commit(
+                    p.read_text(encoding="utf-8"),
+                    target_course_id=selected_course_id,
+                    auto_layout=True,
+                )
                 if res.has_errors:
                     QMessageBox.critical(self, "DSL Import Error", res.diagnostics[0].message)
                     return

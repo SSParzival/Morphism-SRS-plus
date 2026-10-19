@@ -116,13 +116,14 @@ class DSLCompiler:
                     )
                     assert created.id is not None
                     key_to_note_id[dsl_note.external_key] = created.id
+                    key_to_note_id[dsl_note.title] = created.id
                     if dsl_note.pos is None:
                         unpositioned_ids.add(created.id)
                     res.notes_created += 1
                 else:
                     assert existing.id is not None
                     existing.title = dsl_note.title or existing.title
-                    existing.premise_html = premise_clean
+                    existing.premise_html = ""
                     existing.review_mode = mode_enum
                     existing.desired_retention = dsl_note.retention
                     existing.tags = dsl_note.tags
@@ -137,7 +138,7 @@ class DSLCompiler:
                             ec.title = dc.title
                             ec.front_html = sanitize_math_html(dc.front)
                             ec.back_html = sanitize_math_html(dc.back)
-                            ec.hint_html = sanitize_math_html(dc.hint)
+                            ec.hint_html = ""
                             new_cards.append(ec)
                         else:
                             new_cards.append(
@@ -147,16 +148,17 @@ class DSLCompiler:
                                     title=dc.title,
                                     front_html=sanitize_math_html(dc.front),
                                     back_html=sanitize_math_html(dc.back),
-                                    hint_html=sanitize_math_html(dc.hint),
+                                    hint_html="",
                                 )
                             )
                     existing.cards = new_cards
                     self.note_repo.update(existing, sync_cards=True)
                     key_to_note_id[dsl_note.external_key] = existing.id
+                    key_to_note_id[dsl_note.title] = existing.id
                     res.notes_updated += 1
 
             for dsl_note in ast.notes:
-                dst_id = key_to_note_id.get(dsl_note.external_key)
+                dst_id = key_to_note_id.get(dsl_note.external_key) or key_to_note_id.get(dsl_note.title)
                 if dst_id is None:
                     continue
                 for dep_key in dsl_note.deps:
@@ -191,48 +193,42 @@ class DSLCompiler:
         edges: list[EdgeModel],
         folder_path: str = "",
     ) -> str:
-        """Decompiles a CourseModel and its notes/edges into a clean .mdsl string."""
-        lines: list[str] = [f'@course "{course.name}"']
+        """Decompiles a CourseModel and its notes/edges into the canonical .mdsl format."""
+        lines: list[str] = [f'COURSE "{course.name}"']
         if folder_path:
-            lines.append(f'@folder "{folder_path}"')
+            lines.append(f'FOLDER "{folder_path}"')
         lines.append("")
 
-        id_to_key: dict[int, str] = {}
-        for idx, n in enumerate(notes, start=1):
-            key = n.external_key or f"note_{n.id or idx}"
+        id_to_title: dict[int, str] = {}
+        for n in notes:
             if n.id is not None:
-                id_to_key[n.id] = key
+                id_to_title[n.id] = n.title
 
-        incoming_deps: dict[int, list[str]] = {n.id: [] for n in notes if n.id is not None}
-        for e in edges:
-            if e.target_note_id in incoming_deps and e.source_note_id in id_to_key:
-                incoming_deps[e.target_note_id].append(id_to_key[e.source_note_id])
-
-        for idx, n in enumerate(notes, start=1):
-            key = n.external_key or f"note_{n.id or idx}"
-            lines.append(f"@note {key}")
-            lines.append(f'title: "{n.title}"')
-            lines.append(f"mode: {n.review_mode.value}")
+        for n in notes:
+            lines.append(f'NEW NOTE "{n.title}"')
+            lines.append(f"MODE {n.review_mode.value}")
             if n.tags:
-                lines.append(f"tags: [{', '.join(n.tags)}]")
-            deps = incoming_deps.get(n.id or -1, [])
-            if deps:
-                lines.append(f"deps: [{', '.join(deps)}]")
-            if n.premise_html.strip():
-                lines.append(f"premise: {n.premise_html.strip()}")
+                lines.append(f"TAGS {', '.join(n.tags)}")
             if n.desired_retention is not None:
-                lines.append(f"retention: {n.desired_retention:.2f}")
-            lines.append(f"pos: [{n.pos_x:.1f}, {n.pos_y:.1f}]")
-            lines.append("---")
+                lines.append(f"RETENTION {n.desired_retention:.2f}")
+            lines.append(f"POS {n.pos_x:.1f}, {n.pos_y:.1f}")
+            lines.append("")
             for c_idx, c in enumerate(n.cards, start=1):
-                if len(n.cards) > 1 or c.title:
-                    header_title = f": {c.title}" if c.title else ""
-                    lines.append(f"[step {c_idx}{header_title}]")
-                lines.append(f"Q: {c.front_html}")
-                lines.append(f"A: {c.back_html}")
-                if c.hint_html.strip():
-                    lines.append(f"H: {c.hint_html}")
-            lines.append("---")
+                c_title = c.title or f"Card {c_idx}"
+                lines.append(f'CARD {c_idx} "{c_title}"')
+                lines.append("FRONT")
+                lines.append(c.front_html)
+                lines.append("BACK")
+                lines.append(c.back_html)
+                lines.append("")
+
+        if edges:
+            lines.append("# Dependency Links")
+            for e in edges:
+                src_t = id_to_title.get(e.source_note_id)
+                dst_t = id_to_title.get(e.target_note_id)
+                if src_t and dst_t:
+                    lines.append(f'LINK "{src_t}" -> "{dst_t}"')
             lines.append("")
 
         return "\n".join(lines)

@@ -32,6 +32,7 @@ from morphism_srs.storage.repositories.note_repo import NoteRepository
 from morphism_srs.theming.delegates import set_widget_props
 from morphism_srs.ui.components.search_bar import DebouncedSearchBar
 from morphism_srs.ui.dialogs.node_editor_dialog import NodeEditorDialog
+from morphism_srs.ui.window_sizing import configure_splitter, wrap_in_scroll_area
 from morphism_srs.web_engine.web_profile import WebEngineProfileManager
 
 
@@ -146,7 +147,11 @@ class BrowserView(QWidget):
         self.refresh_all()
 
     def _build_ui(self) -> None:
-        root = QVBoxLayout(self)
+        outer = QVBoxLayout(self)
+        outer.setContentsMargins(0, 0, 0, 0)
+
+        container = QWidget(self)
+        root = QVBoxLayout(container)
         root.setContentsMargins(14, 12, 14, 12)
         root.setSpacing(10)
 
@@ -154,34 +159,36 @@ class BrowserView(QWidget):
         top_row = QHBoxLayout()
         self.search_bar = DebouncedSearchBar(
             placeholder='FTS5 Search (e.g. "homotopy", tag:theorem, mode:serial, is:due, prop:lapses>3)...',
-            parent=self,
+            parent=container,
         )
         self.search_bar.search_triggered.connect(lambda _: self.run_search())
         top_row.addWidget(self.search_bar, 1)
 
-        study_sel_btn = QPushButton("Custom Study Selected", self)
+        study_sel_btn = QPushButton("Custom Study Selected", container)
         set_widget_props(study_sel_btn, variant="primary")
         study_sel_btn.clicked.connect(self._on_study_selected)
         top_row.addWidget(study_sel_btn)
 
-        tag_btn = QPushButton("+ Tag", self)
+        tag_btn = QPushButton("+ Tag", container)
         tag_btn.clicked.connect(self._on_bulk_tag)
         top_row.addWidget(tag_btn)
 
-        susp_btn = QPushButton("Toggle Suspend", self)
+        susp_btn = QPushButton("Toggle Suspend", container)
         susp_btn.clicked.connect(self._on_toggle_suspend)
         top_row.addWidget(susp_btn)
 
-        reset_btn = QPushButton("Reset Schedule", self)
+        reset_btn = QPushButton("Reset Schedule", container)
         reset_btn.clicked.connect(self._on_reset_schedule)
         top_row.addWidget(reset_btn)
 
         root.addLayout(top_row)
 
-        splitter = QSplitter(Qt.Orientation.Horizontal, self)
+        splitter = QSplitter(Qt.Orientation.Horizontal, container)
 
         # Left Panel: Facet Tree
         self.facet_tree = QTreeWidget(splitter)
+        self.facet_tree.setMinimumWidth(180)
+        self.facet_tree.setMinimumHeight(260)
         self.facet_tree.setHeaderLabel("Filters")
         self.facet_tree.itemClicked.connect(self._on_facet_clicked)
 
@@ -195,6 +202,8 @@ class BrowserView(QWidget):
 
         self.table_model = BrowserTableModel(center_widget)
         self.table_view = QTableView(center_widget)
+        self.table_view.setMinimumWidth(300)
+        self.table_view.setMinimumHeight(240)
         self.table_view.setModel(self.table_model)
         self.table_view.setSelectionBehavior(QTableView.SelectionBehavior.SelectRows)
         self.table_view.setSelectionMode(QTableView.SelectionMode.ExtendedSelection)
@@ -226,6 +235,7 @@ class BrowserView(QWidget):
         right_layout.addLayout(insp_top)
 
         self.web_view = self.web_profile.create_web_view(right_frame)
+        self.web_view.setMinimumHeight(220)
         self.web_view.loadFinished.connect(self._on_preview_loaded)
         self.web_view.setUrl(QUrl("morphism://app/html/preview.html"))
         right_layout.addWidget(self.web_view, 1)
@@ -233,10 +243,11 @@ class BrowserView(QWidget):
         splitter.addWidget(self.facet_tree)
         splitter.addWidget(center_widget)
         splitter.addWidget(right_frame)
-        splitter.setStretchFactor(0, 1)
-        splitter.setStretchFactor(1, 3)
-        splitter.setStretchFactor(2, 2)
+        configure_splitter(splitter, min_sizes=[180, 320, 260], initial_sizes=[200, 440, 300])
         root.addWidget(splitter, 1)
+
+        scroll = wrap_in_scroll_area(container, self, min_width=760, min_height=460)
+        outer.addWidget(scroll)
 
     def refresh_all(self) -> None:
         self._rebuild_facets()

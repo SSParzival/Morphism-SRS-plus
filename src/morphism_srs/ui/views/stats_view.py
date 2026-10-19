@@ -3,13 +3,14 @@ from __future__ import annotations
 import json
 import sqlite3
 
-from PySide6.QtCore import QUrl
+from PySide6.QtCore import QUrl, Qt
 from PySide6.QtWidgets import (
     QComboBox,
     QFrame,
     QHBoxLayout,
     QLabel,
     QPushButton,
+    QSplitter,
     QVBoxLayout,
     QWidget,
 )
@@ -18,6 +19,7 @@ from morphism_srs.controllers.event_bus import EventBus
 from morphism_srs.storage.repositories.course_repo import CourseRepository
 from morphism_srs.storage.repositories.review_repo import ReviewRepository
 from morphism_srs.theming.delegates import set_widget_props
+from morphism_srs.ui.window_sizing import configure_splitter, wrap_in_scroll_area
 from morphism_srs.web_engine.web_profile import WebEngineProfileManager
 
 
@@ -48,23 +50,27 @@ class StatsView(QWidget):
         self.refresh_stats()
 
     def _build_ui(self) -> None:
-        root = QVBoxLayout(self)
+        outer = QVBoxLayout(self)
+        outer.setContentsMargins(0, 0, 0, 0)
+
+        container = QWidget(self)
+        root = QVBoxLayout(container)
         root.setContentsMargins(18, 14, 18, 14)
         root.setSpacing(12)
 
         top_row = QHBoxLayout()
-        title = QLabel("Analytics & FSRS v5 Retention Statistics", self)
+        title = QLabel("Analytics & FSRS v5 Retention Statistics", container)
         set_widget_props(title, role="title")
         top_row.addWidget(title)
         top_row.addStretch(1)
 
-        top_row.addWidget(QLabel("Scope:", self))
-        self.scope_combo = QComboBox(self)
+        top_row.addWidget(QLabel("Scope:", container))
+        self.scope_combo = QComboBox(container)
         self.scope_combo.setMinimumWidth(200)
         self.scope_combo.currentIndexChanged.connect(lambda _: self.refresh_stats())
         top_row.addWidget(self.scope_combo)
 
-        refresh_btn = QPushButton("Refresh", self)
+        refresh_btn = QPushButton("Refresh", container)
         set_widget_props(refresh_btn, variant="ghost")
         refresh_btn.clicked.connect(self.refresh_stats)
         top_row.addWidget(refresh_btn)
@@ -79,7 +85,7 @@ class StatsView(QWidget):
             ("total_reviews", "Total Reviews Logged"),
             ("avg_stability", "Mean Stability (S)"),
         ]:
-            card = QFrame(self)
+            card = QFrame(container)
             set_widget_props(card, role="card")
             cl = QVBoxLayout(card)
             cl.setContentsMargins(14, 10, 14, 10)
@@ -93,28 +99,37 @@ class StatsView(QWidget):
             kpi_row.addWidget(card, 1)
         root.addLayout(kpi_row)
 
+        charts_splitter = QSplitter(Qt.Orientation.Vertical, container)
+
         # Heatmap Panel
-        hm_frame = QFrame(self)
+        hm_frame = QFrame(charts_splitter)
         set_widget_props(hm_frame, role="panel")
         hm_layout = QVBoxLayout(hm_frame)
         hm_layout.setContentsMargins(6, 6, 6, 6)
         self.heatmap_view = self.web_profile.create_web_view(hm_frame)
-        self.heatmap_view.setMaximumHeight(165)
+        self.heatmap_view.setMinimumHeight(145)
         self.heatmap_view.loadFinished.connect(self._on_heatmap_loaded)
         self.heatmap_view.setUrl(QUrl("morphism://app/html/heatmap.html"))
-        hm_layout.addWidget(self.heatmap_view)
-        root.addWidget(hm_frame)
+        hm_layout.addWidget(self.heatmap_view, 1)
 
         # Barplots Panel
-        bp_frame = QFrame(self)
+        bp_frame = QFrame(charts_splitter)
         set_widget_props(bp_frame, role="panel")
         bp_layout = QVBoxLayout(bp_frame)
         bp_layout.setContentsMargins(6, 6, 6, 6)
         self.barplot_view = self.web_profile.create_web_view(bp_frame)
+        self.barplot_view.setMinimumHeight(210)
         self.barplot_view.loadFinished.connect(self._on_barplot_loaded)
         self.barplot_view.setUrl(QUrl("morphism://app/html/barplot.html"))
         bp_layout.addWidget(self.barplot_view, 1)
-        root.addWidget(bp_frame, 1)
+
+        charts_splitter.addWidget(hm_frame)
+        charts_splitter.addWidget(bp_frame)
+        configure_splitter(charts_splitter, min_sizes=[155, 220], initial_sizes=[170, 280])
+        root.addWidget(charts_splitter, 1)
+
+        scroll = wrap_in_scroll_area(container, self, min_width=640, min_height=460)
+        outer.addWidget(scroll)
 
         self._reload_scope_combo()
 

@@ -22,6 +22,25 @@
     "liff": "{\\Leftrightarrow}",
     "lxor": "{\\veebar}",
     "biota": "{℩}",
-    "d": "\\mathbin{\\!}\\mathrm{d}"
+    "d": "\\mathbin{\\!}\\mathrm{d}",
+    "RR": "{\\mathbb{R}}",
+    "CC": "{\\mathbb{C}}",
+    "NN": "{\\mathbb{N}}",
+    "ZZ": "{\\mathbb{Z}}",
+    "QQ": "{\\mathbb{Q}}",
+    "FF": "{\\mathbb{F}}",
+    "R": "{\\mathbb{R}}",
+    "C": "{\\mathbb{C}}",
+    "N": "{\\mathbb{N}}",
+    "Z": "{\\mathbb{Z}}",
+    "Q": "{\\mathbb{Q}}",
+    "F": "{\\mathbb{F}}",
+    "Hom": "{\\operatorname{Hom}}",
+    "Ker": "{\\operatorname{Ker}}",
+    "Im": "{\\operatorname{Im}}",
+    "Aut": "{\\operatorname{Aut}}",
+    "End": "{\\operatorname{End}}",
+    "id": "{\\operatorname{id}}",
+    "tensor": "{\\otimes}"
   }
 }

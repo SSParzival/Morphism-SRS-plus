@@ -133,26 +133,61 @@ class AppConfig:
         if auto_save:
             self.save()
 
-    def load_mathjax_macros(self) -> dict[str, Any]:
-        if not self.paths.macros_file.exists():
-            default_file = self.paths.defaults_dir / "mathjax_macros.json"
-            if default_file.exists():
-                self.paths.macros_file.write_text(
-                    default_file.read_text(encoding="utf-8"), encoding="utf-8"
-                )
-        if self.paths.macros_file.exists():
+    def _load_default_mathjax_config(self) -> dict[str, Any]:
+        default_file = self.paths.defaults_dir / "mathjax_macros.json"
+        if default_file.exists():
             try:
-                data = json.loads(self.paths.macros_file.read_text(encoding="utf-8"))
+                data = json.loads(default_file.read_text(encoding="utf-8"))
                 if isinstance(data, dict):
-                    return data.get("macros", data) if "macros" in data and isinstance(data["macros"], dict) else data
+                    return data
             except Exception:
                 pass
-        return {}
+        return {
+            "inlineMath": [["$", "$"], ["\\(", "\\)"]],
+            "displayMath": [["$$", "$$"], ["\\[", "\\]"]],
+            "processEscapes": True,
+            "packages": {"[+]": ["color", "ams"]},
+            "macros": {},
+        }
+
+    def load_mathjax_macros(self) -> dict[str, Any]:
+        default_cfg = self._load_default_mathjax_config()
+        default_macros = dict(default_cfg.get("macros", {}))
+        if not self.paths.macros_file.exists():
+            self.save_mathjax_macros(default_macros)
+            return default_macros
+        try:
+            data = json.loads(self.paths.macros_file.read_text(encoding="utf-8"))
+            if isinstance(data, dict):
+                user_macros = (
+                    data.get("macros", data)
+                    if "macros" in data and isinstance(data["macros"], dict)
+                    else data
+                )
+                merged = dict(default_macros)
+                if isinstance(user_macros, dict):
+                    merged.update(user_macros)
+                return merged
+        except Exception:
+            pass
+        return default_macros
+
+    def load_mathjax_tex_config(self) -> dict[str, Any]:
+        """Return the complete MathJax `tex` configuration object including packages and macros."""
+        cfg = self._load_default_mathjax_config()
+        cfg["macros"] = self.load_mathjax_macros()
+        return cfg
 
     def save_mathjax_macros(self, macros: dict[str, Any]) -> None:
-        self.paths.macros_file.write_text(
-            json.dumps(macros, indent=2, ensure_ascii=False), encoding="utf-8"
-        )
+        cfg = self._load_default_mathjax_config()
+        cfg["macros"] = macros
+        try:
+            self.paths.macros_file.parent.mkdir(parents=True, exist_ok=True)
+            self.paths.macros_file.write_text(
+                json.dumps(cfg, indent=2, ensure_ascii=False), encoding="utf-8"
+            )
+        except OSError:
+            pass
 
     def load_editor_buttons(self) -> list[dict[str, Any]]:
         if not self.paths.editor_buttons_file.exists():

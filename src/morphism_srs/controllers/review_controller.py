@@ -114,6 +114,38 @@ class ReviewController:
         self.event_bus.review_session_started.emit()
         return len(self._queue)
 
+    def start_note_study(self, note_id: int, force_all_cards: bool = False) -> int:
+        """
+        Starts a focused study session for a single Note clicked in the Graph Explorer.
+        If force_all_cards is False, prioritizes Due/New cards first and falls back to all cards
+        if none are currently due. If force_all_cards is True, queues all cards in step_order.
+        """
+        self.undo_stack.clear()
+        self._cram_sandbox = False
+
+        if not force_all_cards:
+            due_or_new = self.review_repo.fetch_study_candidates(
+                note_ids=[note_id],
+                only_due_or_new=True,
+            )
+            if due_or_new:
+                self._queue = sorted(due_or_new, key=lambda c: c.step_order)
+                self._current_index = 0
+                self._card_shown_timestamp = time.monotonic()
+                self.event_bus.review_session_started.emit()
+                return len(self._queue)
+
+        all_cards = self.review_repo.fetch_study_candidates(
+            note_ids=[note_id],
+            only_due_or_new=False,
+        )
+        self._queue = sorted(all_cards, key=lambda c: c.step_order)
+        self._current_index = 0
+        self._card_shown_timestamp = time.monotonic()
+        if self._queue:
+            self.event_bus.review_session_started.emit()
+        return len(self._queue)
+
     def _order_candidates(self, cards: list[CardModel], criterion: str) -> list[CardModel]:
         now_dt = datetime.now(timezone.utc)
         note_ids = sorted({c.note_id for c in cards})

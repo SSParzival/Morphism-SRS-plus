@@ -2,13 +2,23 @@
     "use strict";
 
     function typesetElements(elements) {
-        if (window.MathJax && window.MathJax.typesetPromise) {
+        if (!window.MathJax) {
+            return;
+        }
+        var doTypeset = function () {
             if (window.MathJax.typesetClear) {
                 window.MathJax.typesetClear(elements);
             }
-            window.MathJax.typesetPromise(elements).catch(function (err) {
-                console.error("MathJax typeset error:", err);
-            });
+            if (window.MathJax.typesetPromise) {
+                window.MathJax.typesetPromise(elements).catch(function (err) {
+                    console.error("MathJax typeset error:", err);
+                });
+            }
+        };
+        if (window.MathJax.startup && window.MathJax.startup.promise) {
+            window.MathJax.startup.promise.then(doTypeset);
+        } else {
+            doTypeset();
         }
     }
 
@@ -35,13 +45,10 @@
             var titleEl = document.getElementById("note-title");
             var badgeEl = document.getElementById("mode-badge");
             var tagRow = document.getElementById("tag-row");
-            var premiseBox = document.getElementById("premise-box");
-            var premiseContent = document.getElementById("premise-content");
             var sibBefore = document.getElementById("siblings-before");
             var sibAfter = document.getElementById("siblings-after");
             var stepLabel = document.getElementById("active-step-label");
             var frontEl = document.getElementById("card-front");
-            var hintEl = document.getElementById("card-hint");
             var dividerEl = document.getElementById("answer-divider");
             var backEl = document.getElementById("card-back");
 
@@ -55,14 +62,6 @@
                 span.textContent = "#" + t;
                 tagRow.appendChild(span);
             });
-
-            if (payload.premise_html && payload.premise_html.trim().length > 0) {
-                premiseBox.style.display = "block";
-                premiseContent.innerHTML = payload.premise_html;
-            } else {
-                premiseBox.style.display = "none";
-                premiseContent.innerHTML = "";
-            }
 
             var beforeHtml = [];
             var afterHtml = [];
@@ -80,22 +79,14 @@
             var sOrder = (payload.step_order || 0) + 1;
             var cTitle = payload.card_title ? (" — " + payload.card_title) : "";
             if (payload.review_mode === "serial") {
-                stepLabel.textContent = "Target Step " + sOrder + cTitle + "  [P(A_" + sOrder + " | A_j, j < " + sOrder + ")]";
+                stepLabel.textContent = "Step " + sOrder + cTitle + "  [P(A_" + sOrder + " | A_j, j < " + sOrder + ")]";
             } else if (payload.review_mode === "cloze") {
                 stepLabel.textContent = "Cloze Target " + sOrder + cTitle + "  [P(A_" + sOrder + " | A_j, j ≠ " + sOrder + ")]";
             } else {
-                stepLabel.textContent = "Prompt" + cTitle;
+                stepLabel.textContent = "Card " + sOrder + cTitle;
             }
 
             frontEl.innerHTML = payload.front_html || "";
-
-            if (payload.hint_html && payload.show_hint) {
-                hintEl.style.display = "block";
-                hintEl.innerHTML = "<strong>Hint:</strong> " + payload.hint_html;
-            } else {
-                hintEl.style.display = "none";
-                hintEl.innerHTML = "";
-            }
 
             if (payload.show_answer) {
                 dividerEl.style.display = "block";

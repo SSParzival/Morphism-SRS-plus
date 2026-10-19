@@ -4,13 +4,15 @@ from datetime import datetime, timedelta, timezone
 import json
 import sqlite3
 
-from PySide6.QtCore import QUrl
+from PySide6.QtCore import QUrl, Qt
+from PySide6.QtGui import QCloseEvent
 from PySide6.QtWidgets import (
     QDialog,
     QFrame,
     QHBoxLayout,
     QLabel,
     QPushButton,
+    QSplitter,
     QTableWidget,
     QTableWidgetItem,
     QVBoxLayout,
@@ -20,7 +22,11 @@ from PySide6.QtWidgets import (
 from morphism_srs.domain.scheduler_engine import SchedulerEngine
 from morphism_srs.storage.repositories.note_repo import NoteRepository
 from morphism_srs.theming.delegates import set_widget_props
-from morphism_srs.ui.window_sizing import apply_relative_geometry
+from morphism_srs.ui.window_sizing import (
+    apply_relative_geometry,
+    configure_splitter,
+    wrap_in_scroll_area,
+)
 from morphism_srs.web_engine.web_profile import WebEngineProfileManager
 
 
@@ -36,19 +42,23 @@ class RetrievabilityDialog(QDialog):
     ) -> None:
         super().__init__(parent)
         self.setWindowTitle("Mathematical Retrievability Inspector")
-        apply_relative_geometry(self, width_ratio=0.68, height_ratio=0.74, min_width=680, min_height=480)
+        apply_relative_geometry(self, width_ratio=0.70, height_ratio=0.76, min_width=700, min_height=500)
 
         self.conn = conn
         self.web_profile = web_profile
         self.note_repo = NoteRepository(conn)
         self.note = self.note_repo.get_by_id(note_id, include_children=True)
 
-        root = QVBoxLayout(self)
+        outer = QVBoxLayout(self)
+        outer.setContentsMargins(0, 0, 0, 0)
+
+        container = QWidget(self)
+        root = QVBoxLayout(container)
         root.setContentsMargins(16, 16, 16, 16)
         root.setSpacing(12)
 
         note_title = self.note.title if self.note else f"Note #{note_id}"
-        header = QLabel(f"Retrievability Breakdown — {note_title}", self)
+        header = QLabel(f"📈 Retrievability Breakdown — {note_title}", container)
         set_widget_props(header, role="title")
         root.addWidget(header)
 
@@ -62,7 +72,7 @@ class RetrievabilityDialog(QDialog):
             ("Joint Retrieval P(∩ A_i)", f"{metrics.p_joint * 100:.1f}%"),
             ("Total Steps / Cards", str(metrics.card_count)),
         ]:
-            card_frame = QFrame(self)
+            card_frame = QFrame(container)
             set_widget_props(card_frame, role="card")
             fl = QVBoxLayout(card_frame)
             fl.setContentsMargins(12, 8, 12, 8)
@@ -75,13 +85,15 @@ class RetrievabilityDialog(QDialog):
             kpi_row.addWidget(card_frame, 1)
         root.addLayout(kpi_row)
 
-        self.web_view = self.web_profile.create_web_view(self)
-        self.web_view.setMinimumHeight(250)
+        vsplitter = QSplitter(Qt.Orientation.Vertical, container)
+
+        self.web_view = self.web_profile.create_web_view(vsplitter)
+        self.web_view.setMinimumHeight(220)
         self.web_view.loadFinished.connect(self._on_chart_loaded)
         self.web_view.setUrl(QUrl("morphism://app/html/decay_chart.html"))
-        root.addWidget(self.web_view, 1)
 
-        self.table = QTableWidget(self)
+        self.table = QTableWidget(vsplitter)
+        self.table.setMinimumHeight(140)
         self.table.setColumnCount(6)
         self.table.setHorizontalHeaderLabels(["Step", "Title", "State", "Stability (S)", "Difficulty (D)", "Current R(t)"])
         cards = self.note.cards if self.note else []
@@ -97,14 +109,22 @@ class RetrievabilityDialog(QDialog):
             self.table.setItem(row_idx, 4, QTableWidgetItem(f"{s.difficulty:.2f}" if (s and s.difficulty) else "—"))
             self.table.setItem(row_idx, 5, QTableWidgetItem(f"{r_val * 100:.1f}%"))
         self.table.resizeColumnsToContents()
-        root.addWidget(self.table, 1)
+
+        vsplitter.addWidget(self.web_view)
+        vsplitter.addWidget(self.table)
+        configure_splitter(vsplitter, min_sizes=[220, 140], initial_sizes=[260, 160])
+        root.addWidget(vsplitter, 1)
 
         close_row = QHBoxLayout()
         close_row.addStretch(1)
-        close_btn = QPushButton("Close", self)
+        close_btn = QPushButton("Close", container)
+        close_btn.setMinimumHeight(32)
         close_btn.clicked.connect(self.accept)
         close_row.addWidget(close_btn)
         root.addLayout(close_row)
+
+        scroll = wrap_in_scroll_area(container, self, min_width=640, min_height=460)
+        outer.addWidget(scroll)
 
     def _on_chart_loaded(self, ok: bool) -> None:
         if not ok or not self.note:
@@ -129,3 +149,11 @@ class RetrievabilityDialog(QDialog):
             f"{json.dumps(labels)}, {json.dumps(r_min_list)}, {json.dumps(r_avg_list)}, {json.dumps(p_joint_list)}); }}"
         )
         self.web_view.page().runJavaScript(js)
+
+    def closeEvent(self, event: QCloseEvent) -> None:
+        self.web_profile.dispose_web_view(self.web_view)
+        super().closeEvent(event)
+
+    def done(self, result: int) -> None:
+        self.web_profile.dispose_web_view(self.web_view)
+        super().done(result)
