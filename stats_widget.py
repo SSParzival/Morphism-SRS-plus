@@ -75,11 +75,11 @@ def build_heatmap_html_template() -> str:
             z-index: 10;
             outline: 1px solid #ffffff;
         }}
-        .cell-level-0 {{ background-color: var(--border-color); opacity: 0.35; }}
-        .cell-level-1 {{ background-color: #7f1d1d; }}
-        .cell-level-2 {{ background-color: #b91c1c; }}
-        .cell-level-3 {{ background-color: #ef4444; }}
-        .cell-level-4 {{ background-color: #f87171; box-shadow: 0 0 6px rgba(248, 113, 113, 0.8); }}
+        .cell-level-0 {{ background-color: var(--border-color); opacity: 0.25; }}
+        .cell-level-1 {{ background-color: var(--accent-border); opacity: 0.40; }}
+        .cell-level-2 {{ background-color: var(--accent-border); opacity: 0.65; }}
+        .cell-level-3 {{ background-color: var(--accent-border); opacity: 0.85; }}
+        .cell-level-4 {{ background-color: var(--accent-border); opacity: 1.0; box-shadow: 0 0 8px var(--accent-glow); }}
         .future-cell {{ visibility: hidden; }}
         .legend-bar {{
             display: flex;

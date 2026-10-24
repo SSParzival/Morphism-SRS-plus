@@ -164,22 +164,22 @@ class ClozeCard(ReviewObject):
 
     def get_html_front(self) -> str:
         def repl(match):
-            parts = match.group(1).split("::")
+            parts = match.group(1).split("::", 1)
             if len(parts) >= 2:
                 hint = parts[1].strip()
                 return f"<span class='cloze-bracket'>[{hint}]</span>"
             return "<span class='cloze-bracket'>[...]</span>"
 
-        front_text = re.sub(r"\{\{c\d+::(.*?)\}\}", repl, self.text)
+        front_text = re.sub(r"\{\{c\d+::(.*?)\}\}", repl, self.text, flags=re.DOTALL)
         return f"<div class='card-title'>{self.title}</div><div class='card-body'>{front_text}</div>"
 
     def get_html_back(self) -> str:
         def repl(match):
-            parts = match.group(1).split("::")
+            parts = match.group(1).split("::", 1)
             answer = parts[0]
             return f"<span class='cloze-revealed'>{answer}</span>"
 
-        back_text = re.sub(r"\{\{c\d+::(.*?)\}\}", repl, self.text)
+        back_text = re.sub(r"\{\{c\d+::(.*?)\}\}", repl, self.text, flags=re.DOTALL)
         return f"<div class='card-body'>{back_text}</div>"
 
     def to_dict(self, include_scheduling: bool = True) -> Dict[str, Any]:

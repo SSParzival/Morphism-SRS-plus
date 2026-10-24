@@ -10,7 +10,7 @@ if BASE_DIR not in sys.path:
 from app_paths import (BASE_DIR as APP_BASE_DIR, ASSETS_DIR, COURSES_DIR, 
                        THEMES_DIR, CHART_JS, MATHJAX_SVG_JS)
 from theme_manager import ThemeManager
-from models import Flashcard, ProofSequenceCard, ClozeCard, NoteNode, NoteEdge, Course
+from models import Flashcard, ProofSequenceCard, ClozeCard, NoteNode, NoteEdge, Course, ReviewLogRecord
 from scheduler_manager import SchedulerManager
 import course_storage
 
@@ -100,6 +100,24 @@ class TestMorphismPlus(unittest.TestCase):
         from fsrs import Rating
         sm.rate_object(c1, Rating.Good)
         self.assertIsNotNone(c1.fsrs_card.last_review)
+
+    def test_review_log_undo(self):
+        """Verify review log appending and popping for undo support."""
+        course_name = "TestUndoCourse"
+        rlog = ReviewLogRecord(card_id=123, rating=3, review_time="2026-10-23T00:00:00Z")
+        course_storage.save_review_log(course_name, rlog)
+        
+        logs = course_storage.load_review_logs(course_name)
+        self.assertEqual(len(logs), 1)
+        self.assertEqual(logs[0].card_id, 123)
+
+        popped = course_storage.pop_last_review_log(course_name)
+        self.assertIsNotNone(popped)
+        self.assertEqual(popped["card_id"], 123)
+
+        logs_after = course_storage.load_review_logs(course_name)
+        self.assertEqual(len(logs_after), 0)
+        course_storage.delete_course(course_name)
 
     def test_course_storage_and_packages(self):
         """Verify course creation, saving, and .morphism / .zip package export & import."""

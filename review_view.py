@@ -4,7 +4,7 @@ from typing import Optional, List, Dict
 from PySide6.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QPushButton, 
                                QLabel, QFrame, QSizePolicy)
 from PySide6.QtWebEngineWidgets import QWebEngineView
-from PySide6.QtCore import Signal, Qt, QUrl
+from PySide6.QtCore import Signal, Qt, QUrl, QEvent
 from PySide6.QtGui import QKeySequence, QShortcut
 from fsrs import Rating
 
@@ -229,7 +229,7 @@ def build_mathjax_html_template() -> str:
 class ReviewWidget(QWidget):
     """Review screen widget with QWebEngineView, FSRS rating controls, and Undo functionality."""
     
-    rated = Signal(Rating)
+    rated = Signal(object, object)  # (Rating, prev_fsrs_card_dict)
     undo_requested = Signal()
     back_to_graph_requested = Signal()
     start_session_requested = Signal()
@@ -276,6 +276,9 @@ class ReviewWidget(QWidget):
         self.browser = QWebEngineView()
         self.reload_html_template()
         self.browser.loadFinished.connect(self._on_page_loaded)
+        self.browser.installEventFilter(self)
+        if self.browser.focusProxy():
+            self.browser.focusProxy().installEventFilter(self)
 
         main_layout.addWidget(self.browser, stretch=1)
 
@@ -415,11 +418,35 @@ class ReviewWidget(QWidget):
         self._render_current_state()
         self._set_back_state()
 
+    def eventFilter(self, watched, event):
+        if event.type() == QEvent.KeyPress:
+            key = event.key()
+            if key in (Qt.Key_Space, Qt.Key_Return):
+                self._on_space_pressed()
+                return True
+            elif key == Qt.Key_1 and self.is_showing_back:
+                self._on_rating_shortcut(Rating.Again)
+                return True
+            elif key == Qt.Key_2 and self.is_showing_back:
+                self._on_rating_shortcut(Rating.Hard)
+                return True
+            elif key == Qt.Key_3 and self.is_showing_back:
+                self._on_rating_shortcut(Rating.Good)
+                return True
+            elif key == Qt.Key_4 and self.is_showing_back:
+                self._on_rating_shortcut(Rating.Easy)
+                return True
+            elif key == Qt.Key_Z and (event.modifiers() & Qt.ControlModifier):
+                self._on_undo_clicked()
+                return True
+        return super().eventFilter(watched, event)
+
     def submit_rating(self, rating: Rating):
-        """Rate card via FSRS and emit signal."""
+        """Rate card via FSRS and emit signal with previous state snapshot."""
         if self.current_obj:
+            prev_fsrs_dict = self.current_obj.fsrs_card.to_dict() if hasattr(self.current_obj.fsrs_card, "to_dict") else None
             self.scheduler_manager.rate_object(self.current_obj, rating)
-            self.rated.emit(rating)
+            self.rated.emit(rating, prev_fsrs_dict)
 
     def _render_current_state(self):
         if not hasattr(self, "is_page_loaded") or not self.is_page_loaded:

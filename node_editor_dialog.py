@@ -685,6 +685,8 @@ class NodeEditorDialog(QDialog):
         self.note.note_type = self.combo_note_type.currentData()
         self.note.desired_retention = self.spin_desired_r.value()
         row = self.list_cards.currentRow()
-        if row >= 0:
+        if row < 0 and self.current_editing_row >= 0:
+            row = self.current_editing_row
+        if 0 <= row < len(self.note.cards):
             self._save_current_card(row)
         self.accept()

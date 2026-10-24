@@ -40,7 +40,7 @@ class CourseTreeWidget(QTreeWidget):
                 if target_data.get("is_folder"):
                     target_folder_path = target_data.get("folder_path", "")
                 else:
-                    target_folder_path = target_data.get("folder_path", "")
+                    target_folder_path = os.path.dirname(target_data.get("folder_path", "")) if target_data.get("folder_path") else ""
 
         super().dropEvent(event)
         self.item_moved.emit(dragged_data, target_folder_path)

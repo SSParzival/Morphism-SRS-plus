@@ -646,21 +646,22 @@ class MainWindow(QMainWindow):
         else:
             self.review_view.load_object(current_card)
 
-    def _on_card_rated(self, rating: Rating):
+    def _on_card_rated(self, rating: Rating, prev_fsrs_dict: Optional[dict] = None):
         if not self.current_review_queue:
             return
 
         rated_card = self.current_review_queue[0]
         r_val = int(rating.value) if hasattr(rating, "value") else int(rating)
 
-        # Snapshot for undo
+        # Snapshot for undo (stores exact pre-rating state)
         undo_entry = {
             "card": rated_card,
-            "fsrs_dict": rated_card.fsrs_card.to_dict() if hasattr(rated_card.fsrs_card, "to_dict") else None,
+            "fsrs_dict": prev_fsrs_dict or (rated_card.fsrs_card.to_dict() if hasattr(rated_card.fsrs_card, "to_dict") else None),
             "serial_past_steps": list(self.serial_past_steps),
             "queue_item": rated_card
         }
         self.review_undo_stack.append(undo_entry)
+        self.review_view.set_undo_available(True)
 
         fc = rated_card.fsrs_card
         log_rec = ReviewLogRecord(
@@ -712,6 +713,11 @@ class MainWindow(QMainWindow):
             self.current_review_queue.insert(0, card)
 
         self.session_cards_reviewed = max(0, self.session_cards_reviewed - 1)
+        if self.current_course:
+            course_storage.pop_last_review_log(self.current_course.name)
+            self.stats_widget.load_course_stats(self.current_course)
+
+        self.review_view.set_undo_available(len(self.review_undo_stack) > 0)
         self.save_data(silent=True)
 
         # Reload card

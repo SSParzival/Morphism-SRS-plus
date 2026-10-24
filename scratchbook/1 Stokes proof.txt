@@ -1,4 +1,17 @@
-<h2>1 Stokes proof</h2>
+<span style="color: #60a5fa;">colored text</span><span style="color: #60a5fa;">colored text</span><table border="1" style="border-collapse: collapse; width: 100%; margin: 10px 0;">
+  <thead>
+    <tr>
+      <th style="padding: 8px;">Header 1</th>
+      <th style="padding: 8px;">Header 2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding: 8px;">Cell 1</td>
+      <td style="padding: 8px;">Cell 2</td>
+    </tr>
+  </tbody>
+</table><h2>1 Stokes proof</h2>
 Sea $F = (P(x,y,z), Q(x,y,z), R(x,y,z)) $ y sea $S$ una superficie parametrizada por $f:D \subseteq \mathbb R^2 \to S \subseteq \mathbb R^3$ suave.
 
 <hr>

@@ -232,6 +232,23 @@ def save_review_log(course_name: str, log_record: ReviewLogRecord):
     with open(logs_path, "w", encoding="utf-8") as f:
         json.dump(logs, f, indent=2)
 
+def pop_last_review_log(course_name: str) -> Optional[Dict[str, Any]]:
+    """Remove and return the last review log record if undoing a rating."""
+    logs_path = get_review_logs_file_path(course_name)
+    if not os.path.exists(logs_path):
+        return None
+    try:
+        with open(logs_path, "r", encoding="utf-8") as f:
+            logs = json.load(f)
+        if logs:
+            popped = logs.pop()
+            with open(logs_path, "w", encoding="utf-8") as f:
+                json.dump(logs, f, indent=2)
+            return popped
+    except Exception:
+        pass
+    return None
+
 def load_review_logs(course_name: str) -> List[ReviewLogRecord]:
     """Load review log history records for a course."""
     logs_path = get_review_logs_file_path(course_name)
