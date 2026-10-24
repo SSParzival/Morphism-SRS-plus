@@ -1,0 +1,582 @@
+{
+  "name": "Qu\u00edmica para Ingenieros (I2)",
+  "folder_path": "",
+  "notes": [
+    {
+      "note_id": "quim_01",
+      "title": "Cin\u00e9tica y Leyes de Velocidad Integradas",
+      "x": 100.0,
+      "y": 100.0,
+      "tags": [
+        "Qu\u00edmica",
+        "Cin\u00e9tica",
+        "\u00d3rdenes de Reacci\u00f3n"
+      ],
+      "note_type": "standard",
+      "desired_retention": 0.88,
+      "cards": [
+        {
+          "item_id": 1879936200254820033,
+          "type": "ClozeCard",
+          "fsrs_card": {
+            "card_id": 1792846870665,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.666837+00:00",
+            "last_review": null
+          },
+          "title": "Leyes de Velocidad Integradas: Orden 0, 1 y 2",
+          "text": "Para reactivo $A$ con constante $k$:\n- <b>Orden 0:</b> $[A]_t = {{c1::[A]_0 - kt::orden 0}}$, $t_{1/2} = {{c2::\\frac{[A]_0}{2k}::vida media orden 0}}$, lineal en $[A]$ vs $t$.\n- <b>Orden 1:</b> $\\ln[A]_t = {{c3::\\ln[A]_0 - kt::orden 1}}$, $t_{1/2} = {{c4::\\frac{\\ln 2}{k} \\approx \\frac{0.693}{k}::vida media orden 1}}$ (independiente de $[A]_0$), lineal en $\\ln[A]$ vs $t$.\n- <b>Orden 2:</b> $\\frac{1}{[A]_t} = {{c5::\\frac{1}{[A]_0} + kt::orden 2}}$, $t_{1/2} = {{c6::\\frac{1}{k[A]_0}::vida media orden 2}}$, lineal en $\\frac{1}{[A]}$ vs $t$."
+        },
+        {
+          "item_id": 1879936200255605327,
+          "type": "Flashcard",
+          "fsrs_card": {
+            "card_id": 1792846870666,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.667896+00:00",
+            "last_review": null
+          },
+          "title": "Unidades de la Constante de Velocidad k",
+          "front": "\u00bfCu\u00e1les son las unidades del sistema internacional de la constante de velocidad $k$ para \u00f3rdenes globales $0, 1, 2$ y para un orden general $n$?",
+          "back": "La ley general es $v = k [A]^n$, con $[v] = \\text{M}\\cdot\\text{s}^{-1} = \\text{mol}\\cdot\\text{L}^{-1}\\cdot\\text{s}^{-1}$.<br>1. <b>Orden General $n$:</b> $[k] = \\text{M}^{1-n} \\cdot \\text{s}^{-1} = \\text{mol}^{1-n} \\cdot \\text{L}^{n-1} \\cdot \\text{s}^{-1}$.<br>2. <b>Orden 0:</b> $[k] = \\text{M}\\cdot\\text{s}^{-1}$.<br>3. <b>Orden 1:</b> $[k] = \\text{s}^{-1}$ (frecuencia pura).<br>4. <b>Orden 2:</b> $[k] = \\text{M}^{-1}\\cdot\\text{s}^{-1} = \\text{L}\\cdot\\text{mol}^{-1}\\cdot\\text{s}^{-1}$."
+        }
+      ]
+    },
+    {
+      "note_id": "quim_02",
+      "title": "Mecanismos y Ecuaci\u00f3n de Arrhenius",
+      "x": 440.0,
+      "y": 100.0,
+      "tags": [
+        "Qu\u00edmica",
+        "Arrhenius",
+        "Mecanismos",
+        "Energ\u00eda Activaci\u00f3n"
+      ],
+      "note_type": "standard",
+      "desired_retention": 0.88,
+      "cards": [
+        {
+          "item_id": 1879936200257548823,
+          "type": "ClozeCard",
+          "fsrs_card": {
+            "card_id": 1792846870667,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.668968+00:00",
+            "last_review": null
+          },
+          "title": "Ecuaci\u00f3n de Arrhenius Exponencial y Lineal",
+          "text": "La constante de velocidad var\u00eda con la temperatura seg\u00fan:\n$$k = {{c1::A e^{-E_a/(RT)}::forma exponencial}}$$\nForma linealizada de Arrhenius:\n$$\\ln k = {{c2::\\ln A - \\frac{E_a}{R}\\frac{1}{T}::forma linealizada}}$$\nEl gr\u00e1fico de $\\ln k$ vs $1/T$ tiene pendiente negativa $m = {{c3::-\\frac{E_a}{R}::pendiente}}."
+        },
+        {
+          "item_id": 1879936200258102773,
+          "type": "Flashcard",
+          "fsrs_card": {
+            "card_id": 1792846870668,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.670042+00:00",
+            "last_review": null
+          },
+          "title": "Arrhenius para Dos Temperaturas Distintas",
+          "front": "Escriba la ecuaci\u00f3n de Arrhenius para comparar dos constantes $k_1$ y $k_2$ medidas a temperaturas absolutas $T_1$ y $T_2$.",
+          "back": "Restando las ecuaciones linealizadas:<br>$$\\ln\\left(\\frac{k_2}{k_1}\\right) = -\\frac{E_a}{R} \\left(\\frac{1}{T_2} - \\frac{1}{T_1}\\right) = \\frac{E_a}{R} \\left(\\frac{T_2 - T_1}{T_1 T_2}\\right)$$<br>donde $R = 8.314 \\, \\text{J}\\cdot\\text{mol}^{-1}\\cdot\\text{K}^{-1}$ y las temperaturas $T_1, T_2$ deben expresarse obligatoriamente en <b>Kelvin</b>."
+        },
+        {
+          "item_id": 1879936200260618444,
+          "type": "ClozeCard",
+          "fsrs_card": {
+            "card_id": 1792846870670,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.671112+00:00",
+            "last_review": null
+          },
+          "title": "Etapa Determinante y Estado Estacionario (SSA)",
+          "text": "En un mecanismo multietapa, la velocidad global est\u00e1 gobernada por la etapa {{c1::m\u00e1s lenta (RDS)::etapa limitante}}.\nPara intermediarios reactivos muy inestables $I$, la Aproximaci\u00f3n de Estado Estacionario (SSA) establece que: $$\\frac{d[I]}{dt} \\approx {{c2::0::derivada nula}}$$"
+        }
+      ]
+    },
+    {
+      "note_id": "quim_03",
+      "title": "Cat\u00e1lisis y Estado de Transici\u00f3n",
+      "x": 780.0,
+      "y": 100.0,
+      "tags": [
+        "Qu\u00edmica",
+        "Cat\u00e1lisis",
+        "Complejo Activado"
+      ],
+      "note_type": "standard",
+      "desired_retention": 0.88,
+      "cards": [
+        {
+          "item_id": 1879936200261251829,
+          "type": "Flashcard",
+          "fsrs_card": {
+            "card_id": 1792846870671,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.672407+00:00",
+            "last_review": null
+          },
+          "title": "Efecto Termodin\u00e1mico vs Cin\u00e9tico del Catalizador",
+          "front": "\u00bfQu\u00e9 altera y qu\u00e9 NO altera un catalizador qu\u00edmico en una reacci\u00f3n reversible?",
+          "back": "1. <b>S\u00cd altera:</b> Disminuye la energ\u00eda de activaci\u00f3n $E_a$ al proveer una nueva ruta mecanicista con un complejo activado de menor energ\u00eda. Incrementa en el mismo factor la velocidad directa $v_{\\text{dir}}$ y la inversa $v_{\\text{inv}}$. Acelera el tiempo requerido para alcanzar el equilibrio.<br>2. <b>NO altera:</b> La energ\u00eda libre de Gibbs de la reacci\u00f3n ($\\Delta G^\\circ$), la entalp\u00eda ($\\Delta H^\\circ$), la entrop\u00eda ($\\Delta S^\\circ$), ni la constante de equilibrio ($K_{\\text{eq}}$). Las concentraciones finales de equilibrio permanecen estrictamente intactas."
+        },
+        {
+          "item_id": 1879936200262221761,
+          "type": "ClozeCard",
+          "fsrs_card": {
+            "card_id": 1792846870672,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.673477+00:00",
+            "last_review": null
+          },
+          "title": "Cat\u00e1lisis Homog\u00e9nea vs Heterog\u00e9nea",
+          "text": "En la cat\u00e1lisis {{c1::homog\u00e9nea::tipo 1}}, el catalizador se encuentra en la misma fase f\u00edsica que los reactivos (ej. cat\u00e1lisis \u00e1cida acuosa).\nEn la cat\u00e1lisis {{c2::heterog\u00e9nea::tipo 2}}, el catalizador opera en una fase distinta (ej. gases reactivos adsorbidos sobre platino s\u00f3lido)."
+        }
+      ]
+    },
+    {
+      "note_id": "quim_04",
+      "title": "Equilibrio Qu\u00edmico: Kc, Kp y Cociente Q",
+      "x": 100.0,
+      "y": 360.0,
+      "tags": [
+        "Qu\u00edmica",
+        "Equilibrio",
+        "Kc",
+        "Kp",
+        "Cociente Q"
+      ],
+      "note_type": "standard",
+      "desired_retention": 0.88,
+      "cards": [
+        {
+          "item_id": 1879936200263667482,
+          "type": "ClozeCard",
+          "fsrs_card": {
+            "card_id": 1792846870673,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.674542+00:00",
+            "last_review": null
+          },
+          "title": "Relaci\u00f3n entre Kp y Kc para Gases",
+          "text": "Para una reacci\u00f3n $aA(g) + bB(g) \\rightleftharpoons cC(g) + dD(g)$, la relaci\u00f3n entre constantes es:\n$$K_p = {{c1::K_c (RT)^{\\Delta n_{(g)}}::f\u00f3rmula Kp Kc}}$$\ndonde $\\Delta n_{(g)} = {{c2::(c+d) - (a+b)::cambio de moles gaseosos}}$."
+        },
+        {
+          "item_id": 1879936200264832354,
+          "type": "Flashcard",
+          "fsrs_card": {
+            "card_id": 1792846870674,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.675601+00:00",
+            "last_review": null
+          },
+          "title": "Criterio de Evoluci\u00f3n Espont\u00e1nea con el Cociente Q",
+          "front": "Explique hacia d\u00f3nde evoluciona espont\u00e1neamente una mezcla de reacci\u00f3n comparando $Q$ frente a $K$.",
+          "back": "1. <b>$Q < K$:</b> La concentraci\u00f3n de productos es menor que en el equilibrio. La reacci\u00f3n evoluciona espont\u00e1neamente hacia la <b>derecha</b> ($\\to$, sentido directo, produciendo productos).<br>2. <b>$Q = K$:</b> El sistema se encuentra en <b>equilibrio din\u00e1mico</b> microsc\u00f3pico ($v_{\\text{dir}} = v_{\\text{inv}}$). No hay cambio macrosc\u00f3pico neto.<br>3. <b>$Q > K$:</b> Hay exceso de productos relativo a reactivos. La reacci\u00f3n evoluciona espont\u00e1neamente hacia la <b>izquierda</b> ($\\leftarrow$, sentido inverso, consumiendo productos y regenerando reactivos)."
+        },
+        {
+          "item_id": 1879936200265921157,
+          "type": "ClozeCard",
+          "fsrs_card": {
+            "card_id": 1792846870675,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.676666+00:00",
+            "last_review": null
+          },
+          "title": "Actividad de S\u00f3lidos y L\u00edquidos Puros en K",
+          "text": "En las expresiones matem\u00e1ticas de $K_c$ y $K_p$, los s\u00f3lidos puros y los solventes/l\u00edquidos puros {{c1::NO se incluyen (tienen actividad unitaria igual a 1)::regla de inclusi\u00f3n}}."
+        }
+      ]
+    },
+    {
+      "note_id": "quim_05",
+      "title": "Principio de Le Ch\u00e2telier y van 't Hoff",
+      "x": 440.0,
+      "y": 360.0,
+      "tags": [
+        "Qu\u00edmica",
+        "Le Ch\u00e2telier",
+        "van 't Hoff",
+        "Perturbaciones"
+      ],
+      "note_type": "standard",
+      "desired_retention": 0.88,
+      "cards": [
+        {
+          "item_id": 1879936200266673336,
+          "type": "ClozeCard",
+          "fsrs_card": {
+            "card_id": 1792846870676,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.677726+00:00",
+            "last_review": null
+          },
+          "title": "Efecto de Presi\u00f3n y Gases Inertes",
+          "text": "Al comprimir una mezcla gaseosa en equilibrio aumentando la presi\u00f3n total:\n- El sistema se desplaza hacia el miembro con {{c1::menor n\u00famero de moles gaseosos::direcci\u00f3n del desplazamiento}}.\n- Si se a\u00f1ade un gas inerte (ej. He o Ar) a volumen constante, el equilibrio {{c2::NO se altera en absoluto::efecto a volumen constante}} pues las presiones parciales de los reactivos no cambian."
+        },
+        {
+          "item_id": 1879936200267996787,
+          "type": "Flashcard",
+          "fsrs_card": {
+            "card_id": 1792846870677,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.678785+00:00",
+            "last_review": null
+          },
+          "title": "Efecto de la Temperatura y Ecuaci\u00f3n de van 't Hoff",
+          "front": "\u00bfC\u00f3mo afecta un aumento de temperatura a la constante de equilibrio $K$ en reacciones endot\u00e9rmicas vs exot\u00e9rmicas?",
+          "back": "La temperatura es la <b>\u00fanica variable</b> que altera el valor num\u00e9rico de $K$. Por la ecuaci\u00f3n de van 't Hoff:<br>$$\\ln\\left(\\frac{K_2}{K_1}\\right) = -\\frac{\\Delta H^\\circ}{R}\\left(\\frac{1}{T_2} - \\frac{1}{T_1}\\right) = \\frac{\\Delta H^\\circ}{R}\\left(\\frac{T_2 - T_1}{T_1 T_2}\\right)$$<br>1. <b>Endot\u00e9rmica ($\\Delta H^\\circ > 0$):</b> El calor act\u00faa como reactivo. Aumentar $T$ incrementa el valor de $K$ (desplaza hacia productos).<br>2. <b>Exot\u00e9rmica ($\\Delta H^\\circ < 0$):</b> El calor act\u00faa como producto. Aumentar $T$ disminuye el valor de $K$ (desplaza hacia reactivos)."
+        }
+      ]
+    },
+    {
+      "note_id": "quim_06",
+      "title": "Equilibrio \u00c1cido-Base, pH y Disociaci\u00f3n",
+      "x": 780.0,
+      "y": 360.0,
+      "tags": [
+        "Qu\u00edmica",
+        "\u00c1cido-Base",
+        "pH",
+        "pOH",
+        "Ka"
+      ],
+      "note_type": "standard",
+      "desired_retention": 0.88,
+      "cards": [
+        {
+          "item_id": 1879936200268211045,
+          "type": "ClozeCard",
+          "fsrs_card": {
+            "card_id": 1792846870678,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.679853+00:00",
+            "last_review": null
+          },
+          "title": "Autoionizaci\u00f3n del Agua y Relaci\u00f3n pH-pOH",
+          "text": "A $25^\\circ\\text{C}$:\n- $K_w = [\\text{H}_3\\text{O}^+][\\text{OH}^-] = {{c1::1.0 \\times 10^{-14}::valor de Kw}}$\n- Relaci\u00f3n fundamental: $\\text{pH} + \\text{pOH} = {{c2::14.0::suma}}$\n- Para pares \u00e1cido-base conjugados: $K_a \\cdot K_b = {{c3::K_w::producto Ka Kb}}$ y $\\text{p}K_a + \\text{p}K_b = {{c4::14::suma pKa pKb}}$."
+        },
+        {
+          "item_id": 1879936200269131270,
+          "type": "Flashcard",
+          "fsrs_card": {
+            "card_id": 1792846870679,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.680911+00:00",
+            "last_review": null
+          },
+          "title": "C\u00e1lculo de pH en \u00c1cido D\u00e9bil Monopr\u00f3tico",
+          "front": "\u00bfBajo qu\u00e9 criterio es v\u00e1lida la aproximaci\u00f3n $[\\text{H}^+] = \\sqrt{K_a C_0}$ para un \u00e1cido d\u00e9bil monopr\u00f3tico $HA$?",
+          "back": "Para $HA + \\text{H}_2\\text{O} \\rightleftharpoons A^- + \\text{H}_3\\text{O}^+$, el equilibrio exacto es:<br>$$K_a = \\frac{x^2}{C_0 - x}$$<br>1. La aproximaci\u00f3n $C_0 - x \\approx C_0$ es v\u00e1lida si el grado de disociaci\u00f3n es menor al 5% (regla del 5%), lo que equivale a la condici\u00f3n:<br>$$\\frac{C_0}{K_a} > 400$$<br>2. En dicho caso: $x = [\\text{H}^+] = \\sqrt{K_a C_0}$, lo que implica:<br>$$\\text{pH} = \\frac{1}{2}(\\text{p}K_a - \\log_{10} C_0)$$<br>Si $\\frac{C_0}{K_a} \\le 400$, es obligatorio resolver la ecuaci\u00f3n cuadr\u00e1tica completa: $x^2 + K_a x - K_a C_0 = 0$."
+        }
+      ]
+    },
+    {
+      "note_id": "quim_07",
+      "title": "Soluciones Buffer y Henderson-Hasselbalch",
+      "x": 100.0,
+      "y": 620.0,
+      "tags": [
+        "Qu\u00edmica",
+        "Buffer",
+        "Henderson-Hasselbalch",
+        "Amortiguador"
+      ],
+      "note_type": "standard",
+      "desired_retention": 0.88,
+      "cards": [
+        {
+          "item_id": 1879936200270509779,
+          "type": "ClozeCard",
+          "fsrs_card": {
+            "card_id": 1792846870680,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.681975+00:00",
+            "last_review": null
+          },
+          "title": "Ecuaci\u00f3n de Henderson-Hasselbalch",
+          "text": "El pH de una soluci\u00f3n amortiguadora de \u00e1cido d\u00e9bil $HA$ y su sal $A^-$ se calcula como:\n$$\\text{pH} = {{c1::\\text{p}K_a + \\log_{10}\\left(\\frac{[A^-]}{[HA]}\\right)::ecuaci\u00f3n de Henderson-Hasselbalch}}$$\nLa m\u00e1xima capacidad reguladora se logra cuando $[A^-] = [HA]$, donde $\\text{pH} = {{c2::\\text{p}K_a::pH en m\u00e1xima capacidad}}$."
+        },
+        {
+          "item_id": 1879936200271745703,
+          "type": "Flashcard",
+          "fsrs_card": {
+            "card_id": 1792846870681,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.683031+00:00",
+            "last_review": null
+          },
+          "title": "Mecanismo de Amortiguamiento y Rango \u00datil",
+          "front": "Explique qu\u00edmicamente c\u00f3mo reacciona un buffer acetato ($\\text{CH}_3\\text{COOH}/\\text{CH}_3\\text{COO}^-$) ante la adici\u00f3n de $\\text{H}^+$ y $\\text{OH}^-$, y cu\u00e1l es su rango de amortiguamiento \u00fatil.",
+          "back": "1. <b>Adici\u00f3n de \u00e1cido fuerte ($\\text{H}^+$):</b> Reacciona con la base conjugada del buffer:<br>$$\\text{CH}_3\\text{COO}^- + \\text{H}^+ \\to \\text{CH}_3\\text{COOH}$$<br>Los iones $\\text{H}^+$ se transforman en \u00e1cido d\u00e9bil poco disociado, impidiendo la ca\u00edda brusca de pH.<br>2. <b>Adici\u00f3n de base fuerte ($\\text{OH}^-$):</b> Reacciona con el \u00e1cido d\u00e9bil:<br>$$\\text{CH}_3\\text{COOH} + \\text{OH}^- \\to \\text{CH}_3\\text{COO}^- + \\text{H}_2\\text{O}$$<br>3. <b>Rango \u00fatil:</b> El buffer es efectivo en el intervalo $\\text{pH} = \\text{p}K_a \\pm 1$, correspondiente a relaciones de concentraci\u00f3n entre 1:10 y 10:1."
+        }
+      ]
+    },
+    {
+      "note_id": "quim_08",
+      "title": "Titulaciones y Curvas de Neutralizaci\u00f3n",
+      "x": 440.0,
+      "y": 620.0,
+      "tags": [
+        "Qu\u00edmica",
+        "Titulaci\u00f3n",
+        "Equivalencia",
+        "Semiequivalencia"
+      ],
+      "note_type": "standard",
+      "desired_retention": 0.88,
+      "cards": [
+        {
+          "item_id": 1879936200273804612,
+          "type": "ClozeCard",
+          "fsrs_card": {
+            "card_id": 1792846870683,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.684088+00:00",
+            "last_review": null
+          },
+          "title": "pH en el Punto de Equivalencia",
+          "text": "A $25^\\circ\\text{C}$ en el punto de equivalencia:\n- \u00c1cido fuerte con Base fuerte: $\\text{pH} = {{c1::7.0 (neutro)::pH fuerte-fuerte}}$\n- \u00c1cido d\u00e9bil con Base fuerte: $\\text{pH} {{c2::> 7.0 (b\u00e1sico)::pH d\u00e9bil-fuerte}}$ debido a la hidr\u00f3lisis del ani\u00f3n ($A^- + \\text{H}_2\\text{O} \\rightleftharpoons HA + \\text{OH}^-$).\n- Base d\u00e9bil con \u00c1cido fuerte: $\\text{pH} {{c3::< 7.0 (\u00e1cido)::pH fuerte-d\u00e9bil}}$ por hidr\u00f3lisis del cati\u00f3n conjugado."
+        },
+        {
+          "item_id": 1879936200274793809,
+          "type": "Flashcard",
+          "fsrs_card": {
+            "card_id": 1792846870684,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.685142+00:00",
+            "last_review": null
+          },
+          "title": "Punto de Semiequivalencia en \u00c1cido D\u00e9bil",
+          "front": "\u00bfQu\u00e9 propiedad notable ocurre exactamente en el punto de semiequivalencia ($V = V_{\\text{eq}} / 2$) durante la titulaci\u00f3n de un \u00e1cido d\u00e9bil con base fuerte?",
+          "back": "En el punto de semiequivalencia se ha neutralizado exactamente la mitad del \u00e1cido d\u00e9bil inicial, por lo que:<br>$$[HA] = [A^-]$$<br>Aplicando la ecuaci\u00f3n de Henderson-Hasselbalch:<br>$$\\text{pH} = \\text{p}K_a + \\log_{10}(1) = \\text{p}K_a$$<br>Por lo tanto, el pH experimental medido en el punto de semiequivalencia permite determinar directamente el $\\text{p}K_a$ del \u00e1cido analizado."
+        }
+      ]
+    },
+    {
+      "note_id": "quim_09",
+      "title": "Redox y M\u00e9todo Ion-Electr\u00f3n",
+      "x": 780.0,
+      "y": 620.0,
+      "tags": [
+        "Qu\u00edmica",
+        "Redox",
+        "Ion-Electr\u00f3n",
+        "Oxidaci\u00f3n",
+        "Reducci\u00f3n"
+      ],
+      "note_type": "standard",
+      "desired_retention": 0.88,
+      "cards": [
+        {
+          "item_id": 1879936200275847659,
+          "type": "ClozeCard",
+          "fsrs_card": {
+            "card_id": 1792846870685,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.686206+00:00",
+            "last_review": null
+          },
+          "title": "Definiciones de Oxidaci\u00f3n, Reducci\u00f3n y Electrodos",
+          "text": "- <b>Oxidaci\u00f3n:</b> {{c1::P\u00e9rdida de electrones::electrones en oxidaci\u00f3n}} (aumento de estado de oxidaci\u00f3n). Ocurre en el {{c2::\u00c1nodo::electrodo de oxidaci\u00f3n}} (vocal-vocal).\n- <b>Reducci\u00f3n:</b> {{c3::Ganancia de electrones::electrones en reducci\u00f3n}} (disminuci\u00f3n de estado de oxidaci\u00f3n). Ocurre en el {{c4::C\u00e1todo::electrodo de reducci\u00f3n}} (consonante-consonante)."
+        },
+        {
+          "item_id": 1879936200276637612,
+          "type": "ProofSequenceCard",
+          "fsrs_card": {
+            "card_id": 1792846870686,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.687288+00:00",
+            "last_review": null
+          },
+          "title": "Balanceo Redox por Ion-Electr\u00f3n en Medio \u00c1cido",
+          "premise": "Balancear la reacci\u00f3n entre ion permanganato e ion oxalato en medio \u00e1cido: $\\text{MnO}_4^- + \\text{C}_2\\text{O}_4^{2-} \\to \\text{Mn}^{2+} + \\text{CO}_2$.",
+          "steps": [
+            "Semirreacci\u00f3n de oxidaci\u00f3n: $\\text{C}_2\\text{O}_4^{2-} \\to 2\\text{CO}_2 + 2e^-$.",
+            "Semirreacci\u00f3n de reducci\u00f3n: $\\text{MnO}_4^- \\to \\text{Mn}^{2+}$.",
+            "Balancear ox\u00edgenos con 4 mol\u00e9culas de agua: $\\text{MnO}_4^- \\to \\text{Mn}^{2+} + 4\\text{H}_2\\text{O}$.",
+            "Balancear hidr\u00f3genos con 8 protones: $\\text{MnO}_4^- + 8\\text{H}^+ \\to \\text{Mn}^{2+} + 4\\text{H}_2\\text{O}$.",
+            "Balancear cargas el\u00e9ctricas a\u00f1adiendo 5 electrones: $\\text{MnO}_4^- + 8\\text{H}^+ + 5e^- \\to \\text{Mn}^{2+} + 4\\text{H}_2\\text{O}$.",
+            "Multiplicar la oxidaci\u00f3n por 5 y la reducci\u00f3n por 2 para igualar 10 electrones: $2\\text{MnO}_4^- + 16\\text{H}^+ + 5\\text{C}_2\\text{O}_4^{2-} \\to 2\\text{Mn}^{2+} + 10\\text{CO}_2 + 8\\text{H}_2\\text{O}$."
+          ]
+        }
+      ]
+    },
+    {
+      "note_id": "quim_10",
+      "title": "Electroqu\u00edmica, Nernst y Faraday",
+      "x": 440.0,
+      "y": 880.0,
+      "tags": [
+        "Qu\u00edmica",
+        "Electroqu\u00edmica",
+        "Nernst",
+        "Faraday",
+        "Fem"
+      ],
+      "note_type": "standard",
+      "desired_retention": 0.88,
+      "cards": [
+        {
+          "item_id": 1879936200277628272,
+          "type": "ClozeCard",
+          "fsrs_card": {
+            "card_id": 1792846870687,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.688376+00:00",
+            "last_review": null
+          },
+          "title": "FEM Est\u00e1ndar y Energ\u00eda Libre de Gibbs",
+          "text": "La fuerza electromotriz est\u00e1ndar de celda es $E^\\circ_{\\text{celda}} = E^\\circ_{\\text{c\u00e1todo}} - E^\\circ_{\\text{\u00e1nodo}}$.\nSu relaci\u00f3n termodin\u00e1mica con la energ\u00eda libre de Gibbs es:\n$$\\Delta G^\\circ = {{c1::-n F E^\\circ_{\\text{celda}}::relaci\u00f3n Delta G y fem}}$$\nUna reacci\u00f3n redox es espont\u00e1nea si $E^\\circ_{\\text{celda}} {{c2::> 0::condici\u00f3n de fem}}$ ($\\Delta G^\\circ < 0$)."
+        },
+        {
+          "item_id": 1879936200278767832,
+          "type": "Flashcard",
+          "fsrs_card": {
+            "card_id": 1792846870688,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.689434+00:00",
+            "last_review": null
+          },
+          "title": "Ecuaci\u00f3n de Nernst a 25\u00b0C y Constante de Equilibrio",
+          "front": "Escriba la Ecuaci\u00f3n de Nernst a $25^\\circ\\text{C}$ para condiciones no est\u00e1ndar y su relaci\u00f3n con la constante de equilibrio $K$.",
+          "back": "1. <b>Ecuaci\u00f3n de Nernst a $298.15 \\, \\text{K}$:</b><br>$$E_{\\text{celda}} = E^\\circ_{\\text{celda}} - \\frac{0.0592}{n} \\log_{10} Q$$<br>2. <b>En el equilibrio din\u00e1mico:</b> La celda deja de producir corriente ($E_{\\text{celda}} = 0$) y $Q = K$:<br>$$0 = E^\\circ_{\\text{celda}} - \\frac{0.0592}{n} \\log_{10} K \\implies E^\\circ_{\\text{celda}} = \\frac{0.0592}{n} \\log_{10} K$$<br>lo que permite calcular constantes de equilibrio gigantescas o diminutas a partir de simples voltajes est\u00e1ndar."
+        },
+        {
+          "item_id": 1879936200279790263,
+          "type": "ClozeCard",
+          "fsrs_card": {
+            "card_id": 1792846870689,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.690492+00:00",
+            "last_review": null
+          },
+          "title": "Leyes de Faraday de la Electr\u00f3lisis",
+          "text": "La masa depositada en un electrodo por electr\u00f3lisis de corriente $I$ durante un tiempo $t$ es:\n$$m = {{c1::\\frac{M \\cdot I \\cdot t}{n F}::f\u00f3rmula de Faraday}}$$\ndonde $M$ es la masa molar, $F = 96485 \\, \\text{C/mol}$ y $n$ son los moles de electrones intercambiados por mol de sustancia depositada."
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source_id": "quim_01",
+      "target_id": "quim_02",
+      "label": "Cin\u00e9tica Integrada a Ecuaci\u00f3n de Arrhenius"
+    },
+    {
+      "source_id": "quim_02",
+      "target_id": "quim_03",
+      "label": "Energ\u00eda de Activaci\u00f3n a Cat\u00e1lisis"
+    },
+    {
+      "source_id": "quim_01",
+      "target_id": "quim_04",
+      "label": "Velocidades a Equilibrio Din\u00e1mico"
+    },
+    {
+      "source_id": "quim_04",
+      "target_id": "quim_05",
+      "label": "Constante de Equilibrio a Le Ch\u00e2telier"
+    },
+    {
+      "source_id": "quim_04",
+      "target_id": "quim_06",
+      "label": "Equilibrio a Disociaci\u00f3n \u00c1cido-Base"
+    },
+    {
+      "source_id": "quim_06",
+      "target_id": "quim_07",
+      "label": "Pares Conjugados a Soluciones Buffer"
+    },
+    {
+      "source_id": "quim_06",
+      "target_id": "quim_08",
+      "label": "Disociaci\u00f3n a Titulaciones"
+    },
+    {
+      "source_id": "quim_07",
+      "target_id": "quim_08",
+      "label": "Buffer a Zona Amortiguadora en Titulaci\u00f3n"
+    },
+    {
+      "source_id": "quim_09",
+      "target_id": "quim_10",
+      "label": "Balanceo Redox a FEM y Ecuaci\u00f3n de Nernst"
+    },
+    {
+      "source_id": "quim_04",
+      "target_id": "quim_10",
+      "label": "Cociente Q y K a Potencial de Celda"
+    }
+  ]
+}

@@ -1,0 +1,579 @@
+{
+  "name": "OFG Muerte (Presentaci\u00f3n y Gui\u00f3n)",
+  "folder_path": "",
+  "notes": [
+    {
+      "note_id": "ofg_01",
+      "title": "Cosmovisi\u00f3n Hom\u00e9rica y Finitud Radical",
+      "x": 100.0,
+      "y": 100.0,
+      "tags": [
+        "OFG Muerte",
+        "Homero",
+        "Hades",
+        "Escatolog\u00eda"
+      ],
+      "note_type": "standard",
+      "desired_retention": 0.88,
+      "cards": [
+        {
+          "item_id": 1879936200282288329,
+          "type": "ClozeCard",
+          "fsrs_card": {
+            "card_id": 1792846870691,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.692294+00:00",
+            "last_review": null
+          },
+          "title": "El Inframundo Hom\u00e9rico y la Psyche como Sombra",
+          "text": "En la escatolog\u00eda arcaica griega, el Hades no contempla recompensas ni castigos morales.\nLa <i>psyche</i> subsiste \u00fanicamente como {{c1::un <i>eidolon</i> (sombra vaporosa desprovista de fuerza vital y memoria)::naturaleza del alma}} en los Prados Asf\u00f3delos."
+        },
+        {
+          "item_id": 1879936200283037733,
+          "type": "Flashcard",
+          "fsrs_card": {
+            "card_id": 1792846870692,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.693352+00:00",
+            "last_review": null
+          },
+          "title": "La Sentencia Tr\u00e1gica de Aquiles en la Odisea",
+          "front": "\u00bfCu\u00e1l es la c\u00e9lebre afirmaci\u00f3n de Aquiles en el Canto XI de la <i>Odisea</i> y qu\u00e9 revela sobre la concepci\u00f3n griega de la muerte?",
+          "back": "Aquiles proclama a Odiseo:<br><i>\u00abNo intentes consolarme de la muerte, noble Odiseo. Preferir\u00eda ser siervo en la tierra de un labrador pobre antes que reinar sobre todos los muertos extintos.\u00bb</i><br><b>Interpretaci\u00f3n:</b> La muerte en el mundo arcaico es un <b>despojo ontol\u00f3gico radical</b>. No hay consuelo teol\u00f3gico ni para\u00edso. Por eso, el \u00fanico sentido y rescate posible frente al abismo radica en la memoria comunitaria viva (*mneme*) que preserva las haza\u00f1as del h\u00e9roe."
+        },
+        {
+          "item_id": 1879936200284290732,
+          "type": "ClozeCard",
+          "fsrs_card": {
+            "card_id": 1792846870693,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.694410+00:00",
+            "last_review": null
+          },
+          "title": "Finalidad Social del Rito Funerario Griego",
+          "text": "El ritual funerario griego no persigue la salvaci\u00f3n del alma en el M\u00e1s All\u00e1, sino {{c1::la recomposici\u00f3n, orden y protecci\u00f3n de la comunidad de los vivos::prop\u00f3sito central del rito}}."
+        }
+      ]
+    },
+    {
+      "note_id": "ofg_02",
+      "title": "Dial\u00e9ctica Sagrada: M\u00edasma vs Ta Nomiz\u00f3mena",
+      "x": 440.0,
+      "y": 100.0,
+      "tags": [
+        "OFG Muerte",
+        "M\u00edasma",
+        "Purificaci\u00f3n",
+        "Deber Religioso"
+      ],
+      "note_type": "standard",
+      "desired_retention": 0.88,
+      "cards": [
+        {
+          "item_id": 1879936200285522154,
+          "type": "ClozeCard",
+          "fsrs_card": {
+            "card_id": 1792846870694,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.695475+00:00",
+            "last_review": null
+          },
+          "title": "M\u00edasma y Ta Nomiz\u00f3mena",
+          "text": "- La contaminaci\u00f3n e impureza ritual generada por el cad\u00e1ver humano se denomina {{c1::*m\u00edasma*::impureza sagrada}}.\n- Los deberes consuetudinarios y honras debidas al difunto son {{c2::*ta nomiz\u00f3mena*::deber ritual}}."
+        },
+        {
+          "item_id": 1879936200286882983,
+          "type": "Flashcard",
+          "fsrs_card": {
+            "card_id": 1792846870695,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.696533+00:00",
+            "last_review": null
+          },
+          "title": "La Tensi\u00f3n Dial\u00e9ctica Sagrada en el Duelo Hel\u00e9nico",
+          "front": "\u00bfEn qu\u00e9 consiste la paradoja irresoluble entre el <i>m\u00edasma</i> y <i>ta nomiz\u00f3mena</i>?",
+          "back": "El cad\u00e1ver en descomposici\u00f3n emana una impureza religiosa destructiva (*m\u00edasma*) que mancilla el orden c\u00edvico y c\u00f3smico. Sin embargo, el \u00fanico modo de aplacar a los dioses y restituir el orden (*ta nomiz\u00f3mena*) exige que los parientes m\u00e1s cercanos toquen, laven, unjan y vistan directamente ese mismo cuerpo contaminante. El contacto con lo impuro es el \u00fanico camino hacia la purificaci\u00f3n y la piedad comunitaria."
+        },
+        {
+          "item_id": 1879936200287751810,
+          "type": "ClozeCard",
+          "fsrs_card": {
+            "card_id": 1792846870696,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.697596+00:00",
+            "last_review": null
+          },
+          "title": "El Ard\u00e1nion Purificador a la Entrada del Oikos",
+          "text": "A la puerta de la casa del difunto se colocaba {{c1::el *ard\u00e1nion* (\u00e1nfora con agua tra\u00edda de otra fuente)::\u00e1nfora exterior}} para que los visitantes se purificaran antes de retornar al espacio c\u00edvico."
+        }
+      ]
+    },
+    {
+      "note_id": "ofg_03",
+      "title": "Fase I: La Pr\u00f3thesis",
+      "x": 780.0,
+      "y": 100.0,
+      "tags": [
+        "OFG Muerte",
+        "Pr\u00f3thesis",
+        "G\u00f3os",
+        "Mujeres"
+      ],
+      "note_type": "standard",
+      "desired_retention": 0.88,
+      "cards": [
+        {
+          "item_id": 1879936200288294048,
+          "type": "ClozeCard",
+          "fsrs_card": {
+            "card_id": 1792846870697,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.698670+00:00",
+            "last_review": null
+          },
+          "title": "La Pr\u00f3thesis y el Papel Femenino",
+          "text": "La primera fase ritual del funeral griego es la {{c1::*pr\u00f3thesis*::primera fase}}, el velatorio dom\u00e9stico en el *oikos*.\nEl protagonismo absoluto recae en {{c2::las mujeres de la familia::protagonistas del velatorio}}, quienes lavan el cuerpo, lo ungen con perfumes, lo visten de blanco y entonan el {{c3::*g\u00f3os* (lamento f\u00fanebre desgarrador)::lamento cantado}}."
+        },
+        {
+          "item_id": 1879936200289556942,
+          "type": "Flashcard",
+          "fsrs_card": {
+            "card_id": 1792846870698,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.699727+00:00",
+            "last_review": null
+          },
+          "title": "Orientaci\u00f3n y Gestualidad en la Pr\u00f3thesis",
+          "front": "\u00bfC\u00f3mo se dispon\u00eda el cad\u00e1ver en la <i>kline</i> y cu\u00e1les eran los gestos corporales codificados del lamento femenino?",
+          "back": "1. <b>Disposici\u00f3n:</b> El cuerpo reposaba sobre el lecho mortuorio (*kline*) con los pies apuntando rigurosamente hacia la puerta de salida de la casa, simbolizando su inminente partida del mundo de los vivos.<br>2. <b>Gestualidad ritualizada:</b> Las parientes rodeaban el lecho rasg\u00e1ndose las mejillas con las u\u00f1as, mes\u00e1ndose violentamente los cabellos y golpe\u00e1ndose el pecho al comp\u00e1s de cantos antifonales. Esta somatizaci\u00f3n del dolor no era caos, sino una canalizaci\u00f3n cat\u00e1rtica culturalmente normada."
+        }
+      ]
+    },
+    {
+      "note_id": "ofg_04",
+      "title": "Fase II: La \u00c9kfora",
+      "x": 100.0,
+      "y": 360.0,
+      "tags": [
+        "OFG Muerte",
+        "\u00c9kfora",
+        "Cortejo",
+        "Cer\u00e1mico",
+        "Polis"
+      ],
+      "note_type": "standard",
+      "desired_retention": 0.88,
+      "cards": [
+        {
+          "item_id": 1879936200290808550,
+          "type": "ClozeCard",
+          "fsrs_card": {
+            "card_id": 1792846870699,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.700783+00:00",
+            "last_review": null
+          },
+          "title": "Definici\u00f3n y Horario de la \u00c9kfora",
+          "text": "El traslado p\u00fablico del cad\u00e1ver hacia el cementerio extramuros (el Cer\u00e1mico) se denomina {{c1::*\u00e9kfora*::segunda fase}}.\nDeb\u00eda realizarse estrictamente antes del alba para {{c2::evitar que los rayos sagrados del dios Helios fueran contaminados por el *m\u00edasma*::motivo del horario}}."
+        },
+        {
+          "item_id": 1879936200291751333,
+          "type": "Flashcard",
+          "fsrs_card": {
+            "card_id": 1792846870700,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.701837+00:00",
+            "last_review": null
+          },
+          "title": "La \u00c9kfora como Frontera C\u00edvica y Conflicto Pol\u00edtico",
+          "front": "\u00bfPor qu\u00e9 la <i>\u00e9kfora</i> constitu\u00eda el momento de mayor tensi\u00f3n pol\u00edtica entre los linajes aristocr\u00e1ticos y la <i>polis</i>?",
+          "back": "Durante la <i>\u00e9kfora</i> el luto privado sal\u00eda a las calles de la ciudad. Los linajes aristocr\u00e1ticos (*eup\u00e1tridas*) utilizaban el cortejo procesional para desplegar su riqueza, carros, caballos y s\u00e9quitos de pla\u00f1ideras contratadas, convirtiendo las exequias en demostraciones de poder din\u00e1stico y faccioso que amenazaban la cohesi\u00f3n democr\u00e1tica y avivaban disputas de sangre."
+        }
+      ]
+    },
+    {
+      "note_id": "ofg_05",
+      "title": "Fase III: Sepultura y Per\u00eddeipnon",
+      "x": 440.0,
+      "y": 360.0,
+      "tags": [
+        "OFG Muerte",
+        "Sepultura",
+        "Choai",
+        "Per\u00eddeipnon"
+      ],
+      "note_type": "standard",
+      "desired_retention": 0.88,
+      "cards": [
+        {
+          "item_id": 1879936200292602886,
+          "type": "ClozeCard",
+          "fsrs_card": {
+            "card_id": 1792846870701,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.702892+00:00",
+            "last_review": null
+          },
+          "title": "Libaciones Choai y Banquete F\u00fanebre",
+          "text": "- Las libaciones de vino, miel, leche y aceite sobre la tumba se denominan {{c1::*choai*::ofrendas l\u00edquidas}}.\n- El banquete formal de retorno en el *oikos* purificado se llama {{c2::*per\u00eddeipnon*::banquete f\u00fanebre}}, donde el difunto act\u00faa simb\u00f3licamente como anfitri\u00f3n de honor."
+        },
+        {
+          "item_id": 1879936200294186073,
+          "type": "Flashcard",
+          "fsrs_card": {
+            "card_id": 1792846870702,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.703946+00:00",
+            "last_review": null
+          },
+          "title": "Funci\u00f3n Psicosocial del Per\u00eddeipnon",
+          "front": "\u00bfQu\u00e9 funci\u00f3n psicol\u00f3gica y comunitaria cumpl\u00eda el <i>per\u00eddeipnon</i> en la resoluci\u00f3n del duelo?",
+          "back": "El <i>per\u00eddeipnon</i> se\u00f1ala la clausura del duelo agudo y el vencimiento de la contaminaci\u00f3n (*m\u00edasma*). Al sentarse juntos a comer tras lavar sus cuerpos, los familiares restauran el apetito biol\u00f3gico y reafirman su pacto social. El difunto es despedido solemnemente pero su ausencia ya no paraliza al grupo: la comunidad reasume su vida productiva y reproductiva en la <i>polis</i>."
+        }
+      ]
+    },
+    {
+      "note_id": "ofg_06",
+      "title": "Arqueolog\u00eda: Lekythos y \u00d3bolo",
+      "x": 780.0,
+      "y": 360.0,
+      "tags": [
+        "OFG Muerte",
+        "Arqueolog\u00eda",
+        "Lekythos",
+        "\u00d3bolo",
+        "Caronte"
+      ],
+      "note_type": "standard",
+      "desired_retention": 0.88,
+      "cards": [
+        {
+          "item_id": 1879936200295172133,
+          "type": "ClozeCard",
+          "fsrs_card": {
+            "card_id": 1792846870703,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.705002+00:00",
+            "last_review": null
+          },
+          "title": "El Lekythos de Fondo Blanco",
+          "text": "El vaso cer\u00e1mico exclusivo para ofrendas funerarias con pinturas de Hermes Psicopompo y Caronte es el {{c1::*lekythos* (l\u00e9cito)::vaso funerario}}."
+        },
+        {
+          "item_id": 1879936200296539317,
+          "type": "Flashcard",
+          "fsrs_card": {
+            "card_id": 1792846870705,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.706055+00:00",
+            "last_review": null
+          },
+          "title": "La Econom\u00eda Ritual del Lekythos con C\u00e1mara Ciega",
+          "front": "\u00bfQu\u00e9 hallazgo arqueol\u00f3gico revel\u00f3 el interior de muchos *lekythoi* de fondo blanco y qu\u00e9 demuestra sobre la econom\u00eda funeraria?",
+          "back": "Las excavaciones revelaron que muchos *lekythoi* \u00e1ticos pose\u00edan una <b>c\u00e1mara ciega interior</b>: una peque\u00f1a c\u00e1psula en el cuello que conten\u00eda apenas una fracci\u00f3n del aceite o perfume de lujo, manteniendo el resto del vaso vac\u00edo. Esto demuestra el pragmatismo \u00e1tico: la familia cumpl\u00eda con el decoro sagrado y la apariencia exterior requerida por la piedad comunitaria sin incurrir en un gasto econ\u00f3mico ruinoso."
+        },
+        {
+          "item_id": 1879936200298231299,
+          "type": "Flashcard",
+          "fsrs_card": {
+            "card_id": 1792846870706,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.707115+00:00",
+            "last_review": null
+          },
+          "title": "El Significado Real del \u00d3bolo F\u00fanebre",
+          "front": "\u00bfPor qu\u00e9 el \u00f3bolo depositado en la boca del cad\u00e1ver NO era un simple peaje mercantil para Caronte?",
+          "back": "Lejos de una mera transacci\u00f3n comercial, el \u00f3bolo operaba como una <b>credencial c\u00edvica y moral</b>. Demostraba que el muerto no hab\u00eda perecido en el desamparo ni como un paria insepulto: pose\u00eda parientes leg\u00edtimos con solvencia moral y c\u00edvica que hab\u00edan ejecutado rigurosamente los deberes sagrados (*ta nomiz\u00f3mena*), acreditando su estatus de ciudadano con honras f\u00fanebres completas."
+        }
+      ]
+    },
+    {
+      "note_id": "ofg_07",
+      "title": "Leyes de Sol\u00f3n (594 a.C.) y Control del Luto",
+      "x": 100.0,
+      "y": 620.0,
+      "tags": [
+        "OFG Muerte",
+        "Sol\u00f3n",
+        "Leyes Suntuarias",
+        "Polis",
+        "Pol\u00edtica"
+      ],
+      "note_type": "standard",
+      "desired_retention": 0.88,
+      "cards": [
+        {
+          "item_id": 1879936200298899686,
+          "type": "ClozeCard",
+          "fsrs_card": {
+            "card_id": 1792846870707,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.708188+00:00",
+            "last_review": null
+          },
+          "title": "Reformas Suntuarias de Sol\u00f3n",
+          "text": "En el 594 a.C., las leyes de Sol\u00f3n regularon el duelo:\n- Prohibieron {{c1::desgarrarse las mejillas con las u\u00f1as::prohibici\u00f3n corporal}} y contratar pla\u00f1ideras profesionales ajenas al *oikos*.\n- Limitaron las vestiduras mortuorias a un m\u00e1ximo de {{c2::tres mantos::l\u00edmite de mantos}} y prohibieron el sacrificio de {{c3::bueyes::animal prohibido}} en la tumba."
+        },
+        {
+          "item_id": 1879936200300544223,
+          "type": "Flashcard",
+          "fsrs_card": {
+            "card_id": 1792846870708,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.709245+00:00",
+            "last_review": null
+          },
+          "title": "El Sentido Pol\u00edtico de las Reformas de Sol\u00f3n",
+          "front": "\u00bfCu\u00e1l fue el verdadero objetivo pol\u00edtico de Sol\u00f3n al restringir la visibilidad y el llanto de las mujeres en los funerales?",
+          "back": "Las disputas aristocr\u00e1ticas y las <b>venganzas de sangre</b> (*vendettas* cl\u00e1nicas) encontraban su mecha en los velorios p\u00fablicos, donde el llanto exacerbado de las mujeres incitaba a los parientes masculinos a la revancha violenta. Al subordinar y privatizar el luto en el hogar y prohibir las exhibiciones de poder aristocr\u00e1tico, Sol\u00f3n neutraliz\u00f3 el tribalismo nobiliario y consolid\u00f3 el monopolio c\u00edvico de la <i>polis</i> y la ley com\u00fan."
+        }
+      ]
+    },
+    {
+      "note_id": "ofg_08",
+      "title": "Dexiosis y la Serenidad Cl\u00e1sica",
+      "x": 440.0,
+      "y": 620.0,
+      "tags": [
+        "OFG Muerte",
+        "Dexiosis",
+        "Hegeso",
+        "Ethos",
+        "Mneme"
+      ],
+      "note_type": "standard",
+      "desired_retention": 0.88,
+      "cards": [
+        {
+          "item_id": 1879936200300648642,
+          "type": "ClozeCard",
+          "fsrs_card": {
+            "card_id": 1792846870709,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.710303+00:00",
+            "last_review": null
+          },
+          "title": "El Motivo de la Dexiosis",
+          "text": "En las estelas de m\u00e1rmol del siglo IV a.C., el gesto solemne de uni\u00f3n de manos entre el difunto y el allegado vivo se denomina {{c1::*dexiosis*::motivo del apret\u00f3n de manos}}.\nRepresenta una despedida amorosa te\u00f1ida de serena dignidad, conectando el mundo terrenal con el Hades sin desesperaci\u00f3n violenta."
+        },
+        {
+          "item_id": 1879936200302305702,
+          "type": "Flashcard",
+          "fsrs_card": {
+            "card_id": 1792846870710,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.711358+00:00",
+            "last_review": null
+          },
+          "title": "El Ethos Cl\u00e1sico en la Estela de Hegeso",
+          "front": "\u00bfC\u00f3mo se refleja la serenidad cl\u00e1sica en la C\u00e9lebre Estela de Hegeso (Cer\u00e1mico de Atenas)?",
+          "back": "Hegeso aparece sentada en un sill\u00f3n elegante contemplando con calma una joya que extrae de un cofre sostenido por su esclava en pie. No hay l\u00e1grimas, cad\u00e1veres ni agon\u00eda. El arte cl\u00e1sico \u00e1tico elige recordar a la difunta en la cumbre de su belleza y armon\u00eda \u00e9tica (*kalokagath\u00eda*), inmortalizando su memoria (*mneme*) ante los ojos c\u00edvicos de la posteridad."
+        }
+      ]
+    },
+    {
+      "note_id": "ofg_09",
+      "title": "Gui\u00f3n de Exposici\u00f3n: Turnos y Minutaje",
+      "x": 780.0,
+      "y": 620.0,
+      "tags": [
+        "OFG Muerte",
+        "Gui\u00f3n",
+        "Exposici\u00f3n",
+        "Minutaje",
+        "Cronograma"
+      ],
+      "note_type": "standard",
+      "desired_retention": 0.88,
+      "cards": [
+        {
+          "item_id": 1879936200302809465,
+          "type": "Flashcard",
+          "fsrs_card": {
+            "card_id": 1792846870711,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.712415+00:00",
+            "last_review": null
+          },
+          "title": "Estructura Coral de los 4 Expositores (10:00 Exactos)",
+          "front": "\u00bfC\u00f3mo se distribuyen los 4 turnos cronom\u00e9tricos de la presentaci\u00f3n de 10 minutos (2:30 por expositor)?",
+          "back": "1. <b>Turno I (Expositor 1, 0:00 - 2:30, L\u00e1minas 1-3):</b> Apertura formal, despojo ontol\u00f3gico en la <i>Odisea</i> y dial\u00e9ctica sagrada (*m\u00edasma* vs. *ta nomiz\u00f3mena*). Relevo fluido.<br>2. <b>Turno II (Expositor 2, 2:30 - 5:00, L\u00e1minas 4-6):</b> Tr\u00edptico procesal en la arqueolog\u00eda (*pr\u00f3thesis*, *\u00e9kfora*, sepultura, libaciones *choai* y banquete *per\u00eddeipnon*). Relevo fluido.<br>3. <b>Turno III (Expositor 3, 5:00 - 7:30, L\u00e1minas 7-9):</b> Arqueolog\u00eda del *lekythos* (c\u00e1mara ciega y \u00f3bolo), leyes suntuarias de Sol\u00f3n (594 a.C.) y est\u00e9tica de la memoria (*dexiosis*). Relevo fluido.<br>4. <b>Turno IV (Expositor 4, 7:30 - 10:00, L\u00e1minas 10-12):</b> Di\u00e1logo formativo con el presente, Tres Tesis Vertebrales y dinamizaci\u00f3n activa del plenario de discusi\u00f3n."
+        },
+        {
+          "item_id": 1879936200303853126,
+          "type": "ClozeCard",
+          "fsrs_card": {
+            "card_id": 1792846870712,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.713469+00:00",
+            "last_review": null
+          },
+          "title": "Regla Estricta de Locuci\u00f3n Sin Preguntas Ret\u00f3ricas",
+          "text": "A lo largo del desarrollo de las l\u00e1minas 1 a 11 est\u00e1 estrictamente {{c1::prohibido formular preguntas ret\u00f3ricas (debe ser 100% afirmativo y directo)::regla de locuci\u00f3n}}.\nLas preguntas s\u00f3lo deben formularse en la l\u00e1mina 12 final para abrir el debate colectivo."
+        }
+      ]
+    },
+    {
+      "note_id": "ofg_10",
+      "title": "Conclusiones y Preguntas de Debate",
+      "x": 440.0,
+      "y": 880.0,
+      "tags": [
+        "OFG Muerte",
+        "Conclusiones",
+        "Debate",
+        "Tesis"
+      ],
+      "note_type": "standard",
+      "desired_retention": 0.88,
+      "cards": [
+        {
+          "item_id": 1879936200305684935,
+          "type": "Flashcard",
+          "fsrs_card": {
+            "card_id": 1792846870713,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.714526+00:00",
+            "last_review": null
+          },
+          "title": "Las Tres Tesis Vertebrales de la Finitud Hel\u00e9nica",
+          "front": "Sintetice las tres tesis acad\u00e9micas conclusivas de la investigaci\u00f3n sobre la muerte en la Grecia cl\u00e1sica.",
+          "back": "1. <b>Tesis 1:</b> El rito no es una salvaci\u00f3n individual del alma, sino una tecnolog\u00eda ritual colectiva imprescindible para sanar y recomponer la comunidad de los vivos.<br>2. <b>Tesis 2:</b> La regulaci\u00f3n del duelo por Sol\u00f3n representa el nacimiento de la pol\u00edtica c\u00edvica moderna, subordinando la venganza cl\u00e1nica al imperio de la ley com\u00fan.<br>3. <b>Tesis 3:</b> Frente al ocultamiento e higienizaci\u00f3n m\u00e9dica moderna de la muerte, los griegos asumieron la finitud afrontando directamente la materia impura y sublim\u00e1ndola mediante gestos corporales compartidos y arte de la memoria imperecedera."
+        },
+        {
+          "item_id": 1879936200306384328,
+          "type": "ClozeCard",
+          "fsrs_card": {
+            "card_id": 1792846870714,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.715588+00:00",
+            "last_review": null
+          },
+          "title": "Problema Deliberativo para el Plenario",
+          "text": "\u00bfEn qu\u00e9 medida el confinamiento hospitalario as\u00e9ptico de la agon\u00eda en la sociedad moderna ha sumido al doliente en un estado de {{c1::desamparo simb\u00f3lico::diagn\u00f3stico del duelo moderno}} frente al poder curativo del rito colectivo ancestral?"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source_id": "ofg_01",
+      "target_id": "ofg_02",
+      "label": "Escatolog\u00eda a Dial\u00e9ctica del M\u00edasma"
+    },
+    {
+      "source_id": "ofg_02",
+      "target_id": "ofg_03",
+      "label": "Deber Ritual a Velatorio Dom\u00e9stico"
+    },
+    {
+      "source_id": "ofg_03",
+      "target_id": "ofg_04",
+      "label": "Pr\u00f3thesis a \u00c9kfora Procesional"
+    },
+    {
+      "source_id": "ofg_04",
+      "target_id": "ofg_05",
+      "label": "Cortejo a Sepultura y Banquete"
+    },
+    {
+      "source_id": "ofg_02",
+      "target_id": "ofg_06",
+      "label": "Ofrendas Sagradas a Arqueolog\u00eda Material"
+    },
+    {
+      "source_id": "ofg_04",
+      "target_id": "ofg_07",
+      "label": "Cortejo Aristocr\u00e1tico a Leyes de Sol\u00f3n"
+    },
+    {
+      "source_id": "ofg_05",
+      "target_id": "ofg_08",
+      "label": "Sepultura a Monumentos y Dexiosis"
+    },
+    {
+      "source_id": "ofg_03",
+      "target_id": "ofg_09",
+      "label": "Fases Pr\u00e1cticas a Gui\u00f3n y Minutaje"
+    },
+    {
+      "source_id": "ofg_07",
+      "target_id": "ofg_09",
+      "label": "Historia y Pol\u00edtica a Estructura Oral"
+    },
+    {
+      "source_id": "ofg_08",
+      "target_id": "ofg_10",
+      "label": "Memoria F\u00fanebre a Conclusiones y Debate"
+    }
+  ]
+}

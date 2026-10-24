@@ -1,0 +1,728 @@
+{
+  "name": "An\u00e1lisis Real (I3)",
+  "folder_path": "",
+  "notes": [
+    {
+      "note_id": "ar_01",
+      "title": "Espacios M\u00e9tricos y Continuidad Global",
+      "x": 100.0,
+      "y": 100.0,
+      "tags": [
+        "An\u00e1lisis Real",
+        "Topolog\u00eda",
+        "Continuidad"
+      ],
+      "note_type": "standard",
+      "desired_retention": 0.88,
+      "cards": [
+        {
+          "item_id": 1879936200222325151,
+          "type": "ClozeCard",
+          "fsrs_card": {
+            "card_id": 1792846870634,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.635374+00:00",
+            "last_review": null
+          },
+          "title": "Caracterizaci\u00f3n Topol\u00f3gica Global de Continuidad",
+          "text": "Sea $f: X \\to Y$ una aplicaci\u00f3n entre espacios m\u00e9tricos. Son equivalentes:\n1. $f$ es continua en todo $X$.\n2. Para todo conjunto abierto $V \\subset Y$, la preimagen $f^{-1}(V)$ es {{c1::abierta en X::preimagen de abiertos}}.\n3. Para todo conjunto cerrado $F \\subset Y$, la preimagen $f^{-1}(F)$ es {{c2::cerrada en X::preimagen de cerrados}}.\n4. Para todo subconjunto $A \\subset X$, se cumple la inclusi\u00f3n topol\u00f3gica: ${{c3::f(\\overline{A}) \\subset \\overline{f(A)}::preservaci\u00f3n de clausuras}}$."
+        },
+        {
+          "item_id": 1879936200223575558,
+          "type": "Flashcard",
+          "fsrs_card": {
+            "card_id": 1792846870635,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.636430+00:00",
+            "last_review": null
+          },
+          "title": "Funciones Lipschitzianas y H\u00f6lderianas",
+          "front": "Defina rigurosamente las clases de funciones Lipschitz y H\u00f6lder y explique su relaci\u00f3n con la continuidad uniforme.",
+          "back": "1. <b>Lipschitz:</b> Una funci\u00f3n $f: X \\to Y$ es Lipschitz con constante $L \\ge 0$ si $\\forall x, x' \\in X$:<br>$$d_Y(f(x), f(x')) \\le L \\cdot d_X(x, x')$$<br>2. <b>H\u00f6lder:</b> Es H\u00f6lder con exponente $\\alpha \\in (0, 1]$ y constante $C \\ge 0$ si:<br>$$d_Y(f(x), f(x')) \\le C \\cdot d_X(x, x')^\\alpha$$<br>3. <b>Propiedad clave:</b> Toda funci\u00f3n Lipschitz (y toda funci\u00f3n H\u00f6lder) es <b>incondicionalmente uniformemente continua</b> en $X$. Basta elegir $\\delta = \\varepsilon / L$ (o $\\delta = (\\varepsilon / C)^{1/\\alpha}$), el cual es id\u00e9ntico e independiente de los puntos evaluados."
+        },
+        {
+          "item_id": 1879936200224407464,
+          "type": "ClozeCard",
+          "fsrs_card": {
+            "card_id": 1792846870636,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.637484+00:00",
+            "last_review": null
+          },
+          "title": "Homeomorfismo e Invariantes Topol\u00f3gicos",
+          "text": "Una biyecci\u00f3n continua $f: X \\to Y$ cuya inversa $f^{-1}: Y \\to X$ es tambi\u00e9n continua se denomina {{c1::homeomorfismo::isomorfismo topol\u00f3gico}}.\nLas propiedades geom\u00e9tricas preservadas bajo homeomorfismos son los invariantes topol\u00f3gicos, destacando principalmente la {{c2::compacidad y la conexidad::invariantes topol\u00f3gicos principales}}."
+        }
+      ]
+    },
+    {
+      "note_id": "ar_02",
+      "title": "Funci\u00f3n Distancia y Separaci\u00f3n de Urysohn",
+      "x": 440.0,
+      "y": 100.0,
+      "tags": [
+        "An\u00e1lisis Real",
+        "Distancia",
+        "Urysohn",
+        "Separaci\u00f3n"
+      ],
+      "note_type": "standard",
+      "desired_retention": 0.88,
+      "cards": [
+        {
+          "item_id": 1879936200225746350,
+          "type": "ProofSequenceCard",
+          "fsrs_card": {
+            "card_id": 1792846870637,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.638541+00:00",
+            "last_review": null
+          },
+          "title": "La Funci\u00f3n Distancia a un Conjunto es 1-Lipschitz",
+          "premise": "Para cualquier subconjunto no vac\u00edo $A \\subset X$, demostrar que la funci\u00f3n $d_A: X \\to \\mathbb{R}$ dada por $d_A(x) = d(x, A) = \\inf_{a \\in A} d(x, a)$ cumple $|d(x, A) - d(y, A)| \\le d(x, y)$ para todo $x, y \\in X$.",
+          "steps": [
+            "Sea $a \\in A$ arbitrario. Por la desigualdad triangular m\u00e9trica en $X$: $d(x, a) \\le d(x, y) + d(y, a)$.",
+            "Tomar el \u00ednfimo sobre todos los elementos $a \\in A$ en el miembro derecho: $d(x, a) \\le d(x, y) + \\inf_{a' \\in A} d(y, a') = d(x, y) + d(y, A)$.",
+            "Como esta cota es v\u00e1lida para todo $a \\in A$, tomando \u00ednfimo sobre $a$ en el lado izquierdo: $d(x, A) \\le d(x, y) + d(y, A)$.",
+            "Restando $d(y, A)$ se obtiene: $d(x, A) - d(y, A) \\le d(x, y)$.",
+            "Por estricta simetr\u00eda intercambiando los papeles de $x$ e $y$: $d(y, A) - d(x, A) \\le d(x, y)$.",
+            "Combinando ambas desigualdades se concluye rigurosamente: $|d(x, A) - d(y, A)| \\le d(x, y)$, es decir, $d(\\cdot, A)$ es 1-Lipschitz (y por tanto continua)."
+          ]
+        },
+        {
+          "item_id": 1879936200226633083,
+          "type": "Flashcard",
+          "fsrs_card": {
+            "card_id": 1792846870638,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.639594+00:00",
+            "last_review": null
+          },
+          "title": "Lema de Urysohn M\u00e9trico Elemental",
+          "front": "Sean $A, B \\subset X$ dos conjuntos cerrados y disjuntos en un espacio m\u00e9trico ($A \\cap B = \\emptyset$). Construya expl\u00edcitamente una funci\u00f3n continua $f: X \\to [0, 1]$ tal que $f|_A \\equiv 0$ y $f|_B \\equiv 1$.",
+          "back": "Como $A$ y $B$ son cerrados y disjuntos, para ning\u00fan punto se puede anular simult\u00e1neamente la distancia a ambos: $d(x, A) + d(x, B) > 0$ para todo $x \\in X$.<br>Se define la funci\u00f3n de Urysohn:<br>$$f(x) = \\frac{d(x, A)}{d(x, A) + d(x, B)}$$<br>1. Si $x \\in A \\implies d(x, A) = 0 \\implies f(x) = 0$.<br>2. Si $x \\in B \\implies d(x, B) = 0 \\implies f(x) = \\frac{d(x, A)}{d(x, A) + 0} = 1$.<br>3. Como las funciones distancia son 1-Lipschitz y el denominador nunca se anula, $f$ es continua en todo $X$ con imagen contenida en $[0, 1]$."
+        },
+        {
+          "item_id": 1879936200227463537,
+          "type": "ClozeCard",
+          "fsrs_card": {
+            "card_id": 1792846870639,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.640655+00:00",
+            "last_review": null
+          },
+          "title": "Separaci\u00f3n Estricta entre Compacto y Cerrado",
+          "text": "Si $K \\subset X$ es compacto, $F \\subset X$ es cerrado y $K \\cap F = \\emptyset$, entonces la distancia entre ambos conjuntos satisface:\n$$\\text{dist}(K, F) = \\inf_{x \\in K} d(x, F) {{c1::> 0 (es estrictamente positiva)::cota de separaci\u00f3n}}$$\nEsto se debe a que la funci\u00f3n continua $x \\mapsto d(x, F)$ alcanza su m\u00ednimo en el compacto $K$ y dicho m\u00ednimo no puede ser cero pues $K \\cap F = \\emptyset$."
+        }
+      ]
+    },
+    {
+      "note_id": "ar_03",
+      "title": "Continuidad y Compacidad: Weierstrass",
+      "x": 780.0,
+      "y": 100.0,
+      "tags": [
+        "An\u00e1lisis Real",
+        "Compacidad",
+        "Weierstrass",
+        "Extremos"
+      ],
+      "note_type": "standard",
+      "desired_retention": 0.88,
+      "cards": [
+        {
+          "item_id": 1879936200229167237,
+          "type": "ClozeCard",
+          "fsrs_card": {
+            "card_id": 1792846870640,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.641734+00:00",
+            "last_review": null
+          },
+          "title": "Preservaci\u00f3n de Compacidad bajo Continuidad",
+          "text": "Si $f: X \\to Y$ es continua y $K \\subset X$ es un conjunto compacto, entonces la imagen directa $f(K)$ es {{c1::un subconjunto compacto en Y::propiedad de la imagen}}.\nDemostraci\u00f3n: Cualquier recubrimiento abierto de $f(K)$ genera por preim\u00e1genes continuas un recubrimiento abierto de $K$, del cual se extrae un subrecubrimiento finito."
+        },
+        {
+          "item_id": 1879936200229370628,
+          "type": "Flashcard",
+          "fsrs_card": {
+            "card_id": 1792846870641,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.642796+00:00",
+            "last_review": null
+          },
+          "title": "Teorema de Weierstrass de los Valores Extremos",
+          "front": "Demuestre que toda funci\u00f3n continua $f: K \\to \\mathbb{R}$ sobre un espacio m\u00e9trico compacto no vac\u00edo $K$ es acotada y alcanza su m\u00e1ximo y m\u00ednimo absoluto.",
+          "back": "1. Por preservaci\u00f3n de compacidad, la imagen $f(K) \\subset \\mathbb{R}$ es compacta.<br>2. Por el Teorema de Heine-Borel en $\\mathbb{R}$, un subconjunto de $\\mathbb{R}$ es compacto si y s\u00f3lo si es <b>cerrado y acotado</b>.<br>3. Al ser $f(K)$ acotado, existen su supremo finito $M = \\sup f(K)$ y su \u00ednfimo finito $m = \\inf f(K)$.<br>4. Al ser $f(K)$ cerrado, contiene a todos sus puntos de adherencia, luego $M \\in f(K)$ y $m \\in f(K)$.<br>5. Por lo tanto, existen puntos $x_{\\max}, x_{\\min} \\in K$ tales que $f(x_{\\max}) = M$ y $f(x_{\\min}) = m$."
+        },
+        {
+          "item_id": 1879936200230979457,
+          "type": "ClozeCard",
+          "fsrs_card": {
+            "card_id": 1792846870642,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.643850+00:00",
+            "last_review": null
+          },
+          "title": "Inversa Continua sobre Compactos",
+          "text": "Sea $K$ un espacio m\u00e9trico compacto y $f: K \\to Y$ una aplicaci\u00f3n continua y biyectiva. Entonces la funci\u00f3n inversa $f^{-1}: Y \\to K$ es {{c1::autom\u00e1ticamente continua (f es un homeomorfismo)::continuidad forzada}}.\nJustificaci\u00f3n: Para probar que $(f^{-1})^{-1}(F) = f(F)$ es cerrado en $Y$ cuando $F$ es cerrado en $K$, basta notar que todo cerrado en un compacto es compacto, y su imagen continua $f(F)$ es compacta, luego cerrada."
+        }
+      ]
+    },
+    {
+      "note_id": "ar_04",
+      "title": "Continuidad Uniforme y Heine-Cantor",
+      "x": 100.0,
+      "y": 360.0,
+      "tags": [
+        "An\u00e1lisis Real",
+        "Uniforme Continuidad",
+        "Heine-Cantor"
+      ],
+      "note_type": "standard",
+      "desired_retention": 0.88,
+      "cards": [
+        {
+          "item_id": 1879936200231478982,
+          "type": "ProofSequenceCard",
+          "fsrs_card": {
+            "card_id": 1792846870643,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.644909+00:00",
+            "last_review": null
+          },
+          "title": "Demostraci\u00f3n del Teorema de Heine-Cantor",
+          "premise": "Demostrar que toda funci\u00f3n continua $f: K \\to Y$ definida sobre un espacio m\u00e9trico compacto $K$ es uniformemente continua.",
+          "steps": [
+            "Sea $\\varepsilon > 0$. Por continuidad puntual, para cada punto $p \\in K$ existe un radio $\\delta_p > 0$ tal que $d_K(x, p) < \\delta_p \\implies d_Y(f(x), f(p)) < \\varepsilon / 2$.",
+            "Considerar la familia de bolas abiertas $\\{B(p, \\delta_p / 2)\\}_{p \\in K}$. Al cubrir cada punto de $K$, forma un recubrimiento abierto de $K$.",
+            "Por compacidad de $K$, existe un subrecubrimiento finito centrado en los puntos $\\{p_1, p_2, \\dots, p_N\\}$.",
+            "Definir $\\delta = \\min_{1 \\le i \\le N} \\frac{\\delta_{p_i}}{2} > 0$. El m\u00ednimo existe y es estrictamente positivo por ser un conjunto finito de n\u00fameros positivos.",
+            "Sean $x, x' \\in K$ con $d_K(x, x') < \\delta$. Como $x$ pertenece a alguna bola del subrecubrimiento, existe $k$ tal que $d_K(x, p_k) < \\frac{\\delta_{p_k}}{2}$.",
+            "Por desigualdad triangular: $d_K(x', p_k) \\le d_K(x', x) + d_K(x, p_k) < \\delta + \\frac{\\delta_{p_k}}{2} \\le \\frac{\\delta_{p_k}}{2} + \\frac{\\delta_{p_k}}{2} = \\delta_{p_k}$.",
+            "Finalmente, por desigualdad triangular en el codominio $Y$: $d_Y(f(x), f(x')) \\le d_Y(f(x), f(p_k)) + d_Y(f(p_k), f(x')) < \\frac{\\varepsilon}{2} + \\frac{\\varepsilon}{2} = \\varepsilon$. Como $\\delta$ no depende de $x$ ni $x'$, $f$ es uniformemente continua."
+          ]
+        },
+        {
+          "item_id": 1879936200232531331,
+          "type": "ClozeCard",
+          "fsrs_card": {
+            "card_id": 1792846870644,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.645966+00:00",
+            "last_review": null
+          },
+          "title": "Teorema de Extensi\u00f3n \u00danica al Completado",
+          "text": "Sea $D \\subset X$ un subconjunto denso ($\\overline{D} = X$) y sea $Y$ un espacio m\u00e9trico completo. Si $f: D \\to Y$ es uniformemente continua, entonces existe {{c1::una \u00fanica extensi\u00f3n continua \\tilde{f}: X \\to Y::existencia y unicidad}} y dicha extensi\u00f3n es tambi\u00e9n {{c2::uniformemente continua::regularidad de la extensi\u00f3n}}."
+        }
+      ]
+    },
+    {
+      "note_id": "ar_05",
+      "title": "Conexidad, TVI y Punto Fijo 1D",
+      "x": 440.0,
+      "y": 360.0,
+      "tags": [
+        "An\u00e1lisis Real",
+        "Conexidad",
+        "TVI",
+        "Punto Fijo"
+      ],
+      "note_type": "standard",
+      "desired_retention": 0.88,
+      "cards": [
+        {
+          "item_id": 1879936200233683677,
+          "type": "ClozeCard",
+          "fsrs_card": {
+            "card_id": 1792846870645,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.647023+00:00",
+            "last_review": null
+          },
+          "title": "Definici\u00f3n de Conexidad y Subconjuntos Conexos de R",
+          "text": "Un espacio m\u00e9trico $X$ es conexo si sus \u00fanicos subconjuntos simult\u00e1neamente abiertos y cerrados (clopen) son:\n$${{c1::\\emptyset \\text{ y } X::subconjuntos clopen}}$$\nEn la recta real $\\mathbb{R}$, un conjunto $E \\subset \\mathbb{R}$ es conexo si y s\u00f3lo si es {{c2::un intervalo::caracterizaci\u00f3n en R}}."
+        },
+        {
+          "item_id": 1879936200236547923,
+          "type": "Flashcard",
+          "fsrs_card": {
+            "card_id": 1792846870647,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.648077+00:00",
+            "last_review": null
+          },
+          "title": "Teorema del Valor Intermedio (TVI Generalizado)",
+          "front": "Enuncie y demuestre el Teorema del Valor Intermedio para una funci\u00f3n continua $f: X \\to \\mathbb{R}$ sobre un espacio m\u00e9trico conexo arbitrario $X$.",
+          "back": "<b>Enunciado:</b> Si $X$ es un espacio m\u00e9trico conexo, $f: X \\to \\mathbb{R}$ es continua, y para $a, b \\in X$ con $f(a) < c < f(b)$, existe $x \\in X$ tal que $f(x) = c$.<br><b>Demostraci\u00f3n:</b><br>1. Como $X$ es conexo y $f$ es continua, la imagen directa $f(X)$ es un subconjunto conexo de $\\mathbb{R}$.<br>2. Los \u00fanicos subconjuntos conexos de $\\mathbb{R}$ son los intervalos.<br>3. Puesto que $f(a), f(b) \\in f(X)$ y $f(X)$ es un intervalo, todo punto intermedio $c$ comprendido entre $f(a)$ y $f(b)$ pertenece necesariamente a $f(X)$.<br>4. Por lo tanto, existe $x \\in X$ tal que $f(x) = c$."
+        },
+        {
+          "item_id": 1879936200237400395,
+          "type": "ProofSequenceCard",
+          "fsrs_card": {
+            "card_id": 1792846870648,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.649132+00:00",
+            "last_review": null
+          },
+          "title": "Teorema del Punto Fijo en 1D",
+          "premise": "Demostrar que toda funci\u00f3n continua $f: [a, b] \\to [a, b]$ posee al menos un punto fijo $x^* \\in [a, b]$ tal que $f(x^*) = x^*$.",
+          "steps": [
+            "Definir la funci\u00f3n auxiliar continua $g: [a, b] \\to \\mathbb{R}$ mediante $g(x) = f(x) - x$.",
+            "Como el codominio de $f$ es $[a, b]$, se cumple $f(a) \\ge a \\implies g(a) = f(a) - a \\ge 0$.",
+            "Similarmente, para el extremo derecho $f(b) \\le b \\implies g(b) = f(b) - b \\le 0$.",
+            "Si $g(a) = 0$, $a$ es punto fijo; si $g(b) = 0$, $b$ es punto fijo.",
+            "Si $g(a) > 0$ y $g(b) < 0$, por el Teorema de Bolzano existe $x^* \\in (a, b)$ tal que $g(x^*) = 0$.",
+            "Conclusi\u00f3n: $f(x^*) - x^* = 0 \\iff f(x^*) = x^*$."
+          ]
+        }
+      ]
+    },
+    {
+      "note_id": "ar_06",
+      "title": "Convergencia Puntual y Uniforme",
+      "x": 780.0,
+      "y": 360.0,
+      "tags": [
+        "An\u00e1lisis Real",
+        "Convergencia",
+        "Norma Infinito",
+        "Cauchy"
+      ],
+      "note_type": "standard",
+      "desired_retention": 0.88,
+      "cards": [
+        {
+          "item_id": 1879936200238061195,
+          "type": "ClozeCard",
+          "fsrs_card": {
+            "card_id": 1792846870649,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.650189+00:00",
+            "last_review": null
+          },
+          "title": "Norma del Supremo y Convergencia Uniforme",
+          "text": "Una sucesi\u00f3n de funciones $f_n: X \\to Y$ converge uniformemente a $f$ si y s\u00f3lo si:\n$$\\lim_{n \\to \\infty} \\|f_n - f\\|_\\infty = \\lim_{n \\to \\infty} {{c1::\\sup_{x \\in X} d_Y(f_n(x), f(x)) = 0::definici\u00f3n con norma del supremo}}$$\nLa diferencia esencial con la puntual es que el \u00edndice $N(\\varepsilon)$ depende \u00fanicamente de $\\varepsilon$ y {{c2::no depende del punto x::independencia de x}}."
+        },
+        {
+          "item_id": 1879936200239362650,
+          "type": "Flashcard",
+          "fsrs_card": {
+            "card_id": 1792846870650,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.651245+00:00",
+            "last_review": null
+          },
+          "title": "Criterio de Puntos M\u00f3viles (Mobile Points) para Descartar Convergencia Uniforme",
+          "front": "\u00bfEn qu\u00e9 consiste el Criterio de Puntos M\u00f3viles para probar que una sucesi\u00f3n de funciones $f_n$ NO converge uniformemente a $f$?",
+          "back": "<b>Criterio:</b> Si existe una subsucesi\u00f3n o sucesi\u00f3n de puntos $(x_n) \\subset X$ y una constante $c > 0$ tal que:<br>$$d_Y(f_n(x_n), f(x_n)) \\ge c > 0 \\quad \\forall n$$<br>entonces $\\|f_n - f\\|_\\infty = \\sup_{x \\in X} d_Y(f_n(x), f(x)) \\ge d_Y(f_n(x_n), f(x_n)) \\ge c > 0$, lo que impide que $\\|f_n - f\\|_\\infty \\to 0$.<br><b>Ejemplo cl\u00e1sico:</b> $f_n(x) = x^n$ en $[0, 1)$ con l\u00edmite puntual $f \\equiv 0$. Tomando $x_n = (1/2)^{1/n} \\in [0, 1)$, se tiene $f_n(x_n) = 1/2 \\not\\to 0$, descartando la convergencia uniforme."
+        },
+        {
+          "item_id": 1879936200239994385,
+          "type": "Flashcard",
+          "fsrs_card": {
+            "card_id": 1792846870651,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.652299+00:00",
+            "last_review": null
+          },
+          "title": "Criterio de Cauchy Uniforme",
+          "front": "Enuncie el Criterio de Cauchy Uniforme y explique el papel de la completitud del codominio.",
+          "back": "<b>Enunciado:</b> Sea $Y$ un espacio m\u00e9trico completo. Una sucesi\u00f3n de funciones $f_n: X \\to Y$ converge uniformemente en $X$ si y s\u00f3lo si satisface la condici\u00f3n de Cauchy uniforme:<br>$$\\forall \\varepsilon > 0, \\, \\exists N \\in \\mathbb{N} : \\forall n, m \\ge N, \\quad \\|f_n - f_m\\|_\\infty = \\sup_{x \\in X} d_Y(f_n(x), f_m(x)) < \\varepsilon$$<br>La completitud de $Y$ garantiza que para cada $x$ fijado, la sucesi\u00f3n num\u00e9rica $(f_n(x))$ tiene un l\u00edmite $f(x) \\in Y$, y la cota uniforme sobre $m$ asegura que $\\|f_n - f\\|_\\infty \\le \\varepsilon$ al tomar $m \\to \\infty$."
+        }
+      ]
+    },
+    {
+      "note_id": "ar_07",
+      "title": "Transferencia de Continuidad y Test M",
+      "x": 100.0,
+      "y": 620.0,
+      "tags": [
+        "An\u00e1lisis Real",
+        "Continuidad L\u00edmite",
+        "Test M",
+        "Series"
+      ],
+      "note_type": "standard",
+      "desired_retention": 0.88,
+      "cards": [
+        {
+          "item_id": 1879936200241425414,
+          "type": "ProofSequenceCard",
+          "fsrs_card": {
+            "card_id": 1792846870652,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.653355+00:00",
+            "last_review": null
+          },
+          "title": "Teorema de Transferencia de Continuidad",
+          "premise": "Demostrar que si $f_n: X \\to Y$ son funciones continuas y $f_n \\to f$ uniformemente en $X$, entonces la funci\u00f3n l\u00edmite $f$ es continua en $X$.",
+          "steps": [
+            "Sea $x_0 \\in X$ y sea $\\varepsilon > 0$ arbitrario.",
+            "Por convergencia uniforme, existe un \u00edndice $N$ tal que $\\forall n \\ge N$, $d_Y(f_n(x), f(x)) < \\varepsilon / 3$ para TODO $x \\in X$.",
+            "Fijamos el \u00edndice $n = N$. Como la funci\u00f3n $f_N$ es continua en $x_0$, existe $\\delta > 0$ tal que $d_X(x, x_0) < \\delta \\implies d_Y(f_N(x), f_N(x_0)) < \\varepsilon / 3$.",
+            "Aplicando la desigualdad triangular de tres t\u00e9rminos para cualquier $x$ con $d_X(x, x_0) < \\delta$: $d_Y(f(x), f(x_0)) \\le d_Y(f(x), f_N(x)) + d_Y(f_N(x), f_N(x_0)) + d_Y(f_N(x_0), f(x_0))$.",
+            "Acotando cada t\u00e9rmino: $d_Y(f(x), f(x_0)) < \\frac{\\varepsilon}{3} + \\frac{\\varepsilon}{3} + \\frac{\\varepsilon}{3} = \\varepsilon$. Esto prueba la continuidad de $f$ en $x_0$."
+          ]
+        },
+        {
+          "item_id": 1879936200242140232,
+          "type": "ClozeCard",
+          "fsrs_card": {
+            "card_id": 1792846870653,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.654409+00:00",
+            "last_review": null
+          },
+          "title": "Criterio M de Weierstrass para Series de Funciones",
+          "text": "Sea $\\sum_{n=1}^\\infty f_n(x)$ una serie de funciones en $X$. Si existe una sucesi\u00f3n de constantes reales $M_n \\ge 0$ tales que:\n1. $|f_n(x)| \\le M_n$ para todo $x \\in X$ y todo $n$, y\n2. $\\sum_{n=1}^\\infty M_n < \\infty$ converge,\nentonces la serie $\\sum f_n(x)$ converge {{c1::absoluta y uniformemente en X::tipo de convergencia}}."
+        }
+      ]
+    },
+    {
+      "note_id": "ar_08",
+      "title": "Teorema de Dini y Monoton\u00eda",
+      "x": 440.0,
+      "y": 620.0,
+      "tags": [
+        "An\u00e1lisis Real",
+        "Dini",
+        "Monoton\u00eda",
+        "Compacidad"
+      ],
+      "note_type": "standard",
+      "desired_retention": 0.88,
+      "cards": [
+        {
+          "item_id": 1879936200243678293,
+          "type": "ClozeCard",
+          "fsrs_card": {
+            "card_id": 1792846870654,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.655465+00:00",
+            "last_review": null
+          },
+          "title": "Enunciado del Teorema de Dini",
+          "text": "Sea $K$ un espacio m\u00e9trico compacto y sea $f_n: K \\to \\mathbb{R}$ una sucesi\u00f3n de funciones continuas tal que:\n1. $f_n(x) \\to f(x)$ puntualmente en $K$,\n2. La funci\u00f3n l\u00edmite $f: K \\to \\mathbb{R}$ es {{c1::continua en K::hip\u00f3tesis sobre el l\u00edmite}},\n3. La convergencia es mon\u00f3tona: $f_{n+1}(x) \\le f_n(x)$ (o viceversa) $\\forall x \\in K$.\nEntonces la convergencia es forzosamente {{c2::uniforme en K::consecuencia fundamental}}."
+        },
+        {
+          "item_id": 1879936200244948362,
+          "type": "Flashcard",
+          "fsrs_card": {
+            "card_id": 1792846870655,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.656518+00:00",
+            "last_review": null
+          },
+          "title": "Contraejemplo de Dini sin Compacidad",
+          "front": "Muestre un ejemplo concreto donde las hip\u00f3tesis de continuidad y monoton\u00eda de Dini se cumplen pero la convergencia NO es uniforme debido a la no-compacidad del dominio.",
+          "back": "Considerar el intervalo abierto $(0, 1)$ (que no es compacto) y las funciones:<br>$$f_n(x) = \\frac{1}{1 + n x}$$<br>1. Cada $f_n$ es continua y mon\u00f3tona decreciente hacia $f(x) = 0$.<br>2. El l\u00edmite $f \\equiv 0$ es trivialmente continuo.<br>3. Sin embargo, para todo $n$:<br>$$\\|f_n - 0\\|_\\infty = \\sup_{x \\in (0, 1)} \\frac{1}{1 + nx} = 1 \\not\\to 0$$<br>La convergencia NO es uniforme. Falla la compacidad de $(0, 1)$."
+        }
+      ]
+    },
+    {
+      "note_id": "ar_09",
+      "title": "Equicontinuidad y Arzel\u00e0-Ascoli",
+      "x": 780.0,
+      "y": 620.0,
+      "tags": [
+        "An\u00e1lisis Real",
+        "Arzel\u00e0-Ascoli",
+        "Equicontinuidad",
+        "Precompacidad"
+      ],
+      "note_type": "standard",
+      "desired_retention": 0.88,
+      "cards": [
+        {
+          "item_id": 1879936200245572801,
+          "type": "ClozeCard",
+          "fsrs_card": {
+            "card_id": 1792846870656,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.657576+00:00",
+            "last_review": null
+          },
+          "title": "Definici\u00f3n de Familia Equicontinua",
+          "text": "Una familia de funciones $\\mathcal{F} \\subset C(X, Y)$ es equicontinua en $x_0 \\in X$ si para todo $\\varepsilon > 0$, existe $\\delta > 0$ tal que para TODA funci\u00f3n $f \\in \\mathcal{F}$:\n$$d_X(x, x_0) < \\delta \\implies {{c1::d_Y(f(x), f(x_0)) < \\varepsilon::el mismo delta para toda la familia}}$$"
+        },
+        {
+          "item_id": 1879936200246612298,
+          "type": "Flashcard",
+          "fsrs_card": {
+            "card_id": 1792846870657,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.658631+00:00",
+            "last_review": null
+          },
+          "title": "Teorema de Arzel\u00e0-Ascoli (Condici\u00f3n Necesaria y Suficiente)",
+          "front": "Enuncie rigurosamente el Teorema de Arzel\u00e0-Ascoli para espacios m\u00e9tricos compactos.",
+          "back": "<b>Teorema de Arzel\u00e0-Ascoli:</b> Sea $K$ un espacio m\u00e9trico compacto. Una familia de funciones $\\mathcal{F} \\subset C(K, \\mathbb{R})$ es <b>relativamente compacta</b> (es decir, su clausura en $(C(K), \\|\\cdot\\|_\\infty)$ es compacta, o equivalentemente toda sucesi\u00f3n en $\\mathcal{F}$ tiene una subsucesi\u00f3n uniformemente convergente) si y s\u00f3lo si:<br>1. $\\mathcal{F}$ es <b>puntualmente acotada</b>: $\\forall x \\in K, \\, \\sup_{f \\in \\mathcal{F}} |f(x)| < \\infty$ (en compactos esto implica acotaci\u00f3n uniforme).<br>2. $\\mathcal{F}$ es <b>equicontinua</b> en $K$."
+        },
+        {
+          "item_id": 1879936200247936275,
+          "type": "ProofSequenceCard",
+          "fsrs_card": {
+            "card_id": 1792846870658,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.659691+00:00",
+            "last_review": null
+          },
+          "title": "Esquema Demostrativo de Arzel\u00e0-Ascoli",
+          "premise": "Resumir los pasos esenciales de la demostraci\u00f3n del Teorema de Arzel\u00e0-Ascoli.",
+          "steps": [
+            "Paso 1 (Separabilidad): Como $K$ es compacto, es separable. Existe un subconjunto numerable y denso $D = \\{q_1, q_2, \\dots\\} \\subset K$.",
+            "Paso 2 (Proceso Diagonal de Cantor): Dado que $(f_n(q_k))$ est\u00e1 acotada en $\\mathbb{R}$ para cada $q_k$, por Bolzano-Weierstrass y argumento diagonal de Cantor existe una subsucesi\u00f3n $(f_{n_j})$ que converge puntualmente en todo punto de $D$.",
+            "Paso 3 (Red finita por compacidad): Dado $\\varepsilon > 0$, por equicontinuidad existe $\\delta > 0$ tal que $d(x, y) < \\delta \\implies |f(x) - f(y)| < \\varepsilon / 3$ para toda funci\u00f3n de la familia. Cubrir $K$ con un n\u00famero finito de bolas $B(q_1, \\delta), \\dots, B(q_m, \\delta)$ centradas en $D$.",
+            "Paso 4 (Cauchy Uniforme): Como la subsucesi\u00f3n converge en los finitos centros $q_1, \\dots, q_m$, para $j, k \\ge N$ se cumple $|f_{n_j}(q_r) - f_{n_k}(q_r)| < \\varepsilon / 3$.",
+            "Paso 5 (Aproximaci\u00f3n global): Para cualquier $x \\in K$, tomando el centro m\u00e1s cercano $q_r$: $|f_{n_j}(x) - f_{n_k}(x)| \\le |f_{n_j}(x) - f_{n_j}(q_r)| + |f_{n_j}(q_r) - f_{n_k}(q_r)| + |f_{n_k}(q_r) - f_{n_k}(x)| < \\varepsilon$, demostrando convergencia uniforme."
+          ]
+        }
+      ]
+    },
+    {
+      "note_id": "ar_10",
+      "title": "Densidad de Stone-Weierstrass",
+      "x": 280.0,
+      "y": 880.0,
+      "tags": [
+        "An\u00e1lisis Real",
+        "Stone-Weierstrass",
+        "Densidad",
+        "\u00c1lgebra"
+      ],
+      "note_type": "standard",
+      "desired_retention": 0.88,
+      "cards": [
+        {
+          "item_id": 1879936200248635432,
+          "type": "ClozeCard",
+          "fsrs_card": {
+            "card_id": 1792846870659,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.660726+00:00",
+            "last_review": null
+          },
+          "title": "Teorema de Stone-Weierstrass",
+          "text": "Sea $K$ un espacio m\u00e9trico compacto. Una sub\u00e1lgebra $\\mathcal{A} \\subset C(K, \\mathbb{R})$ es densa con respecto a la norma del supremo $\\|\\cdot\\|_\\infty$ si y s\u00f3lo si cumple dos condiciones:\n1. {{c1::Separa puntos::condici\u00f3n 1}}: $\\forall x \\neq y \\in K, \\, \\exists f \\in \\mathcal{A} : f(x) \\neq f(y)$.\n2. {{c2::Contiene las funciones constantes::condici\u00f3n 2}}: $\\mathbf{1} \\in \\mathcal{A}$."
+        },
+        {
+          "item_id": 1879936200249761249,
+          "type": "Flashcard",
+          "fsrs_card": {
+            "card_id": 1792846870660,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.661783+00:00",
+            "last_review": null
+          },
+          "title": "Teorema Cl\u00e1sico de Aproximaci\u00f3n de Weierstrass",
+          "front": "\u00bfCu\u00e1l es la versi\u00f3n original del Teorema de Weierstrass en $[a, b]$ y c\u00f3mo se deduce de Stone-Weierstrass?",
+          "back": "<b>Teorema Cl\u00e1sico de Weierstrass:</b> Todo funci\u00f3n continua $f: [a, b] \\to \\mathbb{R}$ puede ser aproximada uniformemente por polinomios algebraicos con la precisi\u00f3n que se desee: $\\forall \\varepsilon > 0, \\, \\exists P(x) \\in \\mathbb{R}[x]$ tal que $\\|f - P\\|_\\infty < \\varepsilon$.<br><b>Deducci\u00f3n:</b> El conjunto de polinomios $\\mathcal{A} = \\mathbb{R}[x]$ forma una sub\u00e1lgebra de $C([a, b], \\mathbb{R})$. Separa puntos (pues $P(x) = x$ asigna valores distintos a puntos distintos) y contiene las constantes ($P(x) = c$). Por Stone-Weierstrass, $\\overline{\\mathcal{A}} = C([a, b], \\mathbb{R})$."
+        }
+      ]
+    },
+    {
+      "note_id": "ar_11",
+      "title": "Punto Fijo de Banach y Contracciones",
+      "x": 620.0,
+      "y": 880.0,
+      "tags": [
+        "An\u00e1lisis Real",
+        "Banach",
+        "Punto Fijo",
+        "Contracciones"
+      ],
+      "note_type": "standard",
+      "desired_retention": 0.88,
+      "cards": [
+        {
+          "item_id": 1879936200250295718,
+          "type": "ClozeCard",
+          "fsrs_card": {
+            "card_id": 1792846870661,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.662842+00:00",
+            "last_review": null
+          },
+          "title": "Definici\u00f3n de Aplicaci\u00f3n Contractiva",
+          "text": "Sea $(X, d)$ un espacio m\u00e9trico. Una aplicaci\u00f3n $T: X \\to X$ es una contracci\u00f3n estricta si existe una constante de Lipschitz $k$ que cumple:\n$$d(T(x), T(y)) \\le k \\cdot d(x, y) \\quad \\forall x, y \\in X, \\quad \\text{con } {{c1::0 \\le k < 1::rango de la constante k}}$$"
+        },
+        {
+          "item_id": 1879936200251570286,
+          "type": "ProofSequenceCard",
+          "fsrs_card": {
+            "card_id": 1792846870662,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.663898+00:00",
+            "last_review": null
+          },
+          "title": "Demostraci\u00f3n del Teorema del Punto Fijo de Banach",
+          "premise": "Sea $(X, d)$ un espacio m\u00e9trico completo no vac\u00edo y sea $T: X \\to X$ una contracci\u00f3n con constante $k < 1$. Demostrar la existencia, unicidad y convergencia de las iteradas $x_{n+1} = T(x_n)$ hacia el punto fijo $x^*$.",
+          "steps": [
+            "Paso 1: Por inducci\u00f3n inmediata, $d(x_{n+1}, x_n) = d(T(x_n), T(x_{n-1})) \\le k d(x_n, x_{n-1}) \\le k^n d(x_1, x_0)$.",
+            "Paso 2: Para $m > n$, por desigualdad triangular: $d(x_m, x_n) \\le \\sum_{j=n}^{m-1} d(x_{j+1}, x_j) \\le d(x_1, x_0) \\sum_{j=n}^{m-1} k^j$.",
+            "Paso 3: Sumando la serie geom\u00e9trica: $d(x_m, x_n) \\le \\frac{k^n}{1-k} d(x_1, x_0)$. Al tender $n \\to \\infty$, el lado derecho va a 0, probando que $(x_n)$ es de Cauchy.",
+            "Paso 4: Por completitud de $X$, existe $x^* = \\lim_{n \\to \\infty} x_n$. Por continuidad de $T$: $T(x^*) = T(\\lim x_n) = \\lim T(x_n) = \\lim x_{n+1} = x^*$.",
+            "Paso 5: Unicidad: Si $T(y^*) = y^*$, entonces $d(x^*, y^*) = d(T(x^*), T(y^*)) \\le k d(x^*, y^*) \\implies (1-k) d(x^*, y^*) \\le 0 \\implies x^* = y^*$."
+          ]
+        },
+        {
+          "item_id": 1879936200252973883,
+          "type": "Flashcard",
+          "fsrs_card": {
+            "card_id": 1792846870663,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T13:01:10.664954+00:00",
+            "last_review": null
+          },
+          "title": "Cotas de Error de Banach A Priori y A Posteriori",
+          "front": "\u00bfCu\u00e1les son las cotas de error a priori y a posteriori para la aproximaci\u00f3n $x_n$ en el Teorema del Punto Fijo de Banach?",
+          "back": "1. <b>Cota A Priori</b> (calculada antes de iterar, depende \u00fanicamente del paso inicial):<br>$$d(x_n, x^*) \\le \\frac{k^n}{1 - k} d(x_0, x_1)$$<br>2. <b>Cota A Posteriori</b> (calculada paso a paso durante el algoritmo computacional):<br>$$d(x_n, x^*) \\le \\frac{k}{1 - k} d(x_n, x_{n-1})$$"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source_id": "ar_01",
+      "target_id": "ar_02",
+      "label": "Topolog\u00eda Abierta a Funci\u00f3n Distancia"
+    },
+    {
+      "source_id": "ar_01",
+      "target_id": "ar_03",
+      "label": "Continuidad Global a Compacidad"
+    },
+    {
+      "source_id": "ar_03",
+      "target_id": "ar_04",
+      "label": "Compacidad a Heine-Cantor"
+    },
+    {
+      "source_id": "ar_01",
+      "target_id": "ar_05",
+      "label": "Topolog\u00eda M\u00e9trica a Conexidad y TVI"
+    },
+    {
+      "source_id": "ar_01",
+      "target_id": "ar_06",
+      "label": "Espacios M\u00e9tricos a Convergencia Uniforme"
+    },
+    {
+      "source_id": "ar_06",
+      "target_id": "ar_07",
+      "label": "Norma del Supremo a Transferencia de Continuidad"
+    },
+    {
+      "source_id": "ar_06",
+      "target_id": "ar_08",
+      "label": "Convergencia Uniforme a Teorema de Dini"
+    },
+    {
+      "source_id": "ar_04",
+      "target_id": "ar_09",
+      "label": "Heine-Cantor a Arzel\u00e0-Ascoli"
+    },
+    {
+      "source_id": "ar_07",
+      "target_id": "ar_09",
+      "label": "Continuidad L\u00edmite a Precompacidad en C(K)"
+    },
+    {
+      "source_id": "ar_03",
+      "target_id": "ar_10",
+      "label": "Compacidad a Densidad de Stone-Weierstrass"
+    },
+    {
+      "source_id": "ar_01",
+      "target_id": "ar_11",
+      "label": "Completitud a Contracciones de Banach"
+    }
+  ]
+}

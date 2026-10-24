@@ -21,8 +21,9 @@ to_import/
 to_export/
 scheduling/
 docs/
-Courses/
 unused/
+Courses/*
+!Courses/*.json
 
 # User Settings
 settings.json
