@@ -23,12 +23,14 @@
             user-select: none;
         }
 
-        body {
+        html, body {
             margin: 0;
             padding: 0;
-            width: 100vw;
+            width: 100%;
+            max-width: 100%;
             height: 100vh;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: hidden;
             background-color: var(--bg-color);
             color: var(--text-color);
             font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", sans-serif;
@@ -44,46 +46,68 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 14px;
+            padding: 0 10px;
             z-index: 100;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+            overflow: hidden;
         }
 
         .header-title {
             font-weight: 800;
-            font-size: 16px;
+            font-size: 15px;
             color: var(--accent);
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
+            min-width: 0;
+            flex: 1 1 auto;
+            overflow: hidden;
+        }
+
+        .header-logo-text {
+            white-space: nowrap;
+            flex-shrink: 0;
         }
 
         .header-course-badge {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: bold;
             background: rgba(240, 42, 140, 0.15);
             color: var(--accent);
-            padding: 4px 10px;
+            padding: 3px 8px;
             border-radius: 12px;
             border: 1px solid var(--accent);
-            max-width: 150px;
+            min-width: 0;
+            max-width: 130px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
             cursor: pointer;
+            flex-shrink: 1;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-shrink: 0;
         }
 
         .header-btn {
             background: rgba(255, 255, 255, 0.06);
             border: 1px solid var(--border-color);
             color: var(--text-color);
-            font-size: 13px;
+            font-size: 12px;
             font-weight: bold;
-            padding: 6px 10px;
+            padding: 5px 8px;
             cursor: pointer;
             border-radius: 8px;
             display: flex;
             align-items: center;
             gap: 4px;
+            white-space: nowrap;
         }
 
         /* View Container */
@@ -193,39 +217,45 @@
         /* Bottom Action Dock for Graph */
         .graph-action-dock {
             position: absolute;
-            bottom: 14px;
-            left: 14px;
-            right: 14px;
+            bottom: 12px;
+            left: 8px;
+            right: 8px;
             display: flex;
-            gap: 8px;
+            gap: 6px;
             z-index: 10;
             align-items: center;
             justify-content: space-between;
+            box-sizing: border-box;
+            max-width: calc(100% - 16px);
         }
 
         .dock-btn {
             background: var(--surface-bg);
             border: 1px solid var(--border-color);
             color: var(--text-color);
-            border-radius: 12px;
-            padding: 10px 14px;
-            font-size: 13px;
+            border-radius: 10px;
+            padding: 8px 8px;
+            font-size: 12px;
             font-weight: bold;
             display: flex;
             align-items: center;
-            gap: 6px;
+            justify-content: center;
+            gap: 4px;
             box-shadow: 0 4px 14px rgba(0,0,0,0.6);
             cursor: pointer;
             backdrop-filter: blur(8px);
+            white-space: nowrap;
+            min-width: 0;
+            flex: 1 1 auto;
         }
 
         .dock-btn-primary {
             background: var(--accent);
             color: #ffffff;
             border: none;
-            padding: 11px 18px;
-            font-size: 14px;
-            flex-grow: 1;
+            padding: 9px 12px;
+            font-size: 13px;
+            flex: 1.6 1 auto;
             justify-content: center;
         }
 
@@ -236,7 +266,11 @@
             display: flex;
             flex-direction: column;
             overflow-y: auto;
+            overflow-x: hidden;
             align-items: center;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
         }
 
         .review-progress-bar {
@@ -262,10 +296,14 @@
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 16px;
-            padding: 22px;
+            padding: 20px 18px;
             margin-bottom: 20px;
             box-shadow: 0 8px 24px rgba(0,0,0,0.4);
             user-select: text;
+            box-sizing: border-box;
+            overflow-x: hidden;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .card-header-bar {
@@ -275,6 +313,19 @@
             margin-bottom: 12px;
             border-bottom: 1px solid var(--border-color);
             padding-bottom: 8px;
+            gap: 8px;
+            min-width: 0;
+        }
+
+        #review-card-note-title {
+            font-size: 13px;
+            font-weight: bold;
+            color: var(--text-muted);
+            min-width: 0;
+            flex: 1 1 auto;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .card-type-chip {
@@ -285,45 +336,89 @@
             text-transform: uppercase;
             background: rgba(240, 42, 140, 0.15);
             color: var(--accent);
+            flex-shrink: 0;
+            white-space: nowrap;
         }
 
         .card-title {
-            font-size: 19px;
+            font-size: 18px;
             font-weight: 700;
             color: var(--accent);
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            word-break: break-word;
+            hyphens: auto;
+            max-width: 100%;
         }
 
         .card-body {
-            font-size: 16px;
+            font-size: 15px;
             line-height: 1.6;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            word-break: normal;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        #review-front-content, #review-back-content {
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+            overflow-wrap: break-word;
+            word-break: normal;
         }
 
         .cloze-bracket {
             color: #78A9FF;
             font-weight: bold;
-            padding: 2px 8px;
+            padding: 2px 6px;
             background: rgba(120, 169, 255, 0.15);
             border-radius: 6px;
             border: 1px dashed #78A9FF;
             cursor: pointer;
+            display: inline-block;
+            max-width: 100%;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            vertical-align: middle;
         }
 
         .cloze-revealed {
             color: #80D6A3;
             font-weight: bold;
-            padding: 2px 8px;
+            padding: 2px 6px;
             background: rgba(128, 214, 163, 0.2);
             border-radius: 6px;
             border: 1px solid #80D6A3;
+            display: inline-block;
+            max-width: 100%;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            vertical-align: middle;
+        }
+
+        .proof-list {
+            padding-left: 18px;
+            margin-top: 8px;
+            margin-bottom: 8px;
+            box-sizing: border-box;
+            max-width: 100%;
         }
 
         .proof-step {
             margin-bottom: 10px;
-            padding: 10px 12px;
+            padding: 8px 12px;
             border-left: 3px solid #80D6A3;
             background: rgba(255, 255, 255, 0.03);
             border-radius: 6px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            max-width: 100%;
+            box-sizing: border-box;
+            overflow-wrap: break-word;
+            word-break: normal;
         }
 
         hr.divider {
@@ -336,33 +431,39 @@
         /* Review Buttons Controls */
         .review-controls {
             width: 100%;
-            padding: 12px 16px;
+            padding: 12px 14px;
             background: var(--surface-bg);
             border-top: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
             gap: 10px;
+            box-sizing: border-box;
         }
 
         .btn-rating-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 6px;
             width: 100%;
+            box-sizing: border-box;
         }
 
         .btn-rating {
-            height: 56px;
-            border-radius: 12px;
+            height: 54px;
+            border-radius: 10px;
             border: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            font-size: 13px;
+            font-size: 12px;
             cursor: pointer;
             transition: transform 0.1s;
+            min-width: 0;
+            padding: 2px 2px;
+            box-sizing: border-box;
+            overflow: hidden;
         }
 
         .btn-rating:active {
@@ -379,20 +480,25 @@
             opacity: 0.8;
             margin-top: 1px;
             font-weight: normal;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
         }
 
         .btn-rating .forecast {
             font-size: 11px;
             font-weight: bold;
             margin-top: 2px;
+            white-space: nowrap;
         }
 
         .btn-primary {
             background: var(--accent);
             color: #ffffff;
             font-weight: bold;
-            font-size: 16px;
-            height: 50px;
+            font-size: 15px;
+            height: 48px;
             border-radius: 12px;
             border: none;
             width: 100%;
@@ -401,6 +507,7 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
+            box-sizing: border-box;
         }
 
         .btn-undo {
@@ -409,10 +516,11 @@
             border: 1px solid var(--border-color);
             border-radius: 10px;
             padding: 8px;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: bold;
             cursor: pointer;
             text-align: center;
+            box-sizing: border-box;
         }
 
         /* Generic Modals */
@@ -427,7 +535,8 @@
             align-items: center;
             justify-content: center;
             z-index: 500;
-            padding: 16px;
+            padding: 12px;
+            box-sizing: border-box;
             backdrop-filter: blur(4px);
         }
 
@@ -441,10 +550,14 @@
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 18px;
-            padding: 22px;
+            padding: 20px 16px;
             max-height: 88vh;
             overflow-y: auto;
+            overflow-x: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            box-sizing: border-box;
+            overflow-wrap: break-word;
+            word-break: break-word;
         }
 
         .modal-title {
@@ -453,6 +566,8 @@
             font-weight: 800;
             color: var(--accent);
             margin-bottom: 14px;
+            overflow-wrap: break-word;
+            word-break: break-word;
         }
 
         .form-group {
@@ -469,6 +584,8 @@
 
         .form-group input, .form-group textarea, .form-group select {
             width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
             background: var(--surface-bg);
             border: 1px solid var(--border-color);
             color: var(--text-color);
@@ -514,7 +631,9 @@
         .scrollable-view {
             padding: 16px;
             overflow-y: auto;
+            overflow-x: hidden;
             flex: 1;
+            box-sizing: border-box;
         }
 
         .stats-grid {
@@ -530,6 +649,8 @@
             border-radius: 14px;
             padding: 16px;
             text-align: center;
+            box-sizing: border-box;
+            overflow: hidden;
         }
 
         .stat-val {
@@ -552,6 +673,9 @@
             padding: 16px;
             margin-bottom: 12px;
             transition: border-color 0.2s;
+            box-sizing: border-box;
+            overflow: hidden;
+            word-break: break-word;
         }
 
         .course-card.active-course {
@@ -566,12 +690,201 @@
             border: none;
             cursor: pointer;
             font-weight: bold;
+            box-sizing: border-box;
         }
 
         .btn-outline {
             background: transparent;
             color: var(--text-color);
             border: 1px solid var(--border-color);
+        }
+
+        /* ========================================================
+           MathJax 3 Responsive Engine Fix
+           Guarantees that equations never clip horizontally
+           ======================================================== */
+        mjx-container[jax="SVG"][display="true"] {
+            display: block !important;
+            text-align: center !important;
+            margin: 0.8em 0 !important;
+            max-width: 100% !important;
+            overflow-x: auto !important;
+            overflow-y: hidden !important;
+            padding: 6px 2px !important;
+            -webkit-overflow-scrolling: touch !important;
+            touch-action: pan-x pan-y !important;
+            box-sizing: border-box !important;
+        }
+
+        mjx-container[jax="SVG"][display="true"] > svg {
+            max-width: none !important;
+            min-width: min-content;
+            display: inline-block !important;
+            vertical-align: middle !important;
+        }
+
+        mjx-container[jax="SVG"]:not([display="true"]) {
+            max-width: 100% !important;
+            overflow-x: auto !important;
+            overflow-y: hidden !important;
+            vertical-align: -0.22em !important;
+            -webkit-overflow-scrolling: touch !important;
+            display: inline-block !important;
+            box-sizing: border-box !important;
+        }
+
+        mjx-container[jax="SVG"]:not([display="true"]) > svg {
+            max-width: none !important;
+        }
+
+        /* Tables, Pre, Code, Images */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 12px 0;
+            background: rgba(15, 23, 42, 0.6);
+            display: block;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 6px 10px;
+            text-align: left;
+            min-width: 60px;
+        }
+
+        pre {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            max-width: 100%;
+            box-sizing: border-box;
+            font-size: 13px;
+        }
+
+        code {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--accent-hover);
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.9em;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            display: block;
+        }
+
+        /* Custom subtle scrollbars for math and scrollable containers */
+        mjx-container[jax="SVG"]::-webkit-scrollbar,
+        .proof-step::-webkit-scrollbar,
+        .card-body::-webkit-scrollbar,
+        pre::-webkit-scrollbar,
+        table::-webkit-scrollbar,
+        #scratch-preview::-webkit-scrollbar {
+            height: 4px;
+            width: 4px;
+        }
+
+        mjx-container[jax="SVG"]::-webkit-scrollbar-track,
+        .proof-step::-webkit-scrollbar-track,
+        .card-body::-webkit-scrollbar-track,
+        pre::-webkit-scrollbar-track,
+        table::-webkit-scrollbar-track,
+        #scratch-preview::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+        }
+
+        mjx-container[jax="SVG"]::-webkit-scrollbar-thumb,
+        .proof-step::-webkit-scrollbar-thumb,
+        .card-body::-webkit-scrollbar-thumb,
+        pre::-webkit-scrollbar-thumb,
+        table::-webkit-scrollbar-thumb,
+        #scratch-preview::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 4px;
+        }
+
+        /* Compact Screen Responsive Adjustments */
+        @media (max-width: 480px) {
+            .review-container {
+                padding: 10px 8px;
+            }
+            .review-card {
+                padding: 16px 12px;
+                border-radius: 14px;
+                margin-bottom: 14px;
+            }
+            .card-title {
+                font-size: 16px;
+            }
+            .card-body {
+                font-size: 14px;
+            }
+            .proof-list {
+                padding-left: 14px;
+            }
+            .proof-step {
+                padding: 7px 9px;
+            }
+            .dock-btn {
+                padding: 8px 6px;
+                font-size: 11px;
+                gap: 2px;
+            }
+            .dock-btn-primary {
+                padding: 8px 10px;
+                font-size: 12px;
+            }
+            .btn-rating {
+                height: 50px;
+                font-size: 11px;
+            }
+            .btn-rating .forecast {
+                font-size: 10px;
+            }
+            .header-course-badge {
+                max-width: 100px;
+                font-size: 10px;
+                padding: 2px 6px;
+            }
+            .modal-box {
+                padding: 16px 12px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .header-logo-text {
+                font-size: 13px;
+            }
+            .header-btn {
+                padding: 4px 6px;
+                font-size: 11px;
+            }
+            .dock-btn {
+                font-size: 10px;
+                padding: 6px 4px;
+            }
+            .btn-rating {
+                height: 46px;
+                font-size: 10px;
+            }
+            .btn-rating .subtext {
+                display: none;
+            }
         }
 
         /* Guide Dialog Styling */
@@ -616,10 +929,10 @@
     <!-- Header -->
     <header>
         <div class="header-title">
-            <span>⚡ Morphism+</span>
+            <span class="header-logo-text">⚡ Morphism+</span>
             <span class="header-course-badge" id="lbl-active-course" title="Toca para cambiar de curso">Default</span>
         </div>
-        <div style="display:flex; align-items:center; gap:8px;">
+        <div class="header-actions">
             <button class="header-btn" id="btn-open-guide">❓ Ayuda</button>
             <button class="header-btn" id="btn-theme-selector">🎨 Tema</button>
         </div>

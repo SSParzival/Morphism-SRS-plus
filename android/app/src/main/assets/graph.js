@@ -408,31 +408,82 @@ class TouchGraphView {
             ctx.stroke();
             ctx.setLineDash([]);
 
-            // Note Title
+            // Note Title (Support 2-line wrapping & robust truncation)
             ctx.fillStyle = theme.text || "#F7F1F8";
-            ctx.font = "bold 14px -apple-system, Roboto, sans-serif";
+            ctx.font = "bold 13px -apple-system, Roboto, sans-serif";
             const title = note.title || "Untitled";
-            this._drawTruncatedText(ctx, title, nx + 12, ny + 26, this.nodeWidth - 55);
+            const isMultiline = this._drawNodeTitle(ctx, title, nx + 12, ny + 12, this.nodeWidth - 24, isDue);
 
             // Subtitle / cards info
             const cardCount = note.cards ? note.cards.length : 0;
             const typeLabel = note.note_type === "serial_sequence" ? "📜 Serial Seq" : "🧩 Note";
             ctx.fillStyle = isDue ? "#FF8B9D" : "#94a3b8";
-            ctx.font = "12px -apple-system, Roboto, sans-serif";
-            ctx.fillText(`${typeLabel} • ${cardCount} card(s)`, nx + 12, ny + 46);
+            ctx.font = "11px -apple-system, Roboto, sans-serif";
+            const subY = isMultiline ? (ny + 58) : (ny + 46);
+            ctx.fillText(`${typeLabel} • ${cardCount} card(s)`, nx + 12, subY);
 
             // Due Badge
             if (isDue) {
                 ctx.fillStyle = theme.accent || "#F02A8C";
-                this._drawRoundRect(ctx, nx + this.nodeWidth - 48, ny + 10, 38, 18, 4);
+                this._drawRoundRect(ctx, nx + this.nodeWidth - 46, ny + 10, 36, 18, 4);
                 ctx.fill();
                 ctx.fillStyle = "#ffffff";
                 ctx.font = "bold 10px sans-serif";
-                ctx.fillText("DUE", nx + this.nodeWidth - 40, ny + 23);
+                ctx.fillText("DUE", nx + this.nodeWidth - 38, ny + 23);
             }
         }
 
         ctx.restore();
+    }
+
+    _drawNodeTitle(ctx, title, x, y, maxWidth, isDue) {
+        ctx.save();
+        ctx.textAlign = "left";
+        ctx.textBaseline = "top";
+        const line1Max = isDue ? (maxWidth - 36) : maxWidth;
+
+        // If title fits entirely on single line
+        if (ctx.measureText(title).width <= line1Max) {
+            ctx.fillText(title, x, y + 6);
+            ctx.restore();
+            return false;
+        }
+
+        // Try two-line wrap
+        const words = title.split(/\s+/);
+        let line1 = "";
+        let line2 = "";
+        let idx = 0;
+
+        while (idx < words.length) {
+            const candidate = line1 ? (line1 + " " + words[idx]) : words[idx];
+            if (ctx.measureText(candidate).width <= line1Max) {
+                line1 = candidate;
+                idx++;
+            } else {
+                break;
+            }
+        }
+
+        if (!line1 && words.length > 0) {
+            line1 = words[0];
+            idx = 1;
+        }
+
+        line2 = words.slice(idx).join(" ");
+
+        // Draw line 1 (truncated if single word was huge)
+        this._drawTruncatedTextTop(ctx, line1, x, y + 2, line1Max);
+
+        // Draw line 2 if remaining words exist
+        if (line2) {
+            this._drawTruncatedTextTop(ctx, line2, x, y + 19, maxWidth);
+            ctx.restore();
+            return true;
+        }
+
+        ctx.restore();
+        return false;
     }
 
     _drawRoundRect(ctx, x, y, width, height, radius) {
@@ -447,6 +498,17 @@ class TouchGraphView {
         ctx.lineTo(x, y + radius);
         ctx.quadraticCurveTo(x, y, x + radius, y);
         ctx.closePath();
+    }
+
+    _drawTruncatedTextTop(ctx, text, x, y, maxWidth) {
+        let str = text;
+        if (ctx.measureText(str).width > maxWidth) {
+            while (str.length > 0 && ctx.measureText(str + '...').width > maxWidth) {
+                str = str.slice(0, -1);
+            }
+            str += '...';
+        }
+        ctx.fillText(str, x, y);
     }
 
     _drawTruncatedText(ctx, text, x, y, maxWidth) {

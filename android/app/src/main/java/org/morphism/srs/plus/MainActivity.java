@@ -51,6 +51,9 @@ public class MainActivity extends Activity {
         settings.setUseWideViewPort(true);
         settings.setBuiltInZoomControls(false);
         settings.setDisplayZoomControls(false);
+        settings.setTextZoom(100);
+        mWebView.setOverScrollMode(View.OVER_SCROLL_NEVER);
+        mWebView.setHorizontalScrollBarEnabled(false);
 
         mWebView.setWebViewClient(new WebViewClient() {
             @Override

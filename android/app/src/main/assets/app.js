@@ -4161,6 +4161,19 @@ class MorphismApp {
         this._renderCardFront();
     }
 
+    _formatContent(raw) {
+        if (!raw) return "";
+        if (/<(p|div|br|table|ul|ol|li)\b/i.test(raw)) {
+            return raw;
+        }
+        return raw.split(/(\$\$[\s\S]*?\$\$)/g).map((part) => {
+            if (part.startsWith('$$') && part.endsWith('$$')) {
+                return part;
+            }
+            return part.replace(/\n\n+/g, '<br><br>').replace(/\n/g, '<br>');
+        }).join("");
+    }
+
     _renderCardFront() {
         const card = this.currentReviewCard;
         const frontContainer = document.getElementById('review-front-content');
@@ -4175,11 +4188,11 @@ class MorphismApp {
                 const hint = parts.length > 1 ? parts[1].trim() : "...";
                 return `<span class="cloze-bracket" onclick="window.app.showAnswer()">[${hint}]</span>`;
             });
-            frontContainer.innerHTML = `<div class="card-title">${card.title}</div><div class="card-body">${frontHtml}</div>`;
+            frontContainer.innerHTML = `<div class="card-title">${card.title}</div><div class="card-body">${this._formatContent(frontHtml)}</div>`;
         } else if (card.type === 'ProofSequenceCard') {
-            frontContainer.innerHTML = `<div class="card-title">${card.title}</div><div class="card-body"><strong>Premisa / Teorema a demostrar:</strong><br>${card.premise}</div>`;
+            frontContainer.innerHTML = `<div class="card-title">${card.title}</div><div class="card-body"><strong>Premisa / Teorema a demostrar:</strong><br>${this._formatContent(card.premise)}</div>`;
         } else {
-            frontContainer.innerHTML = `<div class="card-title">${card.title || 'Pregunta'}</div><div class="card-body">${card.front || ''}</div>`;
+            frontContainer.innerHTML = `<div class="card-title">${card.title || 'Pregunta'}</div><div class="card-body">${this._formatContent(card.front || '')}</div>`;
         }
 
         this._typesetMath();
@@ -4199,12 +4212,12 @@ class MorphismApp {
                 const answer = p1.split("::")[0];
                 return `<span class="cloze-revealed">${answer}</span>`;
             });
-            backContainer.innerHTML = `<hr class="divider"><div class="card-body">${backHtml}</div>`;
+            backContainer.innerHTML = `<hr class="divider"><div class="card-body">${this._formatContent(backHtml)}</div>`;
         } else if (card.type === 'ProofSequenceCard') {
-            const steps = (card.steps || []).map((s, idx) => `<li class="proof-step"><b>Paso ${idx+1}:</b> ${s}</li>`).join("");
+            const steps = (card.steps || []).map((s, idx) => `<li class="proof-step"><b>Paso ${idx+1}:</b> ${this._formatContent(s)}</li>`).join("");
             backContainer.innerHTML = `<hr class="divider"><div class="card-body"><strong>Demostración Completa:</strong><ol class="proof-list" style="padding-left:18px; margin-top:8px;">${steps}</ol></div>`;
         } else {
-            backContainer.innerHTML = `<hr class="divider"><div class="card-body">${card.back || ''}</div>`;
+            backContainer.innerHTML = `<hr class="divider"><div class="card-body">${this._formatContent(card.back || '')}</div>`;
         }
 
         // Show rating buttons with forecasts
@@ -4385,12 +4398,12 @@ class MorphismApp {
             const div = document.createElement('div');
             div.className = `course-card ${isCurrent ? 'active-course' : ''}`;
             div.innerHTML = `
-                <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <div style="font-weight:bold; font-size:16px; color:var(--text-color);">${c.name}</div>
-                    ${isCurrent ? '<span style="font-size:11px; font-weight:bold; color:var(--accent); border:1px solid var(--accent); padding:2px 8px; border-radius:10px;">ACTIVO</span>' : ''}
+                <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
+                    <div style="font-weight:bold; font-size:15px; color:var(--text-color); min-width:0; flex:1; overflow-wrap:break-word; word-break:break-word;">${c.name}</div>
+                    ${isCurrent ? '<span style="font-size:11px; font-weight:bold; color:var(--accent); border:1px solid var(--accent); padding:2px 8px; border-radius:10px; flex-shrink:0;">ACTIVO</span>' : ''}
                 </div>
                 <div style="font-size:13px; color:var(--text-muted); margin:6px 0;">${c.notes.length} conceptos matemáticos</div>
-                <div style="display:flex; gap:8px; margin-top:10px;">
+                <div style="display:flex; gap:8px; margin-top:10px; flex-wrap:wrap;">
                     <button class="btn-sm btn-primary" onclick="window.app._selectCourse('${c.name}')">${isCurrent ? 'Abrir Grafo' : 'Seleccionar'}</button>
                     <button class="btn-sm btn-outline" onclick="window.app._exportCourseJson('${c.name}')">Exportar JSON</button>
                     ${!isCurrent && this.courses.length > 1 ? `<button class="btn-sm btn-outline" style="color:#FF667D; border-color:#FF667D;" onclick="window.app._deleteCourse('${c.name}')">🗑️</button>` : ''}

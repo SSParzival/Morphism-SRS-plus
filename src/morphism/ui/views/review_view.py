@@ -59,6 +59,9 @@ def build_mathjax_html_template() -> str:
             justify-content: center;
             align-items: flex-start;
             min-height: 95vh;
+            overflow-x: hidden;
+            box-sizing: border-box;
+            max-width: 100vw;
         }}
         .container {{
             width: 100%;
@@ -69,6 +72,9 @@ def build_mathjax_html_template() -> str:
             padding: 28px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.4), 0 0 20px var(--accent-glow);
             transition: all 0.3s ease;
+            box-sizing: border-box;
+            overflow-x: hidden;
+            overflow-wrap: break-word;
         }}
         .empty-placeholder {{
             text-align: center;
@@ -102,6 +108,8 @@ def build_mathjax_html_template() -> str:
             border-radius: 10px;
             padding: 12px 16px;
             margin-bottom: 20px;
+            box-sizing: border-box;
+            max-width: 100%;
         }}
         .past-steps-summary {{
             cursor: pointer;
@@ -117,6 +125,10 @@ def build_mathjax_html_template() -> str:
             padding: 10px 14px;
             border-radius: 6px;
             font-size: 16px;
+            overflow-x: auto;
+            max-width: 100%;
+            box-sizing: border-box;
+            overflow-wrap: break-word;
         }}
         .past-step-title {{
             font-weight: bold;
@@ -130,10 +142,18 @@ def build_mathjax_html_template() -> str:
             margin-bottom: 14px;
             border-bottom: 1px solid var(--border-color);
             padding-bottom: 8px;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            hyphens: auto;
+            max-width: 100%;
         }}
         .card-body {{
             font-size: 18px;
             margin-top: 10px;
+            overflow-wrap: break-word;
+            word-break: normal;
+            max-width: 100%;
+            box-sizing: border-box;
         }}
         .cloze-bracket {{
             color: #38bdf8;
@@ -142,6 +162,9 @@ def build_mathjax_html_template() -> str:
             background: rgba(56, 189, 248, 0.15);
             border-radius: 4px;
             border: 1px dashed #38bdf8;
+            display: inline-block;
+            max-width: 100%;
+            overflow-wrap: break-word;
         }}
         .cloze-revealed {{
             color: #10b981;
@@ -150,6 +173,9 @@ def build_mathjax_html_template() -> str:
             border-radius: 4px;
             padding: 2px 8px;
             border: 1px solid #10b981;
+            display: inline-block;
+            max-width: 100%;
+            overflow-wrap: break-word;
         }}
         hr.divider {{
             margin: 24px 0;
@@ -160,6 +186,8 @@ def build_mathjax_html_template() -> str:
         .proof-list {{
             padding-left: 20px;
             margin-top: 10px;
+            box-sizing: border-box;
+            max-width: 100%;
         }}
         .proof-step {{
             margin-bottom: 10px;
@@ -167,13 +195,66 @@ def build_mathjax_html_template() -> str:
             padding: 8px 12px;
             border-radius: 8px;
             border-left: 3px solid #10b981;
+            overflow-x: auto;
+            max-width: 100%;
+            box-sizing: border-box;
+            overflow-wrap: break-word;
         }}
         img {{ max-width: 100%; height: auto; border-radius: 8px; margin: 8px 0; display: block; }}
-        table {{ border-collapse: collapse; width: 100%; margin: 12px 0; background: rgba(15, 23, 42, 0.6); }}
-        th, td {{ border: 1px solid var(--border-color); padding: 8px 12px; text-align: left; }}
+        table {{ border-collapse: collapse; width: 100%; margin: 12px 0; background: rgba(15, 23, 42, 0.6); display: block; overflow-x: auto; max-width: 100%; box-sizing: border-box; }}
+        th, td {{ border: 1px solid var(--border-color); padding: 8px 12px; text-align: left; min-width: 60px; }}
         th {{ background-color: rgba(30, 41, 59, 0.8); color: var(--accent-border); }}
-        code {{ background: rgba(0,0,0,0.3); color: #f43f5e; padding: 2px 6px; border-radius: 4px; font-family: monospace; }}
-        pre {{ background: rgba(0,0,0,0.4); padding: 12px; border-radius: 8px; overflow-x: auto; border: 1px solid var(--border-color); }}
+        code {{ background: rgba(0,0,0,0.3); color: #f43f5e; padding: 2px 6px; border-radius: 4px; font-family: monospace; overflow-wrap: break-word; word-break: break-word; }}
+        pre {{ background: rgba(0,0,0,0.4); padding: 12px; border-radius: 8px; overflow-x: auto; border: 1px solid var(--border-color); max-width: 100%; box-sizing: border-box; }}
+
+        /* MathJax 3 Responsive Equations */
+        mjx-container[jax="SVG"][display="true"] {{
+            display: block !important;
+            text-align: center !important;
+            margin: 1em 0 !important;
+            max-width: 100% !important;
+            overflow-x: auto !important;
+            overflow-y: hidden !important;
+            padding: 6px 2px !important;
+            box-sizing: border-box !important;
+        }}
+        mjx-container[jax="SVG"][display="true"] > svg {{
+            max-width: none !important;
+            min-width: min-content;
+            display: inline-block !important;
+        }}
+        mjx-container[jax="SVG"]:not([display="true"]) {{
+            max-width: 100% !important;
+            overflow-x: auto !important;
+            overflow-y: hidden !important;
+            vertical-align: -0.2em !important;
+            display: inline-block !important;
+            box-sizing: border-box !important;
+        }}
+        mjx-container[jax="SVG"]:not([display="true"]) > svg {{
+            max-width: none !important;
+        }}
+        mjx-container[jax="SVG"]::-webkit-scrollbar,
+        .proof-step::-webkit-scrollbar,
+        .past-step-item::-webkit-scrollbar,
+        .card-body::-webkit-scrollbar,
+        pre::-webkit-scrollbar,
+        table::-webkit-scrollbar {{
+            height: 6px;
+            width: 6px;
+        }}
+        mjx-container[jax="SVG"]::-webkit-scrollbar-thumb,
+        .proof-step::-webkit-scrollbar-thumb,
+        .past-step-item::-webkit-scrollbar-thumb,
+        .card-body::-webkit-scrollbar-thumb,
+        pre::-webkit-scrollbar-thumb,
+        table::-webkit-scrollbar-thumb {{
+            background: var(--accent-border);
+            border-radius: 4px;
+        }}
+        mjx-container[jax="SVG"]::-webkit-scrollbar-track {{
+            background: rgba(0, 0, 0, 0.2);
+        }}
     </style>
 
     <script>

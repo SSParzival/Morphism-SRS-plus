@@ -73,18 +73,66 @@ def build_live_preview_html_template() -> str:
             padding: 16px;
             margin: 0;
             line-height: 1.6;
+            overflow-x: hidden;
+            box-sizing: border-box;
+            max-width: 100vw;
         }}
-        .title {{ color: var(--accent-border); font-weight: bold; font-size: 18px; margin-bottom: 8px; border-bottom: 1px solid var(--border-color); padding-bottom: 6px; }}
-        .body {{ line-height: 1.5; }}
-        .cloze-bracket {{ color: #38bdf8; font-weight: bold; padding: 2px 8px; background: rgba(56, 189, 248, 0.15); border-radius: 4px; border: 1px dashed #38bdf8; }}
-        .cloze-revealed {{ color: #10b981; font-weight: bold; background: rgba(16, 185, 129, 0.2); border-radius: 4px; padding: 2px 8px; border: 1px solid #10b981; }}
+        .title {{ color: var(--accent-border); font-weight: bold; font-size: 18px; margin-bottom: 8px; border-bottom: 1px solid var(--border-color); padding-bottom: 6px; overflow-wrap: break-word; word-break: break-word; }}
+        .body {{ line-height: 1.5; overflow-wrap: break-word; word-break: normal; max-width: 100%; box-sizing: border-box; }}
+        .cloze-bracket {{ color: #38bdf8; font-weight: bold; padding: 2px 8px; background: rgba(56, 189, 248, 0.15); border-radius: 4px; border: 1px dashed #38bdf8; display: inline-block; max-width: 100%; overflow-wrap: break-word; }}
+        .cloze-revealed {{ color: #10b981; font-weight: bold; background: rgba(16, 185, 129, 0.2); border-radius: 4px; padding: 2px 8px; border: 1px solid #10b981; display: inline-block; max-width: 100%; overflow-wrap: break-word; }}
         hr {{ border: 0; height: 1px; background: var(--border-color); margin: 16px 0; }}
         img {{ max-width: 100%; height: auto; border-radius: 8px; margin: 8px 0; display: block; }}
-        table {{ border-collapse: collapse; width: 100%; margin: 12px 0; background: rgba(15, 23, 42, 0.6); }}
-        th, td {{ border: 1px solid var(--border-color); padding: 8px 12px; text-align: left; }}
+        table {{ border-collapse: collapse; width: 100%; margin: 12px 0; background: rgba(15, 23, 42, 0.6); display: block; overflow-x: auto; max-width: 100%; box-sizing: border-box; }}
+        th, td {{ border: 1px solid var(--border-color); padding: 8px 12px; text-align: left; min-width: 60px; }}
         th {{ background-color: rgba(30, 41, 59, 0.8); color: var(--accent-border); }}
-        code {{ background: rgba(0,0,0,0.3); color: #f43f5e; padding: 2px 6px; border-radius: 4px; font-family: monospace; }}
-        pre {{ background: rgba(0,0,0,0.4); padding: 12px; border-radius: 8px; overflow-x: auto; border: 1px solid var(--border-color); }}
+        code {{ background: rgba(0,0,0,0.3); color: #f43f5e; padding: 2px 6px; border-radius: 4px; font-family: monospace; overflow-wrap: break-word; word-break: break-word; }}
+        pre {{ background: rgba(0,0,0,0.4); padding: 12px; border-radius: 8px; overflow-x: auto; border: 1px solid var(--border-color); max-width: 100%; box-sizing: border-box; }}
+
+        /* MathJax 3 Responsive Equations */
+        mjx-container[jax="SVG"][display="true"] {{
+            display: block !important;
+            text-align: center !important;
+            margin: 0.8em 0 !important;
+            max-width: 100% !important;
+            overflow-x: auto !important;
+            overflow-y: hidden !important;
+            padding: 6px 2px !important;
+            box-sizing: border-box !important;
+        }}
+        mjx-container[jax="SVG"][display="true"] > svg {{
+            max-width: none !important;
+            min-width: min-content;
+            display: inline-block !important;
+        }}
+        mjx-container[jax="SVG"]:not([display="true"]) {{
+            max-width: 100% !important;
+            overflow-x: auto !important;
+            overflow-y: hidden !important;
+            vertical-align: -0.2em !important;
+            display: inline-block !important;
+            box-sizing: border-box !important;
+        }}
+        mjx-container[jax="SVG"]:not([display="true"]) > svg {{
+            max-width: none !important;
+        }}
+        mjx-container[jax="SVG"]::-webkit-scrollbar,
+        .body::-webkit-scrollbar,
+        pre::-webkit-scrollbar,
+        table::-webkit-scrollbar {{
+            height: 6px;
+            width: 6px;
+        }}
+        mjx-container[jax="SVG"]::-webkit-scrollbar-thumb,
+        .body::-webkit-scrollbar-thumb,
+        pre::-webkit-scrollbar-thumb,
+        table::-webkit-scrollbar-thumb {{
+            background: var(--accent-border);
+            border-radius: 4px;
+        }}
+        mjx-container[jax="SVG"]::-webkit-scrollbar-track {{
+            background: rgba(0, 0, 0, 0.2);
+        }}
     </style>
 
     <script>

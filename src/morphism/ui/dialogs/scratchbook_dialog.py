@@ -35,6 +35,11 @@ def build_scratchbook_html_template(content: str = "") -> str:
             padding: 16px;
             margin: 0;
             line-height: 1.6;
+            overflow-x: hidden;
+            box-sizing: border-box;
+            max-width: 100vw;
+            overflow-wrap: break-word;
+            word-break: normal;
         }}
         img {{
             max-width: 100%;
@@ -45,18 +50,68 @@ def build_scratchbook_html_template(content: str = "") -> str:
             width: 100%;
             margin: 10px 0;
             background: rgba(15, 23, 42, 0.6);
+            display: block;
+            overflow-x: auto;
+            max-width: 100%;
+            box-sizing: border-box;
         }}
         th, td {{
             border: 1px solid var(--border-color);
             padding: 8px 12px;
             text-align: left;
+            min-width: 60px;
         }}
         th {{
             background-color: rgba(30, 41, 59, 0.8);
             color: var(--accent-border);
         }}
-        code {{ background: rgba(0,0,0,0.3); color: #f43f5e; padding: 2px 6px; border-radius: 4px; font-family: monospace; }}
-        pre {{ background: rgba(0,0,0,0.4); padding: 12px; border-radius: 8px; overflow-x: auto; border: 1px solid var(--border-color); }}
+        code {{ background: rgba(0,0,0,0.3); color: #f43f5e; padding: 2px 6px; border-radius: 4px; font-family: monospace; overflow-wrap: break-word; word-break: break-word; }}
+        pre {{ background: rgba(0,0,0,0.4); padding: 12px; border-radius: 8px; overflow-x: auto; border: 1px solid var(--border-color); max-width: 100%; box-sizing: border-box; }}
+
+        /* MathJax 3 Responsive Equations */
+        mjx-container[jax="SVG"][display="true"] {{
+            display: block !important;
+            text-align: center !important;
+            margin: 0.8em 0 !important;
+            max-width: 100% !important;
+            overflow-x: auto !important;
+            overflow-y: hidden !important;
+            padding: 6px 2px !important;
+            box-sizing: border-box !important;
+        }}
+        mjx-container[jax="SVG"][display="true"] > svg {{
+            max-width: none !important;
+            min-width: min-content;
+            display: inline-block !important;
+        }}
+        mjx-container[jax="SVG"]:not([display="true"]) {{
+            max-width: 100% !important;
+            overflow-x: auto !important;
+            overflow-y: hidden !important;
+            vertical-align: -0.2em !important;
+            display: inline-block !important;
+            box-sizing: border-box !important;
+        }}
+        mjx-container[jax="SVG"]:not([display="true"]) > svg {{
+            max-width: none !important;
+        }}
+        mjx-container[jax="SVG"]::-webkit-scrollbar,
+        body::-webkit-scrollbar,
+        pre::-webkit-scrollbar,
+        table::-webkit-scrollbar {{
+            height: 6px;
+            width: 6px;
+        }}
+        mjx-container[jax="SVG"]::-webkit-scrollbar-thumb,
+        body::-webkit-scrollbar-thumb,
+        pre::-webkit-scrollbar-thumb,
+        table::-webkit-scrollbar-thumb {{
+            background: var(--accent-border);
+            border-radius: 4px;
+        }}
+        mjx-container[jax="SVG"]::-webkit-scrollbar-track {{
+            background: rgba(0, 0, 0, 0.2);
+        }}
     </style>
 
     <script>
