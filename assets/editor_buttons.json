@@ -30,6 +30,80 @@
     "shortcut": "Ctrl+U"
   },
   {
+    "id": "cloze",
+    "label": "🧩 Cloze",
+    "tooltip": "Insert Cloze Deletion {{c1::answer::hint}} (Shortcut: Ctrl+Shift+K)",
+    "type": "interval",
+    "left": "{{c1::",
+    "right": "}}",
+    "default_text": "answer",
+    "shortcut": "Ctrl+Shift+K"
+  },
+  {
+    "id": "math_display",
+    "label": "$$ TeX $$",
+    "tooltip": "Math Display Block $$...$$ (Shortcut: Ctrl+M)",
+    "type": "interval",
+    "left": "$$",
+    "right": "$$",
+    "default_text": "f(x) = y",
+    "shortcut": "Ctrl+M"
+  },
+  {
+    "id": "math_inline",
+    "label": "$ x $",
+    "tooltip": "Inline Math $...$",
+    "type": "interval",
+    "left": "$",
+    "right": "$",
+    "default_text": "x"
+  },
+  {
+    "id": "frac",
+    "label": "a/b",
+    "tooltip": "Fraction \\frac{a}{b} (Shortcut: Ctrl+/)",
+    "type": "interval",
+    "left": "\\frac{",
+    "right": "}{b}",
+    "default_text": "a",
+    "shortcut": "Ctrl+/"
+  },
+  {
+    "id": "integral",
+    "label": "∫ dx",
+    "tooltip": "Definite Integral \\int_{a}^{b} f(x)\\,dx",
+    "type": "single",
+    "content": "\\int_{a}^{b} f(x)\\,dx "
+  },
+  {
+    "id": "sum",
+    "label": "∑",
+    "tooltip": "Summation \\sum_{i=1}^{n}",
+    "type": "single",
+    "content": "\\sum_{i=1}^{n} "
+  },
+  {
+    "id": "matrix",
+    "label": "[ ⊞ ]",
+    "tooltip": "2x2 Matrix \\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}",
+    "type": "single",
+    "content": "\\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix} "
+  },
+  {
+    "id": "implies",
+    "label": "⟹",
+    "tooltip": "Implication \\implies",
+    "type": "single",
+    "content": "\\implies "
+  },
+  {
+    "id": "iff",
+    "label": "⟺",
+    "tooltip": "Equivalence \\iff",
+    "type": "single",
+    "content": "\\iff "
+  },
+  {
     "id": "code",
     "label": "Code",
     "tooltip": "Code snippet <code>...</code> (Shortcut: Ctrl+Shift+C)",
@@ -61,18 +135,9 @@
     "label": "&lt;ul&gt;",
     "tooltip": "Listing <ul>...</ul>",
     "type": "interval",
-    "left": "<ul>",
-    "right": "</ul>",
-    "default_text": "ul"
-  },
-  {
-    "id": "listitem",
-    "label": "&lt;li&gt;",
-    "tooltip": "list item <li>...</li>",
-    "type": "interval",
-    "left": "<li>",
-    "right": "</li>",
-    "default_text": "li"
+    "left": "<ul>\n",
+    "right": "\n</ul>",
+    "default_text": "  <li>item</li>"
   },
   {
     "id": "image",
@@ -89,16 +154,6 @@
     "action": "prompt_table"
   },
   {
-    "id": "frak",
-    "label": "𝔅",
-    "tooltip": "Fraktur \\mathfrak{#1} (Shortcut: Ctrl+K, Ctrl+Alt+F)",
-    "type": "interval",
-    "left": "\\mathfrak{",
-    "right": "}",
-    "default_text": "B",
-    "shortcut": "Ctrl+K, Ctrl+Alt+F"
-  },
-  {
     "id": "mathbb",
     "label": "ℝ",
     "tooltip": "Mathbb \\mathbb{#1} (Shortcut: Ctrl+K, Ctrl+Alt+B)",
@@ -107,15 +162,5 @@
     "right": "}",
     "default_text": "R",
     "shortcut": "Ctrl+K, Ctrl+Alt+B"
-  },
-  {
-    "id": "set",
-    "label": "{x∈A:φ(x)}",
-    "tooltip": "Mathbb \\mathbb{#1} (Shortcut: Ctrl+K, Ctrl+Alt+B)",
-    "type": "interval",
-    "left": "\\Set{",
-    "right": "}",
-    "default_text": "x \\in A : \\varphi(x)",
-    "shortcut": "Ctrl+K, Shift+S"
   }
 ]

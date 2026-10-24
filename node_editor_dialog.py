@@ -4,27 +4,23 @@ import os
 import re
 from typing import Optional, List
 
-
 from PySide6.QtWidgets import (QDialog, QVBoxLayout, QHBoxLayout, QPushButton, 
                                QLabel, QLineEdit, QTextEdit, QListWidget, QListWidgetItem, 
                                QGroupBox, QComboBox, QMessageBox, QDoubleSpinBox,
-                               QScrollArea, QWidget, QFileDialog, QToolButton, QLayout, QSizePolicy)
+                               QScrollArea, QWidget, QFileDialog, QToolButton, QLayout, QSizePolicy, QMenu)
 from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6.QtCore import Qt, QUrl, QRect, QSize, QPoint
 from PySide6.QtGui import QFont, QKeySequence, QShortcut, QTextCursor
 
-from models import NoteNode, Flashcard, ProofSequenceCard, ReviewObject
-
-
-ASSETS_DIR = os.path.abspath("assets").replace("\\", "/")
-
+from models import NoteNode, Flashcard, ProofSequenceCard, ClozeCard, ReviewObject
+from app_paths import ASSETS_DIR, MATHJAX_CONFIG_FILE, EDITOR_BUTTONS_FILE
+from theme_manager import ThemeManager, FONT_FAMILY_STACK, MONO_FONT_STACK
 
 def load_mathjax_config_json() -> dict:
     """Load assets/mathjax_config.json dynamically or return default configuration."""
-    config_path = os.path.join(ASSETS_DIR, "mathjax_config.json")
-    if os.path.exists(config_path):
+    if os.path.exists(MATHJAX_CONFIG_FILE):
         try:
-            with open(config_path, "r", encoding="utf-8") as f:
+            with open(MATHJAX_CONFIG_FILE, "r", encoding="utf-8") as f:
                 return json.load(f)
         except Exception as e:
             print(f"Error loading mathjax_config.json in node_editor_dialog: {e}")
@@ -42,13 +38,11 @@ def load_mathjax_config_json() -> dict:
         }
     }
 
-
 def load_editor_buttons_config() -> List[dict]:
     """Load assets/editor_buttons.json dynamically or return default configuration."""
-    config_path = os.path.join(ASSETS_DIR, "editor_buttons.json")
-    if os.path.exists(config_path):
+    if os.path.exists(EDITOR_BUTTONS_FILE):
         try:
-            with open(config_path, "r", encoding="utf-8") as f:
+            with open(EDITOR_BUTTONS_FILE, "r", encoding="utf-8") as f:
                 return json.load(f)
         except Exception as e:
             print(f"Error loading editor_buttons.json: {e}")
@@ -56,41 +50,43 @@ def load_editor_buttons_config() -> List[dict]:
         {"id": "bold", "label": "<b>B</b>", "tooltip": "Bold <b>", "type": "interval", "left": "<b>", "right": "</b>", "default_text": "bold text", "shortcut": "Ctrl+B"},
         {"id": "italic", "label": "<i>I</i>", "tooltip": "Italic <i>", "type": "interval", "left": "<i>", "right": "</i>", "default_text": "italic text", "shortcut": "Ctrl+I"},
         {"id": "underline", "label": "<u>U</u>", "tooltip": "Underline <u>", "type": "interval", "left": "<u>", "right": "</u>", "default_text": "underlined text", "shortcut": "Ctrl+U"},
-        {"id": "code", "label": "Code", "tooltip": "Code <code>", "type": "interval", "left": "<code>", "right": "</code>", "default_text": "code", "shortcut": "Ctrl+Shift+C"},
-        {"id": "color_blue", "label": "🎨 Color", "tooltip": "Blue Accent", "type": "interval", "left": "<span style=\"color: #60a5fa;\">", "right": "</span>", "default_text": "colored text"},
+        {"id": "cloze", "label": "🧩 Cloze", "tooltip": "Insert Cloze Deletion", "type": "interval", "left": "{{c1::", "right": "}}", "default_text": "answer", "shortcut": "Ctrl+Shift+K"},
+        {"id": "math_display", "label": "$$ TeX $$", "tooltip": "Math Display Block", "type": "interval", "left": "$$", "right": "$$", "default_text": "f(x) = y", "shortcut": "Ctrl+M"},
     ]
-
-
-
 
 def build_live_preview_html_template() -> str:
     tex_data = load_mathjax_config_json()
     tex_json = json.dumps(tex_data)
+    css_vars = ThemeManager.get_instance().get_web_css_variables()
+
     return f"""<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <style>
+        {css_vars}
         body {{ 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+            font-family: -apple-system, BlinkMacSystemFont, "Inter", "Ubuntu", "DejaVu Sans", "Segoe UI", Roboto, sans-serif; 
             font-size: 16px; 
-            background: #1e293b; 
-            color: #f8fafc; 
+            background: var(--card-bg); 
+            color: var(--text-color); 
             padding: 16px;
             margin: 0;
+            line-height: 1.6;
         }}
-        .title {{ color: #38bdf8; font-weight: bold; font-size: 18px; margin-bottom: 8px; }}
+        .title {{ color: var(--accent-border); font-weight: bold; font-size: 18px; margin-bottom: 8px; border-bottom: 1px solid var(--border-color); padding-bottom: 6px; }}
         .body {{ line-height: 1.5; }}
-        hr {{ border: 0; height: 1px; background: #475569; margin: 16px 0; }}
+        .cloze-bracket {{ color: #38bdf8; font-weight: bold; padding: 2px 8px; background: rgba(56, 189, 248, 0.15); border-radius: 4px; border: 1px dashed #38bdf8; }}
+        .cloze-revealed {{ color: #10b981; font-weight: bold; background: rgba(16, 185, 129, 0.2); border-radius: 4px; padding: 2px 8px; border: 1px solid #10b981; }}
+        hr {{ border: 0; height: 1px; background: var(--border-color); margin: 16px 0; }}
         img {{ max-width: 100%; height: auto; border-radius: 8px; margin: 8px 0; display: block; }}
         table {{ border-collapse: collapse; width: 100%; margin: 12px 0; background: rgba(15, 23, 42, 0.6); }}
-        th, td {{ border: 1px solid #334155; padding: 8px 12px; text-align: left; }}
-        th {{ background-color: #1e293b; color: #38bdf8; }}
-        code {{ background: #0f172a; color: #f43f5e; padding: 2px 6px; border-radius: 4px; font-family: monospace; }}
-        pre {{ background: #0f172a; padding: 12px; border-radius: 8px; overflow-x: auto; border: 1px solid #334155; }}
+        th, td {{ border: 1px solid var(--border-color); padding: 8px 12px; text-align: left; }}
+        th {{ background-color: rgba(30, 41, 59, 0.8); color: var(--accent-border); }}
+        code {{ background: rgba(0,0,0,0.3); color: #f43f5e; padding: 2px 6px; border-radius: 4px; font-family: monospace; }}
+        pre {{ background: rgba(0,0,0,0.4); padding: 12px; border-radius: 8px; overflow-x: auto; border: 1px solid var(--border-color); }}
     </style>
 
-    <!-- MathJax 3 Offline Configuration loaded dynamically from assets/mathjax_config.json -->
     <script>
         window.MathJax = {{
             tex: {tex_json},
@@ -102,8 +98,6 @@ def build_live_preview_html_template() -> str:
             }}
         }};
     </script>
-
-    <!-- Load Local Self-Contained MathJax 3 SVG Bundle for Vector Typesetting -->
     <script src="tex-svg.js"></script>
 
     <script>
@@ -111,9 +105,12 @@ def build_live_preview_html_template() -> str:
             let container = document.getElementById('preview-container');
             if (!container) return;
 
-            container.innerHTML = "<div class='title'>" + title + "</div>" +
-                                  "<div class='body'>" + front + "</div>" +
-                                  (back ? "<hr><div class='body'>" + back + "</div>" : "");
+            let content = "";
+            if (title) content += "<div class='title'>" + title + "</div>";
+            content += "<div class='body'>" + front + "</div>";
+            if (back) content += "<hr><div class='body'>" + back + "</div>";
+
+            container.innerHTML = content;
 
             if (window.MathJax && window.MathJax.typesetPromise) {{
                 MathJax.typesetPromise([container]).catch(function(err) {{
@@ -125,22 +122,12 @@ def build_live_preview_html_template() -> str:
 </head>
 <body>
     <div id="preview-container">
-        <div style="color: #94a3b8; text-align: center; margin-top: 20px;">
-            Select a card from the left panel to edit content and preview rendered HTML / MathJax math formulas.
+        <div style="color: var(--text-muted); text-align: center; margin-top: 20px;">
+            Select a card from the left panel to edit content and preview rendered HTML / MathJax formulas.
         </div>
     </div>
 </body>
-</html>
-"""
-
-def insert_tag_into_editor(editor: QTextEdit, open_tag: str, close_tag: str, default_text: str = ""):
-    cursor = editor.textCursor()
-    selected = cursor.selectedText()
-    if selected:
-        cursor.insertText(f"{open_tag}{selected}{close_tag}")
-    else:
-        insert_val = default_text if default_text else "text"
-        cursor.insertText(f"{open_tag}{insert_val}{close_tag}")
+</html>"""
 
 def prompt_insert_image(editor: QTextEdit, parent: QWidget):
     file_path, _ = QFileDialog.getOpenFileName(parent, "Select Image File", "", "Images (*.png *.jpg *.jpeg *.gif *.svg *.webp)")
@@ -149,20 +136,19 @@ def prompt_insert_image(editor: QTextEdit, parent: QWidget):
         img_tag = f'<img src="{file_url}" style="max-width:100%; border-radius:8px; margin:8px 0;" />'
         editor.textCursor().insertText(img_tag)
 
-
 def prompt_insert_table(editor: QTextEdit):
     table_snippet = (
         '<table border="1" style="border-collapse: collapse; width: 100%; margin: 10px 0;">\n'
         '  <thead>\n'
-        '    <tr style="background-color: #1e293b; color: #38bdf8;">\n'
-        '      <th style="padding: 8px; border: 1px solid #334155;">Header 1</th>\n'
-        '      <th style="padding: 8px; border: 1px solid #334155;">Header 2</th>\n'
+        '    <tr>\n'
+        '      <th style="padding: 8px;">Header 1</th>\n'
+        '      <th style="padding: 8px;">Header 2</th>\n'
         '    </tr>\n'
         '  </thead>\n'
         '  <tbody>\n'
         '    <tr>\n'
-        '      <td style="padding: 8px; border: 1px solid #334155;">Cell 1</td>\n'
-        '      <td style="padding: 8px; border: 1px solid #334155;">Cell 2</td>\n'
+        '      <td style="padding: 8px;">Cell 1</td>\n'
+        '      <td style="padding: 8px;">Cell 2</td>\n'
         '    </tr>\n'
         '  </tbody>\n'
         '</table>'
@@ -243,7 +229,7 @@ class FlowLayout(QLayout):
 
 
 class NodeEditorDialog(QDialog):
-    """Dialog for creating & editing Note Nodes and their attached Flashcards/Proofs."""
+    """Dialog for creating & editing Note Nodes and their attached Flashcards/Proofs/Clozes."""
 
     def __init__(self, note: NoteNode, parent=None):
         super().__init__(parent)
@@ -254,16 +240,19 @@ class NodeEditorDialog(QDialog):
         self.is_preview_loaded = False
         self.current_editing_row = -1
 
-
         self.setWindowTitle(f"Edit Note: {note.title}")
-        # Allow Window Maximization, Minimization & Resizing
         self.setWindowFlags(self.windowFlags() | Qt.WindowMaximizeButtonHint | Qt.WindowMinimizeButtonHint)
         self.setWindowModality(Qt.NonModal)
-        self.setMinimumSize(820, 600)
-        self.resize(1120, 820)
+        self.setMinimumSize(840, 620)
+        self.resize(1140, 840)
         
         self._setup_ui()
         self._load_cards_list()
+        ThemeManager.get_instance().theme_changed.connect(self.on_theme_changed)
+
+    def on_theme_changed(self, theme_id: str):
+        assets_url = QUrl.fromLocalFile(ASSETS_DIR.replace("\\", "/") + "/")
+        self.preview_browser.setHtml(build_live_preview_html_template(), assets_url)
 
     def _open_scratchbook_from_editor(self):
         """Open or raise the Scratchbook window directly from the Note Editor."""
@@ -280,19 +269,17 @@ class NodeEditorDialog(QDialog):
                 self._scratchbook_dlg.raise_()
                 self._scratchbook_dlg.activateWindow()
 
-
     def _setup_ui(self):
         dialog_layout = QVBoxLayout(self)
-        dialog_layout.setContentsMargins(10, 10, 10, 10)
+        dialog_layout.setContentsMargins(12, 12, 12, 12)
 
-        # Scroll Area wrapping all content
         scroll = QScrollArea()
         scroll.setWidgetResizable(True)
         scroll.setStyleSheet("QScrollArea { border: none; background: transparent; }")
 
         scroll_content = QWidget()
         main_layout = QVBoxLayout(scroll_content)
-        main_layout.setContentsMargins(5, 5, 5, 5)
+        main_layout.setContentsMargins(6, 6, 6, 6)
 
         # Note Header & Architecture Options
         header_layout = QHBoxLayout()
@@ -313,10 +300,8 @@ class NodeEditorDialog(QDialog):
 
         self.btn_scratchbook = QPushButton("✏️ Scratchbook")
         self.btn_scratchbook.setCursor(Qt.PointingHandCursor)
-        self.btn_scratchbook.setStyleSheet("background-color: #1e293b; color: #38bdf8; font-weight: bold; border: 1px solid #334155; border-radius: 6px; padding: 4px 10px;")
         self.btn_scratchbook.clicked.connect(self._open_scratchbook_from_editor)
         header_layout.addWidget(self.btn_scratchbook)
-
 
         header_layout.addWidget(QLabel("Target R:"))
         self.spin_desired_r = QDoubleSpinBox()
@@ -339,20 +324,20 @@ class NodeEditorDialog(QDialog):
         list_vbox.addWidget(self.list_cards)
 
         order_btns_layout = QHBoxLayout()
-        btn_move_up = QPushButton("▲ Move Up")
+        btn_move_up = QPushButton("▲ Up")
         btn_move_up.clicked.connect(self._move_card_up)
         order_btns_layout.addWidget(btn_move_up)
 
-        btn_move_down = QPushButton("▼ Move Down")
+        btn_move_down = QPushButton("▼ Down")
         btn_move_down.clicked.connect(self._move_card_down)
         order_btns_layout.addWidget(btn_move_down)
         list_vbox.addLayout(order_btns_layout)
 
         card_actions_layout = QHBoxLayout()
-        btn_add_card = QPushButton("+ Add Card")
-        btn_add_card.setStyleSheet("background-color: #6366f1; color: white; font-weight: bold;")
-        btn_add_card.clicked.connect(self._add_card)
-        card_actions_layout.addWidget(btn_add_card)
+        self.btn_add_card = QPushButton("+ Add Card ▾")
+        self.btn_add_card.setStyleSheet("background-color: #6366f1; color: white; font-weight: bold;")
+        self.btn_add_card.clicked.connect(self._show_add_card_menu)
+        card_actions_layout.addWidget(self.btn_add_card)
 
         btn_del_card = QPushButton("🗑 Delete")
         btn_del_card.setStyleSheet("background-color: #991b1b; color: #fca5a5;")
@@ -362,7 +347,7 @@ class NodeEditorDialog(QDialog):
         list_vbox.addLayout(card_actions_layout)
         content_layout.addWidget(list_group, stretch=1)
 
-        # Right Column: Text Editors + Live Preview Browser + Save Card Button
+        # Right Column: Text Editors + Live Preview Browser
         editor_group = QGroupBox("Card Content & Live HTML / MathJax Preview")
         editor_vbox = QVBoxLayout(editor_group)
 
@@ -381,38 +366,39 @@ class NodeEditorDialog(QDialog):
         editor_vbox.addWidget(self.txt_card_title)
 
         # Front Field Header & HTML Toolbar
-        editor_vbox.addWidget(QLabel("Front / Question / Premise:"))
+        self.lbl_front = QLabel("Front / Question / Cloze Content:")
+        editor_vbox.addWidget(self.lbl_front)
         front_toolbar = self._create_html_toolbar(field="front")
         editor_vbox.addLayout(front_toolbar)
 
-        mono_font = QFont("Consolas", 11)
+        mono_font = QFont("monospace", 11)
         mono_font.setStyleHint(QFont.Monospace)
 
         self.txt_card_front = QTextEdit()
         self.txt_card_front.setAcceptRichText(False)
         self.txt_card_front.setFont(mono_font)
-        self.txt_card_front.setStyleSheet("font-family: 'Consolas', 'Courier New', monospace; font-size: 13px; background-color: #0f172a; color: #f8fafc; border: 1px solid #334155; border-radius: 6px; padding: 6px;")
-        self.txt_card_front.setMinimumHeight(100)
+        self.txt_card_front.setMinimumHeight(110)
         self.txt_card_front.textChanged.connect(self._update_preview)
         editor_vbox.addWidget(self.txt_card_front, stretch=1)
 
         # Back Field Header & HTML Toolbar
-        editor_vbox.addWidget(QLabel("Back / Answer / Proof Steps:"))
+        self.lbl_back = QLabel("Back / Answer / Proof Steps:")
+        editor_vbox.addWidget(self.lbl_back)
         back_toolbar = self._create_html_toolbar(field="back")
         editor_vbox.addLayout(back_toolbar)
 
         self.txt_card_back = QTextEdit()
         self.txt_card_back.setAcceptRichText(False)
         self.txt_card_back.setFont(mono_font)
-        self.txt_card_back.setStyleSheet("font-family: 'Consolas', 'Courier New', monospace; font-size: 13px; background-color: #0f172a; color: #f8fafc; border: 1px solid #334155; border-radius: 6px; padding: 6px;")
-        self.txt_card_back.setMinimumHeight(100)
+        self.txt_card_back.setMinimumHeight(110)
         self.txt_card_back.textChanged.connect(self._update_preview)
         editor_vbox.addWidget(self.txt_card_back, stretch=1)
 
         # Live MathJax Preview Browser
         self.preview_browser = QWebEngineView()
-        self.preview_browser.setMinimumHeight(220)
-        self.preview_browser.setHtml(build_live_preview_html_template(), QUrl.fromLocalFile(ASSETS_DIR + "/"))
+        self.preview_browser.setMinimumHeight(240)
+        assets_url = QUrl.fromLocalFile(ASSETS_DIR.replace("\\", "/") + "/")
+        self.preview_browser.setHtml(build_live_preview_html_template(), assets_url)
         self.preview_browser.loadFinished.connect(self._on_preview_loaded)
         editor_vbox.addWidget(self.preview_browser, stretch=2)
 
@@ -422,7 +408,7 @@ class NodeEditorDialog(QDialog):
         scroll.setWidget(scroll_content)
         dialog_layout.addWidget(scroll, stretch=1)
 
-        # Fixed Bottom Action Buttons (Always visible)
+        # Fixed Bottom Action Buttons
         bottom_layout = QHBoxLayout()
         bottom_layout.addStretch()
 
@@ -437,6 +423,22 @@ class NodeEditorDialog(QDialog):
 
         dialog_layout.addLayout(bottom_layout)
 
+    def _show_add_card_menu(self):
+        menu = QMenu(self)
+        menu.setStyleSheet(ThemeManager.get_instance().generate_qss())
+        
+        act_std = menu.addAction("📄 Standard Flashcard")
+        act_cloze = menu.addAction("🧩 Cloze Deletion Card")
+        act_proof = menu.addAction("📜 Multi-Step Proof Card")
+
+        action = menu.exec(self.btn_add_card.mapToGlobal(QPoint(0, self.btn_add_card.height())))
+        if action == act_std:
+            self._add_card("standard")
+        elif action == act_cloze:
+            self._add_card("cloze")
+        elif action == act_proof:
+            self._add_card("proof")
+
     def _apply_interval(self, editor: QTextEdit, left: str, right: str, default_text: str = ""):
         cursor = editor.textCursor()
         selected = cursor.selectedText()
@@ -447,7 +449,6 @@ class NodeEditorDialog(QDialog):
             cursor.insertText(f"{left}{fallback}{right}")
 
     def _trigger_shortcut_action(self, btn_info: dict):
-        """Execute shortcut action on the currently focused text editor (front or back)."""
         target_editor = self.txt_card_back if self.txt_card_back.hasFocus() else self.txt_card_front
         btn_type = btn_info.get("type", "single")
         if btn_type == "interval":
@@ -466,7 +467,6 @@ class NodeEditorDialog(QDialog):
                 prompt_insert_table(target_editor)
 
     def configure_button_rich_text(self, btn: QPushButton, label_str: str):
-        """Parse HTML formatting tags and unescape entities like &lt;br&gt; -> <br>."""
         raw_label = html.unescape(label_str)
         if raw_label.strip() in ("<br>", "<br/>", "<br >"):
             plain_text = "<br>"
@@ -474,32 +474,15 @@ class NodeEditorDialog(QDialog):
             plain_text = re.sub(r'<(?!br\b)[^>]+>', '', raw_label)
         btn.setText(plain_text)
 
-
-        is_bold = "<b>" in label_str or "font-weight: bold" in label_str or "font-weight:bold" in label_str
-        is_italic = "<i>" in label_str or "font-style: italic" in label_str or "font-style:italic" in label_str
-        is_underline = "<u>" in label_str or "text-decoration: underline" in label_str
-
-        color_match = re.search(r"color=['\"]?([^'\">\s;]+)", label_str)
-        text_color = color_match.group(1) if color_match else "#f8fafc"
-
+        is_bold = "<b>" in label_str or "bold" in label_str
         font = btn.font()
+        font.setPointSize(10)
         font.setBold(is_bold)
-        font.setItalic(is_italic)
-        font.setUnderline(is_underline)
         btn.setFont(font)
-
-        style = f"font-size: 12px; padding: 4px 10px; min-width: 26px; color: {text_color};"
-        if is_bold:
-            style += " font-weight: bold;"
-        if is_italic:
-            style += " font-style: italic;"
-        if is_underline:
-            style += " text-decoration: underline;"
-        btn.setStyleSheet(style)
+        btn.setStyleSheet("padding: 4px 8px; min-width: 24px;")
 
     def _create_html_toolbar(self, field: str) -> FlowLayout:
-        """Create rich HTML formatting toolbar with dynamic FlowLayout wrapping based on assets/editor_buttons.json."""
-        layout = FlowLayout(spacing=6)
+        layout = FlowLayout(spacing=5)
 
         def get_target_editor() -> QTextEdit:
             return self.txt_card_front if field == "front" else self.txt_card_back
@@ -532,21 +515,13 @@ class NodeEditorDialog(QDialog):
 
             layout.addWidget(btn)
 
-            # Register shortcut once per dialog
             shortcut_key = btn_info.get("shortcut", "")
             if shortcut_key and field == "front":
                 sc = QShortcut(QKeySequence(shortcut_key), self)
                 sc.setContext(Qt.WindowShortcut)
                 sc.activated.connect(lambda info=btn_info: self._trigger_shortcut_action(info))
 
-
         return layout
-
-
-
-
-
-
 
     def _on_preview_loaded(self, ok: bool):
         self.is_preview_loaded = True
@@ -557,7 +532,8 @@ class NodeEditorDialog(QDialog):
         self.list_cards.clear()
         for idx, card in enumerate(self.note.cards, start=1):
             title = card.get_title()
-            item = QListWidgetItem(f"#{idx}: {title}")
+            type_icon = "🧩" if isinstance(card, ClozeCard) else ("📜" if isinstance(card, ProofSequenceCard) else "📄")
+            item = QListWidgetItem(f"#{idx} {type_icon} {title}")
             item.setData(Qt.UserRole, card)
             self.list_cards.addItem(item)
         self.list_cards.blockSignals(False)
@@ -566,7 +542,6 @@ class NodeEditorDialog(QDialog):
             self.list_cards.setCurrentRow(0)
 
     def _on_card_selected(self, row: int):
-        # Auto-save changes on previously selected card before switching
         if 0 <= self.current_editing_row < len(self.note.cards) and self.current_editing_row != row:
             self._save_current_card(self.current_editing_row)
 
@@ -575,12 +550,21 @@ class NodeEditorDialog(QDialog):
             card = self.note.cards[row]
             self.txt_card_title.setText(card.get_title())
 
-            if isinstance(card, Flashcard):
-                self.txt_card_front.setPlainText(card.front)
-                self.txt_card_back.setPlainText(card.back)
+            if isinstance(card, ClozeCard):
+                self.lbl_front.setText("Cloze Sentence (Use {{c1::answer}} or {{c1::answer::hint}}):")
+                self.lbl_back.setText("Optional Extra Notes / Comments (Shown after answer):")
+                self.txt_card_front.setPlainText(card.text)
+                self.txt_card_back.setPlainText("")
             elif isinstance(card, ProofSequenceCard):
+                self.lbl_front.setText("Proof Premise / Theorem:")
+                self.lbl_back.setText("Proof Steps (One step per line):")
                 self.txt_card_front.setPlainText(card.premise)
                 self.txt_card_back.setPlainText("\n".join(card.steps))
+            else:
+                self.lbl_front.setText("Front / Question / Premise:")
+                self.lbl_back.setText("Back / Answer / Solution:")
+                self.txt_card_front.setPlainText(getattr(card, 'front', ''))
+                self.txt_card_back.setPlainText(getattr(card, 'back', ''))
 
             self._update_preview()
 
@@ -591,6 +575,22 @@ class NodeEditorDialog(QDialog):
         title = self.txt_card_title.text()
         front = self.txt_card_front.toPlainText()
         back = self.txt_card_back.toPlainText()
+
+        # Handle cloze preview
+        if 0 <= self.current_editing_row < len(self.note.cards):
+            card = self.note.cards[self.current_editing_row]
+            if isinstance(card, ClozeCard) or ("{{" in front and "}}" in front):
+                def repl(match):
+                    parts = match.group(1).split("::")
+                    answer = parts[0]
+                    return f"<span class='cloze-revealed'>{answer}</span>"
+                back = re.sub(r"\{\{c\d+::(.*?)\}\}", repl, front)
+                
+                def repl_front(match):
+                    parts = match.group(1).split("::")
+                    hint = parts[1].strip() if len(parts) >= 2 else "..."
+                    return f"<span class='cloze-bracket'>[{hint}]</span>"
+                front = re.sub(r"\{\{c\d+::(.*?)\}\}", repl_front, front)
 
         title_json = json.dumps(title)
         front_json = json.dumps(front)
@@ -614,17 +614,19 @@ class NodeEditorDialog(QDialog):
         if 0 <= row < len(self.note.cards):
             card = self.note.cards[row]
             card.title = self.txt_card_title.text().strip() or f"Card #{row+1}"
-            if isinstance(card, Flashcard):
-                card.front = self.txt_card_front.toPlainText()
-                card.back = self.txt_card_back.toPlainText()
+            if isinstance(card, ClozeCard):
+                card.text = self.txt_card_front.toPlainText()
             elif isinstance(card, ProofSequenceCard):
                 card.premise = self.txt_card_front.toPlainText()
                 card.steps = [s.strip() for s in self.txt_card_back.toPlainText().split("\n") if s.strip()]
+            else:
+                card.front = self.txt_card_front.toPlainText()
+                card.back = self.txt_card_back.toPlainText()
             
-            # Update item label in list
             item = self.list_cards.item(row)
             if item:
-                item.setText(f"#{row+1}: {card.title}")
+                type_icon = "🧩" if isinstance(card, ClozeCard) else ("📜" if isinstance(card, ProofSequenceCard) else "📄")
+                item.setText(f"#{row+1} {type_icon} {card.title}")
 
     def _delete_current_card(self):
         row = self.list_cards.currentRow()
@@ -639,15 +641,23 @@ class NodeEditorDialog(QDialog):
                 self.txt_card_front.clear()
                 self.txt_card_back.clear()
 
-    def _add_card(self):
-        # Save current card before adding new one
+    def _add_card(self, card_type: str = "standard"):
         if 0 <= self.current_editing_row < len(self.note.cards):
             self._save_current_card(self.current_editing_row)
 
         step_num = len(self.note.cards) + 1
         is_serial = self.combo_note_type.currentData() == "serial_sequence"
-        title = f"Step A_{step_num} Statement" if is_serial else f"Card {step_num}"
-        new_card = Flashcard(title, "Enter question / theorem statement here (e.g. $E=mc^2$)", "Enter proof / solution details here")
+
+        if card_type == "cloze":
+            title = f"Definition {step_num}"
+            new_card = ClozeCard(title, "A topological space $(X, \\tau)$ is {{c1::compact::property}} if every open cover has a finite subcover.")
+        elif card_type == "proof":
+            title = f"Proof Step {step_num}"
+            new_card = ProofSequenceCard(title, "Theorem Premise Statement", ["Assume $P$", "Then $Q$ follows", "Therefore $R$"])
+        else:
+            title = f"Step A_{step_num} Statement" if is_serial else f"Card {step_num}"
+            new_card = Flashcard(title, "Question / theorem statement (e.g. $\\nabla \\cdot \\mathbf{B} = 0$)", "Answer / proof details")
+
         self.note.add_card(new_card)
         self._load_cards_list()
         self.list_cards.setCurrentRow(len(self.note.cards) - 1)

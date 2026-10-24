@@ -10,15 +10,14 @@ from fsrs import Rating
 
 from models import ReviewObject, ProofSequenceCard
 from scheduler_manager import SchedulerManager
-
-ASSETS_DIR = os.path.abspath("assets").replace("\\", "/")
+from app_paths import ASSETS_DIR, MATHJAX_CONFIG_FILE
+from theme_manager import ThemeManager
 
 def load_mathjax_tex_config_json() -> str:
     """Load assets/mathjax_config.json dynamically or return fallback TeX config JSON."""
-    config_path = os.path.join(ASSETS_DIR, "mathjax_config.json")
-    if os.path.exists(config_path):
+    if os.path.exists(MATHJAX_CONFIG_FILE):
         try:
-            with open(config_path, "r", encoding="utf-8") as f:
+            with open(MATHJAX_CONFIG_FILE, "r", encoding="utf-8") as f:
                 data = json.load(f)
                 return json.dumps(data)
         except Exception as e:
@@ -39,23 +38,17 @@ def load_mathjax_tex_config_json() -> str:
 
 def build_mathjax_html_template() -> str:
     tex_json = load_mathjax_tex_config_json()
+    css_vars = ThemeManager.get_instance().get_web_css_variables()
+
     return f"""<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <style>
-        :root {{
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --text-color: #f8fafc;
-            --text-muted: #94a3b8;
-            --border-color: #334155;
-            --accent-glow: rgba(99, 102, 241, 0.15);
-            --accent-border: #6366f1;
-        }}
+        {css_vars}
         * {{ box-sizing: border-box; }}
         body {{ 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Inter", "Ubuntu", "DejaVu Sans", "Segoe UI", Roboto, sans-serif;
             font-size: 18px; 
             line-height: 1.6;
             margin: 0;
@@ -69,12 +62,12 @@ def build_mathjax_html_template() -> str:
         }}
         .container {{
             width: 100%;
-            max-width: 840px;
+            max-width: 860px;
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 16px;
             padding: 28px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 20px var(--accent-glow);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4), 0 0 20px var(--accent-glow);
             transition: all 0.3s ease;
         }}
         .empty-placeholder {{
@@ -84,12 +77,12 @@ def build_mathjax_html_template() -> str:
         .empty-title {{
             font-size: 24px;
             font-weight: bold;
-            color: #38bdf8;
+            color: var(--accent-border);
             margin-bottom: 12px;
         }}
         .empty-subtitle {{
             font-size: 16px;
-            color: #94a3b8;
+            color: var(--text-muted);
         }}
         .seq-badge {{
             display: inline-block;
@@ -105,7 +98,7 @@ def build_mathjax_html_template() -> str:
         }}
         .past-steps-container {{
             background: rgba(15, 23, 42, 0.7);
-            border: 1px solid #334155;
+            border: 1px solid var(--border-color);
             border-radius: 10px;
             padding: 12px 16px;
             margin-bottom: 20px;
@@ -113,7 +106,7 @@ def build_mathjax_html_template() -> str:
         .past-steps-summary {{
             cursor: pointer;
             font-weight: 600;
-            color: #818cf8;
+            color: var(--accent-border);
             font-size: 15px;
             user-select: none;
         }}
@@ -133,7 +126,7 @@ def build_mathjax_html_template() -> str:
         .card-title {{
             font-size: 22px;
             font-weight: 700;
-            color: #38bdf8;
+            color: var(--accent-border);
             margin-bottom: 14px;
             border-bottom: 1px solid var(--border-color);
             padding-bottom: 8px;
@@ -141,6 +134,22 @@ def build_mathjax_html_template() -> str:
         .card-body {{
             font-size: 18px;
             margin-top: 10px;
+        }}
+        .cloze-bracket {{
+            color: #38bdf8;
+            font-weight: bold;
+            padding: 2px 8px;
+            background: rgba(56, 189, 248, 0.15);
+            border-radius: 4px;
+            border: 1px dashed #38bdf8;
+        }}
+        .cloze-revealed {{
+            color: #10b981;
+            font-weight: bold;
+            background: rgba(16, 185, 129, 0.2);
+            border-radius: 4px;
+            padding: 2px 8px;
+            border: 1px solid #10b981;
         }}
         hr.divider {{
             margin: 24px 0;
@@ -161,13 +170,12 @@ def build_mathjax_html_template() -> str:
         }}
         img {{ max-width: 100%; height: auto; border-radius: 8px; margin: 8px 0; display: block; }}
         table {{ border-collapse: collapse; width: 100%; margin: 12px 0; background: rgba(15, 23, 42, 0.6); }}
-        th, td {{ border: 1px solid #334155; padding: 8px 12px; text-align: left; }}
-        th {{ background-color: #1e293b; color: #38bdf8; }}
-        code {{ background: #0f172a; color: #f43f5e; padding: 2px 6px; border-radius: 4px; font-family: monospace; }}
-        pre {{ background: #0f172a; padding: 12px; border-radius: 8px; overflow-x: auto; border: 1px solid #334155; }}
+        th, td {{ border: 1px solid var(--border-color); padding: 8px 12px; text-align: left; }}
+        th {{ background-color: rgba(30, 41, 59, 0.8); color: var(--accent-border); }}
+        code {{ background: rgba(0,0,0,0.3); color: #f43f5e; padding: 2px 6px; border-radius: 4px; font-family: monospace; }}
+        pre {{ background: rgba(0,0,0,0.4); padding: 12px; border-radius: 8px; overflow-x: auto; border: 1px solid var(--border-color); }}
     </style>
 
-    <!-- MathJax 3 Offline Configuration loaded dynamically from assets/mathjax_config.json -->
     <script>
         window.MathJax = {{
             tex: {tex_json},
@@ -179,8 +187,6 @@ def build_mathjax_html_template() -> str:
             }}
         }};
     </script>
-
-    <!-- Load Local Self-Contained MathJax 3 SVG Bundle for Vector Typesetting -->
     <script src="tex-svg.js"></script>
 
     <script>
@@ -217,15 +223,14 @@ def build_mathjax_html_template() -> str:
         </div>
     </div>
 </body>
-</html>
-"""
+</html>"""
 
-MATHJAX_HTML_TEMPLATE = build_mathjax_html_template()
 
 class ReviewWidget(QWidget):
-    """Review screen widget with QWebEngineView and FSRS rating controls."""
+    """Review screen widget with QWebEngineView, FSRS rating controls, and Undo functionality."""
     
     rated = Signal(Rating)
+    undo_requested = Signal()
     back_to_graph_requested = Signal()
     start_session_requested = Signal()
 
@@ -236,8 +241,10 @@ class ReviewWidget(QWidget):
         self.seq_info: Optional[Dict] = None
         self.is_showing_back = False
         self.is_page_loaded = False
+        self.can_undo = False
 
         self._setup_ui()
+        ThemeManager.get_instance().theme_changed.connect(self.on_theme_changed)
 
     def _setup_ui(self):
         main_layout = QVBoxLayout(self)
@@ -251,8 +258,14 @@ class ReviewWidget(QWidget):
         self.btn_back.clicked.connect(self.back_to_graph_requested.emit)
         top_bar.addWidget(self.btn_back)
 
+        self.btn_undo = QPushButton("↩ Undo Last Rating (Ctrl+Z)")
+        self.btn_undo.setCursor(Qt.PointingHandCursor)
+        self.btn_undo.setEnabled(False)
+        self.btn_undo.clicked.connect(self._on_undo_clicked)
+        top_bar.addWidget(self.btn_undo)
+
         self.lbl_card_info = QLabel("Review Session")
-        self.lbl_card_info.setStyleSheet("font-size: 16px; font-weight: bold; color: #94a3b8;")
+        self.lbl_card_info.setStyleSheet("font-size: 15px; font-weight: bold; color: #94a3b8;")
         top_bar.addSpacing(20)
         top_bar.addWidget(self.lbl_card_info)
         top_bar.addStretch()
@@ -261,7 +274,7 @@ class ReviewWidget(QWidget):
 
         # Embedded QWebEngineView
         self.browser = QWebEngineView()
-        self.browser.setHtml(build_mathjax_html_template(), QUrl.fromLocalFile(ASSETS_DIR + "/"))
+        self.reload_html_template()
         self.browser.loadFinished.connect(self._on_page_loaded)
 
         main_layout.addWidget(self.browser, stretch=1)
@@ -277,24 +290,24 @@ class ReviewWidget(QWidget):
         self.btn_show_answer = QPushButton("Show Answer (Space)")
         self.btn_show_answer.setObjectName("BtnShowAnswer")
         self.btn_show_answer.setCursor(Qt.PointingHandCursor)
-        self.btn_show_answer.setFixedHeight(46)
+        self.btn_show_answer.setFixedHeight(48)
         self.btn_show_answer.clicked.connect(self.show_answer)
         control_layout.addWidget(self.btn_show_answer)
 
         # FSRS Rating Buttons
         self.rating_buttons = {}
         ratings_data = [
-            (Rating.Again, "Again (1)", "#ef4444", "BtnAgain"),
-            (Rating.Hard, "Hard (2)", "#f59e0b", "BtnHard"),
-            (Rating.Good, "Good (3)", "#10b981", "BtnGood"),
-            (Rating.Easy, "Easy (4)", "#3b82f6", "BtnEasy"),
+            (Rating.Again, "Again (1)", "BtnAgain"),
+            (Rating.Hard, "Hard (2)", "BtnHard"),
+            (Rating.Good, "Good (3)", "BtnGood"),
+            (Rating.Easy, "Easy (4)", "BtnEasy"),
         ]
 
-        for rating, label_text, color, obj_name in ratings_data:
+        for rating, label_text, obj_name in ratings_data:
             btn = QPushButton()
             btn.setObjectName(obj_name)
             btn.setCursor(Qt.PointingHandCursor)
-            btn.setFixedHeight(46)
+            btn.setFixedHeight(48)
             btn.clicked.connect(lambda checked=False, r=rating: self.submit_rating(r))
             self.rating_buttons[rating] = (btn, label_text)
             control_layout.addWidget(btn)
@@ -303,11 +316,33 @@ class ReviewWidget(QWidget):
         self._setup_shortcuts()
         self._set_empty_state()
 
+    def reload_html_template(self):
+        assets_url = QUrl.fromLocalFile(ASSETS_DIR.replace("\\", "/") + "/")
+        self.browser.setHtml(build_mathjax_html_template(), assets_url)
+
+    def on_theme_changed(self, theme_id: str):
+        self.reload_html_template()
+
+    def set_undo_available(self, available: bool):
+        self.can_undo = available
+        self.btn_undo.setEnabled(available)
+
+    def _on_undo_clicked(self):
+        if self.can_undo:
+            self.undo_requested.emit()
+
     def _setup_shortcuts(self):
-        """Setup keyboard shortcuts for Space (Show Answer / Rate Good) and 1,2,3,4 rating keys."""
         sc_space = QShortcut(QKeySequence(Qt.Key_Space), self)
         sc_space.setContext(Qt.WindowShortcut)
         sc_space.activated.connect(self._on_space_pressed)
+
+        sc_return = QShortcut(QKeySequence(Qt.Key_Return), self)
+        sc_return.setContext(Qt.WindowShortcut)
+        sc_return.activated.connect(self._on_space_pressed)
+
+        sc_undo = QShortcut(QKeySequence("Ctrl+Z"), self)
+        sc_undo.setContext(Qt.WindowShortcut)
+        sc_undo.activated.connect(self._on_undo_clicked)
 
         sc_1 = QShortcut(QKeySequence(Qt.Key_1), self)
         sc_1.setContext(Qt.WindowShortcut)
@@ -337,7 +372,6 @@ class ReviewWidget(QWidget):
         if self.current_obj and self.is_showing_back:
             self.submit_rating(rating)
 
-
     def _on_page_loaded(self, ok: bool):
         self.is_page_loaded = True
         self._render_current_state()
@@ -357,7 +391,6 @@ class ReviewWidget(QWidget):
         self.seq_info = seq_info
         self.is_showing_back = False
         
-        # Calculate interval forecasts
         forecasts = self.scheduler_manager.get_interval_forecasts(review_obj)
         for rating, (btn, label_text) in self.rating_buttons.items():
             forecast_str = forecasts.get(rating, "")
@@ -449,24 +482,3 @@ class ReviewWidget(QWidget):
         self.btn_show_answer.setVisible(False)
         for btn, _ in self.rating_buttons.values():
             btn.setVisible(True)
-
-    def keyPressEvent(self, event):
-        if not self.current_obj:
-            super().keyPressEvent(event)
-            return
-        if event.key() == Qt.Key_Space:
-            if not self.is_showing_back:
-                self.show_answer()
-        elif self.is_showing_back:
-            if event.key() == Qt.Key_1:
-                self.submit_rating(Rating.Again)
-            elif event.key() == Qt.Key_2:
-                self.submit_rating(Rating.Hard)
-            elif event.key() == Qt.Key_3:
-                self.submit_rating(Rating.Good)
-            elif event.key() == Qt.Key_4:
-                self.submit_rating(Rating.Easy)
-            else:
-                super().keyPressEvent(event)
-        else:
-            super().keyPressEvent(event)

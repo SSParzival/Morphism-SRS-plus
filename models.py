@@ -1,6 +1,7 @@
 import time
 import random
 import uuid
+import re
 from abc import ABC, abstractmethod
 from typing import List, Dict, Any, Optional
 from datetime import datetime, timezone
@@ -18,7 +19,6 @@ def to_hex_id(val: Any) -> str:
         return f"0x{val}"
 
 class ReviewLogRecord:
-
     """Record of a single card review event for FSRS optimization."""
     def __init__(self, card_id: int, rating: int, review_time: str, 
                  elapsed_days: int = 0, scheduled_days: int = 0, 
@@ -80,7 +80,6 @@ class ReviewObject(ABC):
             return f"0x{self.item_id}"
 
     @abstractmethod
-
     def get_title(self) -> str:
         """Short title or question header."""
         pass
@@ -126,7 +125,6 @@ class ReviewObject(ABC):
         return d
 
 
-
 class Flashcard(ReviewObject):
     """Standard Flashcard with LaTeX MathJax support."""
     def __init__(self, title: str, front: str, back: str, item_id: Optional[Any] = None):
@@ -150,6 +148,45 @@ class Flashcard(ReviewObject):
             "title": self.title,
             "front": self.front,
             "back": self.back
+        })
+        return d
+
+
+class ClozeCard(ReviewObject):
+    """Cloze deletion card for definitions and formulas using {{c1::answer}} or {{c1::answer::hint}}."""
+    def __init__(self, title: str, text: str, item_id: Optional[Any] = None):
+        super().__init__(item_id)
+        self.title = title
+        self.text = text
+
+    def get_title(self) -> str:
+        return self.title
+
+    def get_html_front(self) -> str:
+        def repl(match):
+            parts = match.group(1).split("::")
+            if len(parts) >= 2:
+                hint = parts[1].strip()
+                return f"<span class='cloze-bracket'>[{hint}]</span>"
+            return "<span class='cloze-bracket'>[...]</span>"
+
+        front_text = re.sub(r"\{\{c\d+::(.*?)\}\}", repl, self.text)
+        return f"<div class='card-title'>{self.title}</div><div class='card-body'>{front_text}</div>"
+
+    def get_html_back(self) -> str:
+        def repl(match):
+            parts = match.group(1).split("::")
+            answer = parts[0]
+            return f"<span class='cloze-revealed'>{answer}</span>"
+
+        back_text = re.sub(r"\{\{c\d+::(.*?)\}\}", repl, self.text)
+        return f"<div class='card-body'>{back_text}</div>"
+
+    def to_dict(self, include_scheduling: bool = True) -> Dict[str, Any]:
+        d = super().to_dict(include_scheduling=include_scheduling)
+        d.update({
+            "title": self.title,
+            "text": self.text
         })
         return d
 
@@ -213,9 +250,30 @@ class NoteNode:
     def is_serial_sequence_full(self) -> bool:
         return self.note_type == "serial_sequence"
 
-
     def add_card(self, card: ReviewObject):
         self.cards.append(card)
+
+    def matches_query(self, query: str) -> bool:
+        """Check if note matches search query across title, tags, and card content."""
+        q = query.lower().strip()
+        if not q:
+            return True
+        if q in self.title.lower():
+            return True
+        if any(q in t.lower() for t in self.tags):
+            return True
+        for c in self.cards:
+            if hasattr(c, 'title') and q in c.title.lower():
+                return True
+            if hasattr(c, 'front') and q in c.front.lower():
+                return True
+            if hasattr(c, 'back') and q in c.back.lower():
+                return True
+            if hasattr(c, 'premise') and q in c.premise.lower():
+                return True
+            if hasattr(c, 'text') and q in c.text.lower():
+                return True
+        return False
 
     def get_joint_retention(self, scheduler_manager=None) -> float:
         """
@@ -248,7 +306,6 @@ class NoteNode:
             return joint_r <= self.desired_retention
 
         return False
-
 
     def due_count(self, scheduler_manager=None) -> int:
         if self.is_due(scheduler_manager):
@@ -296,6 +353,17 @@ class Course:
         self.edges: List[NoteEdge] = edges or []
         self.folder_path: str = folder_path  # Relative folder path e.g. "Math/Analysis"
 
+    def get_note_by_id(self, note_id: str) -> Optional[NoteNode]:
+        """Find note by ID."""
+        for n in self.notes:
+            if n.note_id == note_id:
+                return n
+        return None
+
+    def find_notes(self, query: str) -> List[NoteNode]:
+        """Search notes in the course by query string."""
+        return [n for n in self.notes if n.matches_query(query)]
+
     def to_dict(self, include_scheduling: bool = True) -> Dict[str, Any]:
         return {
             "name": self.name,
@@ -303,4 +371,3 @@ class Course:
             "notes": [n.to_dict(include_scheduling=include_scheduling) for n in self.notes],
             "edges": [e.to_dict() for e in self.edges]
         }
-

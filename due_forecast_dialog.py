@@ -1,10 +1,13 @@
 from datetime import datetime, timezone, timedelta, date
+import os
 from PySide6.QtWidgets import (QDialog, QVBoxLayout, QHBoxLayout, QLabel, 
                                QPushButton, QTableWidget, QTableWidgetItem, 
                                QHeaderView, QCalendarWidget, QGroupBox, QSplitter)
 from PySide6.QtCore import Qt, QDate
+from PySide6.QtGui import QIcon
 from models import Course
 from scheduler_manager import SchedulerManager
+from app_paths import ICON_PNG, ICON_ICO
 
 class DueForecastDialog(QDialog):
     """Dialog for viewing due notes and cards forecasted across future dates."""
@@ -14,6 +17,10 @@ class DueForecastDialog(QDialog):
         self.course = course
         self.scheduler_manager = scheduler_manager
         self.selected_target_dt = datetime.now(timezone.utc)
+
+        icon_file = ICON_PNG if os.path.exists(ICON_PNG) else (ICON_ICO if os.path.exists(ICON_ICO) else None)
+        if icon_file:
+            self.setWindowIcon(QIcon(icon_file))
 
         self.setWindowTitle(f"📅 Due Forecast - Course: {course.name}")
         self.resize(900, 600)

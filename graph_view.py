@@ -4,9 +4,9 @@ from PySide6.QtWidgets import (QGraphicsView, QGraphicsScene, QGraphicsItem,
                                QGraphicsRectItem, QGraphicsPathItem, QMenu)
 from PySide6.QtCore import Qt, Signal, QObject, QPointF, QRectF
 from PySide6.QtGui import (QBrush, QColor, QPen, QPainterPath, QPolygonF, 
-                           QLinearGradient, QFont, QPainter)
+                            QLinearGradient, QFont, QPainter)
 from models import NoteNode, NoteEdge
-from styles import DARK_THEME_QSS
+from theme_manager import ThemeManager
 
 class GraphSignals(QObject):
     """Signals for graph interactions and context menu actions."""
@@ -20,16 +20,14 @@ class GraphSignals(QObject):
     note_reschedule_requested = Signal(object)   # NoteNode
     note_force_review_requested = Signal(object) # NoteNode
     note_delete_requested = Signal(object)      # NoteNode
-
-
-
     prereq_edge_created = Signal(str, str)      # source_id, target_id
+
 
 class NoteNodeItem(QGraphicsRectItem):
     """Custom graphical item for Note nodes on the canvas."""
     
-    WIDTH = 180
-    HEIGHT = 80
+    WIDTH = 190
+    HEIGHT = 85
     CORNER_RADIUS = 12
 
     def __init__(self, note: NoteNode, signals: GraphSignals):
@@ -37,6 +35,7 @@ class NoteNodeItem(QGraphicsRectItem):
         self.note = note
         self.signals = signals
         self.edges: List['NoteEdgeItem'] = []
+        self.search_opacity: float = 1.0
 
         self.setPos(note.x, note.y)
         self.setFlag(QGraphicsItem.ItemIsMovable, True)
@@ -51,6 +50,8 @@ class NoteNodeItem(QGraphicsRectItem):
 
     def update_status_colors(self, scheduler_manager=None):
         """Update node gradient & border based on due cards count and joint retention."""
+        gc = ThemeManager.get_instance().get_graph_colors()
+
         if self.note.is_serial_sequence():
             joint_r = self.note.get_joint_retention(scheduler_manager)
             ret_percent = int(joint_r * 100)
@@ -58,33 +59,33 @@ class NoteNodeItem(QGraphicsRectItem):
             total = self.note.total_count()
 
             if is_due:
-                bg_start = QColor("#991b1b")
-                bg_end = QColor("#450a0a")
-                border_color = QColor("#fca5a5")
+                bg_start = QColor(gc.get("serial_due_bg_start", "#991b1b"))
+                bg_end = QColor(gc.get("serial_due_bg_end", "#450a0a"))
+                border_color = QColor(gc.get("serial_due_border", "#fca5a5"))
                 badge_text = f"🔥 Serial {total}s | P={ret_percent}%"
             else:
-                bg_start = QColor("#1e1b4b")
-                bg_end = QColor("#0f172a")
-                border_color = QColor("#818cf8")
+                bg_start = QColor(gc.get("serial_bg_start", "#1e1b4b"))
+                bg_end = QColor(gc.get("serial_bg_end", "#0f172a"))
+                border_color = QColor(gc.get("serial_border", "#818cf8"))
                 badge_text = f"🔗 Serial {total}s | P={ret_percent}%"
         else:
             due_count = self.note.due_count(scheduler_manager)
             total = self.note.total_count()
 
             if self.note.is_due(scheduler_manager):
-                bg_start = QColor("#ef4444")
-                bg_end = QColor("#991b1b")
-                border_color = QColor("#fca5a5")
+                bg_start = QColor(gc.get("due_bg_start", "#ef4444"))
+                bg_end = QColor(gc.get("due_bg_end", "#991b1b"))
+                border_color = QColor(gc.get("due_border", "#fca5a5"))
                 badge_text = f"🔥 {due_count} Due"
             elif total > 0:
-                bg_start = QColor("#1e293b")
-                bg_end = QColor("#0f172a")
-                border_color = QColor("#10b981")
+                bg_start = QColor(gc.get("node_bg_start", "#1e293b"))
+                bg_end = QColor(gc.get("node_bg_end", "#0f172a"))
+                border_color = QColor(gc.get("node_border", "#10b981"))
                 badge_text = f"✓ {total} Cards"
             else:
-                bg_start = QColor("#334155")
-                bg_end = QColor("#1e293b")
-                border_color = QColor("#64748b")
+                bg_start = QColor(gc.get("node_bg_start", "#334155"))
+                bg_end = QColor(gc.get("node_bg_end", "#1e293b"))
+                border_color = QColor(gc.get("node_muted", "#64748b"))
                 badge_text = "0 Cards"
 
         self.border_pen = QPen(border_color, 2)
@@ -109,12 +110,16 @@ class NoteNodeItem(QGraphicsRectItem):
 
     def paint(self, painter: QPainter, option, widget=None):
         painter.setRenderHint(QPainter.Antialiasing)
+        painter.setOpacity(self.search_opacity)
+
+        gc = ThemeManager.get_instance().get_graph_colors()
 
         path = QPainterPath()
         path.addRoundedRect(0, 0, self.WIDTH, self.HEIGHT, self.CORNER_RADIUS, self.CORNER_RADIUS)
 
         if self.isSelected():
-            painter.setPen(QPen(QColor("#38bdf8"), 3, Qt.DashLine))
+            sel_color = QColor(gc.get("selection_border", "#38bdf8"))
+            painter.setPen(QPen(sel_color, 3, Qt.DashLine))
         else:
             painter.setPen(self.border_pen)
 
@@ -122,18 +127,23 @@ class NoteNodeItem(QGraphicsRectItem):
         painter.drawPath(path)
 
         # Title Text
-        painter.setPen(QColor("#f8fafc"))
-        font_title = QFont("Segoe UI", 11, QFont.Bold)
+        text_color = QColor(gc.get("node_text", "#f8fafc"))
+        painter.setPen(text_color)
+        font_title = QFont()
+        font_title.setPointSize(11)
+        font_title.setBold(True)
         painter.setFont(font_title)
         rect_title = QRectF(12, 10, self.WIDTH - 24, 30)
         title_text = painter.fontMetrics().elidedText(self.note.title, Qt.ElideRight, int(rect_title.width()))
         painter.drawText(rect_title, Qt.AlignLeft | Qt.AlignVCenter, title_text)
 
         # Status Badge Pill
-        font_badge = QFont("Segoe UI", 9)
+        muted_color = QColor(gc.get("node_muted", "#94a3b8"))
+        painter.setPen(muted_color)
+        font_badge = QFont()
+        font_badge.setPointSize(9)
         painter.setFont(font_badge)
-        painter.setPen(QColor("#94a3b8"))
-        rect_badge = QRectF(12, 45, self.WIDTH - 24, 24)
+        rect_badge = QRectF(12, 48, self.WIDTH - 24, 24)
         painter.drawText(rect_badge, Qt.AlignLeft | Qt.AlignVCenter, self.badge_text)
 
     def mousePressEvent(self, event):
@@ -145,18 +155,17 @@ class NoteNodeItem(QGraphicsRectItem):
         super().mouseDoubleClickEvent(event)
         self.signals.note_selected_for_review.emit(self.note)
 
-
     def contextMenuEvent(self, event):
         """Right-click context menu: Edit, Info, Add prerequisites, Delete."""
         menu = QMenu()
-        menu.setStyleSheet(DARK_THEME_QSS)
+        menu.setStyleSheet(ThemeManager.get_instance().generate_qss())
 
         act_edit = menu.addAction("✏️ Edit Note")
         act_info = menu.addAction("📈 Info / Retrievability Plot")
         act_prereq = menu.addAction("🔗 Add Prerequisites")
         act_delete_prereqs = menu.addAction("✂️ Delete Prerequisites")
         act_reschedule = menu.addAction("🔄 Reschedule Note FSRS State")
-        act_force_review = menu.addAction("▶️ Review All Cards / Steps (Force Review)")
+        act_force_review = menu.addAction("▶️ Review All Cards (Force Review)")
         menu.addSeparator()
         act_delete = menu.addAction("🗑 Delete Note")
 
@@ -196,9 +205,6 @@ class NoteNodeItem(QGraphicsRectItem):
         return super().itemChange(change, value)
 
 
-
-
-
 class NoteEdgeItem(QGraphicsPathItem):
     """Directed connection arrow between two Note nodes."""
 
@@ -211,10 +217,16 @@ class NoteEdgeItem(QGraphicsPathItem):
         self.source_item.add_edge(self)
         self.target_item.add_edge(self)
 
-        self.setPen(QPen(QColor("#818cf8"), 2.5, Qt.SolidLine, Qt.RoundCap, Qt.RoundJoin))
-        self.setBrush(QBrush(QColor("#818cf8")))
+        self.update_theme_colors()
         self.setZValue(5)
         self.update_position()
+
+    def update_theme_colors(self):
+        gc = ThemeManager.get_instance().get_graph_colors()
+        edge_color = QColor(gc.get("edge_color", "#818cf8"))
+        self.setPen(QPen(edge_color, 2.5, Qt.SolidLine, Qt.RoundCap, Qt.RoundJoin))
+        self.setBrush(QBrush(edge_color))
+        self.update()
 
     @staticmethod
     def _get_border_intersection(rect_pos: QPointF, width: float, height: float, target_point: QPointF) -> QPointF:
@@ -263,7 +275,7 @@ class NoteEdgeItem(QGraphicsPathItem):
 
 
 class GraphWidget(QGraphicsView):
-    """Infinite canvas graphics view supporting drag, zoom, context menus, and prerequisite linking."""
+    """Infinite canvas graphics view supporting drag, zoom, search highlight, and prerequisite linking."""
 
     GRID_X = 300
     GRID_Y = 130
@@ -286,10 +298,13 @@ class GraphWidget(QGraphicsView):
 
         self._setup_canvas()
         self.signals.note_add_prereq_requested.connect(self.start_prereq_mode)
+        ThemeManager.get_instance().theme_changed.connect(self.on_theme_changed)
+
         self.load_graph(notes, edges)
 
     def set_snapping_enabled(self, enabled: bool):
         self.is_snapping_enabled = enabled
+        self.viewport().update()
 
     def _adjust_scene_rect(self):
         """Ensure sceneRect dynamically encompasses all nodes plus a generous padding margin."""
@@ -308,8 +323,37 @@ class GraphWidget(QGraphicsView):
         self.setViewportUpdateMode(QGraphicsView.FullViewportUpdate)
         self.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.setStyleSheet("background-color: #0b0f19; border: none;")
         self.setMouseTracking(True)
+        self._apply_canvas_theme()
+
+    def _apply_canvas_theme(self):
+        gc = ThemeManager.get_instance().get_graph_colors()
+        bg_color = gc.get("canvas_bg", "#0b0f19")
+        self.setStyleSheet(f"background-color: {bg_color}; border: none;")
+        self.setBackgroundBrush(QBrush(QColor(bg_color)))
+
+    def on_theme_changed(self, theme_id: str):
+        self._apply_canvas_theme()
+        for item in self.node_items.values():
+            item.update_status_colors(self.scheduler_manager)
+        for edge in self.edge_items:
+            edge.update_theme_colors()
+        self.viewport().update()
+
+    def drawBackground(self, painter: QPainter, rect: QRectF):
+        super().drawBackground(painter, rect)
+        # Draw subtle grid dots when snapping is enabled
+        if self.is_snapping_enabled:
+            gc = ThemeManager.get_instance().get_graph_colors()
+            dot_color = QColor(gc.get("grid_color", "#334155"))
+            painter.setPen(QPen(dot_color, 2))
+            
+            left = int(rect.left()) - (int(rect.left()) % self.GRID_X)
+            top = int(rect.top()) - (int(rect.top()) % self.GRID_Y)
+            
+            for x in range(left, int(rect.right()), self.GRID_X):
+                for y in range(top, int(rect.bottom()), self.GRID_Y):
+                    painter.drawPoint(x, y)
 
     def load_graph(self, notes: List[NoteNode], edges: List[NoteEdge]):
         """Clear and load nodes and edges into scene."""
@@ -336,11 +380,62 @@ class GraphWidget(QGraphicsView):
 
         self._adjust_scene_rect()
 
-
     def refresh_nodes(self):
         """Update node status appearance after review."""
         for item in self.node_items.values():
             item.update_status_colors(self.scheduler_manager)
+
+    def highlight_search(self, query: str) -> int:
+        """Filter and highlight matching nodes on canvas. Returns match count."""
+        q = query.strip().lower()
+        if not q:
+            self.clear_search_highlight()
+            return len(self.node_items)
+
+        match_count = 0
+        first_match_item = None
+        for item in self.node_items.values():
+            if item.note.matches_query(q):
+                item.search_opacity = 1.0
+                match_count += 1
+                if first_match_item is None:
+                    first_match_item = item
+            else:
+                item.search_opacity = 0.22
+            item.update()
+
+        if first_match_item:
+            self.centerOn(first_match_item)
+
+        return match_count
+
+    def clear_search_highlight(self):
+        """Reset opacity of all nodes to normal."""
+        for item in self.node_items.values():
+            item.search_opacity = 1.0
+            item.update()
+
+    def center_on_node(self, note_id: str):
+        """Center canvas view smoothly on a specific node."""
+        item = self.node_items.get(note_id)
+        if item:
+            self.centerOn(item)
+            item.setSelected(True)
+
+    def zoom_in(self):
+        self.scale(1.2, 1.2)
+
+    def zoom_out(self):
+        self.scale(1 / 1.2, 1 / 1.2)
+
+    def zoom_reset(self):
+        self.resetTransform()
+
+    def fit_all(self):
+        """Fit all nodes neatly in the viewport."""
+        rect = self.scene.itemsBoundingRect()
+        if not rect.isEmpty():
+            self.fitInView(rect.adjusted(-60, -60, 60, 60), Qt.KeepAspectRatio)
 
     def start_prereq_mode(self, target_note: NoteNode):
         """Enter interactive prerequisite linking mode for a target node."""
@@ -373,7 +468,6 @@ class GraphWidget(QGraphicsView):
                 path.moveTo(cursor_scene_pos)
                 path.lineTo(tgt_center)
 
-                # Draw arrowhead pointing to target_center
                 dx = tgt_center.x() - cursor_scene_pos.x()
                 dy = tgt_center.y() - cursor_scene_pos.y()
                 angle = math.atan2(dy, dx)
@@ -414,7 +508,6 @@ class GraphWidget(QGraphicsView):
 
         super().mousePressEvent(event)
 
-
     def wheelEvent(self, event):
         zoom_factor = 1.15
         if event.angleDelta().y() > 0:
@@ -424,14 +517,13 @@ class GraphWidget(QGraphicsView):
 
     def auto_arrange(self):
         """
-        Topological Hierarchy Tree Layout:
+        Topological Hierarchy Tree Layout (Cycle-Safe):
         Arranges prerequisite root nodes on the left and dependent nodes in successive columns to the right.
         """
         nodes = list(self.node_items.values())
         if not nodes:
             return
 
-        # Build adjacency & in-degree maps
         in_degree: Dict[str, int] = {n.note.note_id: 0 for n in nodes}
         adj: Dict[str, List[str]] = {n.note.note_id: [] for n in nodes}
 
@@ -442,7 +534,6 @@ class GraphWidget(QGraphicsView):
                 adj[src_id].append(tgt_id)
                 in_degree[tgt_id] += 1
 
-        # Calculate depth levels (Topological Layering)
         level: Dict[str, int] = {n.note.note_id: 0 for n in nodes}
         queue = [nid for nid, deg in in_degree.items() if deg == 0]
 
@@ -452,19 +543,23 @@ class GraphWidget(QGraphicsView):
             for neighbor in adj[curr]:
                 level[neighbor] = max(level[neighbor], level[curr] + 1)
                 in_degree[neighbor] -= 1
-                if in_degree[neighbor] == 0 or neighbor not in visited:
+                if in_degree[neighbor] <= 0 and neighbor not in visited:
                     visited.add(neighbor)
                     queue.append(neighbor)
 
-        # Group nodes by depth level
+        # Handle any unplaced cycle nodes gracefully
+        for n in nodes:
+            nid = n.note.note_id
+            if nid not in visited:
+                level[nid] = max((level[x] for x in visited), default=0) + 1
+
         levels_map: Dict[int, List[NoteNodeItem]] = {}
         for node_item in nodes:
             lvl = level[node_item.note.note_id]
             levels_map.setdefault(lvl, []).append(node_item)
 
-        # Position nodes in clean columns
-        x_spacing = 300
-        y_spacing = 130
+        x_spacing = 310
+        y_spacing = 135
 
         for lvl in sorted(levels_map.keys()):
             column_nodes = levels_map[lvl]
@@ -480,4 +575,3 @@ class GraphWidget(QGraphicsView):
             edge.update_position()
 
         self._adjust_scene_rect()
-

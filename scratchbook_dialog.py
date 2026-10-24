@@ -6,31 +6,32 @@ from typing import List, Optional
 
 from PySide6.QtWidgets import (QDialog, QVBoxLayout, QHBoxLayout, QPushButton,
                                QLabel, QLineEdit, QTextEdit, QListWidget, QListWidgetItem,
-                               QGroupBox, QMessageBox, QWidget, QSplitter, QInputDialog)
+                               QGroupBox, QMessageBox, QWidget, QSplitter, QInputDialog, QFileDialog)
 from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6.QtCore import Qt, QUrl, QTimer
-from PySide6.QtGui import QFont, QKeySequence, QShortcut
+from PySide6.QtGui import QFont, QKeySequence, QShortcut, QIcon
 
 from node_editor_dialog import (FlowLayout, load_editor_buttons_config, 
                                 load_mathjax_config_json, prompt_insert_image, prompt_insert_table)
-
-SCRATCHBOOK_DIR = "scratchbook"
-ASSETS_DIR = os.path.abspath("assets").replace("\\", "/")
-
+from app_paths import SCRATCHBOOK_DIR, ASSETS_DIR, ICON_PNG, ICON_ICO
+from theme_manager import ThemeManager
 
 def build_scratchbook_html_template(content: str = "") -> str:
-    """Build MathJax HTML page template for scratchbook live preview matching note editor."""
+    """Build MathJax HTML page template for scratchbook live preview matching active theme."""
     mathjax_cfg = load_mathjax_config_json()
     cfg_json = json.dumps(mathjax_cfg)
+    css_vars = ThemeManager.get_instance().get_web_css_variables()
+
     return f"""<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <style>
+        {css_vars}
         body {{
-            background-color: #0b0f19;
-            color: #f8fafc;
-            font-family: -apple-system, "BlinkMacSystemFont", "SF Pro Text", "Helvetica Neue", "Segoe UI", Roboto, "Ubuntu", "DejaVu Sans", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: -apple-system, BlinkMacSystemFont, "Inter", "Ubuntu", "DejaVu Sans", sans-serif;
             padding: 16px;
             margin: 0;
             line-height: 1.6;
@@ -46,19 +47,18 @@ def build_scratchbook_html_template(content: str = "") -> str:
             background: rgba(15, 23, 42, 0.6);
         }}
         th, td {{
-            border: 1px solid #334155;
+            border: 1px solid var(--border-color);
             padding: 8px 12px;
             text-align: left;
         }}
         th {{
-            background-color: #1e293b;
-            color: #38bdf8;
+            background-color: rgba(30, 41, 59, 0.8);
+            color: var(--accent-border);
         }}
-        code {{ background: #0f172a; color: #f43f5e; padding: 2px 6px; border-radius: 4px; font-family: monospace; }}
-        pre {{ background: #0f172a; padding: 12px; border-radius: 8px; overflow-x: auto; border: 1px solid #334155; }}
+        code {{ background: rgba(0,0,0,0.3); color: #f43f5e; padding: 2px 6px; border-radius: 4px; font-family: monospace; }}
+        pre {{ background: rgba(0,0,0,0.4); padding: 12px; border-radius: 8px; overflow-x: auto; border: 1px solid var(--border-color); }}
     </style>
 
-    <!-- MathJax 3 Offline Configuration matching Note Editor -->
     <script>
         window.MathJax = {{
             tex: {cfg_json},
@@ -70,8 +70,6 @@ def build_scratchbook_html_template(content: str = "") -> str:
             }}
         }};
     </script>
-
-    <!-- Load Local Self-Contained MathJax 3 SVG Bundle for Vector Typesetting -->
     <script src="tex-svg.js"></script>
 
     <script>
@@ -92,125 +90,126 @@ def build_scratchbook_html_template(content: str = "") -> str:
 </body>
 </html>"""
 
-
-
 def sanitize_page_filename(name: str) -> str:
     """Sanitize page name for OS filename safety."""
     return "".join(c for c in name if c.isalnum() or c in (' ', '_', '-')).strip() or "Untitled"
 
 
 class ScratchbookDialog(QDialog):
-    """Standalone resizable & maximizable Scratchbook Window with multi-page .txt storage & live MathJax preview."""
+    """
+    Scratchbook scratchpad dialog for scratch math derivations, theorems, 
+    scratch proofs, and live formula rendering with auto-save.
+    """
 
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.current_page_name: Optional[str] = None
-        self.is_page_loaded = False
-
-        self.setWindowTitle("✏️ Scratchbook")
-        self.setWindowFlags(self.windowFlags() | Qt.WindowMaximizeButtonHint | Qt.WindowMinimizeButtonHint)
-        self.setWindowModality(Qt.NonModal)
-        self.setMinimumSize(840, 560)
-        self.resize(1120, 760)
-
-
         os.makedirs(SCRATCHBOOK_DIR, exist_ok=True)
+
+        self.current_page_name: Optional[str] = None
+        self.is_page_loaded: bool = False
+
+        icon_file = ICON_PNG if os.path.exists(ICON_PNG) else (ICON_ICO if os.path.exists(ICON_ICO) else None)
+        if icon_file:
+            self.setWindowIcon(QIcon(icon_file))
+
+        self.setWindowTitle("✏️ Scratchbook — Mathematics & Proof Scratchpad")
+        self.setWindowFlags(self.windowFlags() | Qt.WindowMaximizeButtonHint | Qt.WindowMinimizeButtonHint)
+        self.setMinimumSize(900, 600)
+        self.resize(1160, 780)
+
+        # Debounce timer for live rendering
+        self.preview_timer = QTimer(self)
+        self.preview_timer.setSingleShot(True)
+        self.preview_timer.setInterval(250)
+        self.preview_timer.timeout.connect(self._sync_current_page_to_preview_and_disk)
 
         self._setup_ui()
         self._load_pages_list()
+        ThemeManager.get_instance().theme_changed.connect(self.on_theme_changed)
 
-        # Preview update timer for smooth debounced typing
-        self.preview_timer = QTimer(self)
-        self.preview_timer.setSingleShot(True)
-        self.preview_timer.setInterval(300)
-        self.preview_timer.timeout.connect(self._sync_current_page_to_preview_and_disk)
+    def on_theme_changed(self, theme_id: str):
+        assets_url = QUrl.fromLocalFile(ASSETS_DIR.replace("\\", "/") + "/")
+        self.browser_preview.setHtml(build_scratchbook_html_template(""), assets_url)
 
     def _setup_ui(self):
-        main_layout = QHBoxLayout(self)
-        main_layout.setContentsMargins(10, 10, 10, 10)
+        main_layout = QVBoxLayout(self)
+        main_layout.setContentsMargins(12, 12, 12, 12)
+        main_layout.setSpacing(10)
 
         splitter = QSplitter(Qt.Horizontal)
 
-        # ----------------------------------------------------------------------
-        # Left Sidebar: Page List & Page Management Buttons
-        # ----------------------------------------------------------------------
-        sidebar_widget = QWidget()
-        sidebar_layout = QVBoxLayout(sidebar_widget)
-        sidebar_layout.setContentsMargins(0, 0, 6, 0)
-        sidebar_layout.setSpacing(8)
-
-        lbl_pages = QLabel("📖 Scratch Pages")
-        lbl_pages.setStyleSheet("font-size: 15px; font-weight: bold; color: #38bdf8;")
-        sidebar_layout.addWidget(lbl_pages)
+        # 1. Left Sidebar: Page List & Page Management
+        sidebar_panel = QGroupBox("Scratch Pages")
+        sidebar_layout = QVBoxLayout(sidebar_panel)
 
         self.list_pages = QListWidget()
-        self.list_pages.setStyleSheet(
-            "QListWidget { background-color: #0f172a; border: 1px solid #334155; border-radius: 8px; font-size: 13px; padding: 4px; }"
-            "QListWidget::item { padding: 8px; border-radius: 4px; }"
-            "QListWidget::item:selected { background-color: #0284c7; color: white; font-weight: bold; }"
-        )
         self.list_pages.currentItemChanged.connect(self._on_page_selection_changed)
-        sidebar_layout.addWidget(self.list_pages, stretch=1)
+        sidebar_layout.addWidget(self.list_pages)
 
-        # Sidebar Buttons
-        btn_layout = QHBoxLayout()
-        self.btn_add_page = QPushButton("+ New")
-        self.btn_add_page.setStyleSheet("background-color: #10b981; color: white; font-weight: bold; padding: 6px 10px; border-radius: 6px;")
-        self.btn_add_page.clicked.connect(self._add_new_page)
+        page_actions_layout = QHBoxLayout()
+        btn_new_page = QPushButton("+ New Page")
+        btn_new_page.setStyleSheet("background-color: #6366f1; color: white; font-weight: bold;")
+        btn_new_page.clicked.connect(self._add_new_page)
+        page_actions_layout.addWidget(btn_new_page)
 
-        self.btn_rename_page = QPushButton("✏️ Rename")
-        self.btn_rename_page.setStyleSheet("background-color: #334155; color: #f8fafc; font-weight: bold; padding: 6px 10px; border-radius: 6px;")
-        self.btn_rename_page.clicked.connect(self._rename_current_page)
+        btn_rename_page = QPushButton("✏️ Rename")
+        btn_rename_page.clicked.connect(self._rename_current_page)
+        page_actions_layout.addWidget(btn_rename_page)
 
-        self.btn_delete_page = QPushButton("🗑️ Delete")
-        self.btn_delete_page.setStyleSheet("background-color: #dc2626; color: white; font-weight: bold; padding: 6px 10px; border-radius: 6px;")
-        self.btn_delete_page.clicked.connect(self._delete_current_page)
+        btn_delete_page = QPushButton("🗑 Delete")
+        btn_delete_page.setStyleSheet("background-color: #991b1b; color: #fca5a5;")
+        btn_delete_page.clicked.connect(self._delete_current_page)
+        page_actions_layout.addWidget(btn_delete_page)
 
-        btn_layout.addWidget(self.btn_add_page)
-        btn_layout.addWidget(self.btn_rename_page)
-        btn_layout.addWidget(self.btn_delete_page)
-        sidebar_layout.addLayout(btn_layout)
+        sidebar_layout.addLayout(page_actions_layout)
 
-        splitter.addWidget(sidebar_widget)
+        btn_export = QPushButton("📤 Export Page to File...")
+        btn_export.clicked.connect(self._export_page)
+        sidebar_layout.addWidget(btn_export)
 
-        # ----------------------------------------------------------------------
-        # Right Side: Editor & Live Preview Panel
-        # ----------------------------------------------------------------------
+        splitter.addWidget(sidebar_panel)
+
+        # 2. Right Area: Formatting Toolbar + Split Editor/Preview
         editor_panel = QWidget()
         editor_layout = QVBoxLayout(editor_panel)
-        editor_layout.setContentsMargins(6, 0, 0, 0)
-        editor_layout.setSpacing(8)
+        editor_layout.setContentsMargins(0, 0, 0, 0)
 
-        # Page Header Banner
-        self.lbl_active_page_title = QLabel("Select or Create a Page")
-        self.lbl_active_page_title.setStyleSheet("font-size: 16px; font-weight: bold; color: #f8fafc;")
-        editor_layout.addWidget(self.lbl_active_page_title)
+        # Active page header bar
+        header_bar = QHBoxLayout()
+        self.lbl_active_page_title = QLabel("Select or create a page")
+        self.lbl_active_page_title.setStyleSheet("font-size: 16px; font-weight: bold; color: #38bdf8;")
+        header_bar.addWidget(self.lbl_active_page_title)
+        header_bar.addStretch()
 
-        # Formatting Toolbar Container (FlowLayout using assets/editor_buttons.json)
-        toolbar_container = QWidget()
-        toolbar_container.setStyleSheet("background-color: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 4px;")
-        toolbar_container_layout = QVBoxLayout(toolbar_container)
-        toolbar_container_layout.setContentsMargins(6, 6, 6, 6)
+        self.lbl_word_count = QLabel("Words: 0 | Chars: 0")
+        self.lbl_word_count.setStyleSheet("color: #94a3b8; font-size: 12px;")
+        header_bar.addWidget(self.lbl_word_count)
 
-        self.formatting_toolbar_layout = self._create_formatting_toolbar()
-        toolbar_container_layout.addLayout(self.formatting_toolbar_layout)
-        editor_layout.addWidget(toolbar_container)
+        self.lbl_status = QLabel("● Auto-saving")
+        self.lbl_status.setStyleSheet("color: #10b981; font-weight: bold; font-size: 12px;")
+        header_bar.addWidget(self.lbl_status)
+        editor_layout.addLayout(header_bar)
 
-        # Split Editor (TextEdit + Live MathJax Preview)
+        # Formatting Toolbar
+        toolbar_layout = self._create_formatting_toolbar()
+        editor_layout.addLayout(toolbar_layout)
+
+        # Editor & Preview Splitter
         editor_splitter = QSplitter(Qt.Horizontal)
 
         # Text Editor
         self.txt_editor = QTextEdit()
         self.txt_editor.setPlaceholderText("Write HTML and LaTeX math ($...$, $$...$$) here...")
-        self.txt_editor.setStyleSheet(
-            "QTextEdit { background-color: #0f172a; border: 1px solid #334155; border-radius: 8px; color: #f8fafc; font-family: 'Consolas', 'Liberation Mono', 'DejaVu Sans Mono', monospace; font-size: 13px; padding: 10px; }"
-        )
+        mono_font = QFont("monospace", 11)
+        mono_font.setStyleHint(QFont.Monospace)
+        self.txt_editor.setFont(mono_font)
         self.txt_editor.textChanged.connect(self._on_text_changed)
         editor_splitter.addWidget(self.txt_editor)
 
         # WebEngine Live Preview
         self.browser_preview = QWebEngineView()
-        self.browser_preview.setHtml(build_scratchbook_html_template(""), QUrl.fromLocalFile(ASSETS_DIR + "/"))
+        assets_url = QUrl.fromLocalFile(ASSETS_DIR.replace("\\", "/") + "/")
+        self.browser_preview.setHtml(build_scratchbook_html_template(""), assets_url)
         self.browser_preview.loadFinished.connect(self._on_preview_loaded)
         editor_splitter.addWidget(self.browser_preview)
 
@@ -223,9 +222,7 @@ class ScratchbookDialog(QDialog):
         main_layout.addWidget(splitter)
 
     def _create_formatting_toolbar(self) -> FlowLayout:
-        """Create rich HTML formatting toolbar with dynamic FlowLayout wrapping based on assets/editor_buttons.json."""
-        layout = FlowLayout(spacing=6)
-
+        layout = FlowLayout(spacing=5)
         buttons_config = load_editor_buttons_config()
         for btn_info in buttons_config:
             label_text = btn_info.get("label", "Button")
@@ -254,7 +251,6 @@ class ScratchbookDialog(QDialog):
 
             layout.addWidget(btn)
 
-            # Register shortcut key if present
             shortcut_key = btn_info.get("shortcut", "")
             if shortcut_key:
                 sc = QShortcut(QKeySequence(shortcut_key), self)
@@ -264,32 +260,16 @@ class ScratchbookDialog(QDialog):
         return layout
 
     def _configure_button_rich_text(self, btn: QPushButton, raw_label: str):
-        """Parse raw label (unescaping HTML entities) and configure QPushButton styling."""
         label_str = html.unescape(raw_label)
         plain_text = re.sub(r'<[^>]+>', '', label_str)
         btn.setText(plain_text)
 
-        is_bold = "<b>" in label_str or "font-weight: bold" in label_str or "font-weight:bold" in label_str
-        is_italic = "<i>" in label_str or "font-style: italic" in label_str or "font-style:italic" in label_str
-        is_underline = "<u>" in label_str or "text-decoration: underline" in label_str
-
-        color_match = re.search(r"color=['\"]?([^'\">\s;]+)", label_str)
-        text_color = color_match.group(1) if color_match else "#f8fafc"
-
+        is_bold = "<b>" in label_str or "bold" in label_str
         font = btn.font()
+        font.setPointSize(10)
         font.setBold(is_bold)
-        font.setItalic(is_italic)
-        font.setUnderline(is_underline)
         btn.setFont(font)
-
-        style = f"font-size: 12px; padding: 4px 10px; min-width: 26px; color: {text_color};"
-        if is_bold:
-            style += " font-weight: bold;"
-        if is_italic:
-            style += " font-style: italic;"
-        if is_underline:
-            style += " text-decoration: underline;"
-        btn.setStyleSheet(style)
+        btn.setStyleSheet("padding: 4px 8px; min-width: 24px;")
 
     def _apply_interval(self, left: str, right: str, default_text: str = ""):
         cursor = self.txt_editor.textCursor()
@@ -318,7 +298,6 @@ class ScratchbookDialog(QDialog):
                 prompt_insert_table(self.txt_editor)
 
     def _load_pages_list(self):
-        """Scan scratchbook/*.txt files and populate the sidebar page list."""
         self.list_pages.blockSignals(True)
         self.list_pages.clear()
 
@@ -326,13 +305,12 @@ class ScratchbookDialog(QDialog):
         page_names = sorted([os.path.splitext(f)[0] for f in files])
 
         if not page_names:
-            # Create a default initial page if directory is empty
             default_name = "General Notes"
             default_file = os.path.join(SCRATCHBOOK_DIR, f"{default_name}.txt")
             sample_content = (
                 "<h2>✏️ Welcome to Scratchbook!</h2>\n"
                 "<p>Write notes, formulas, and proofs freely here.</p>\n"
-                "<p>Euler's Identity: $e^{{i\\pi}} + 1 = 0$</p>\n"
+                "<p>Euler's Identity: $e^{i\\pi} + 1 = 0$</p>\n"
             )
             with open(default_file, "w", encoding="utf-8") as f:
                 f.write(sample_content)
@@ -349,7 +327,6 @@ class ScratchbookDialog(QDialog):
             self.list_pages.setCurrentRow(0)
 
     def _on_page_selection_changed(self, current: Optional[QListWidgetItem], previous: Optional[QListWidgetItem]):
-        """Save previous page content and load newly selected page from disk."""
         if previous:
             prev_name = previous.data(Qt.UserRole)
             self._save_page_to_disk(prev_name, self.txt_editor.toPlainText())
@@ -378,10 +355,15 @@ class ScratchbookDialog(QDialog):
         self.txt_editor.blockSignals(False)
 
         self._update_preview(content)
+        self._update_word_count(content)
 
     def _on_text_changed(self):
-        """Debounce preview update and auto-save to disk."""
         self.preview_timer.start()
+
+    def _update_word_count(self, content: str):
+        words = len(re.findall(r'\b\w+\b', content))
+        chars = len(content)
+        self.lbl_word_count.setText(f"Words: {words} | Chars: {chars}")
 
     def _sync_current_page_to_preview_and_disk(self):
         if not self.current_page_name:
@@ -389,9 +371,9 @@ class ScratchbookDialog(QDialog):
         content = self.txt_editor.toPlainText()
         self._update_preview(content)
         self._save_page_to_disk(self.current_page_name, content)
+        self._update_word_count(content)
 
     def _save_page_to_disk(self, page_name: str, content: str):
-        """Save a page's text content to scratchbook/<Page Name>.txt."""
         if not page_name:
             return
         file_path = os.path.join(SCRATCHBOOK_DIR, f"{sanitize_page_filename(page_name)}.txt")
@@ -443,7 +425,6 @@ class ScratchbookDialog(QDialog):
                 QMessageBox.warning(self, "Page Exists", f"A page named '{safe_new_name}' already exists.")
                 return
 
-            # Save current unsaved editor changes first before renaming
             self._save_page_to_disk(old_name, self.txt_editor.toPlainText())
 
             if os.path.exists(old_path):
@@ -486,8 +467,21 @@ class ScratchbookDialog(QDialog):
                 self.txt_editor.setPlainText("")
                 self._update_preview("")
 
+    def _export_page(self):
+        if not self.current_page_name:
+            return
+        dest_path, _ = QFileDialog.getSaveFileName(
+            self, f"Export '{self.current_page_name}'", 
+            f"{self.current_page_name}.md", 
+            "Markdown File (*.md);;HTML File (*.html);;Text File (*.txt)"
+        )
+        if dest_path:
+            content = self.txt_editor.toPlainText()
+            with open(dest_path, "w", encoding="utf-8") as f:
+                f.write(content)
+            QMessageBox.information(self, "Exported", f"Exported to {dest_path}")
+
     def closeEvent(self, event):
-        """Auto-save active page on window close."""
         if self.current_page_name:
             self._save_page_to_disk(self.current_page_name, self.txt_editor.toPlainText())
         event.accept()

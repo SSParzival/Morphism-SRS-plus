@@ -24,6 +24,9 @@ docs/
 Courses/
 unused/
 
+# User Settings
+settings.json
+
 # Bundles
 assets/tex-chtml.js
 assets/tex-svg.js

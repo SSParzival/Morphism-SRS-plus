@@ -1,33 +1,40 @@
 import os
 import json
+import zipfile
+import shutil
 import urllib.request
-from typing import List, Dict, Any, Optional
-from models import Course, NoteNode, NoteEdge, Flashcard, ProofSequenceCard, ReviewLogRecord
+from typing import List, Dict, Any, Optional, Tuple
+from models import Course, NoteNode, NoteEdge, Flashcard, ProofSequenceCard, ClozeCard, ReviewLogRecord
 from fsrs import Card as FSRSCard
+from app_paths import (COURSES_DIR, SCHEDULING_DIR, ASSETS_DIR, 
+                       MATHJAX_SVG_JS, CHART_JS, ensure_app_directories)
 
-COURSES_DIR = "Courses"
-SCHEDULING_DIR = "scheduling"
-ASSETS_DIR = "assets"
 FOLDER_CONFIG_FILE = "folder_config.cfg"
-MATHJAX_LOCAL_JS = os.path.join(ASSETS_DIR, "tex-chtml.js")
-MATHJAX_CDN_URL = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
-
+MATHJAX_CDN_SVG_URL = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"
+CHARTJS_CDN_URL = "https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"
 
 def ensure_local_mathjax_assets():
-    """Ensure MathJax 3 static JS bundle is downloaded locally for 100% offline usage."""
-    os.makedirs(ASSETS_DIR, exist_ok=True)
-    if not os.path.exists(MATHJAX_LOCAL_JS):
+    """Ensure MathJax 3 SVG vector bundle and Chart.js are downloaded locally for 100% offline usage."""
+    ensure_app_directories()
+    if not os.path.exists(MATHJAX_SVG_JS):
         try:
-            print("Downloading offline MathJax 3 bundle into assets/...")
-            urllib.request.urlretrieve(MATHJAX_CDN_URL, MATHJAX_LOCAL_JS)
+            print("Downloading offline MathJax 3 tex-svg bundle into assets/...")
+            urllib.request.urlretrieve(MATHJAX_CDN_SVG_URL, MATHJAX_SVG_JS)
             print("MathJax 3 bundle downloaded successfully for offline usage!")
         except Exception as e:
             print(f"Warning: Could not download MathJax 3 offline bundle: {e}")
 
+    if not os.path.exists(CHART_JS):
+        try:
+            print("Downloading offline Chart.js bundle into assets/...")
+            urllib.request.urlretrieve(CHARTJS_CDN_URL, CHART_JS)
+            print("Chart.js bundle downloaded successfully for offline usage!")
+        except Exception as e:
+            print(f"Warning: Could not download Chart.js offline bundle: {e}")
+
 def ensure_directories():
-    """Ensure Courses, scheduling, and assets directories exist."""
-    os.makedirs(COURSES_DIR, exist_ok=True)
-    os.makedirs(SCHEDULING_DIR, exist_ok=True)
+    """Ensure Courses, scheduling, and assets directories exist and contain required libraries."""
+    ensure_app_directories()
     ensure_local_mathjax_assets()
 
 def sanitize_filename(name: str) -> str:
@@ -67,7 +74,6 @@ def list_courses_info() -> List[Dict[str, Any]]:
         else:
             rel_folder = rel_folder.replace("\\", "/")
 
-        # Record folder entry if not root
         if rel_folder:
             items.append({
                 "name": os.path.basename(rel_folder),
@@ -166,6 +172,8 @@ def load_course(course_name: str, folder_path: str = "") -> Course:
                 card = Flashcard(cd.get("title", ""), cd.get("front", ""), cd.get("back", ""), item_id=cid)
             elif ctype == "ProofSequenceCard":
                 card = ProofSequenceCard(cd.get("title", ""), cd.get("premise", ""), cd.get("steps", []), item_id=cid)
+            elif ctype == "ClozeCard":
+                card = ClozeCard(cd.get("title", ""), cd.get("text", cd.get("front", "")), item_id=cid)
             else:
                 card = Flashcard(cd.get("title", ""), cd.get("front", ""), cd.get("back", ""), item_id=cid)
 
@@ -252,12 +260,49 @@ def import_course_json(filepath: str, dest_folder: str = "") -> Course:
 
     return load_course(name, dest_folder or data.get("folder_path", ""))
 
-
 def export_course_json(course: Course, dest_filepath: str):
     """Export a course data structure to an external file without user-specific FSRS scheduling or due dates."""
     with open(dest_filepath, "w", encoding="utf-8") as f:
         json.dump(course.to_dict(include_scheduling=False), f, indent=2)
 
+def export_course_package_zip(course: Course, dest_zip_path: str):
+    """Export complete course package (.morphism / .zip) including graph structure, scheduling, and reviews."""
+    save_course(course)
+    course_path = get_course_file_path(course.name, course.folder_path)
+    scheduling_path = get_scheduling_file_path(course.name)
+    logs_path = get_review_logs_file_path(course.name)
+
+    with zipfile.ZipFile(dest_zip_path, "w", zipfile.ZIP_DEFLATED) as zf:
+        if os.path.exists(course_path):
+            zf.write(course_path, arcname="course.json")
+        if os.path.exists(scheduling_path):
+            zf.write(scheduling_path, arcname="scheduling.json")
+        if os.path.exists(logs_path):
+            zf.write(logs_path, arcname="reviews.json")
+
+def import_course_package_zip(zip_path: str, dest_folder: str = "") -> Course:
+    """Import a complete course package (.morphism / .zip)."""
+    with zipfile.ZipFile(zip_path, "r") as zf:
+        course_data = json.loads(zf.read("course.json").decode("utf-8"))
+        name = course_data.get("name", "Imported Course")
+        if dest_folder:
+            course_data["folder_path"] = dest_folder
+
+        course_path = get_course_file_path(name, dest_folder or course_data.get("folder_path", ""))
+        with open(course_path, "w", encoding="utf-8") as f:
+            json.dump(course_data, f, indent=2)
+
+        if "scheduling.json" in zf.namelist():
+            sched_path = get_scheduling_file_path(name)
+            with open(sched_path, "wb") as f:
+                f.write(zf.read("scheduling.json"))
+
+        if "reviews.json" in zf.namelist():
+            reviews_path = get_review_logs_file_path(name)
+            with open(reviews_path, "wb") as f:
+                f.write(zf.read("reviews.json"))
+
+    return load_course(name, dest_folder or course_data.get("folder_path", ""))
 
 def import_raw_notes_into_course(course: Course, json_filepath: str) -> tuple[int, int]:
     """
@@ -284,7 +329,6 @@ def import_raw_notes_into_course(course: Course, json_filepath: str) -> tuple[in
 
     for idx, nd in enumerate(raw_notes):
         note_id = generate_id64()
-        
         orig_id = str(nd.get("note_id", idx))
         title = nd.get("title", f"Note {existing_count + idx + 1}")
 
@@ -292,7 +336,6 @@ def import_raw_notes_into_course(course: Course, json_filepath: str) -> tuple[in
         id_map[str(idx)] = note_id
         id_map[title] = note_id
 
-        # Calculate canvas grid coordinates
         col = (existing_count + idx) % grid_col_count
         row = (existing_count + idx) // grid_col_count
         x = 100.0 + col * spacing_x
@@ -317,6 +360,8 @@ def import_raw_notes_into_course(course: Course, json_filepath: str) -> tuple[in
                 card = Flashcard(ctitle, cd.get("front", ""), cd.get("back", ""), item_id=card_id)
             elif ctype == "ProofSequenceCard":
                 card = ProofSequenceCard(ctitle, cd.get("premise", ""), cd.get("steps", []), item_id=card_id)
+            elif ctype == "ClozeCard":
+                card = ClozeCard(ctitle, cd.get("text", cd.get("front", "")), item_id=card_id)
             else:
                 card = Flashcard(ctitle, cd.get("front", ""), cd.get("back", ""), item_id=card_id)
 
@@ -326,11 +371,9 @@ def import_raw_notes_into_course(course: Course, json_filepath: str) -> tuple[in
         course.notes.append(note)
         total_notes_added += 1
 
-    # Map Edges
     for ed in raw_edges:
         raw_src = str(ed.get("source_id", ""))
         raw_tgt = str(ed.get("target_id", ""))
-        
         src_id = id_map.get(raw_src, raw_src)
         tgt_id = id_map.get(raw_tgt, raw_tgt)
         label = ed.get("label", "Prerequisite")

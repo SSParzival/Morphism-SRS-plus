@@ -1,0 +1,14 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Morphism SRS Plus
+GenericName=Spaced Repetition System for Mathematics & Logic
+Comment=Interactive graph-based spaced repetition system with FSRS, MathJax 3 LaTeX and JSON themes
+Exec=/bin/bash -c "cd '%k' && ./run.sh"
+Path=
+Icon=morphism-srs-plus
+Terminal=false
+Categories=Education;Science;Math;
+StartupNotify=true
+StartupWMClass=morphism-srs-plus
+Keywords=flashcards;srs;fsrs;math;latex;proof;graph;spaced-repetition;
