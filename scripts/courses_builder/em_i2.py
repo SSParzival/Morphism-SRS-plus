@@ -15,8 +15,8 @@ def build_electricidad_magnetismo_course() -> Course:
     n0 = NoteNode("em_00", "Filosofía de Corrección FIS1533 y Rescate de Puntos", 80.0, 40.0, ["EM", "Rúbrica", "Estrategia"])
     n0.add_card(ClozeCard("Doctrina Oficial de Arrastre de Error (Error-Carrying)",
         r"En las pautas de corrección de FIS1533:"
-        r"\n1. Si cometes un error algebraico en la parte (a), pero en la parte (b) utilizas tu resultado erróneo con {{c1::la metodología y ecuaciones correctas::consistencia formal}}, recibes {{c2::el 100% del puntaje metodológico::puntaje completo}} de la parte (b)."
-        r"\n2. <b>Parametrización de Emergencia:</b> Si te bloqueas en una integral complicada, define formalmente {{c3::$I_0 = \int \dots$::constante intermedia}} y continúa resolviendo las partes siguientes en función de $I_0$ para salvar hasta el {{c4::80% del puntaje total::máximo puntaje rescatable}}."))
+        r"<br>1. Si cometes un error algebraico en la parte (a), pero en la parte (b) utilizas tu resultado erróneo con {{c1::la metodología y ecuaciones correctas}}, recibes {{c2::el 100% del puntaje metodológico}} de la parte (b)."
+        r"<br>2. <b>Parametrización de Emergencia:</b> Si te bloqueas en una integral complicada, define formalmente {{c3::$I_0 = \int \dots$}} y continúa resolviendo las partes siguientes en función de $I_0$ para salvar hasta el {{c4::80% del puntaje total}}."))
     n0.add_card(Flashcard("Protocolo Universal de 4 Pasos para Todo Ejercicio de la I2",
         r"¿Cuáles son los 4 pasos sistemáticos indispensables para abordar cualquier problema de FIS1533 asegurando el máximo puntaje?",
         r"1. <b>Diagrama y Sistema de Coordenadas:</b> Dibujar el sistema, elegir el origen, explicitar vectores unitarios ($\hat{r}, \hat{\theta}, \hat{\phi}, \hat{z}$) y sentidos de corriente.<br>"
@@ -31,15 +31,32 @@ def build_electricidad_magnetismo_course() -> Course:
     n1 = NoteNode("em_01", "Álgebra Vectorial y Operadores Curvilíneos", 380.0, 40.0, ["EM", "Vectores", "Operadores"])
     n1.add_card(ClozeCard("Identidades Vectoriales y Regla BAC-CAB",
         r"Identidades fundamentales para campos vectoriales en electrodinámica:"
-        r"\n- Regla BAC-CAB: $$\mathbf{A} \times (\mathbf{B} \times \mathbf{C}) = {{c1::\mathbf{B}(\mathbf{A}\cdot\mathbf{C}) - \mathbf{C}(\mathbf{A}\cdot\mathbf{B})::producto vectorial triple}}$$"
-        r"\n- Identidades nulas: $\nabla \times (\nabla f) = {{c2::\mathbf{0}::rotacional del gradiente}}$ y $\nabla \cdot (\nabla \times \mathbf{A}) = {{c3::0::divergencia del rotacional}}$."
-        r"\n- Laplaciano vectorial: $\nabla^2 \mathbf{A} = {{c4::\nabla(\nabla \cdot \mathbf{A}) - \nabla \times (\nabla \times \mathbf{A})::descomposición laplaciana}}$."))
+        r"<br>- Regla BAC-CAB: $$\mathbf{A} \times (\mathbf{B} \times \mathbf{C}) = {{c1::\mathbf{B}(\mathbf{A}\cdot\mathbf{C}) - \mathbf{C}(\mathbf{A}\cdot\mathbf{B})}}$$"
+        r"<br>- Identidades nulas: $\nabla \times (\nabla f) = {{c2::\mathbf{0}}}$ y $\nabla \cdot (\nabla \times \mathbf{A}) = {{c3::0}}$."
+        r"<br>- Laplaciano vectorial: $\nabla^2 \mathbf{A} = {{c4::\nabla(\nabla \cdot \mathbf{A}) - \nabla \times (\nabla \times \mathbf{A})}}$."))
     n1.add_card(Flashcard("Operadores Diferenciales en Cilíndricas y Esféricas",
         r"Escriba la divergencia $\nabla \cdot \mathbf{A}$ y el rotacional $\nabla \times \mathbf{A}$ en coordenadas cilíndricas $(r, \theta, z)$.",
         r"1. <b>Divergencia Cilíndrica:</b><br>"
         r"$$\nabla \cdot \mathbf{A} = \frac{1}{r}\frac{\partial(r A_r)}{\partial r} + \frac{1}{r}\frac{\partial A_\theta}{\partial \theta} + \frac{\partial A_z}{\partial z}$$<br>"
         r"2. <b>Rotacional Cilíndrico:</b><br>"
         r"$$\nabla \times \mathbf{A} = \left(\frac{1}{r}\frac{\partial A_z}{\partial \theta} - \frac{\partial A_\theta}{\partial z}\right)\hat{r} + \left(\frac{\partial A_r}{\partial z} - \frac{\partial A_z}{\partial r}\right)\hat{\theta} + \frac{1}{r}\left(\frac{\partial(r A_\theta)}{\partial r} - \frac{\partial A_r}{\partial \theta}\right)\hat{z}$$"))
+    n1.add_card(Flashcard("Divergencia del Campo Coulombiano y Delta de Dirac",
+        r"Demuestre por qué formalmente $\nabla \cdot \left(\frac{\hat{r}}{r^2}\right) = 4\pi \delta^3(\mathbf{r})$ integrando contra una función de prueba suave $f(\mathbf{r})$.",
+        r"1. <b>Identidad del producto vectorial:</b> $\nabla \cdot (f \mathbf{V}) = f(\nabla \cdot \mathbf{V}) + \nabla f \cdot \mathbf{V}$ con $\mathbf{V} = \frac{\hat{r}}{r^2}$.<br>"
+        r"2. <b>Integral en bola $B_\varepsilon$ centrada en el origen:</b><br>"
+        r"$$I = \int_{B_\varepsilon} f \left[\nabla \cdot \frac{\hat{r}}{r^2}\right] dV = \int_{B_\varepsilon} \nabla \cdot \left(f \frac{\hat{r}}{r^2}\right) dV - \int_{B_\varepsilon} \nabla f \cdot \frac{\hat{r}}{r^2} dV$$<br>"
+        r"3. <b>Término de borde por Gauss:</b> $\oint_{S_\varepsilon} f \frac{\hat{r}}{\varepsilon^2} \cdot (\hat{r}\varepsilon^2 d\Omega) = \oint_{S_\varepsilon} f d\Omega$. Al tomar $\varepsilon \to 0$, $f \to f(\mathbf{0})$, obteniendo $f(\mathbf{0})\oint d\Omega = 4\pi f(\mathbf{0})$.<br>"
+        r"4. <b>Término volumétrico del gradiente:</b> En esféricas, $\int_{B_\varepsilon} (\nabla f \cdot \hat{r}) dr d\Omega$. Como $\nabla f$ es acotada y $r \in [0, \varepsilon]$, la integral tiende a $0$ cuando $\varepsilon \to 0$.<br>"
+        r"5. <b>Conclusión distributiva:</b> $\int_{\mathbb{R}^3} f(\mathbf{r}) \left[\nabla \cdot \frac{\hat{r}}{r^2}\right] dV = 4\pi f(\mathbf{0}) \implies \nabla \cdot \left(\frac{\hat{r}}{r^2}\right) = 4\pi \delta^3(\mathbf{r})$."))
+    n1.add_card(ProofSequenceCard("Teorema de Stokes en Superficies Parametrizadas",
+        r"Demuestre el Teorema de Stokes $\oint_{\partial S} \mathbf{F} \cdot d\mathbf{r} = \iint_S (\nabla \times \mathbf{F}) \cdot d\mathbf{S}$ para una superficie suave $S$ parametrizada por $f: D \subseteq \mathbb{R}^2 \to S \subseteq \mathbb{R}^3$.",
+        [
+            r"Sea $f(u, v) = (x(u,v), y(u,v), z(u,v))$. El pullback del campo sobre el borde es $(\mathbf{F} \circ f) Df \begin{pmatrix} du \\ dv \end{pmatrix} = A \, du + B \, dv$, donde $A = (\mathbf{F}\circ f) \cdot \frac{\partial f}{\partial u}$ y $B = (\mathbf{F}\circ f) \cdot \frac{\partial f}{\partial v}$.",
+            r"Por el Teorema de Green en el dominio plano $D$: $\oint_{\partial S} \mathbf{F} \cdot d\mathbf{r} = \oint_{\partial D} A du + B dv = \iint_D \left(\frac{\partial B}{\partial u} - \frac{\partial A}{\partial v}\right) du \, dv$.",
+            r"Derivando por regla de la cadena: $\frac{\partial B}{\partial u} - \frac{\partial A}{\partial v} = D_2 f^\top (D\mathbf{F}) D_1 f - D_1 f^\top (D\mathbf{F}) D_2 f$, cancelándose las segundas derivadas cruzadas de $f$ por el Teorema de Schwarz.",
+            r"Para cualquier matriz $M$ y vectores $\mathbf{a}, \mathbf{b}$, se cumple la identidad $\mathbf{b}^\top M \mathbf{a} - \mathbf{a}^\top M \mathbf{b} = \text{Axl}(M) \cdot (\mathbf{a} \times \mathbf{b})$, donde $\text{Axl}(D\mathbf{F}) = \nabla \times \mathbf{F}$.",
+            r"Sustituyendo $\mathbf{a} = D_1 f = \frac{\partial f}{\partial u}$ y $\mathbf{b} = D_2 f = \frac{\partial f}{\partial v}$: el integrando es $(\nabla \times \mathbf{F}) \cdot \left(\frac{\partial f}{\partial u} \times \frac{\partial f}{\partial v}\right) du \, dv = (\nabla \times \mathbf{F}) \cdot d\mathbf{S} \quad \blacksquare$."
+        ]))
     course.notes.append(n1)
 
     # --------------------------------------------------------------------------
@@ -48,9 +65,9 @@ def build_electricidad_magnetismo_course() -> Course:
     n2 = NoteNode("em_02", "Polarización P y Cargas Ligadas", 680.0, 40.0, ["EM", "Polarización", "Cargas Ligadas"])
     n2.add_card(ClozeCard("Definición de Cargas Ligadas",
         r"Dado un dieléctrico con vector polarización macroscópica $\mathbf{P}$ (momento dipolar por unidad de volumen):"
-        r"\n- Densidad volumétrica de carga ligada: $\rho_b = {{c1::-\nabla \cdot \mathbf{P}::divergencia negativa de P}}$"
-        r"\n- Densidad superficial de carga ligada: $\sigma_b = {{c2::\mathbf{P} \cdot \hat{n}::producto escalar con la normal exterior}}$"
-        r"\n- Potencial electrostático generado: $$V(\mathbf{r}) = \frac{1}{4\pi\varepsilon_0}\left[\iiint_V \frac{\rho_b(\mathbf{r}')}{|\mathbf{r}-\mathbf{r}'|}dV' + \iint_{\partial V} \frac{\sigma_b(\mathbf{r}')}{|\mathbf{r}-\mathbf{r}'|}dA'\right]$$"))
+        r"<br>- Densidad volumétrica de carga ligada: $\rho_b = {{c1::-\nabla \cdot \mathbf{P}}}$"
+        r"<br>- Densidad superficial de carga ligada: $\sigma_b = {{c2::\mathbf{P} \cdot \hat{n}}}$"
+        r"<br>- Potencial electrostático generado: $$V(\mathbf{r}) = \frac{1}{4\pi\varepsilon_0}\left[\iiint_V \frac{\rho_b(\mathbf{r}')}{|\mathbf{r}-\mathbf{r}'|}dV' + \iint_{\partial V} \frac{\sigma_b(\mathbf{r}')}{|\mathbf{r}-\mathbf{r}'|}dA'\right]$$"))
     n2.add_card(ProofSequenceCard("Neutralidad Neta de Dieléctricos Neutros",
         r"Demuestre rigurosamente que la carga ligada neta de un dieléctrico neutro de volumen $V$ y frontera $\partial V$ es idénticamente cero.",
         [
@@ -66,10 +83,10 @@ def build_electricidad_magnetismo_course() -> Course:
     # --------------------------------------------------------------------------
     n3 = NoteNode("em_03", "Desplazamiento Eléctrico D y Ley de Gauss", 980.0, 40.0, ["EM", "Gauss", "Desplazamiento"])
     n3.add_card(ClozeCard("Ley de Gauss Generalizada",
-        r"El vector desplazamiento eléctrico se define como: $$\mathbf{D} = {{c1::\varepsilon_0 \mathbf{E} + \mathbf{P}::relación D, E, P}}$$"
-        r"\nLa Ley de Gauss en dieléctricos depende <b>exclusivamente</b> de las cargas libres:"
-        r"\n- Forma diferencial: $\nabla \cdot \mathbf{D} = {{c2::\rho_f::densidad de carga libre}}$"
-        r"\n- Forma integral: $\oint_{\partial V} \mathbf{D} \cdot d\mathbf{A} = {{c3::Q_{f,\text{enc}}::carga libre total encerrada}}$."))
+        r"El vector desplazamiento eléctrico se define como: $$\mathbf{D} = {{c1::\varepsilon_0 \mathbf{E} + \mathbf{P}}}$$"
+        r"<br>La Ley de Gauss en dieléctricos depende <b>exclusivamente</b> de las cargas libres:"
+        r"<br>- Forma diferencial: $\nabla \cdot \mathbf{D} = {{c2::\rho_f}}$"
+        r"<br>- Forma integral: $\oint_{\partial V} \mathbf{D} \cdot d\mathbf{A} = {{c3::Q_{f,\text{enc}}}}$."))
     n3.add_card(Flashcard("Cálculo de E a partir de D en Medios LHI",
         r"¿Cómo se relacionan $\mathbf{D}, \mathbf{E}, \mathbf{P}$ en un medio Lineal, Homogéneo e Isótropo (LHI) con susceptibilidad $\chi_e$ y permitividad relativa $\kappa$?",
         r"1. $\mathbf{P} = \varepsilon_0 \chi_e \mathbf{E}$.<br>"
@@ -84,10 +101,18 @@ def build_electricidad_magnetismo_course() -> Course:
     n4 = NoteNode("em_04", "Condiciones de Borde en Interfaces Dieléctricas", 80.0, 240.0, ["EM", "Condiciones de Borde", "Interfaces"])
     n4.add_card(ClozeCard("Discontinuidad Normal y Continuidad Tangencial",
         r"En la interfaz entre dos medios dieléctricos (medio 1 y medio 2), con normal $\hat{n}_{1\to 2}$ apuntando hacia el medio 2:"
-        r"\n- Componente normal de $\mathbf{D}$: $$D_{2n} - D_{1n} = {{c1::\sigma_f::densidad superficial de carga libre}}$$"
+        r"<br>- Componente normal de $\mathbf{D}$: $$D_{2n} - D_{1n} = {{c1::\sigma_f}}$$"
         r"Si la interfaz no tiene carga libre ($\sigma_f = 0$): $D_{1n} = D_{2n}$ (continuo)."
-        r"\n- Componente tangencial de $\mathbf{E}$: $$E_{2t} - E_{1t} = {{c2::0::siempre continuo}}$$ (consecuencia de $\nabla \times \mathbf{E} = \mathbf{0}$)."
-        r"\n- Ley de refracción de líneas de campo: $$\frac{\tan\theta_1}{\tan\theta_2} = {{c3::\frac{\varepsilon_1}{\varepsilon_2}::razón de permitividades}}$$ (donde $\theta$ es el ángulo respecto a la normal)."))
+        r"<br>- Componente tangencial de $\mathbf{E}$: $$E_{2t} - E_{1t} = {{c2::0}}$$ (consecuencia de $\nabla \times \mathbf{E} = \mathbf{0}$)."
+        r"<br>- Ley de refracción de líneas de campo: $$\frac{\tan\theta_1}{\tan\theta_2} = {{c3::\frac{\varepsilon_1}{\varepsilon_2}}}$$ (donde $\theta$ es el ángulo respecto a la normal)."))
+    n4.add_card(Flashcard("Deducción de la Ley de Refracción en Interfaces Dieléctricas",
+        r"¿Cómo se deduce la ley de refracción $\frac{\tan\theta_1}{\tan\theta_2} = \frac{\varepsilon_1}{\varepsilon_2}$ para las líneas de campo eléctrico en la frontera libre de carga ($\sigma_f = 0$) entre dos dieléctricos lineales?",
+        r"1. <b>Componentes Tangenciales:</b> Como $\nabla \times \mathbf{E} = \mathbf{0}$, la circulación en un lazo rectangular infinitesimal da:<br>"
+        r"$$E_{1t} = E_{2t} \implies E_1 \sin\theta_1 = E_2 \sin\theta_2$$<br>"
+        r"2. <b>Componentes Normales:</b> Como $\nabla \cdot \mathbf{D} = 0$ al no haber cargas libres ($\sigma_f = 0$), el flujo sobre una caja cilíndrica infinitesimal da:<br>"
+        r"$$D_{1n} = D_{2n} \implies \varepsilon_1 E_1 \cos\theta_1 = \varepsilon_2 E_2 \cos\theta_2$$<br>"
+        r"3. <b>Cociente:</b> Dividiendo miembro a miembro ambas igualdades:<br>"
+        r"$$\frac{E_1 \sin\theta_1}{\varepsilon_1 E_1 \cos\theta_1} = \frac{E_2 \sin\theta_2}{\varepsilon_2 E_2 \cos\theta_2} \implies \frac{\tan\theta_1}{\varepsilon_1} = \frac{\tan\theta_2}{\varepsilon_2} \iff \frac{\tan\theta_1}{\tan\theta_2} = \frac{\varepsilon_1}{\varepsilon_2}$$."))
     course.notes.append(n4)
 
     # --------------------------------------------------------------------------
@@ -102,9 +127,9 @@ def build_electricidad_magnetismo_course() -> Course:
         r"$$C_{\text{eq}} = C_1 + C_2 = \frac{\kappa_1 \varepsilon_0 A_1}{d} + \frac{\kappa_2 \varepsilon_0 A_2}{d}$$"))
     n5.add_card(ClozeCard("Dieléctrico Inhomogéneo Continuo",
         r"Para un condensador plano con permitividad dependiente de la posición $\kappa(x)$ entre $x = 0$ y $x = d$:"
-        r"\nComo $D$ es constante en $x$: $E(x) = \frac{D}{\varepsilon_0 \kappa(x)} = \frac{Q}{\varepsilon_0 A \kappa(x)}$."
-        r"\nLa diferencia de potencial es: $$\Delta V = \int_0^d E(x) dx = \frac{Q}{\varepsilon_0 A} {{c1::\int_0^d \frac{dx}{\kappa(x)}::integral de rebanado}}$$"
-        r"\nPor lo tanto, la capacitancia es: $$C = \frac{\varepsilon_0 A}{\int_0^d \frac{dx}{\kappa(x)}}$$."))
+        r"<br>Como $D$ es constante en $x$: $E(x) = \frac{D}{\varepsilon_0 \kappa(x)} = \frac{Q}{\varepsilon_0 A \kappa(x)}$."
+        r"<br>La diferencia de potencial es: $$\Delta V = \int_0^d E(x) dx = \frac{Q}{\varepsilon_0 A} {{c1::\int_0^d \frac{dx}{\kappa(x)}}}$$"
+        r"<br>Por lo tanto, la capacitancia es: $$C = \frac{\varepsilon_0 A}{\int_0^d \frac{dx}{\kappa(x)}}$$."))
     course.notes.append(n5)
 
     # --------------------------------------------------------------------------
@@ -113,9 +138,9 @@ def build_electricidad_magnetismo_course() -> Course:
     n6 = NoteNode("em_06", "Energía y Fuerzas sobre Dieléctricos", 680.0, 240.0, ["EM", "Energía", "Fuerzas"])
     n6.add_card(ClozeCard("Fuerza a Carga Constante vs a Voltaje Constante",
         r"Cálculo de la fuerza mecánica sobre una placa dieléctrica que penetra una distancia $x$ en un condensador:"
-        r"\n- Condensador desconectado ($Q = \text{cte}$): $$F_x = {{c1::-\left(\frac{\partial U}{\partial x}\right)_Q::derivada negativa de la energía}}$$ con $U = \frac{Q^2}{2 C(x)} \implies F_x = +\frac{Q^2}{2 C^2}\frac{dC}{dx} = +\frac{1}{2}V^2 \frac{dC}{dx}$."
-        r"\n- Condensador conectado a batería ($V = \text{cte}$): $$F_x = {{c2::+\left(\frac{\partial U}{\partial x}\right)_V::derivada positiva de la energía}} = {{c3::+\frac{1}{2}V^2 \frac{dC}{dx}::fuerza neta idéntica}}$$."
-        r"\n¡En ambos casos la fuerza neta es <b>atractiva</b> hacia el interior del condensador!"))
+        r"<br>- Condensador desconectado ($Q = \text{cte}$): $$F_x = {{c1::-\left(\frac{\partial U}{\partial x}\right)_Q}}$$ con $U = \frac{Q^2}{2 C(x)} \implies F_x = +\frac{Q^2}{2 C^2}\frac{dC}{dx} = +\frac{1}{2}V^2 \frac{dC}{dx}$."
+        r"<br>- Condensador conectado a batería ($V = \text{cte}$): $$F_x = {{c2::+\left(\frac{\partial U}{\partial x}\right)_V}} = {{c3::+\frac{1}{2}V^2 \frac{dC}{dx}}}$$."
+        r"<br>¡En ambos casos la fuerza neta es <b>atractiva</b> hacia el interior del condensador!"))
     n6.add_card(ProofSequenceCard("Deducción de la Fuerza a Voltaje Constante con Trabajo de la Fuente",
         r"Demuestre por balance de trabajo virtual que $F_x = +\left(\frac{\partial U}{\partial x}\right)_V = \frac{1}{2}V^2 \frac{dC}{dx}$ cuando el condensador está conectado a una batería de voltaje $V_0$.",
         [
@@ -132,10 +157,10 @@ def build_electricidad_magnetismo_course() -> Course:
     n7 = NoteNode("em_07", "Densidad de Corriente y Continuidad", 980.0, 240.0, ["EM", "Corriente", "Continuidad"])
     n7.add_card(ClozeCard("Ecuación de Continuidad y Corriente Eléctrica",
         r"Definición y principios fundamentales de corrientes eléctricas:"
-        r"\n- Corriente total que atraviesa una superficie $S$: $$I = \iint_S {{c1::\mathbf{J} \cdot d\mathbf{A}::flujo de la densidad de corriente}}$$"
-        r"\n- Densidad microscópica de corriente: $$\mathbf{J} = {{c2::n q \mathbf{v}_d::densidad portadores por carga por velocidad de deriva}}$$"
-        r"\n- Ecuación de continuidad (conservación local de la carga): $$\nabla \cdot \mathbf{J} = {{c3::-\frac{\partial \rho}{\partial t}::tasa de vaciamiento de carga}}$$."
-        r"\nEn corriente estacionaria ($\partial\rho/\partial t = 0$): $\nabla \cdot \mathbf{J} = 0$."))
+        r"<br>- Corriente total que atraviesa una superficie $S$: $$I = \iint_S {{c1::\mathbf{J} \cdot d\mathbf{A}}}$$"
+        r"<br>- Densidad microscópica de corriente: $$\mathbf{J} = {{c2::n q \mathbf{v}_d}}$$"
+        r"<br>- Ecuación de continuidad (conservación local de la carga): $$\nabla \cdot \mathbf{J} = {{c3::-\frac{\partial \rho}{\partial t}}}$$."
+        r"<br>En corriente estacionaria ($\partial\rho/\partial t = 0$): $\nabla \cdot \mathbf{J} = 0$."))
     course.notes.append(n7)
 
     # --------------------------------------------------------------------------
@@ -151,9 +176,19 @@ def build_electricidad_magnetismo_course() -> Course:
         r"3. Conductividad de Drude: $\sigma = \frac{n q^2 \tau}{m}$, y resistividad: $\rho = \frac{1}{\sigma} = \frac{m}{n q^2 \tau}$."))
     n8.add_card(ClozeCard("Teorema Dual de Resistencia y Capacitancia (RC = rho * eps)",
         r"Para cualquier estructura conductora con dos electrodos inmersos en un medio con resistividad uniforme $\rho$ y permitividad dieléctrica $\varepsilon$:"
-        r"\n- La resistencia $R$ y la capacitancia $C$ satisfacen la relación universal: $$R \cdot C = {{c1::\rho \varepsilon = \frac{\varepsilon}{\sigma}::producto invariante geométrico}}$$"
-        r"\nEjemplo: En un cilindro coaxial hueco de longitud $L$ con radios $a$ y $b$ ($b > a$):"
-        r"\n$$C = \frac{2\pi \varepsilon L}{\ln(b/a)} \implies R = {{c2::\frac{\rho \ln(b/a)}{2\pi L}::resistencia coaxial radial}}$$."))
+        r"<br>- La resistencia $R$ y la capacitancia $C$ satisfacen la relación universal: $$R \cdot C = {{c1::\rho \varepsilon = \frac{\varepsilon}{\sigma}}}$$"
+        r"<br>Ejemplo: En un cilindro coaxial hueco de longitud $L$ con radios $a$ y $b$ ($b > a$):"
+        r"<br>$$C = \frac{2\pi \varepsilon L}{\ln(b/a)} \implies R = {{c2::\frac{\rho \ln(b/a)}{2\pi L}}}$$."))
+    n8.add_card(Flashcard("Vector de Poynting y Disipación Joule en un Resistor Cilíndrico",
+        r"¿Cómo demuestra el vector de Poynting $\mathbf{S} = \frac{1}{\mu_0}(\mathbf{E} \times \mathbf{B})$ que la energía disipada por efecto Joule en un cable cilíndrico de radio $a$, largo $L$ y resistencia $R$ proviene del campo electromagnético circundante?",
+        r"1. <b>Campos en la superficie del cilindro ($r = a$):</b><br>"
+        r"- Campo eléctrico axial: $\mathbf{E} = \frac{V}{L}\hat{z} = \frac{I R}{L}\hat{z}$.<br>"
+        r"- Campo magnético azimutal por Ampère: $\mathbf{B} = \frac{\mu_0 I}{2\pi a}\hat{\phi}$.<br>"
+        r"2. <b>Vector de Poynting:</b><br>"
+        r"$$\mathbf{S} = \frac{1}{\mu_0}(\mathbf{E} \times \mathbf{B}) = \frac{1}{\mu_0}\left(\frac{I R}{L}\hat{z}\right)\times\left(\frac{\mu_0 I}{2\pi a}\hat{\phi}\right) = -\frac{I^2 R}{2\pi a L}\hat{r}$$<br>"
+        r"El vector $\mathbf{S}$ apunta radialmente hacia el interior del conductor.<br>"
+        r"3. <b>Flujo total hacia adentro:</b> Con área de la superficie cilíndrica $A_{\text{sup}} = 2\pi a L$:<br>"
+        r"$$P_{\text{ingreso}} = -\iint \mathbf{S} \cdot d\mathbf{A} = \left(\frac{I^2 R}{2\pi a L}\right)(2\pi a L) = I^2 R = V I \quad \blacksquare$$."))
     course.notes.append(n8)
 
     # --------------------------------------------------------------------------
@@ -162,10 +197,10 @@ def build_electricidad_magnetismo_course() -> Course:
     n9 = NoteNode("em_09", "Circuitos DC y Transitorios RC", 380.0, 440.0, ["EM", "Circuitos", "RC"])
     n9.add_card(ClozeCard("Carga de un Condensador en Circuito RC",
         r"Considere un circuito con fuente de FEM $\mathcal{E}$, resistencia $R$ y condensador $C$ inicialmente descargado ($q(0) = 0$):"
-        r"\n- Ecuación diferencial por Kirchhoff: $$\mathcal{E} - R\frac{dq}{dt} - \frac{q}{C} = 0$$"
-        r"\n- Carga en función del tiempo: $$q(t) = {{c1::C\mathcal{E}(1 - e^{-t/RC})::evolución temporal de carga}}$$"
-        r"\n- Corriente en función del tiempo: $$i(t) = \frac{dq}{dt} = {{c2::\frac{\mathcal{E}}{R}e^{-t/RC}::corriente exponencial decreciente}}$$"
-        r"\n- Constante de tiempo: $\tau = {{c3::RC::tiempo característico}}$."))
+        r"<br>- Ecuación diferencial por Kirchhoff: $$\mathcal{E} - R\frac{dq}{dt} - \frac{q}{C} = 0$$"
+        r"<br>- Carga en función del tiempo: $$q(t) = {{c1::C\mathcal{E}(1 - e^{-t/RC})}}$$"
+        r"<br>- Corriente en función del tiempo: $$i(t) = \frac{dq}{dt} = {{c2::\frac{\mathcal{E}}{R}e^{-t/RC}}}$$"
+        r"<br>- Constante de tiempo: $\tau = {{c3::RC}}$."))
     n9.add_card(ProofSequenceCard("Balance Energético en Carga RC: El Teorema del 50%",
         r"Demuestre rigurosamente que al cargar completamente un condensador desde una fuente de FEM constante $\mathcal{E}$, exactamente el 50% de la energía entregada por la fuente se disipa en la resistencia, sin importar el valor de $R$.",
         [
@@ -183,8 +218,8 @@ def build_electricidad_magnetismo_course() -> Course:
     n10 = NoteNode("em_10", "Fuerza de Lorentz y Dispositivos de Partículas", 680.0, 440.0, ["EM", "Lorentz", "Dispositivos"])
     n10.add_card(ClozeCard("Fuerza de Lorentz y Trabajo Nulo",
         r"Fuerza total sobre una carga $q$ con velocidad $\mathbf{v}$ en presencia de campos $\mathbf{E}$ y $\mathbf{B}$:"
-        r"\n$$\mathbf{F} = {{c1::q(\mathbf{E} + \mathbf{v} \times \mathbf{B})::ecuación de Lorentz}}$$"
-        r"\n- Trabajo de la fuerza magnética sobre la carga: $$dW_B = \mathbf{F}_B \cdot d\mathbf{r} = q(\mathbf{v} \times \mathbf{B}) \cdot (\mathbf{v} dt) = {{c2::0::trabajo idénticamente nulo}}$$"
+        r"<br>$$\mathbf{F} = {{c1::q(\mathbf{E} + \mathbf{v} \times \mathbf{B})}}$$"
+        r"<br>- Trabajo de la fuerza magnética sobre la carga: $$dW_B = \mathbf{F}_B \cdot d\mathbf{r} = q(\mathbf{v} \times \mathbf{B}) \cdot (\mathbf{v} dt) = {{c2::0}}$$"
         r"Por lo tanto, un campo magnético estático <b>nunca</b> altera la energía cinética de una partícula; solo curva su trayectoria."))
     n10.add_card(Flashcard("Dispositivos Electromagnéticos Canónicos",
         r"Escriba las ecuaciones de operación para: 1) Selector de velocidades de Wien, 2) Radio de ciclotrón y frecuencia angular, 3) Espectrómetro de masas de Bainbridge.",
@@ -199,10 +234,10 @@ def build_electricidad_magnetismo_course() -> Course:
     n11 = NoteNode("em_11", "Efecto Hall y Signo de Portadores", 980.0, 440.0, ["EM", "Efecto Hall", "Portadores"])
     n11.add_card(ClozeCard("Voltaje Hall y Coeficiente Hall",
         r"En una cinta conductora de espesor $t$ y ancho $w$ por la que fluye corriente $I$ inmersa en campo magnético perpendicular $B$:"
-        r"\n- Campo eléctrico transversal de equilibrio (Hall): $E_H = v_d B$."
-        r"\n- Voltaje transversal Hall: $$V_H = E_H w = v_d B w = {{c1::\frac{I B}{n q t}::voltaje Hall}}$$."
-        r"\n- Coeficiente Hall: $$R_H = {{c2::\frac{1}{n q}::coeficiente Hall}}$$."
-        r"\n- Significado físico crucial: El signo medido de $V_H$ permite distinguir si los portadores mayoritarios de carga son {{c3::electrones negativos ($q < 0$) o huecos positivos ($q > 0$)::tipo de portador}}."))
+        r"<br>- Campo eléctrico transversal de equilibrio (Hall): $E_H = v_d B$."
+        r"<br>- Voltaje transversal Hall: $$V_H = E_H w = v_d B w = {{c1::\frac{I B}{n q t}}}$$."
+        r"<br>- Coeficiente Hall: $$R_H = {{c2::\frac{1}{n q}}}$$."
+        r"<br>- Significado físico crucial: El signo medido de $V_H$ permite distinguir si los portadores mayoritarios de carga son {{c3::electrones negativos ($q < 0$) o huecos positivos ($q > 0$)}}."))
     course.notes.append(n11)
 
     # --------------------------------------------------------------------------
@@ -220,10 +255,10 @@ def build_electricidad_magnetismo_course() -> Course:
         ]))
     n12.add_card(ClozeCard("Torque y Momento Dipolar Magnético",
         r"Para una espira conductora de área vectorial $\mathbf{A} = A \hat{n}$ y corriente $I$:"
-        r"\n- Momento dipolar magnético: $$\mathbf{m} = {{c1::I \mathbf{A} = I A \hat{n}::momento dipolar magnético}}$$"
-        r"\n- Torque magnético en campo uniforme $\mathbf{B}$: $$\boldsymbol{\tau} = {{c2::\mathbf{m} \times \mathbf{B}::torque magnético}}$$"
-        r"\n- Energía potencial dipolar: $$U = {{c3::-\mathbf{m} \cdot \mathbf{B}::energía dipolar}}$$."
-        r"\n- Fuerza sobre un dipolo en campo magnético <b>no uniforme</b>: $$\mathbf{F} = {{c4::\nabla(\mathbf{m} \cdot \mathbf{B})::fuerza sobre dipolo}}$$."))
+        r"<br>- Momento dipolar magnético: $$\mathbf{m} = {{c1::I \mathbf{A} = I A \hat{n}}}$$"
+        r"<br>- Torque magnético en campo uniforme $\mathbf{B}$: $$\boldsymbol{\tau} = {{c2::\mathbf{m} \times \mathbf{B}}}$$"
+        r"<br>- Energía potencial dipolar: $$U = {{c3::-\mathbf{m} \cdot \mathbf{B}}}$$."
+        r"<br>- Fuerza sobre un dipolo en campo magnético <b>no uniforme</b>: $$\mathbf{F} = {{c4::\nabla(\mathbf{m} \cdot \mathbf{B})}}$$."))
     course.notes.append(n12)
 
     # --------------------------------------------------------------------------
@@ -232,9 +267,9 @@ def build_electricidad_magnetismo_course() -> Course:
     n13 = NoteNode("em_13", "Ley de Biot-Savart: Metodología de 5 Pasos", 380.0, 640.0, ["EM", "Biot-Savart", "Metodología"])
     n13.add_card(ClozeCard("Fórmula Vectorial de Biot-Savart",
         r"Campo magnético generado por un elemento de corriente $I d\boldsymbol{\ell}'$ ubicado en $\mathbf{r}'$ evaluado en el punto $\mathbf{r}$:"
-        r"\n$$d\mathbf{B}(\mathbf{r}) = \frac{\mu_0 I}{4\pi} {{c1::\frac{d\boldsymbol{\ell}' \times (\mathbf{r} - \mathbf{r}')}{|\mathbf{r} - \mathbf{r}'|^3}::expresión fundamental de Biot-Savart}}$$"
-        r"\nEn términos del vector unitario de separación $\hat{\boldsymbol{\mathcal{R}}} = \frac{\mathbf{r}-\mathbf{r}'}{|\mathbf{r}-\mathbf{r}'|}$:"
-        r"\n$$d\mathbf{B}(\mathbf{r}) = \frac{\mu_0 I}{4\pi}\frac{d\boldsymbol{\ell}' \times \hat{\boldsymbol{\mathcal{R}}}}{\mathcal{R}^2}$$."))
+        r"<br>$$d\mathbf{B}(\mathbf{r}) = \frac{\mu_0 I}{4\pi} {{c1::\frac{d\boldsymbol{\ell}' \times (\mathbf{r} - \mathbf{r}')}{|\mathbf{r} - \mathbf{r}'|^3}}}$$"
+        r"<br>En términos del vector unitario de separación $\hat{\boldsymbol{\mathcal{R}}} = \frac{\mathbf{r}-\mathbf{r}'}{|\mathbf{r}-\mathbf{r}'|}$:"
+        r"<br>$$d\mathbf{B}(\mathbf{r}) = \frac{\mu_0 I}{4\pi}\frac{d\boldsymbol{\ell}' \times \hat{\boldsymbol{\mathcal{R}}}}{\mathcal{R}^2}$$."))
     n13.add_card(Flashcard("Los 5 Pasos Infalibles para Resolver Biot-Savart en Examen",
         r"Explique la metodología paso a paso para calcular el campo de Biot-Savart sin equivocarse en signos ni factores geométricos.",
         r"1. <b>Parametrizar la fuente:</b> Vector posición $\mathbf{r}'$ y elemento vectorial tangente $d\boldsymbol{\ell}'$.<br>"
@@ -256,9 +291,9 @@ def build_electricidad_magnetismo_course() -> Course:
         r"$$B = \frac{\mu_0 I}{4\pi d}(1 - (-1)) = \frac{\mu_0 I}{2\pi d}$$ con dirección azimutal $\hat{\phi}$ según la regla de la mano derecha."))
     n14.add_card(ClozeCard("Espira Circular en el Eje de Simetría",
         r"Para una espira circular de radio $R$ con corriente $I$ centrada en el origen sobre el plano $xy$:"
-        r"\n- Campo magnético en cualquier punto $z$ sobre su eje de simetría: $$\mathbf{B}(z) = {{c1::\frac{\mu_0 I R^2}{2(R^2 + z^2)^{3/2}}\hat{z}::campo axial de espira circular}}$$"
-        r"\n- En el centro de la espira ($z = 0$): $$\mathbf{B}(0) = {{c2::\frac{\mu_0 I}{2R}\hat{z}::campo en el centro}}$$"
-        r"\n- Arco circular plano de ángulo $\Delta\phi$ en su centro de curvatura: $$B = {{c3::\frac{\mu_0 I \Delta\phi}{4\pi R}::campo de arco planar}}$$."))
+        r"<br>- Campo magnético en cualquier punto $z$ sobre su eje de simetría: $$\mathbf{B}(z) = {{c1::\frac{\mu_0 I R^2}{2(R^2 + z^2)^{3/2}}\hat{z}}}$$"
+        r"<br>- En el centro de la espira ($z = 0$): $$\mathbf{B}(0) = {{c2::\frac{\mu_0 I}{2R}\hat{z}}}$$"
+        r"<br>- Arco circular plano de ángulo $\Delta\phi$ en su centro de curvatura: $$B = {{c3::\frac{\mu_0 I \Delta\phi}{4\pi R}}}$$."))
     course.notes.append(n14)
 
     # --------------------------------------------------------------------------
@@ -267,9 +302,9 @@ def build_electricidad_magnetismo_course() -> Course:
     n15 = NoteNode("em_15", "Ley de Ampère y Medios de Alta Simetría", 980.0, 640.0, ["EM", "Ampère", "Simetría"])
     n15.add_card(ClozeCard("Ley de Ampère en Formas Integral y Diferencial",
         r"La Ley de Ampère para magnetostática relaciona la circulación del campo magnético con la corriente libre encerrada:"
-        r"\n- Forma integral: $$\oint_C \mathbf{B} \cdot d\boldsymbol{\ell} = {{c1::\mu_0 I_{\text{enc}} = \mu_0 \iint_S \mathbf{J} \cdot d\mathbf{A}::circulación amperiana}}$$"
-        r"\n- Forma diferencial (rotacional): $$\nabla \times \mathbf{B} = {{c2::\mu_0 \mathbf{J}::rotacional en corrientes estacionarias}}$$"
-        r"\nPara que la ley permita despejar $|\mathbf{B}|$ algebraicamente, el lazo amperiano $C$ debe satisfacer simetría tal que $\mathbf{B}$ sea {{c3::paralelo y constante a lo largo de $C$::condición de desacoplamiento}}."))
+        r"<br>- Forma integral: $$\oint_C \mathbf{B} \cdot d\boldsymbol{\ell} = {{c1::\mu_0 I_{\text{enc}} = \mu_0 \iint_S \mathbf{J} \cdot d\mathbf{A}}}$$"
+        r"<br>- Forma diferencial (rotacional): $$\nabla \times \mathbf{B} = {{c2::\mu_0 \mathbf{J}}}$$"
+        r"<br>Para que la ley permita despejar $|\mathbf{B}|$ algebraicamente, el lazo amperiano $C$ debe satisfacer simetría tal que $\mathbf{B}$ sea {{c3::paralelo y constante a lo largo de $C$}}."))
     n15.add_card(Flashcard("Cilindro con Densidad de Corriente No Uniforme J(r)",
         r"Un conductor cilíndrico de radio $R$ conduce corriente con densidad $\mathbf{J}(r) = C r^k \hat{z}$. Calcule el campo $\mathbf{B}(r)$ en el interior ($r < R$) y en el exterior ($r > R$).",
         r"1. <b>Interior ($r < R$):</b> Lazo circular amperiano de radio $r$.<br>"
@@ -285,9 +320,9 @@ def build_electricidad_magnetismo_course() -> Course:
     n16 = NoteNode("em_16", "Magnetismo en la Materia y Campo H", 80.0, 840.0, ["EM", "Materia Magnética", "Campo H"])
     n16.add_card(ClozeCard("Magnetización M y Corrientes Ligadas",
         r"En un material magnético con magnetización $\mathbf{M}$ (momento dipolar magnético por volumen):"
-        r"\n- Densidad volumétrica de corriente ligada: $$\mathbf{J}_b = {{c1::\nabla \times \mathbf{M}::rotacional de la magnetización}}$$"
-        r"\n- Densidad superficial de corriente ligada: $$\mathbf{K}_b = {{c2::\mathbf{M} \times \hat{n}::producto cruz con la normal exterior}}$$"
-        r"\n- Campo auxiliar $\mathbf{H}$ (depende solo de corrientes libres): $$\mathbf{H} = {{c3::\frac{\mathbf{B}}{\mu_0} - \mathbf{M}::definición del campo H}}$$ y $\oint_C \mathbf{H} \cdot d\boldsymbol{\ell} = I_{f,\text{enc}}$."))
+        r"<br>- Densidad volumétrica de corriente ligada: $$\mathbf{J}_b = {{c1::\nabla \times \mathbf{M}}}$$"
+        r"<br>- Densidad superficial de corriente ligada: $$\mathbf{K}_b = {{c2::\mathbf{M} \times \hat{n}}}$$"
+        r"<br>- Campo auxiliar $\mathbf{H}$ (depende solo de corrientes libres): $$\mathbf{H} = {{c3::\frac{\mathbf{B}}{\mu_0} - \mathbf{M}}}$$ y $\oint_C \mathbf{H} \cdot d\boldsymbol{\ell} = I_{f,\text{enc}}$."))
     n16.add_card(Flashcard("Medios Magnéticos Lineales: Diamagnetismo, Paramagnetismo y Ferromagnetismo",
         r"Explique las relaciones constitutivas $\mathbf{M} = \chi_m \mathbf{H}$ y $\mathbf{B} = \mu \mathbf{H}$, distinguiendo las tres clases de materiales magnéticos.",
         r"1. <b>Relaciones constitutivas:</b> $\mathbf{B} = \mu_0(\mathbf{H} + \mathbf{M}) = \mu_0(1 + \chi_m)\mathbf{H} = \mu \mathbf{H}$, donde $\chi_m$ es la susceptibilidad y $\mu = \mu_0 \mu_r = \mu_0(1+\chi_m)$ es la permeabilidad.<br>"
@@ -302,10 +337,10 @@ def build_electricidad_magnetismo_course() -> Course:
     n17 = NoteNode("em_17", "Potencial Vector Magnético A y Gauge de Coulomb", 380.0, 840.0, ["EM", "Potencial Vector", "Gauge"])
     n17.add_card(ClozeCard("Definición y Propiedades del Potencial Vector A",
         r"Como la divergencia del campo magnético es nula ($\nabla \cdot \mathbf{B} = 0$), existe un potencial vector $\mathbf{A}$ tal que:"
-        r"\n$$\mathbf{B} = {{c1::\nabla \times \mathbf{A}::rotacional del potencial vector}}$$"
-        r"\n- Gauge de Coulomb (norma estándar en magnetostática): $$\nabla \cdot \mathbf{A} = {{c2::0::divergencia nula de A}}$$"
-        r"\n- Ecuación de Poisson para $\mathbf{A}$: $$\nabla^2 \mathbf{A} = {{c3::-\mu_0 \mathbf{J}::ecuación diferencial de Poisson}}$$"
-        r"\n- Flujo magnético a través de superficie $S$ con borde $\partial S$ (por Stokes): $$\Phi_B = \iint_S \mathbf{B} \cdot d\mathbf{A} = {{c4::\oint_{\partial S} \mathbf{A} \cdot d\boldsymbol{\ell}::circulación de A}}$$."))
+        r"<br>$$\mathbf{B} = {{c1::\nabla \times \mathbf{A}}}$$"
+        r"<br>- Gauge de Coulomb (norma estándar en magnetostática): $$\nabla \cdot \mathbf{A} = {{c2::0}}$$"
+        r"<br>- Ecuación de Poisson para $\mathbf{A}$: $$\nabla^2 \mathbf{A} = {{c3::-\mu_0 \mathbf{J}}}$$"
+        r"<br>- Flujo magnético a través de superficie $S$ con borde $\partial S$ (por Stokes): $$\Phi_B = \iint_S \mathbf{B} \cdot d\mathbf{A} = {{c4::\oint_{\partial S} \mathbf{A} \cdot d\boldsymbol{\ell}}}$$."))
     course.notes.append(n17)
 
     # --------------------------------------------------------------------------
@@ -314,9 +349,9 @@ def build_electricidad_magnetismo_course() -> Course:
     n18 = NoteNode("em_18", "Inducción Electromagnética y Ley de Faraday-Lenz", 680.0, 840.0, ["EM", "Faraday", "Lenz"])
     n18.add_card(ClozeCard("Ley de Faraday y Ley de Lenz",
         r"Principios fundamentales de la inducción electromagnética:"
-        r"\n- Ley de Faraday: La fuerza electromotriz inducida en un circuito cerrado es igual al negativo de la tasa de cambio del flujo magnético: $$\mathcal{E} = {{c1::-\frac{d\Phi_B}{dt}::tasa de variación del flujo}}$$ donde $\Phi_B = \iint_S \mathbf{B} \cdot d\mathbf{A}$."
-        r"\n- Ley de Lenz: El signo negativo indica que la corriente inducida genera un campo magnético que {{c2::se opone al cambio del flujo magnético original::principio de conservación energética}}."
-        r"\n- Forma diferencial de Maxwell-Faraday: $$\nabla \times \mathbf{E} = {{c3::-\frac{\partial \mathbf{B}}{\partial t}::campo eléctrico no conservativo}}$$."))
+        r"<br>- Ley de Faraday: La fuerza electromotriz inducida en un circuito cerrado es igual al negativo de la tasa de cambio del flujo magnético: $$\mathcal{E} = {{c1::-\frac{d\Phi_B}{dt}}}$$ donde $\Phi_B = \iint_S \mathbf{B} \cdot d\mathbf{A}$."
+        r"<br>- Ley de Lenz: El signo negativo indica que la corriente inducida genera un campo magnético que {{c2::se opone al cambio del flujo magnético original}}."
+        r"<br>- Forma diferencial de Maxwell-Faraday: $$\nabla \times \mathbf{E} = {{c3::-\frac{\partial \mathbf{B}}{\partial t}}}$$."))
     n18.add_card(ProofSequenceCard("Mecanismo Dual de Inducción: FEM de Movimiento vs Campo Eléctrico Inducido",
         r"Distinga formalmente los dos mecanismos físicos que producen FEM en la ley de Faraday.",
         [
@@ -325,6 +360,11 @@ def build_electricidad_magnetismo_course() -> Course:
             r"Mecanismo 1 (FEM de movimiento): Circuito en movimiento en campo estático $\mathbf{B}$; la fuerza de Lorentz sobre portadores móviles produce $\mathcal{E}_{\text{mov}} = \oint (\mathbf{v} \times \mathbf{B})\cdot d\boldsymbol{\ell}$.",
             r"Mecanismo 2 (Campo eléctrico inducido): Circuito en reposo en campo variable $\mathbf{B}(t)$; la variación temporal de $\mathbf{B}$ engendra un campo no conservativo $\mathbf{E}_{\text{ind}}$ tal que $\mathcal{E}_{\text{ind}} = \oint \mathbf{E}_{\text{ind}}\cdot d\boldsymbol{\ell} = -\iint_S \frac{\partial \mathbf{B}}{\partial t}\cdot d\mathbf{A} \quad \blacksquare$."
         ]))
+    n18.add_card(ClozeCard("Corrientes Parásitas (Foucault) y Frenado Electromagnético",
+        r"Cuando un conductor macizo se desplaza a través de un campo magnético no homogéneo o variable:"
+        r"<br>1. Se generan lazos de corriente inducida cerrados en la masa del metal llamados {{c1::corrientes de Foucault (eddy currents)}}."
+        r"<br>2. Según la Ley de Lenz, estas corrientes generan una fuerza magnética neta $\mathbf{F} = \int (\mathbf{J}_{\text{ind}} \times \mathbf{B}) dV$ que {{c2::se opone al movimiento relativo del conductor}} (frenado electromagnético)."
+        r"<br>3. Para mitigar las pérdidas por disipación de calor ($P = \int \mathbf{J}^2 / \sigma \, dV$) en núcleos ferromagnéticos de transformadores, se utiliza hierro {{c3::laminado con placas aisladas eléctricamente entre sí}} en vez de un bloque macizo."))
     course.notes.append(n18)
 
     # --------------------------------------------------------------------------
@@ -333,10 +373,10 @@ def build_electricidad_magnetismo_course() -> Course:
     n19 = NoteNode("em_19", "FEM de Movimiento y Rieles Deslizantes", 980.0, 840.0, ["EM", "Rieles", "Frenado Magnético"])
     n19.add_card(ClozeCard("Barra Deslizante en Rieles con Resistencia",
         r"Una barra conductora de masa $m$ y longitud $L$ se desliza a velocidad inicial $v_0$ sobre rieles paralelos sin fricción conectados por una resistencia $R$, en un campo magnético uniforme perpendicular $B \hat{z}$:"
-        r"\n- FEM inducida por movimiento: $$\mathcal{E} = {{c1::B L v::fuerza electromotriz}}$$."
-        r"\n- Corriente inducida: $$I = \frac{\mathcal{E}}{R} = \frac{B L v}{R}$$."
-        r"\n- Fuerza magnética de frenado sobre la barra: $$F_x = -I L B = {{c2::-\frac{B^2 L^2}{R}v::fuerza retardadora proporcional a v}}$$."
-        r"\n- Ecuación de movimiento: $$m \frac{dv}{dt} = -\frac{B^2 L^2}{R}v \implies v(t) = {{c3::v_0 e^{-t/\tau_m}::decaimiento exponencial}}$$, con tiempo característico $\tau_m = \frac{m R}{B^2 L^2}$."))
+        r"<br>- FEM inducida por movimiento: $$\mathcal{E} = {{c1::B L v}}$$."
+        r"<br>- Corriente inducida: $$I = \frac{\mathcal{E}}{R} = \frac{B L v}{R}$$."
+        r"<br>- Fuerza magnética de frenado sobre la barra: $$F_x = -I L B = {{c2::-\frac{B^2 L^2}{R}v}}$$."
+        r"<br>- Ecuación de movimiento: $$m \frac{dv}{dt} = -\frac{B^2 L^2}{R}v \implies v(t) = {{c3::v_0 e^{-t/\tau_m}}}$$, con tiempo característico $\tau_m = \frac{m R}{B^2 L^2}$."))
     course.notes.append(n19)
 
     # --------------------------------------------------------------------------
@@ -352,9 +392,15 @@ def build_electricidad_magnetismo_course() -> Course:
         r"4. <b>Densidad de energía magnética:</b> $u_B = \frac{B^2}{2\mu_0}$, y energía total $U_B = \frac{1}{2} L I^2$."))
     n20.add_card(ClozeCard("Transitorio RL Serie",
         r"En un circuito con fuente $\mathcal{E}$, resistencia $R$ e inductor $L$ cerrado en $t = 0$ con $i(0) = 0$:"
-        r"\n- Ecuación diferencial: $$\mathcal{E} - L\frac{di}{dt} - R i = 0$$"
-        r"\n- Crecimiento de corriente: $$i(t) = {{c1::\frac{\mathcal{E}}{R}(1 - e^{-t/\tau_L})::corriente en circuito RL}}$$ donde la constante inductiva es $\tau_L = {{c2::\frac{L}{R}::constante de tiempo RL}}$."
-        r"\n- Desconexión de la fuente: $$i(t) = {{c3::I_0 e^{-t/\tau_L}::decaimiento de corriente}}$$."))
+        r"<br>- Ecuación diferencial: $$\mathcal{E} - L\frac{di}{dt} - R i = 0$$"
+        r"<br>- Crecimiento de corriente: $$i(t) = {{c1::\frac{\mathcal{E}}{R}(1 - e^{-t/\tau_L})}}$$ donde la constante inductiva es $\tau_L = {{c2::\frac{L}{R}}}$."
+        r"<br>- Desconexión de la fuente: $$i(t) = {{c3::I_0 e^{-t/\tau_L}}}$$."))
+    n20.add_card(ClozeCard("Inductancia Mutua de Dos Solenoides Coaxiales Largos",
+        r"Considere dos solenoides coaxiales largos de longitud $\ell$: uno interior de radio $r_1$ con $N_1$ vueltas, y uno exterior de radio $r_2 > r_1$ con $N_2$ vueltas:"
+        r"<br>- Haciendo circular corriente $I_1$ en el solenoide interior: produce campo uniforme $B_1 = {{c1::\mu_0 \frac{N_1}{\ell} I_1}}$ confinado en el radio $r_1$."
+        r"<br>- Flujo a través de cada espira del solenoide 2: $\Phi_{21} = B_1 (\pi r_1^2) = \mu_0 \frac{N_1}{\ell} I_1 (\pi r_1^2)$ (limitado por el área {{c2::del solenoide interior $r_1$}})."
+        r"<br>- Inductancia mutua del sistema: $$M = \frac{N_2 \Phi_{21}}{I_1} = {{c3::\mu_0 \frac{N_1 N_2}{\ell} \pi r_1^2}}$$"
+        r"<br>- Por el teorema de reciprocidad: si circulara $I_2$ por el solenoide exterior, se obtiene exactamente {{c4::el mismo valor de $M$}}."))
     course.notes.append(n20)
 
     # --------------------------------------------------------------------------
@@ -371,11 +417,11 @@ def build_electricidad_magnetismo_course() -> Course:
         r"$$\int \frac{dx}{\sqrt{x^2 + a^2}} = \ln\left(x + \sqrt{x^2 + a^2}\right) + C$$"))
     n21.add_card(ClozeCard("Análisis Dimensional y Unidades SI en Electromagnetismo",
         r"Unidades fundamentales para verificar dimensiones en la I2:"
-        r"\n- Campo Eléctrico: $[\mathbf{E}] = {{c1::\text{V/m} = \text{N/C}::unidades de E}}$"
-        r"\n- Desplazamiento Eléctrico: $[\mathbf{D}] = {{c2::\text{C/m}^2::unidades de D}}$"
-        r"\n- Campo Magnético: $[\mathbf{B}] = {{c3::\text{T} = \frac{\text{N}}{\text{A}\cdot\text{m}} = \frac{\text{kg}}{\text{s}^2\cdot\text{A}}::unidades de B}}$"
-        r"\n- Campo Auxiliar H: $[\mathbf{H}] = {{c4::\text{A/m}::unidades de H}}$"
-        r"\n- Inductancia: $[L] = {{c5::\text{H} = \Omega \cdot \text{s} = \frac{\text{T}\cdot\text{m}^2}{\text{A}}::unidades de inductancia}}$."))
+        r"<br>- Campo Eléctrico: $[\mathbf{E}] = {{c1::\text{V/m} = \text{N/C}}}$"
+        r"<br>- Desplazamiento Eléctrico: $[\mathbf{D}] = {{c2::\text{C/m}^2}}$"
+        r"<br>- Campo Magnético: $[\mathbf{B}] = {{c3::\text{T} = \frac{\text{N}}{\text{A}\cdot\text{m}} = \frac{\text{kg}}{\text{s}^2\cdot\text{A}}}}$"
+        r"<br>- Campo Auxiliar H: $[\mathbf{H}] = {{c4::\text{A/m}}}$"
+        r"<br>- Inductancia: $[L] = {{c5::\text{H} = \Omega \cdot \text{s} = \frac{\text{T}\cdot\text{m}^2}{\text{A}}}}$."))
     course.notes.append(n21)
 
     # --------------------------------------------------------------------------

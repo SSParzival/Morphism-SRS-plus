@@ -125,6 +125,28 @@ class ReviewObject(ABC):
         return d
 
 
+def format_html_content(raw: str) -> str:
+    """Format content by normalizing literal escaped newlines and converting to <br>."""
+    if not raw:
+        return ""
+    text = raw.replace(r"\r\n", "\n").replace(r"\n", "\n").replace("/n", "\n")
+    parts = re.split(
+        r"(\$\$[\s\S]*?\$\$|<div class=['\"]math-display-container['\"]>[\s\S]*?</div>|<table[\s\S]*?</table>|<pre[\s\S]*?</pre>|<ul[\s\S]*?</ul>|<ol[\s\S]*?</ol>)",
+        text,
+    )
+    res = []
+    for p in parts:
+        if not p:
+            continue
+        if p.startswith("$$") and p.endswith("$$"):
+            res.append(p)
+        elif "math-display-container" in p or re.match(r"^<(table|pre|ul|ol)\b", p, re.I):
+            res.append(p)
+        else:
+            res.append(p.replace("\n\n", "<br><br>").replace("\n", "<br>"))
+    return "".join(res)
+
+
 class Flashcard(ReviewObject):
     """Standard Flashcard with LaTeX MathJax support."""
     def __init__(self, title: str, front: str, back: str, item_id: Optional[Any] = None):
@@ -137,10 +159,10 @@ class Flashcard(ReviewObject):
         return self.title
 
     def get_html_front(self) -> str:
-        return f"<div class='card-title'>{self.title}</div><div class='card-body'>{self.front}</div>"
+        return f"<div class='card-title'>{self.title}</div><div class='card-body'>{format_html_content(self.front)}</div>"
 
     def get_html_back(self) -> str:
-        return f"<div class='card-body'>{self.back}</div>"
+        return f"<div class='card-body'>{format_html_content(self.back)}</div>"
 
     def to_dict(self, include_scheduling: bool = True) -> Dict[str, Any]:
         d = super().to_dict(include_scheduling=include_scheduling)
@@ -163,6 +185,76 @@ class ClozeCard(ReviewObject):
         return self.title
 
     @staticmethod
+    def _replace_clozes(text: str, is_back: bool, in_math: bool = False, is_display: bool = False) -> str:
+        pattern = re.compile(r"\{\{c(\d+)::")
+        pieces = []
+        last_idx = 0
+        i = 0
+        while i < len(text):
+            m = pattern.search(text, i)
+            if not m:
+                break
+            start = m.start()
+            content_start = m.end()
+            depth = 2
+            j = content_start
+            while j < len(text) and depth > 0:
+                if text[j] == "{" and j + 1 < len(text) and text[j + 1] == "{":
+                    depth += 2
+                    j += 2
+                elif text[j] == "{":
+                    depth += 1
+                    j += 1
+                elif text[j] == "}" and depth > 2:
+                    depth -= 1
+                    j += 1
+                elif text[j] == "}" and j + 1 < len(text) and text[j + 1] == "}" and depth == 2:
+                    depth = 0
+                    j += 2
+                    break
+                elif text[j] == "}":
+                    depth -= 1
+                    j += 1
+                else:
+                    j += 1
+
+            if depth == 0:
+                content = text[content_start : j - 2]
+                prefix = text[last_idx:start]
+                if in_math:
+                    if prefix.strip():
+                        pieces.append(f"$\\displaystyle {prefix}$" if is_display else f"${prefix}$")
+                else:
+                    pieces.append(prefix)
+
+                c_parts = content.split("::", 1)
+                if not is_back:
+                    hint = c_parts[1].strip() if len(c_parts) > 1 else "..."
+                    pieces.append(f"<span class='cloze-bracket'>[{hint}]</span>")
+                else:
+                    ans = c_parts[0].strip()
+                    if in_math:
+                        pieces.append(
+                            f"<span class='cloze-revealed'>$\\displaystyle {ans}$</span>"
+                            if is_display
+                            else f"<span class='cloze-revealed'>${ans}$</span>"
+                        )
+                    else:
+                        pieces.append(f"<span class='cloze-revealed'>{ans}</span>")
+                last_idx = j
+                i = j
+            else:
+                i = content_start
+
+        suffix = text[last_idx:]
+        if in_math:
+            if suffix.strip():
+                pieces.append(f"$\\displaystyle {suffix}$" if is_display else f"${suffix}$")
+        else:
+            pieces.append(suffix)
+        return "".join(pieces)
+
+    @staticmethod
     def _process_cloze_math(text: str, is_back: bool) -> str:
         if not text:
             return ""
@@ -171,55 +263,24 @@ class ClozeCard(ReviewObject):
             block = math_match.group(0)
             is_display = block.startswith("$$")
             delim = "$$" if is_display else "$"
-            inner = block[len(delim):-len(delim)]
+            inner = block[len(delim) : -len(delim)]
             if not re.search(r"\{\{c\d+::", inner):
                 return block
 
-            parts = re.split(r"(\{\{c\d+::.*?\}\})", inner, flags=re.DOTALL)
-            res = []
-            for p in parts:
-                m = re.match(r"^\{\{c\d+::(.*?)\}\}$", p, flags=re.DOTALL)
-                if m:
-                    if not is_back:
-                        c_parts = m.group(1).split("::", 1)
-                        hint = c_parts[1].strip() if len(c_parts) > 1 else "..."
-                        res.append(f"<span class='cloze-bracket'>[{hint}]</span>")
-                    else:
-                        ans = m.group(1).split("::", 1)[0].strip()
-                        if is_display:
-                            res.append(f"<span class='cloze-revealed'>$\\displaystyle {ans}$</span>")
-                        else:
-                            res.append(f"<span class='cloze-revealed'>${ans}$</span>")
-                elif p.strip():
-                    if is_display:
-                        res.append(f"$\\displaystyle {p}$")
-                    else:
-                        res.append(f"${p}$")
-            content = "".join(res)
+            res = ClozeCard._replace_clozes(inner, is_back=is_back, in_math=True, is_display=is_display)
             if is_display:
-                return f"<div class='math-display-container'>{content}</div>"
-            return content
+                return f"<div class='math-display-container'>{res}</div>"
+            return res
 
         out = re.sub(r"(\$\$[\s\S]*?\$\$|\$[^\$]+?\$)", math_repl, text)
-
-        def text_repl(m):
-            if not is_back:
-                c_parts = m.group(1).split("::", 1)
-                hint = c_parts[1].strip() if len(c_parts) > 1 else "..."
-                return f"<span class='cloze-bracket'>[{hint}]</span>"
-            else:
-                ans = m.group(1).split("::", 1)[0]
-                return f"<span class='cloze-revealed'>{ans}</span>"
-
-        out = re.sub(r"\{\{c\d+::(.*?)\}\}", text_repl, out, flags=re.DOTALL)
-        return out
+        return ClozeCard._replace_clozes(out, is_back=is_back, in_math=False, is_display=False)
 
     def get_html_front(self) -> str:
-        front_text = self._process_cloze_math(self.text, is_back=False)
+        front_text = format_html_content(self._process_cloze_math(self.text, is_back=False))
         return f"<div class='card-title'>{self.title}</div><div class='card-body'>{front_text}</div>"
 
     def get_html_back(self) -> str:
-        back_text = self._process_cloze_math(self.text, is_back=True)
+        back_text = format_html_content(self._process_cloze_math(self.text, is_back=True))
         return f"<div class='card-body'>{back_text}</div>"
 
     def to_dict(self, include_scheduling: bool = True) -> Dict[str, Any]:
@@ -244,10 +305,10 @@ class ProofSequenceCard(ReviewObject):
         return self.title
 
     def get_html_front(self) -> str:
-        return f"<div class='card-title'>{self.title}</div><div class='card-body'><strong>Premise / Goal:</strong><br>{self.premise}</div>"
+        return f"<div class='card-title'>{self.title}</div><div class='card-body'><strong>Premise / Goal:</strong><br>{format_html_content(self.premise)}</div>"
 
     def get_html_back(self) -> str:
-        steps_html = "".join([f"<li class='proof-step'>Step {i+1}: {step}</li>" for i, step in enumerate(self.steps)])
+        steps_html = "".join([f"<li class='proof-step'>Step {i+1}: {format_html_content(step)}</li>" for i, step in enumerate(self.steps)])
         return f"<div class='card-body'><strong>Complete Proof:</strong><ol class='proof-list'>{steps_html}</ol></div>"
 
     def to_dict(self, include_scheduling: bool = True) -> Dict[str, Any]:

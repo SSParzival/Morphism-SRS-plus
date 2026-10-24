@@ -34,12 +34,14 @@ content = content[:start_idx] + new_seed_str + content[end_idx + len(end_needle)
 content = content.replace('p1.split("::", 1)', 'p1.split("::")')
 
 # Update storage keys to ensure automatic migration on mobile
-content = content.replace('"morphism_courses"', '"morphism_courses_v4"')
-content = content.replace('"morphism_courses_v2"', '"morphism_courses_v4"')
-content = content.replace('"morphism_courses_v3"', '"morphism_courses_v4"')
-content = content.replace('"morphism_active_course"', '"morphism_active_course_v4"')
-content = content.replace('"morphism_active_course_v2"', '"morphism_active_course_v4"')
-content = content.replace('"morphism_active_course_v3"', '"morphism_active_course_v4"')
+content = content.replace('"morphism_courses"', '"morphism_courses_v5"')
+content = content.replace('"morphism_courses_v2"', '"morphism_courses_v5"')
+content = content.replace('"morphism_courses_v3"', '"morphism_courses_v5"')
+content = content.replace('"morphism_courses_v4"', '"morphism_courses_v5"')
+content = content.replace('"morphism_active_course"', '"morphism_active_course_v5"')
+content = content.replace('"morphism_active_course_v2"', '"morphism_active_course_v5"')
+content = content.replace('"morphism_active_course_v3"', '"morphism_active_course_v5"')
+content = content.replace('"morphism_active_course_v4"', '"morphism_active_course_v5"')
 
 # Update restore message
 content = content.replace(

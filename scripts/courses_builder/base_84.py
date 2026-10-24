@@ -24,23 +24,23 @@ def build_electricidad_magnetismo_course() -> Course:
     # 1. Álgebra Vectorial y Operadores Curvilíneos
     n1 = NoteNode("em_01", "Álgebra Vectorial y Operadores Curvilíneos", 80.0, 80.0, ["EM", "Vectores", "Operadores"])
     n1.add_card(ClozeCard("Regla BAC-CAB e Identidades de Rotacional",
-        r"Triple producto vectorial: $$\mathbf{A} \times (\mathbf{B} \times \mathbf{C}) = {{c1::\mathbf{B}(\mathbf{A}\cdot\mathbf{C}) - \mathbf{C}(\mathbf{A}\cdot\mathbf{B})::regla BAC-CAB}}$$"
-        r"\nIdentidades diferenciales nulas: $\nabla \times (\nabla f) = {{c2::\mathbf{0}::rotacional del gradiente}}$ y $\nabla \cdot (\nabla \times \mathbf{A}) = {{c3::0::divergencia del rotacional}}$."))
+        r"Triple producto vectorial: $$\mathbf{A} \times (\mathbf{B} \times \mathbf{C}) = {{c1::\mathbf{B}(\mathbf{A}\cdot\mathbf{C}) - \mathbf{C}(\mathbf{A}\cdot\mathbf{B})}}$$"
+        r"<br>Identidades diferenciales nulas: $\nabla \times (\nabla f) = {{c2::\mathbf{0}}}$ y $\nabla \cdot (\nabla \times \mathbf{A}) = {{c3::0}}$."))
     n1.add_card(Flashcard("Operadores en Coordenadas Cilíndricas y Esféricas",
         r"Escriba la divergencia $\nabla \cdot \mathbf{A}$ en cilíndricas y esféricas.",
         r"1. <b>Cilíndricas $(r, \theta, z)$:</b> $\nabla \cdot \mathbf{A} = \frac{1}{r}\partial_r(r A_r) + \frac{1}{r}\partial_\theta A_\theta + \partial_z A_z$.<br>"
         r"2. <b>Esféricas $(r, \theta, \phi)$:</b> $\nabla \cdot \mathbf{A} = \frac{1}{r^2}\partial_r(r^2 A_r) + \frac{1}{r\sin\theta}\partial_\theta(\sin\theta A_\theta) + \frac{1}{r\sin\theta}\partial_\phi A_\phi$."))
     n1.add_card(ClozeCard("Laplaciano Vectorial y Teorema de Stokes",
-        r"El laplaciano de un campo vectorial se descompone como: $$\nabla^2 \mathbf{A} = {{c1::\nabla(\nabla \cdot \mathbf{A}) - \nabla \times (\nabla \times \mathbf{A})::descomposición de laplaciano vectorial}}$$"
-        r"\nTeorema de Stokes: $\oint_{\partial S} \mathbf{A} \cdot d\boldsymbol{\ell} = {{c2::\iint_S (\nabla \times \mathbf{A}) \cdot d\mathbf{S}::integral de rotacional}}$."))
+        r"El laplaciano de un campo vectorial se descompone como: $$\nabla^2 \mathbf{A} = {{c1::\nabla(\nabla \cdot \mathbf{A}) - \nabla \times (\nabla \times \mathbf{A})}}$$"
+        r"<br>Teorema de Stokes: $\oint_{\partial S} \mathbf{A} \cdot d\boldsymbol{\ell} = {{c2::\iint_S (\nabla \times \mathbf{A}) \cdot d\mathbf{S}}}$."))
     course.notes.append(n1)
 
     # 2. Polarización P y Cargas Ligadas
     n2 = NoteNode("em_02", "Polarización P y Cargas Ligadas", 380.0, 80.0, ["EM", "Polarización", "Cargas Ligadas"])
     n2.add_card(ClozeCard("Definición de Cargas Ligadas",
         r"A partir del vector polarización $\mathbf{P}$:"
-        r"\n- Densidad volumétrica ligada: $\rho_b = {{c1::-\nabla \cdot \mathbf{P}::densidad volumétrica}}$"
-        r"\n- Densidad superficial ligada: $\sigma_b = {{c2::\mathbf{P} \cdot \hat{n}::densidad superficial en la interfaz}}$."))
+        r"<br>- Densidad volumétrica ligada: $\rho_b = {{c1::-\nabla \cdot \mathbf{P}}}$"
+        r"<br>- Densidad superficial ligada: $\sigma_b = {{c2::\mathbf{P} \cdot \hat{n}}}$."))
     n2.add_card(ProofSequenceCard("Carga Ligada Total Nula en Dieléctricos Neutros",
         r"Demostrar que la carga ligada neta de un dieléctrico neutro cerrado es idénticamente cero.",
         [
@@ -58,8 +58,8 @@ def build_electricidad_magnetismo_course() -> Course:
     # 3. Desplazamiento Eléctrico D y Ley de Gauss
     n3 = NoteNode("em_03", "Desplazamiento Eléctrico D y Ley de Gauss", 680.0, 80.0, ["EM", "Gauss", "Desplazamiento"])
     n3.add_card(ClozeCard("Ley de Gauss en Dieléctricos",
-        r"El vector desplazamiento se define como $\mathbf{D} = {{c1::\varepsilon_0 \mathbf{E} + \mathbf{P}::relación D, E, P}}$."
-        r"\nLey de Gauss en dieléctricos: $\nabla \cdot \mathbf{D} = {{c2::\rho_f::solo carga libre}}$ y $\oint \mathbf{D} \cdot d\mathbf{A} = {{c3::Q_{f,\text{enc}}::carga libre encerrada}}$."))
+        r"El vector desplazamiento se define como $\mathbf{D} = {{c1::\varepsilon_0 \mathbf{E} + \mathbf{P}}}$."
+        r"<br>Ley de Gauss en dieléctricos: $\nabla \cdot \mathbf{D} = {{c2::\rho_f}}$ y $\oint \mathbf{D} \cdot d\mathbf{A} = {{c3::Q_{f,\text{enc}}}}$."))
     n3.add_card(Flashcard("Relaciones Constitutivas en Medios LHI",
         r"En un dieléctrico Lineal, Homogéneo e Isótropo (LHI), ¿cuáles son las relaciones entre $\mathbf{P}, \mathbf{E}, \mathbf{D}, \chi_e, \kappa$ y $\varepsilon$?",
         r"1. $\mathbf{P} = \varepsilon_0 \chi_e \mathbf{E} = (\varepsilon - \varepsilon_0)\mathbf{E}$.<br>"
@@ -71,9 +71,9 @@ def build_electricidad_magnetismo_course() -> Course:
     n4 = NoteNode("em_04", "Condiciones de Borde y Refracción de Líneas", 980.0, 80.0, ["EM", "Condiciones de Borde", "Interfaces"])
     n4.add_card(ClozeCard("Continuidad y Salto en la Interfaz",
         r"En la interfaz entre dos dieléctricos:"
-        r"\n- Componente tangencial: ${{c1::E_{1t} - E_{2t} = 0::continuidad tangencial}}$ (pues $\nabla \times \mathbf{E} = \mathbf{0}$)."
-        r"\n- Componente normal: ${{c2::D_{1n} - D_{2n} = \sigma_f::salto normal por carga libre}}$."
-        r"\nSi no hay carga libre ($\sigma_f = 0$): $D_{1n} = D_{2n} \iff \varepsilon_1 E_{1n} = \varepsilon_2 E_{2n}$."))
+        r"<br>- Componente tangencial: ${{c1::E_{1t} - E_{2t} = 0}}$ (pues $\nabla \times \mathbf{E} = \mathbf{0}$)."
+        r"<br>- Componente normal: ${{c2::D_{1n} - D_{2n} = \sigma_f}}$."
+        r"<br>Si no hay carga libre ($\sigma_f = 0$): $D_{1n} = D_{2n} \iff \varepsilon_1 E_{1n} = \varepsilon_2 E_{2n}$."))
     n4.add_card(Flashcard("Ley de Refracción de Líneas de Campo Eléctrico",
         r"Deduzca la relación entre los ángulos de incidencia y refracción $(\theta_1, \theta_2)$ respecto a la normal en una interfaz sin cargas libres.",
         r"Por condiciones de borde:<br>"
@@ -83,8 +83,8 @@ def build_electricidad_magnetismo_course() -> Course:
         r"$$\frac{\tan\theta_1}{\tan\theta_2} = \frac{\varepsilon_1}{\varepsilon_2} = \frac{\kappa_1}{\kappa_2}$$"))
     n4.add_card(ClozeCard("Interfaz Conductor-Dieléctrico",
         r"En la superficie de un conductor ideal en equilibrio en contacto con dieléctrico $\varepsilon$:"
-        r"\n- Campo tangencial: $E_t = {{c1::0::conductor equipotencial}}$."
-        r"\n- Campo normal exterior: $E_n = {{c2::\frac{\sigma_f}{\varepsilon}::campo en superficie con dieléctrico}}$."))
+        r"<br>- Campo tangencial: $E_t = {{c1::0}}$."
+        r"<br>- Campo normal exterior: $E_n = {{c2::\frac{\sigma_f}{\varepsilon}}}$."))
     course.notes.append(n4)
 
     # 5. Esfera y Cilindro Dieléctrico en Campo Exterior
@@ -96,16 +96,16 @@ def build_electricidad_magnetismo_course() -> Course:
         r"3. <b>Cargas Ligadas:</b> $\rho_b = 0$, y $\sigma_b = P \cos\theta$."))
     n5.add_card(ClozeCard("Cilindro Dieléctrico en Campo Transversal",
         r"Para un cilindro dieléctrico infinito en campo uniforme perpendicular $\mathbf{E}_0$:"
-        r"\n- Campo eléctrico interior: $\mathbf{E}_{\text{int}} = {{c1::\frac{2}{\kappa + 1} \mathbf{E}_0::campo interior cilindro}}$"
-        r"\n- Polarización interior: $\mathbf{P} = {{c2::2\varepsilon_0 \frac{\kappa - 1}{\kappa + 1} \mathbf{E}_0::polarización cilindro}}$."))
+        r"<br>- Campo eléctrico interior: $\mathbf{E}_{\text{int}} = {{c1::\frac{2}{\kappa + 1} \mathbf{E}_0}}$"
+        r"<br>- Polarización interior: $\mathbf{P} = {{c2::2\varepsilon_0 \frac{\kappa - 1}{\kappa + 1} \mathbf{E}_0}}$."))
     course.notes.append(n5)
 
     # 6. Capacitancia con Dieléctricos Múltiples
     n6 = NoteNode("em_06", "Capacitancia y Medios Multicapa", 80.0, 340.0, ["EM", "Capacitancia", "Multicapa"])
     n6.add_card(ClozeCard("Capas Dieléctricas en Serie vs Paralelo",
         r"En capacitores de placas paralelas:"
-        r"\n- Capas perpendiculares a $\mathbf{E}$ (apiladas en espesor): suman en {{c1::serie::serie o paralelo}}, $\frac{1}{C} = \sum \frac{d_i}{\varepsilon_i A}$."
-        r"\n- Capas paralelas a $\mathbf{E}$ (yuxtapuestas en área): suman en {{c2::paralelo::serie o paralelo}}, $C = \sum \frac{\varepsilon_i A_i}{d}$."))
+        r"<br>- Capas perpendiculares a $\mathbf{E}$ (apiladas en espesor): suman en {{c1::serie}}, $\frac{1}{C} = \sum \frac{d_i}{\varepsilon_i A}$."
+        r"<br>- Capas paralelas a $\mathbf{E}$ (yuxtapuestas en área): suman en {{c2::paralelo}}, $C = \sum \frac{\varepsilon_i A_i}{d}$."))
     n6.add_card(Flashcard("Capacitancia Cilíndrica y Esférica con Dieléctrico",
         r"Escriba la capacitancia de un cable coaxial ($a < b$, largo $L$) y de un capacitor esférico ($a < b$) llenos de dieléctrico $\varepsilon$.",
         r"1. <b>Cilíndrico:</b> $C = \frac{2\pi \varepsilon L}{\ln(b/a)}$.<br>"
@@ -116,9 +116,9 @@ def build_electricidad_magnetismo_course() -> Course:
     n7 = NoteNode("em_07", "Energía y Fuerzas sobre Dieléctricos", 380.0, 340.0, ["EM", "Energía", "Fuerza Virtual"])
     n7.add_card(ClozeCard("Fuerza Electrostática: Carga vs Voltaje Constante",
         r"Por el método del trabajo virtual, la fuerza sobre un dieléctrico móvil es:"
-        r"\n- A carga constante $Q$: $F_x = {{c1::-\left(\frac{\partial U}{\partial x}\right)_Q::derivada a Q fijo}}$"
-        r"\n- A voltaje constante $V$: $F_x = {{c2::+\left(\frac{\partial U}{\partial x}\right)_V = +\frac{1}{2} V^2 \frac{dC}{dx}::derivada a V fijo}}$."
-        r"\nEl dieléctrico es siempre {{c3::succionado hacia el interior del capacitor::dirección de la fuerza}}."))
+        r"<br>- A carga constante $Q$: $F_x = {{c1::-\left(\frac{\partial U}{\partial x}\right)_Q}}$"
+        r"<br>- A voltaje constante $V$: $F_x = {{c2::+\left(\frac{\partial U}{\partial x}\right)_V = +\frac{1}{2} V^2 \frac{dC}{dx}}}$."
+        r"<br>El dieléctrico es siempre {{c3::succionado hacia el interior del capacitor}}."))
     n7.add_card(ProofSequenceCard("Fuerza sobre Placa Dieléctrica Parcialmente Insertada",
         r"Calcular la fuerza $F_x$ sobre una lámina dieléctrica de ancho $w$ y espesor $d$ insertada distancia $x$ a voltaje fijo $V$.",
         [
@@ -129,23 +129,23 @@ def build_electricidad_magnetismo_course() -> Course:
         ]))
     n7.add_card(ClozeCard("Presión Electrostática en Conductor",
         r"La fuerza por unidad de área (presión electrostática hacia el exterior) en la superficie de un conductor cargado es:"
-        r"\n$$P_{\text{es}} = {{c1::\frac{\sigma^2}{2\varepsilon_0} = \frac{1}{2} \varepsilon_0 E^2::presión electrostática}}$$"
-        r"\nSiempre está dirigida hacia {{c2::el exterior del conductor::dirección de la presión}} independientemente del signo de $\sigma$."))
+        r"<br>$$P_{\text{es}} = {{c1::\frac{\sigma^2}{2\varepsilon_0} = \frac{1}{2} \varepsilon_0 E^2}}$$"
+        r"<br>Siempre está dirigida hacia {{c2::el exterior del conductor}} independientemente del signo de $\sigma$."))
     course.notes.append(n7)
 
     # 8. Corriente Eléctrica, Densidad J y Continuidad
     n8 = NoteNode("em_08", "Corriente y Ecuación de Continuidad", 680.0, 340.0, ["EM", "Corriente", "Densidad J", "Continuidad"])
     n8.add_card(ClozeCard("Ecuación de Continuidad y Tiempo de Relajación",
-        r"Conservación de la carga: $\nabla \cdot \mathbf{J} + {{c1::\frac{\partial \rho}{\partial t}::derivada temporal de carga}} = 0$."
-        r"\nEn un conductor óhmico homogéneo: $\rho(t) = \rho_0 e^{-t/\tau_{\text{rel}}}$ con tiempo de relajación $\tau_{\text{rel}} = {{c2::\frac{\varepsilon}{\sigma}::tiempo de relajación de carga}}$."))
+        r"Conservación de la carga: $\nabla \cdot \mathbf{J} + {{c1::\frac{\partial \rho}{\partial t}}} = 0$."
+        r"<br>En un conductor óhmico homogéneo: $\rho(t) = \rho_0 e^{-t/\tau_{\text{rel}}}$ con tiempo de relajación $\tau_{\text{rel}} = {{c2::\frac{\varepsilon}{\sigma}}}$."))
     course.notes.append(n8)
 
     # 9. Modelo de Drude, Ley de Ohm y Teorema Dual RC
     n9 = NoteNode("em_09", "Modelo de Drude y Teorema Dual RC", 980.0, 340.0, ["EM", "Drude", "Ohm", "Teorema Dual"])
     n9.add_card(ClozeCard("Conductividad de Drude y Teorema Dual RC",
-        r"Conductividad microscópica según Drude: $\sigma = {{c1::\frac{n q^2 \tau}{m}::conductividad de Drude}}$."
-        r"\nTeorema Dual RC entre resistencia y capacitancia para cualquier geometría en medio LHI:"
-        r"\n$$R \cdot C = {{c2::\frac{\varepsilon}{\sigma} = \rho_e \varepsilon::producto RC geométrico}}$$"))
+        r"Conductividad microscópica según Drude: $\sigma = {{c1::\frac{n q^2 \tau}{m}}}$."
+        r"<br>Teorema Dual RC entre resistencia y capacitancia para cualquier geometría en medio LHI:"
+        r"<br>$$R \cdot C = {{c2::\frac{\varepsilon}{\sigma} = \rho_e \varepsilon}}$$"))
     n9.add_card(Flashcard("Resistencia de Puesta a Tierra Semiesférica",
         r"Calcule la resistencia de puesta a tierra de un electrodo semiesférico de radio $a$ enterrado en suelo con conductividad $\sigma$.",
         r"1. Por simetría radial, la corriente $I$ fluye por la semiesfera de área $2\pi r^2$: $J(r) = \frac{I}{2\pi r^2}$.<br>"
@@ -158,9 +158,9 @@ def build_electricidad_magnetismo_course() -> Course:
     n10 = NoteNode("em_10", "Circuitos DC y Equivalentes de Thévenin", 1280.0, 340.0, ["EM", "Circuitos", "Thévenin", "Norton"])
     n10.add_card(ClozeCard("Equivalentes de Thévenin, Norton y Máxima Potencia",
         r"Equivalentes de red lineal:"
-        r"\n- Thévenin: Fuente $V_{th}$ en serie con $R_{th}$."
-        r"\n- Norton: Fuente de corriente $I_N = {{c1::\frac{V_{th}}{R_{th}}::corriente Norton}}$ en paralelo con $R_{th}$."
-        r"\n- Condición de máxima potencia transferida a $R_L$: $R_L = {{c2::R_{th}::condición}}$ con $P_{\max} = {{c3::\frac{V_{th}^2}{4 R_{th}}::potencia máxima}}$."))
+        r"<br>- Thévenin: Fuente $V_{th}$ en serie con $R_{th}$."
+        r"<br>- Norton: Fuente de corriente $I_N = {{c1::\frac{V_{th}}{R_{th}}}}$ en paralelo con $R_{th}$."
+        r"<br>- Condición de máxima potencia transferida a $R_L$: $R_L = {{c2::R_{th}}}$ con $P_{\max} = {{c3::\frac{V_{th}^2}{4 R_{th}}}}$."))
     course.notes.append(n10)
 
     # 11. Transitorios RC y Balance Energético
@@ -184,8 +184,8 @@ def build_electricidad_magnetismo_course() -> Course:
     n12 = NoteNode("em_12", "Fuerza de Lorentz y Movimiento Helicoidal", 380.0, 600.0, ["EM", "Lorentz", "Ciclotrón", "Larmor"])
     n12.add_card(ClozeCard("Fuerza de Lorentz y Radio Ciclotrónico",
         r"Fuerza total: $\mathbf{F} = q(\mathbf{E} + \mathbf{v}\times\mathbf{B})$."
-        r"\nLa potencia del campo magnético es $P = \mathbf{F}_B \cdot \mathbf{v} = {{c1::0::potencia nula}}$, por lo que {{c2::nunca altera la energía cinética::efecto magnético}}."
-        r"\nRadio ciclotrón: $r_c = {{c3::\frac{m v_\perp}{q B}::radio ciclotrón}}$, período: $T = {{c4::\frac{2\pi m}{q B}::período}}$."))
+        r"<br>La potencia del campo magnético es $P = \mathbf{F}_B \cdot \mathbf{v} = {{c1::0}}$, por lo que {{c2::nunca altera la energía cinética}}."
+        r"<br>Radio ciclotrón: $r_c = {{c3::\frac{m v_\perp}{q B}}}$, período: $T = {{c4::\frac{2\pi m}{q B}}}$."))
     n12.add_card(Flashcard("Paso de la Trayectoria Helicoidal",
         r"Si una partícula entra a un campo $\mathbf{B}$ con ángulo $\alpha$ respecto a las líneas de campo, ¿cuál es el paso de avance $p$?",
         r"1. Componente paralela constante: $v_\parallel = v \cos\alpha$.<br>"
@@ -196,28 +196,28 @@ def build_electricidad_magnetismo_course() -> Course:
     # 13. Efecto Hall y Selector de Velocidades
     n13 = NoteNode("em_13", "Efecto Hall y Selector de Wien", 680.0, 600.0, ["EM", "Hall", "Wien", "Portadores"])
     n13.add_card(ClozeCard("Fórmulas del Efecto Hall y Selector",
-        r"- Selector de velocidades con $\mathbf{E} \perp \mathbf{B}$: velocidad filtrada $v = {{c1::\frac{E}{B}::velocidad de Wien}}$."
-        r"\n- Voltaje de Hall en cinta de espesor $t$: $\Delta V_H = {{c2::\frac{I B}{n q t} = R_H \frac{I B}{t}::voltaje de Hall}}$."
-        r"\n- Coeficiente de Hall: $R_H = {{c3::\frac{1}{nq}::coeficiente RH}}$, cuyo signo revela el tipo de portadores mayoritarios."))
+        r"- Selector de velocidades con $\mathbf{E} \perp \mathbf{B}$: velocidad filtrada $v = {{c1::\frac{E}{B}}}$."
+        r"<br>- Voltaje de Hall en cinta de espesor $t$: $\Delta V_H = {{c2::\frac{I B}{n q t} = R_H \frac{I B}{t}}}$."
+        r"<br>- Coeficiente de Hall: $R_H = {{c3::\frac{1}{nq}}}$, cuyo signo revela el tipo de portadores mayoritarios."))
     course.notes.append(n13)
 
     # 14. Fuerza de Laplace, Espiras y Dipolos Magnéticos
     n14 = NoteNode("em_14", "Fuerzas y Torques sobre Espiras y Dipolos", 980.0, 600.0, ["EM", "Laplace", "Dipolo", "Torque"])
     n14.add_card(ClozeCard("Fuerza y Torque sobre Espiras",
-        r"Fuerza elemental sobre corriente: $d\mathbf{F} = {{c1::I d\boldsymbol{\ell} \times \mathbf{B}::fuerza diferencial}}$."
-        r"\nPara una espira plana de área vectorial $\mathbf{A}$ con corriente $I$:"
-        r"\n- Momento dipolar: $\boldsymbol{\mu} = {{c2::I \mathbf{A}::momento dipolar}}$"
-        r"\n- Torque: $\boldsymbol{\tau} = {{c3::\boldsymbol{\mu} \times \mathbf{B}::torque}}$"
-        r"\n- Energía potencial: $U = {{c4::-\boldsymbol{\mu} \cdot \mathbf{B}::energía potencial}}$."))
+        r"Fuerza elemental sobre corriente: $d\mathbf{F} = {{c1::I d\boldsymbol{\ell} \times \mathbf{B}}}$."
+        r"<br>Para una espira plana de área vectorial $\mathbf{A}$ con corriente $I$:"
+        r"<br>- Momento dipolar: $\boldsymbol{\mu} = {{c2::I \mathbf{A}}}$"
+        r"<br>- Torque: $\boldsymbol{\tau} = {{c3::\boldsymbol{\mu} \times \mathbf{B}}}$"
+        r"<br>- Energía potencial: $U = {{c4::-\boldsymbol{\mu} \cdot \mathbf{B}}}$."))
     course.notes.append(n14)
 
     # 15. Ley de Biot-Savart y Alambres Conductores
     n15 = NoteNode("em_15", "Ley de Biot-Savart y Alambres Conductores", 1280.0, 600.0, ["EM", "Biot-Savart", "Alambres"])
     n15.add_card(ClozeCard("Fórmulas de Biot-Savart para Alambres",
         r"Ley de Biot-Savart: $d\mathbf{B} = \frac{\mu_0 I}{4\pi}\frac{d\boldsymbol{\ell}\times\hat{r}}{r^2}$."
-        r"\n- Segmento finito entre $\theta_1$ y $\theta_2$: $B = {{c1::\frac{\mu_0 I}{4\pi d}(\sin\theta_2 - \sin\theta_1)::segmento finito}}$."
-        r"\n- Hilo infinito: $B = {{c2::\frac{\mu_0 I}{2\pi d}::hilo infinito}}$."
-        r"\n- Puntos colineales en la prolongación del alambre: $B = {{c3::0::campo nulo en prolongación}}$."))
+        r"<br>- Segmento finito entre $\theta_1$ y $\theta_2$: $B = {{c1::\frac{\mu_0 I}{4\pi d}(\sin\theta_2 - \sin\theta_1)}}$."
+        r"<br>- Hilo infinito: $B = {{c2::\frac{\mu_0 I}{2\pi d}}}$."
+        r"<br>- Puntos colineales en la prolongación del alambre: $B = {{c3::0}}$."))
     course.notes.append(n15)
 
     # 16. Espiras Circulares, Arcos y Bobinas de Helmholtz
@@ -239,17 +239,17 @@ def build_electricidad_magnetismo_course() -> Course:
         r"3. Las variaciones espaciales son de orden cuatro ($O(z^4)$), logrando la máxima uniformidad magnética experimental."))
     n16.add_card(ClozeCard("Campo en el Centro de un Arco Circular",
         r"Para un arco circular de radio $R$ que subtiende un ángulo $\alpha$ (en radianes) con corriente $I$:"
-        r"\n$$B_{\text{centro}} = {{c1::\frac{\mu_0 I \alpha}{4\pi R}::campo de arco circular}}$$"
-        r"\nSi es una espira completa ($\alpha = 2\pi$): $B = \frac{\mu_0 I}{2R}$."))
+        r"<br>$$B_{\text{centro}} = {{c1::\frac{\mu_0 I \alpha}{4\pi R}}}$$"
+        r"<br>Si es una espira completa ($\alpha = 2\pi$): $B = \frac{\mu_0 I}{2R}$."))
     course.notes.append(n16)
 
     # 17. Fuerzas entre Conductores Paralelos y Espiras Coplanares
     n17 = NoteNode("em_17", "Fuerzas entre Conductores y Espiras Coplanares", 380.0, 860.0, ["EM", "Fuerza Magnética", "Espira Coplanar"])
     n17.add_card(ClozeCard("Fuerza entre Hilos Paralelos",
         r"Fuerza por unidad de longitud entre dos conductores paralelos separados distancia $d$:"
-        r"\n$$\frac{F}{L} = {{c1::\frac{\mu_0 I_1 I_2}{2\pi d}::fuerza por longitud}}$$"
-        r"\n- Corrientes en el mismo sentido: se {{c2::atraen::atracción o repulsión}}."
-        r"\n- Corrientes en sentidos opuestos: se {{c3::repelen::atracción o repulsión}}."))
+        r"<br>$$\frac{F}{L} = {{c1::\frac{\mu_0 I_1 I_2}{2\pi d}}}$$"
+        r"<br>- Corrientes en el mismo sentido: se {{c2::atraen}}."
+        r"<br>- Corrientes en sentidos opuestos: se {{c3::repelen}}."))
     n17.add_card(Flashcard("Fuerza Neta sobre Espira Coplanar a Hilo Infinito",
         r"Una espira rectangular de lados $a$ (paralelo) y $b$ (perpendicular) con corriente $I_2$ se sitúa a distancia $d$ de un hilo largo con corriente $I_1$. Calcule la fuerza neta.",
         r"1. Los lados perpendiculares sufren fuerzas opuestas que se cancelan vectorialmente.<br>"
@@ -261,19 +261,19 @@ def build_electricidad_magnetismo_course() -> Course:
     # 18. Ley de Ampère y Medios de Alta Simetría
     n18 = NoteNode("em_18", "Ley de Ampère y Medios de Alta Simetría", 680.0, 860.0, ["EM", "Ampère", "Solenoide", "Toroide"])
     n18.add_card(ClozeCard("Formas de la Ley de Ampère",
-        r"- Integral: $\oint_{\mathcal{C}} \mathbf{B} \cdot d\boldsymbol{\ell} = {{c1::\mu_0 I_{\text{enc}}::forma integral}}$"
-        r"\n- Diferencial: $\nabla \times \mathbf{B} = {{c2::\mu_0 \mathbf{J}::rotacional de B}}$."
-        r"\n- En solenoide ideal de $n$ espiras/metro: interior $B = {{c3::\mu_0 n I::interior solenoide}}$, exterior $B \approx 0$."
-        r"\n- En toroide de $N$ espiras y radio medio $r$: $B(r) = {{c4::\frac{\mu_0 N I}{2\pi r}::toroide}}$."))
+        r"- Integral: $\oint_{\mathcal{C}} \mathbf{B} \cdot d\boldsymbol{\ell} = {{c1::\mu_0 I_{\text{enc}}}}$"
+        r"<br>- Diferencial: $\nabla \times \mathbf{B} = {{c2::\mu_0 \mathbf{J}}}$."
+        r"<br>- En solenoide ideal de $n$ espiras/metro: interior $B = {{c3::\mu_0 n I}}$, exterior $B \approx 0$."
+        r"<br>- En toroide de $N$ espiras y radio medio $r$: $B(r) = {{c4::\frac{\mu_0 N I}{2\pi r}}}$."))
     course.notes.append(n18)
 
     # 19. Magnetismo en la Materia y Campo H
     n19 = NoteNode("em_19", "Magnetismo en la Materia y Campo H", 980.0, 860.0, ["EM", "Magnetización", "Campo H", "Materiales"])
     n19.add_card(ClozeCard("Magnetización y Campo Auxiliar H",
         r"A partir del vector magnetización $\mathbf{M}$:"
-        r"\n- Corriente volumétrica ligada: $\mathbf{J}_b = {{c1::\nabla \times \mathbf{M}::rotacional de M}}$"
-        r"\n- Corriente superficial ligada: $\mathbf{K}_b = {{c2::\mathbf{M} \times \hat{n}::salto superficial}}$"
-        r"\n- Campo auxiliar: $\mathbf{H} = {{c3::\frac{\mathbf{B}}{\mu_0} - \mathbf{M}::definición de H}}$, con $\oint \mathbf{H} \cdot d\boldsymbol{\ell} = I_{f,\text{enc}}$."))
+        r"<br>- Corriente volumétrica ligada: $\mathbf{J}_b = {{c1::\nabla \times \mathbf{M}}}$"
+        r"<br>- Corriente superficial ligada: $\mathbf{K}_b = {{c2::\mathbf{M} \times \hat{n}}}$"
+        r"<br>- Campo auxiliar: $\mathbf{H} = {{c3::\frac{\mathbf{B}}{\mu_0} - \mathbf{M}}}$, con $\oint \mathbf{H} \cdot d\boldsymbol{\ell} = I_{f,\text{enc}}$."))
     n19.add_card(Flashcard("Condiciones de Borde en Interfaces Magnéticas",
         r"¿Cuáles son las condiciones de frontera para $\mathbf{B}$ y $\mathbf{H}$ en la interfaz entre dos medios magnéticos?",
         r"1. <b>Componente normal de $\mathbf{B}$:</b> Es estrictamente continua:<br>"
@@ -288,10 +288,10 @@ def build_electricidad_magnetismo_course() -> Course:
     n20 = NoteNode("em_20", "Inducción Electromagnética y Ley de Faraday", 1280.0, 860.0, ["EM", "Faraday", "Lenz", "Inducción"])
     n20.add_card(ClozeCard("Leyes de Faraday y Lenz",
         r"Fuerza electromotriz inducida en circuito cerrado:"
-        r"\n$$\mathcal{E} = \oint \mathbf{E} \cdot d\boldsymbol{\ell} = {{c1::-\frac{d\Phi_B}{dt}::Ley de Faraday-Lenz}}$$"
-        r"\nForma diferencial de Maxwell-Faraday:"
-        r"\n$$\nabla \times \mathbf{E} = {{c2::-\frac{\partial \mathbf{B}}{\partial t}::rotacional del campo eléctrico inducido}}$$"
-        r"\nEl signo negativo de Lenz impone que la corriente inducida {{c3::se opone al cambio de flujo::regla de Lenz}}."))
+        r"<br>$$\mathcal{E} = \oint \mathbf{E} \cdot d\boldsymbol{\ell} = {{c1::-\frac{d\Phi_B}{dt}}}$$"
+        r"<br>Forma diferencial de Maxwell-Faraday:"
+        r"<br>$$\nabla \times \mathbf{E} = {{c2::-\frac{\partial \mathbf{B}}{\partial t}}}$$"
+        r"<br>El signo negativo de Lenz impone que la corriente inducida {{c3::se opone al cambio de flujo}}."))
     course.notes.append(n20)
 
     # 21. FEM de Movimiento y Rieles Deslizantes
@@ -316,10 +316,10 @@ def build_electricidad_magnetismo_course() -> Course:
     # 22. Inductancia, Teorema de Reciprocidad y Transitorios RL
     n22 = NoteNode("em_22", "Inductancia, Reciprocidad y Transitorios RL", 680.0, 1120.0, ["EM", "Inductancia", "Reciprocidad", "RL"])
     n22.add_card(ClozeCard("Inductancia y Densidad de Energía Magnética",
-        r"- Teorema de reciprocidad: ${{c1::M_{12} = M_{21} = M::igualdad de inductancias mutuas}}$."
-        r"\n- Energía en un inductor: $U_B = {{c2::\frac{1}{2} L I^2::energía inductor}}$."
-        r"\n- Densidad volumétrica de energía magnética: $u_B = {{c3::\frac{B^2}{2\mu_0} = \frac{1}{2}\mathbf{B}\cdot\mathbf{H}::densidad magnética}}$."
-        r"\n- Constante de tiempo de circuito RL: $\tau_L = {{c4::\frac{L}{R}::constante de tiempo RL}}$."))
+        r"- Teorema de reciprocidad: ${{c1::M_{12} = M_{21} = M}}$."
+        r"<br>- Energía en un inductor: $U_B = {{c2::\frac{1}{2} L I^2}}$."
+        r"<br>- Densidad volumétrica de energía magnética: $u_B = {{c3::\frac{B^2}{2\mu_0} = \frac{1}{2}\mathbf{B}\cdot\mathbf{H}}}$."
+        r"<br>- Constante de tiempo de circuito RL: $\tau_L = {{c4::\frac{L}{R}}}$."))
     course.notes.append(n22)
 
     # Edges EM
@@ -360,8 +360,8 @@ def build_analisis_real_course() -> Course:
     # 1. Espacios Métricos y Topología Relativa
     n1 = NoteNode("ar_01", "Espacios Métricos y Topología Relativa", 80.0, 80.0, ["Análisis Real", "Topología", "Abiertos", "Cerrados"])
     n1.add_card(ClozeCard("Axiomas Métricos y Topología Relativa",
-        r"Axiomas métricos: no negatividad, separación $d(x, y)=0 \iff x=y$, simetría y {{c1::desigualdad triangular $d(x, z) \le d(x, y) + d(y, z)$::desigualdad triangular}}."
-        r"\nEn subespacio $S \subseteq X$, un conjunto $U_S$ es abierto relativo si y sólo si ${{c2::U_S = U \cap S::abierto relativo}}$ con $U$ abierto en $X$."))
+        r"Axiomas métricos: no negatividad, separación $d(x, y)=0 \iff x=y$, simetría y {{c1::desigualdad triangular $d(x, z) \le d(x, y) + d(y, z)$}}."
+        r"<br>En subespacio $S \subseteq X$, un conjunto $U_S$ es abierto relativo si y sólo si ${{c2::U_S = U \cap S}}$ con $U$ abierto en $X$."))
     n1.add_card(Flashcard("Bolas en la Métrica Discreta",
         r"Sea $X$ dotado de la métrica discreta $d(x, y) = 1$ si $x \ne y$ y $0$ si $x = y$. Describa las bolas abiertas $B(x, r)$ para $r \le 1$ y $r > 1$.",
         r"1. <b>Para $r \le 1$:</b> $B(x, r) = \{y \in X : d(x, y) < r\} = \{x\}$ (el singleton individual). En consecuencia, todo subconjunto de $X$ es abierto (y por ende también cerrado).<br>"
@@ -372,10 +372,10 @@ def build_analisis_real_course() -> Course:
     n2 = NoteNode("ar_02", "Caracterizaciones de Continuidad Global", 380.0, 80.0, ["Análisis Real", "Continuidad", "Preimágenes"])
     n2.add_card(ClozeCard("Cuatro Caracterizaciones Equivalentes de Continuidad",
         r"Para $f: X \to Y$, son equivalentes:"
-        r"\n(i) $\forall U \subseteq Y$ abierto $\implies f^{-1}(U)$ es {{c1::abierto en X::preimagen de abiertos}}."
-        r"\n(ii) $\forall F \subseteq Y$ cerrado $\implies f^{-1}(F)$ es {{c2::cerrado en X::preimagen de cerrados}}."
-        r"\n(iii) $\forall A \subseteq X \implies f(\overline{A}) \subseteq {{c3::\overline{f(A)}::preservación de clausuras}}$."
-        r"\n(iv) Continuidad secuencial: $x_n \to x_0 \implies f(x_n) \to f(x_0)$."))
+        r"<br>(i) $\forall U \subseteq Y$ abierto $\implies f^{-1}(U)$ es {{c1::abierto en X}}."
+        r"<br>(ii) $\forall F \subseteq Y$ cerrado $\implies f^{-1}(F)$ es {{c2::cerrado en X}}."
+        r"<br>(iii) $\forall A \subseteq X \implies f(\overline{A}) \subseteq {{c3::\overline{f(A)}}}$."
+        r"<br>(iv) Continuidad secuencial: $x_n \to x_0 \implies f(x_n) \to f(x_0)$."))
     n2.add_card(Flashcard("Falla de Conexidad en Preimágenes",
         r"¿Preserva la continuidad la conexidad en preimágenes? Muestre un contraejemplo donde $V$ es conexo pero $f^{-1}(V)$ es disconexo.",
         r"<b>Respuesta:</b> NO. La continuidad preserva conexidad en la <b>imagen directa</b> ($f(X)$ es conexo), pero NO en preimágenes.<br>"
@@ -386,9 +386,9 @@ def build_analisis_real_course() -> Course:
     # 3. Discontinuidad Secuencial, Lipschitz y Hölder
     n3 = NoteNode("ar_03", "Condiciones Lipschitz y Hölder", 680.0, 80.0, ["Análisis Real", "Lipschitz", "Hölder"])
     n3.add_card(ClozeCard("Funciones Lipschitz y Hölder",
-        r"- Lipschitz: $d_Y(f(x), f(x')) \le L d_X(x, x') \implies$ uniformemente continua con $\delta = {{c1::\varepsilon / L::delta Lipschitz}}$."
-        r"\n- Hölder de orden $\alpha \in (0, 1]$: $d_Y(f(x), f(x')) \le C (d_X(x, x'))^\alpha \implies$ uniformemente continua con $\delta = {{c2::(\varepsilon / C)^{1/\alpha}::delta Hölder}}$."
-        r"\n- Refutación secuencial: $f$ es discontinua si existe $x_n \to x_0$ con {{c3::f(x_n) \not\to f(x_0)::falla secuencial}}."))
+        r"- Lipschitz: $d_Y(f(x), f(x')) \le L d_X(x, x') \implies$ uniformemente continua con $\delta = {{c1::\varepsilon / L}}$."
+        r"<br>- Hölder de orden $\alpha \in (0, 1]$: $d_Y(f(x), f(x')) \le C (d_X(x, x'))^\alpha \implies$ uniformemente continua con $\delta = {{c2::(\varepsilon / C)^{1/\alpha}}}$."
+        r"<br>- Refutación secuencial: $f$ es discontinua si existe $x_n \to x_0$ con {{c3::f(x_n) \not\to f(x_0)}}."))
     n3.add_card(Flashcard("Función Hölder no Lipschitziana",
         r"Muestre que la función $f(x) = \sqrt{x}$ en $[0, 1]$ es $1/2$-Hölder continua pero NO es Lipschitziana.",
         r"1. <b>Hölder $\alpha = 1/2$:</b> Para $x, y \ge 0$, se cumple $|\sqrt{x} - \sqrt{y}| \le \sqrt{|x - y|}$. Por ende es $1/2$-Hölder con constante $C = 1$.<br>"
@@ -416,8 +416,8 @@ def build_analisis_real_course() -> Course:
         ]))
     n5.add_card(ClozeCard("Clausura Topológica con la Distancia",
         r"Un punto $x$ pertenece a la clausura $\overline{A}$ si y sólo si:"
-        r"\n$$d(x, A) = {{c1::0::distancia nula}}$$"
-        r"\nSi $A$ es cerrado: $x \in A \iff d(x, A) = 0$."))
+        r"<br>$$d(x, A) = {{c1::0}}$$"
+        r"<br>Si $A$ es cerrado: $x \in A \iff d(x, A) = 0$."))
     course.notes.append(n5)
 
     # 6. Separación Topológica: Lema de Urysohn Métrico
@@ -431,15 +431,15 @@ def build_analisis_real_course() -> Course:
         r"3. Es continua por ser cociente de funciones 1-Lipschitz con denominador no nulo."))
     n6.add_card(ClozeCard("Separación entre Compacto y Cerrado Disjuntos",
         r"Si $K$ es compacto, $F$ es cerrado y $K \cap F = \emptyset$:"
-        r"\n$$\text{dist}(K, F) = \inf_{x \in K, y \in F} d(x, y) {{c1::> 0 (es estrictamente positiva)::cota de separación}}$$"
-        r"\nFalla si ninguno es compacto: $y = 0$ y $x y = 1$ en $\mathbb{R}^2$ tienen distancia {{c2::0 (cero)::distancia asintótica}}."))
+        r"<br>$$\text{dist}(K, F) = \inf_{x \in K, y \in F} d(x, y) {{c1::> 0 (es estrictamente positiva)}}$$"
+        r"<br>Falla si ninguno es compacto: $y = 0$ y $x y = 1$ en $\mathbb{R}^2$ tienen distancia {{c2::0 (cero)}}."))
     course.notes.append(n6)
 
     # 7. Continuidad y Compacidad: Teorema de Weierstrass
     n7 = NoteNode("ar_07", "Continuidad y Teorema de Weierstrass", 380.0, 340.0, ["Análisis Real", "Compacidad", "Weierstrass"])
     n7.add_card(ClozeCard("Preservación de Compacidad y Teorema de Extremos",
-        r"Si $f: X \to Y$ es continua y $K \subseteq X$ es compacto, $f(K)$ es {{c1::compacto en Y::propiedad de la imagen}}."
-        r"\nTeorema de Weierstrass: Toda $f: K \to \mathbb{R}$ continua sobre un compacto no vacío es acotada y {{c2::alcanza su máximo y su mínimo absoluto::extremos globales}}."))
+        r"Si $f: X \to Y$ es continua y $K \subseteq X$ es compacto, $f(K)$ es {{c1::compacto en Y}}."
+        r"<br>Teorema de Weierstrass: Toda $f: K \to \mathbb{R}$ continua sobre un compacto no vacío es acotada y {{c2::alcanza su máximo y su mínimo absoluto}}."))
     course.notes.append(n7)
 
     # 8. Inversa Continua sobre Compactos y Homeomorfismos
@@ -471,23 +471,23 @@ def build_analisis_real_course() -> Course:
             r"Por desigualdad triangular: $d(f(x), f(x')) \le d(f(x), f(p_k)) + d(f(p_k), f(x')) < \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon$."
         ]))
     n9.add_card(ClozeCard("Funciones Periódicas Continuas en R",
-        r"Toda función $f: \mathbb{R} \to \mathbb{R}$ continua y periódica es {{c1::uniformemente continua en todo R::propiedad global}}."
-        r"\nDemostración: Por Heine-Cantor es uniformemente continua en el intervalo compacto $[0, 2T]$, y la periodicidad extiende el mismo $\delta$ a todo $\mathbb{R}$."))
+        r"Toda función $f: \mathbb{R} \to \mathbb{R}$ continua y periódica es {{c1::uniformemente continua en todo R}}."
+        r"<br>Demostración: Por Heine-Cantor es uniformemente continua en el intervalo compacto $[0, 2T]$, y la periodicidad extiende el mismo $\delta$ a todo $\mathbb{R}$."))
     course.notes.append(n9)
 
     # 10. Extensión Única de Funciones Uniformemente Continuas
     n10 = NoteNode("ar_10", "Extensión Única al Completado", 1280.0, 340.0, ["Análisis Real", "Extensión", "Completitud"])
     n10.add_card(ClozeCard("Teorema de Extensión Única al Completado",
         r"Si $D \subset X$ es denso ($\overline{D} = X$), $Y$ es completo y $f: D \to Y$ es uniformemente continua:"
-        r"\nExiste {{c1::una única extensión continua $\tilde{f}: X \to Y$::existencia y unicidad}} y además es {{c2::uniformemente continua::regularidad}} en todo $X$."))
+        r"<br>Existe {{c1::una única extensión continua $\tilde{f}: X \to Y$}} y además es {{c2::uniformemente continua}} en todo $X$."))
     course.notes.append(n10)
 
     # 11. Conexidad Topológica e Intervalos
     n11 = NoteNode("em_conexidad", "Conexidad Topológica e Intervalos", 80.0, 600.0, ["Análisis Real", "Conexidad", "Clopen", "Intervalos"])
     n11.add_card(ClozeCard("Definición de Conexidad e Intervalos en R",
-        r"Un espacio métrico $X$ es conexo si sus únicos subconjuntos clopen son {{c1::$\emptyset$ y $X$::subconjuntos clopen}}."
-        r"\nEn $\mathbb{R}$, un conjunto $E \subseteq \mathbb{R}$ es conexo si y sólo si es {{c2::un intervalo::caracterización en R}}."
-        r"\nSi $f$ es continua y $X$ es conexo, $f(X)$ es {{c3::conexo::imagen conexa}}."))
+        r"Un espacio métrico $X$ es conexo si sus únicos subconjuntos clopen son {{c1::$\emptyset$ y $X$}}."
+        r"<br>En $\mathbb{R}$, un conjunto $E \subseteq \mathbb{R}$ es conexo si y sólo si es {{c2::un intervalo}}."
+        r"<br>Si $f$ es continua y $X$ es conexo, $f(X)$ es {{c3::conexo}}."))
     course.notes.append(n11)
 
     # 12. TVI, Punto Fijo 1D e Invarianza por Corte
@@ -509,16 +509,16 @@ def build_analisis_real_course() -> Course:
     # 13. Arcoconexidad y Seno del Topólogo
     n13 = NoteNode("ar_13", "Arcoconexidad y Curva Seno del Topólogo", 680.0, 600.0, ["Análisis Real", "Arcoconexidad", "Seno del Topólogo"])
     n13.add_card(ClozeCard("Arcoconexidad vs Conexidad",
-        r"Todo espacio arcoconexo es {{c1::conexo::implicación}}."
-        r"\nEl recíproco es falso: El contraejemplo clásico es {{c2::la curva seno del topólogo::contraejemplo}}, la cual es conexa pero no arcoconexa."))
+        r"Todo espacio arcoconexo es {{c1::conexo}}."
+        r"<br>El recíproco es falso: El contraejemplo clásico es {{c2::la curva seno del topólogo}}, la cual es conexa pero no arcoconexa."))
     course.notes.append(n13)
 
     # 14. Convergencia Uniforme y Norma del Supremo
     n14 = NoteNode("ar_14", "Convergencia Uniforme y Norma del Supremo", 980.0, 600.0, ["Análisis Real", "Convergencia", "Norma Infinito"])
     n14.add_card(ClozeCard("Convergencia Uniforme con Norma Infinito",
         r"Una sucesión $f_n: X \to Y$ converge uniformemente a $f$ si y sólo si:"
-        r"\n$$\lim_{n \to \infty} \|f_n - f\|_\infty = \lim_{n \to \infty} {{c1::\sup_{x \in X} d_Y(f_n(x), f(x)) = 0::límite de la norma infinito}}$$"
-        r"\nEl índice $N(\varepsilon)$ es {{c2::independiente del punto x::independencia de x}}."))
+        r"<br>$$\lim_{n \to \infty} \|f_n - f\|_\infty = \lim_{n \to \infty} {{c1::\sup_{x \in X} d_Y(f_n(x), f(x)) = 0}}$$"
+        r"<br>El índice $N(\varepsilon)$ es {{c2::independiente del punto x}}."))
     course.notes.append(n14)
 
     # 15. Cauchy Uniforme y Puntos Móviles
@@ -544,14 +544,14 @@ def build_analisis_real_course() -> Course:
     # 17. Test M de Weierstrass y Espacio C(K)
     n17 = NoteNode("ar_17", "Test M de Weierstrass y Espacio C(K)", 380.0, 860.0, ["Análisis Real", "Test M", "Series", "Completitud"])
     n17.add_card(ClozeCard("Criterio M de Weierstrass y Completitud",
-        r"Si $|f_n(x)| \le M_n$ con $\sum M_n < \infty$, la serie $\sum f_n(x)$ converge {{c1::absoluta y uniformemente en X::tipo de convergencia}}."
-        r"\nEl espacio métrico $(C(K, \mathbb{R}), \|\cdot\|_\infty)$ sobre un compacto $K$ es un espacio de Banach, es decir, es {{c2::completo::completitud métrica}}."))
+        r"Si $|f_n(x)| \le M_n$ con $\sum M_n < \infty$, la serie $\sum f_n(x)$ converge {{c1::absoluta y uniformemente en X}}."
+        r"<br>El espacio métrico $(C(K, \mathbb{R}), \|\cdot\|_\infty)$ sobre un compacto $K$ es un espacio de Banach, es decir, es {{c2::completo}}."))
     course.notes.append(n17)
 
     # 18. Teorema de Dini y Fallas de Hipótesis
     n18 = NoteNode("ar_18", "Teorema de Dini y Fallas de Hipótesis", 680.0, 860.0, ["Análisis Real", "Dini", "Monotonía", "Contraejemplos"])
     n18.add_card(ClozeCard("Hipótesis del Teorema de Dini",
-        r"Teorema de Dini: Si $K$ es compacto, $f_n$ continuas, $f_n \to f$ puntualmente con $f$ continua y la convergencia es monótona ($f_{n+1} \le f_n$), entonces la convergencia es forzosamente {{c1::uniforme en K::consecuencia}}."))
+        r"Teorema de Dini: Si $K$ es compacto, $f_n$ continuas, $f_n \to f$ puntualmente con $f$ continua y la convergencia es monótona ($f_{n+1} \le f_n$), entonces la convergencia es forzosamente {{c1::uniforme en K}}."))
     n18.add_card(Flashcard("Catálogo de Fallas de Hipótesis de Dini",
         r"Muestre las 3 fallas clásicas de Dini: (1) Sin compacidad, (2) Sin monotonía, (3) Límite discontinuo.",
         r"1. <b>Sin compacidad:</b> $f_n(x) = \frac{1}{1 + nx}$ en $(0, 1)$ decrece a $0$, pero $\|f_n\|_\infty = 1 \not\to 0$.<br>"
@@ -563,8 +563,8 @@ def build_analisis_real_course() -> Course:
     n19 = NoteNode("ar_19", "Equicontinuidad y Arzelà-Ascoli", 980.0, 860.0, ["Análisis Real", "Arzelà-Ascoli", "Equicontinuidad", "Precompacidad"])
     n19.add_card(ClozeCard("Teorema de Arzelà-Ascoli",
         r"En compacto $K$, una familia $\mathcal{F} \subset C(K, \mathbb{R})$ es relativamente compacta si y sólo si:"
-        r"\n1. Es {{c1::puntualmente acotada::condición 1}} ($\forall x \in K, \sup_{f \in \mathcal{F}} |f(x)| < \infty$)."
-        r"\n2. Es {{c2::equicontinua en K::condición 2}}."))
+        r"<br>1. Es {{c1::puntualmente acotada}} ($\forall x \in K, \sup_{f \in \mathcal{F}} |f(x)| < \infty$)."
+        r"<br>2. Es {{c2::equicontinua en K}}."))
     n19.add_card(ProofSequenceCard("Esquema Demostrativo de Arzelà-Ascoli",
         r"Resumir la demostración de Arzelà-Ascoli usando Cantor y redes finitas.",
         [
@@ -580,8 +580,8 @@ def build_analisis_real_course() -> Course:
     n20 = NoteNode("ar_20", "Densidad de Stone-Weierstrass", 1280.0, 860.0, ["Análisis Real", "Stone-Weierstrass", "Subálgebra", "Densidad"])
     n20.add_card(ClozeCard("Enunciado de Stone-Weierstrass",
         r"Una subálgebra $\mathcal{A} \subset C(K, \mathbb{R})$ sobre un compacto $K$ es densa si y sólo si:"
-        r"\n1. {{c1::Separa puntos::condición 1}}: $\forall x \ne y \implies \exists f \in \mathcal{A} : f(x) \ne f(y)$."
-        r"\n2. {{c2::Contiene las funciones constantes::condición 2}}: $\mathbf{1} \in \mathcal{A}$."))
+        r"<br>1. {{c1::Separa puntos}}: $\forall x \ne y \implies \exists f \in \mathcal{A} : f(x) \ne f(y)$."
+        r"<br>2. {{c2::Contiene las funciones constantes}}: $\mathbf{1} \in \mathcal{A}$."))
     n20.add_card(Flashcard("Subálgebra que no Separa Puntos",
         r"Muestre una subálgebra que no sea densa en $C([-1, 1], \mathbb{R})$ por no separar puntos.",
         r"Polinomios pares $\mathcal{A} = \{P(x^2)\}$. No separan $x$ y $-x$, por lo que es imposible aproximar funciones impares como $g(x) = x$ ($\|x - P(x^2)\|_\infty \ge 1$)."))
@@ -591,7 +591,7 @@ def build_analisis_real_course() -> Course:
     n21 = NoteNode("ar_21", "Aproximación de Weierstrass y Fourier", 380.0, 1120.0, ["Análisis Real", "Weierstrass", "Fourier"])
     n21.add_card(ClozeCard("Densidad Polinomial y Trigonométrica",
         r"- Polinomios $\mathbb{R}[x]$ son densos en $(C([a, b], \mathbb{R}), \|\cdot\|_\infty)$."
-        r"\n- Polinomios trigonométricos son densos en el espacio de funciones continuas y {{c1::periódicas de período $2\pi$::clase de funciones}}."))
+        r"<br>- Polinomios trigonométricos son densos en el espacio de funciones continuas y {{c1::periódicas de período $2\pi$}}."))
     course.notes.append(n21)
 
     # 22. Punto Fijo de Banach y Edelstein
@@ -651,8 +651,8 @@ def build_quimica_course() -> Course:
     n1 = NoteNode("quim_01", "Velocidad de Reacción y Ley Diferencial", 80.0, 80.0, ["Química", "Cinética", "Velocidad"])
     n1.add_card(ClozeCard("Definición Estequiométrica de Velocidad",
         r"Para $aA + bB \to cC + dD$:"
-        r"\n$$v = {{c1::-\frac{1}{a}\frac{d[A]}{dt} = -\frac{1}{b}\frac{d[B]}{dt} = \frac{1}{c}\frac{d[C]}{dt} = \frac{1}{d}\frac{d[D]}{dt}::definición estequiométrica}}$$"
-        r"\nLey diferencial general: $v = k [A]^x [B]^y$, donde $x, y$ se obtienen {{c2::experimentalmente::determinación experimental}}."))
+        r"<br>$$v = {{c1::-\frac{1}{a}\frac{d[A]}{dt} = -\frac{1}{b}\frac{d[B]}{dt} = \frac{1}{c}\frac{d[C]}{dt} = \frac{1}{d}\frac{d[D]}{dt}}}$$"
+        r"<br>Ley diferencial general: $v = k [A]^x [B]^y$, donde $x, y$ se obtienen {{c2::experimentalmente}}."))
     n1.add_card(Flashcard("Estequiometría de Velocidad en Reacción N2O5",
         r"Para $2\text{N}_2\text{O}_5 \to 4\text{NO}_2 + \text{O}_2$, exprese la relación entre la velocidad de desaparición de reactivo y aparición de productos.",
         r"$$v = -\frac{1}{2}\frac{d[\text{N}_2\text{O}_5]}{dt} = \frac{1}{4}\frac{d[\text{NO}_2]}{dt} = \frac{d[\text{O}_2]}{dt}$$<br>"
@@ -663,10 +663,10 @@ def build_quimica_course() -> Course:
     n2 = NoteNode("quim_02", "Método de Velocidades Iniciales y Unidades de k", 380.0, 80.0, ["Química", "Velocidades Iniciales", "Órdenes"])
     n2.add_card(ClozeCard("Unidades de la Constante de Velocidad k",
         r"Para reacción de orden global $n$:"
-        r"\n$$[k] = {{c1::\text{M}^{1-n} \cdot \text{s}^{-1} = \text{mol}^{1-n} \cdot \text{L}^{n-1} \cdot \text{s}^{-1}::unidades generales}}$$"
-        r"\n- Orden 0: $[k] = {{c2::\text{M}\cdot\text{s}^{-1}::orden 0}}$"
-        r"\n- Orden 1: $[k] = {{c3::\text{s}^{-1}::orden 1}}$"
-        r"\n- Orden 2: $[k] = {{c4::\text{M}^{-1}\cdot\text{s}^{-1}::orden 2}}$."))
+        r"<br>$$[k] = {{c1::\text{M}^{1-n} \cdot \text{s}^{-1} = \text{mol}^{1-n} \cdot \text{L}^{n-1} \cdot \text{s}^{-1}}}$$"
+        r"<br>- Orden 0: $[k] = {{c2::\text{M}\cdot\text{s}^{-1}}}$"
+        r"<br>- Orden 1: $[k] = {{c3::\text{s}^{-1}}}$"
+        r"<br>- Orden 2: $[k] = {{c4::\text{M}^{-1}\cdot\text{s}^{-1}}}$."))
     n2.add_card(Flashcard("Algoritmo: Método de Velocidades Iniciales",
         r"¿Cómo se determinan los órdenes parciales en una tabla de ensayos experimentales?",
         r"1. Elegir dos ensayos donde cambie $[A]$ y los demás reactivos se mantengan constantes.<br>"
@@ -678,18 +678,18 @@ def build_quimica_course() -> Course:
     n3 = NoteNode("quim_03", "Cinética de Orden Cero", 680.0, 80.0, ["Química", "Orden 0", "Vida Media"])
     n3.add_card(ClozeCard("Leyes de Orden Cero",
         r"Para reacción de orden 0 ($v = k$):"
-        r"\n- Concentración temporal: $[A]_t = {{c1::[A]_0 - kt::ley integrada orden 0}}$"
-        r"\n- Vida media: $t_{1/2} = {{c2::\frac{[A]_0}{2k}::vida media orden 0}}$"
-        r"\n- Gráfico lineal: $[A]$ vs $t$ con pendiente {{c3::-k::pendiente de orden 0}}."))
+        r"<br>- Concentración temporal: $[A]_t = {{c1::[A]_0 - kt}}$"
+        r"<br>- Vida media: $t_{1/2} = {{c2::\frac{[A]_0}{2k}}}$"
+        r"<br>- Gráfico lineal: $[A]$ vs $t$ con pendiente {{c3::-k}}."))
     course.notes.append(n3)
 
     # 4. Cinética de Primer Orden y Radiactividad
     n4 = NoteNode("quim_04", "Cinética de Primer Orden y Decaimiento", 980.0, 80.0, ["Química", "Orden 1", "Vida Media"])
     n4.add_card(ClozeCard("Leyes de Primer Orden",
         r"Para reacción de orden 1 ($v = k[A]$):"
-        r"\n- Concentración: $\ln[A]_t = {{c1::\ln[A]_0 - kt \iff [A]_t = [A]_0 e^{-kt}::forma integrada orden 1}}$"
-        r"\n- Vida media: $t_{1/2} = {{c2::\frac{\ln 2}{k} \approx \frac{0.6931}{k}::vida media orden 1}}$ ({{c3::independiente de [A]_0::propiedad fundamental}})."
-        r"\n- Gráfico lineal: $\ln[A]$ vs $t$ con pendiente $-k$."))
+        r"<br>- Concentración: $\ln[A]_t = {{c1::\ln[A]_0 - kt \iff [A]_t = [A]_0 e^{-kt}}}$"
+        r"<br>- Vida media: $t_{1/2} = {{c2::\frac{\ln 2}{k} \approx \frac{0.6931}{k}}}$ ({{c3::independiente de [A]_0}})."
+        r"<br>- Gráfico lineal: $\ln[A]$ vs $t$ con pendiente $-k$."))
     n4.add_card(Flashcard("Datación por Carbono-14",
         r"Deduzca la fórmula para calcular la edad $t$ de un fósil a partir de su actividad remanente $A_t$ y su vida media $t_{1/2}$.",
         r"El decaimiento radiactivo es cinéticamente de primer orden puro:<br>"
@@ -701,18 +701,18 @@ def build_quimica_course() -> Course:
     n5 = NoteNode("quim_05", "Cinética de Segundo Orden", 1280.0, 80.0, ["Química", "Orden 2", "Vida Media"])
     n5.add_card(ClozeCard("Leyes de Segundo Orden",
         r"Para orden 2 ($v = k[A]^2$):"
-        r"\n- Integrada: $\frac{1}{[A]_t} = {{c1::\frac{1}{[A]_0} + kt::forma integrada orden 2}}$"
-        r"\n- Vida media: $t_{1/2} = {{c2::\frac{1}{k[A]_0}::vida media orden 2}}$"
-        r"\n- Gráfico lineal: $1/[A]$ vs $t$ con pendiente {{c3::+k (positiva)::pendiente positiva}}."))
+        r"<br>- Integrada: $\frac{1}{[A]_t} = {{c1::\frac{1}{[A]_0} + kt}}$"
+        r"<br>- Vida media: $t_{1/2} = {{c2::\frac{1}{k[A]_0}}}$"
+        r"<br>- Gráfico lineal: $1/[A]$ vs $t$ con pendiente {{c3::+k (positiva)}}."))
     course.notes.append(n5)
 
     # 6. Ecuación de Arrhenius y Dependencia Térmica
     n6 = NoteNode("quim_06", "Ecuación de Arrhenius y Dependencia Térmica", 80.0, 340.0, ["Química", "Arrhenius", "Ea", "Temperatura"])
     n6.add_card(ClozeCard("Ecuación de Arrhenius",
         r"Ecuación de Arrhenius:"
-        r"\n$$k = {{c1::A e^{-E_a/(RT)}::forma exponencial de Arrhenius}}$$"
-        r"\nLinealizada: $\ln k = \ln A - \frac{E_a}{R}\frac{1}{T}$ con pendiente {{c2::-E_a/R::pendiente de Arrhenius}}."
-        r"\nDos temperaturas: $\ln(k_2/k_1) = {{c3::\frac{E_a}{R}\left(\frac{1}{T_1} - \frac{1}{T_2}\right)::dos temperaturas}}$."))
+        r"<br>$$k = {{c1::A e^{-E_a/(RT)}}}$$"
+        r"<br>Linealizada: $\ln k = \ln A - \frac{E_a}{R}\frac{1}{T}$ con pendiente {{c2::-E_a/R}}."
+        r"<br>Dos temperaturas: $\ln(k_2/k_1) = {{c3::\frac{E_a}{R}\left(\frac{1}{T_1} - \frac{1}{T_2}\right)}}$."))
     n6.add_card(Flashcard("Regla de Duplicación cada 10°C",
         r"Si una reacción duplica su velocidad al pasar de $20^\circ\text{C}$ a $30^\circ\text{C}$ ($k_2/k_1 = 2$), calcule $E_a$.",
         r"$T_1 = 293.15\,\text{K}$ y $T_2 = 303.15\,\text{K}$.<br>"
@@ -722,9 +722,9 @@ def build_quimica_course() -> Course:
     # 7. Mecanismos de Reacción, RDS y SSA
     n7 = NoteNode("quim_07", "Mecanismos de Reacción, RDS y SSA", 380.0, 340.0, ["Química", "Mecanismos", "RDS", "SSA"])
     n7.add_card(ClozeCard("Etapa Limitante y Estado Estacionario",
-        r"- La velocidad global está gobernada por la etapa {{c1::más lenta (Rate Determining Step, RDS)::etapa limitante}}."
-        r"\n- Para intermediarios reactivos inestables $I$: $\frac{d[I]}{dt} \approx {{c2::0 (Aproximación de Estado Estacionario, SSA)::derivada nula}}$."
-        r"\n- Si $[B]_0 \gg [A]_0$, se sigue cinética de {{c3::pseudo-primer orden::pseudo orden}} con $k_{\text{obs}} = k[B]_0^y$."))
+        r"- La velocidad global está gobernada por la etapa {{c1::más lenta (Rate Determining Step, RDS)}}."
+        r"<br>- Para intermediarios reactivos inestables $I$: $\frac{d[I]}{dt} \approx {{c2::0 (Aproximación de Estado Estacionario, SSA)}}$."
+        r"<br>- Si $[B]_0 \gg [A]_0$, se sigue cinética de {{c3::pseudo-primer orden}} con $k_{\text{obs}} = k[B]_0^y$."))
     course.notes.append(n7)
 
     # 8. Catálisis y Complejo Activado
@@ -739,27 +739,27 @@ def build_quimica_course() -> Course:
     n9 = NoteNode("quim_09", "Constantes de Equilibrio Kc y Kp", 980.0, 340.0, ["Química", "Equilibrio", "Kc", "Kp"])
     n9.add_card(ClozeCard("Relación entre Kp y Kc",
         r"Para reacción gaseosa $aA(g) + bB(g) \rightleftharpoons cC(g) + dD(g)$:"
-        r"\n$$K_p = {{c1::K_c (RT)^{\Delta n_{(g)}}::conversión Kp Kc}}$$"
-        r"\ndonde $\Delta n_{(g)} = {{c2::(c + d) - (a + b)::moles de gas productos menos reactivos}}$."
-        r"\nSi $\Delta n_{(g)} = 0 \implies K_p {{c3::= K_c::igualdad}}$."))
+        r"<br>$$K_p = {{c1::K_c (RT)^{\Delta n_{(g)}}}}$$"
+        r"<br>donde $\Delta n_{(g)} = {{c2::(c + d) - (a + b)}}$."
+        r"<br>Si $\Delta n_{(g)} = 0 \implies K_p {{c3::= K_c}}$."))
     course.notes.append(n9)
 
     # 10. Cociente de Reacción Q y Espontaneidad
     n10 = NoteNode("quim_10", "Cociente de Reacción Q y Espontaneidad", 1280.0, 340.0, ["Química", "Cociente Q", "Evolución Espontánea"])
     n10.add_card(ClozeCard("Criterio de Evolución con Q",
-        r"- Si $Q < K$: La reacción avanza hacia la {{c1::derecha (hacia productos)::sentido directo}}."
-        r"\n- Si $Q = K$: Sistema en {{c2::equilibrio dinámico::equilibrio}}."
-        r"\n- Si $Q > K$: La reacción avanza hacia la {{c3::izquierda (hacia reactivos)::sentido inverso}}."
-        r"\nRegla de sólidos y líquidos puros: Tienen actividad 1 y {{c4::NO se incluyen en K::exclusión de sólidos}}."))
+        r"- Si $Q < K$: La reacción avanza hacia la {{c1::derecha (hacia productos)}}."
+        r"<br>- Si $Q = K$: Sistema en {{c2::equilibrio dinámico}}."
+        r"<br>- Si $Q > K$: La reacción avanza hacia la {{c3::izquierda (hacia reactivos)}}."
+        r"<br>Regla de sólidos y líquidos puros: Tienen actividad 1 y {{c4::NO se incluyen en K}}."))
     course.notes.append(n10)
 
     # 11. Termodinámica: Relación entre Delta G° y K
     n11 = NoteNode("quim_11", "Termodinámica: Relación entre Delta G° y K", 80.0, 600.0, ["Química", "Termodinámica", "Delta G", "Equilibrio"])
     n11.add_card(ClozeCard("Energía Libre y Constante de Equilibrio",
-        r"$$\Delta G^\circ = {{c1::-RT \ln K::relación Delta G y K}} \iff K = {{c2::\exp\left(-\frac{\Delta G^\circ}{RT}\right)::K exponencial}}$$"
-        r"\nBajo condiciones no estándar:"
-        r"\n$$\Delta G = {{c3::\Delta G^\circ + RT \ln Q::Delta G no estándar}}$$"
-        r"\nEn el equilibrio: $\Delta G = {{c4::0::Delta G en equilibrio}}$."))
+        r"$$\Delta G^\circ = {{c1::-RT \ln K}} \iff K = {{c2::\exp\left(-\frac{\Delta G^\circ}{RT}\right)}}$$"
+        r"<br>Bajo condiciones no estándar:"
+        r"<br>$$\Delta G = {{c3::\Delta G^\circ + RT \ln Q}}$$"
+        r"<br>En el equilibrio: $\Delta G = {{c4::0}}$."))
     course.notes.append(n11)
 
     # 12. Principio de Le Châtelier (Presión y Concentración)
@@ -774,9 +774,9 @@ def build_quimica_course() -> Course:
     n13 = NoteNode("quim_13", "Temperatura en Equilibrio y Ecuación de van 't Hoff", 680.0, 600.0, ["Química", "van 't Hoff", "Temperatura"])
     n13.add_card(ClozeCard("Ecuación de van 't Hoff",
         r"La temperatura es la ÚNICA variable que cambia el valor de $K$:"
-        r"\n$$\ln\left(\frac{K_2}{K_1}\right) = {{c1::\frac{\Delta H^\circ}{R}\left(\frac{T_2 - T_1}{T_1 T_2}\right)::van 't Hoff}}$$"
-        r"\n- Endotérmica ($\Delta H^\circ > 0$): Aumentar $T$ {{c2::aumenta K (favorece productos)::efecto endotérmico}}."
-        r"\n- Exotérmica ($\Delta H^\circ < 0$): Aumentar $T$ {{c3::disminuye K (favorece reactivos)::efecto exotérmico}}."))
+        r"<br>$$\ln\left(\frac{K_2}{K_1}\right) = {{c1::\frac{\Delta H^\circ}{R}\left(\frac{T_2 - T_1}{T_1 T_2}\right)}}$$"
+        r"<br>- Endotérmica ($\Delta H^\circ > 0$): Aumentar $T$ {{c2::aumenta K (favorece productos)}}."
+        r"<br>- Exotérmica ($\Delta H^\circ < 0$): Aumentar $T$ {{c3::disminuye K (favorece reactivos)}}."))
     course.notes.append(n13)
 
     # 14. Grado de Disociación Gaseosa alpha
@@ -792,9 +792,9 @@ def build_quimica_course() -> Course:
     n15 = NoteNode("quim_15", "Autoionización del Agua, pH y pOH", 1280.0, 600.0, ["Química", "Ácido-Base", "pH", "Kw"])
     n15.add_card(ClozeCard("Constante Kw y Relación pH-pOH",
         r"A $25^\circ\text{C}$:"
-        r"\n- $K_w = [\text{H}^+][\text{OH}^-] = {{c1::1.0 \times 10^{-14}::valor de Kw}}$"
-        r"\n- $\text{pH} + \text{pOH} = {{c2::14.00::suma}}$"
-        r"\n- Pares conjugados: $K_a \cdot K_b = {{c3::K_w::producto Ka y Kb}}$ y $\text{p}K_a + \text{p}K_b = 14.00$."))
+        r"<br>- $K_w = [\text{H}^+][\text{OH}^-] = {{c1::1.0 \times 10^{-14}}}$"
+        r"<br>- $\text{pH} + \text{pOH} = {{c2::14.00}}$"
+        r"<br>- Pares conjugados: $K_a \cdot K_b = {{c3::K_w}}$ y $\text{p}K_a + \text{p}K_b = 14.00$."))
     n15.add_card(Flashcard("Variación de Kw con la Temperatura",
         r"La autoionización del agua es endotérmica ($\Delta H^\circ > 0$). A $50^\circ\text{C}$, $K_w = 5.5 \times 10^{-14}$. Calcule el pH neutro.",
         r"En agua pura neutra: $[\text{H}^+] = [\text{OH}^-] = \sqrt{K_w} = \sqrt{5.5 \times 10^{-14}} \approx 2.345 \times 10^{-7}\,\text{M}$.<br>"
@@ -812,26 +812,26 @@ def build_quimica_course() -> Course:
         r"2. <b>Si $\frac{C_0}{K_a} \le 400$:</b> Obligatorio resolver la cuadrática exacta: $x^2 + K_a x - K_a C_0 = 0$."))
     n16.add_card(ClozeCard("Ácidos Polipróticos",
         r"Para un ácido poliprótico como $\ce{H3PO4}$ donde $K_{a1} \gg K_{a2} \gg K_{a3}$:"
-        r"\n- El pH está gobernado casi exclusivamente por {{c1::la primera disociación Ka1::primera disociación}}."
-        r"\n- La concentración del anión divalente es $[\ce{HPO4^{2-}}] \approx {{c2::K_{a2}::Ka2}}$."))
+        r"<br>- El pH está gobernado casi exclusivamente por {{c1::la primera disociación Ka1}}."
+        r"<br>- La concentración del anión divalente es $[\ce{HPO4^{2-}}] \approx {{c2::K_{a2}}}$."))
     course.notes.append(n16)
 
     # 17. Hidrólisis de Sales Básicas y Ácidas
     n17 = NoteNode("quim_17", "Hidrólisis de Sales Básicas y Ácidas", 380.0, 860.0, ["Química", "Hidrólisis", "Sal Básica", "Sal Ácida"])
     n17.add_card(ClozeCard("Fórmulas de Hidrólisis de Sales",
         r"Para concentración de sal $C_s$:"
-        r"\n- Sal básica ($A^-$): $K_b = \frac{K_w}{K_a}$, $[\text{OH}^-] \approx {{c1::\sqrt{K_b C_s} = \sqrt{\frac{K_w}{K_a} C_s}::OH en sal básica}}$."
-        r"\n- Sal ácida ($BH^+$): $K_a = \frac{K_w}{K_b}$, $[\text{H}^+] \approx {{c2::\sqrt{K_a C_s} = \sqrt{\frac{K_w}{K_b} C_s}::H en sal ácida}}$."
-        r"\n- Sales de ácido fuerte y base fuerte (ej. $\ce{NaCl}$): no se hidrolizan, $\text{pH} = {{c3::7.00::neutro}}$."))
+        r"<br>- Sal básica ($A^-$): $K_b = \frac{K_w}{K_a}$, $[\text{OH}^-] \approx {{c1::\sqrt{K_b C_s} = \sqrt{\frac{K_w}{K_a} C_s}}}$."
+        r"<br>- Sal ácida ($BH^+$): $K_a = \frac{K_w}{K_b}$, $[\text{H}^+] \approx {{c2::\sqrt{K_a C_s} = \sqrt{\frac{K_w}{K_b} C_s}}}$."
+        r"<br>- Sales de ácido fuerte y base fuerte (ej. $\ce{NaCl}$): no se hidrolizan, $\text{pH} = {{c3::7.00}}$."))
     course.notes.append(n17)
 
     # 18. Soluciones Buffer y Henderson-Hasselbalch
     n18 = NoteNode("quim_18", "Soluciones Buffer y Henderson-Hasselbalch", 680.0, 860.0, ["Química", "Buffer", "Henderson-Hasselbalch"])
     n18.add_card(ClozeCard("Ecuación de Henderson-Hasselbalch",
         r"Para amortiguador de ácido débil $HA$ y su sal $A^-$:"
-        r"\n$$\text{pH} = {{c1::\text{p}K_a + \log_{10}\left(\frac{[A^-]}{[HA]}\right) = \text{p}K_a + \log_{10}\left(\frac{n_{A^-}}{n_{HA}}\right)::Henderson-Hasselbalch}}$$"
-        r"\nMáxima capacidad amortiguadora: cuando $[A^-] = [HA]$, donde $\text{pH} = {{c2::\text{p}K_a::pH óptimo}}$."
-        r"\nRango de amortiguamiento útil: $\text{pH} = {{c3::\text{p}K_a \pm 1::rango de efectividad}}$."))
+        r"<br>$$\text{pH} = {{c1::\text{p}K_a + \log_{10}\left(\frac{[A^-]}{[HA]}\right) = \text{p}K_a + \log_{10}\left(\frac{n_{A^-}}{n_{HA}}\right)}}$$"
+        r"<br>Máxima capacidad amortiguadora: cuando $[A^-] = [HA]$, donde $\text{pH} = {{c2::\text{p}K_a}}$."
+        r"<br>Rango de amortiguamiento útil: $\text{pH} = {{c3::\text{p}K_a \pm 1}}$."))
     course.notes.append(n18)
 
     # 19. Perturbación Estequiométrica de Buffers
@@ -869,18 +869,18 @@ def build_quimica_course() -> Course:
             r"Paso 6: Multiplicar por factores cruzados para igualar electrones y sumar."
         ]))
     n21.add_card(ClozeCard("Conceptos de Oxidación y Reducción",
-        r"- <b>Oxidación:</b> {{c1::Pérdida de electrones::electrones}} (aumento de estado de oxidación). Ocurre en el {{c2::Ánodo::electrodo de oxidación}} (vocal-vocal); actúa como agente reductor."
-        r"\n- <b>Reducción:</b> {{c3::Ganancia de electrones::electrones}} (disminución de estado de oxidación). Ocurre en el {{c4::Cátodo::electrodo de reducción}} (consonante-consonante); actúa como agente oxidante."))
+        r"- <b>Oxidación:</b> {{c1::Pérdida de electrones}} (aumento de estado de oxidación). Ocurre en el {{c2::Ánodo}} (vocal-vocal); actúa como agente reductor."
+        r"<br>- <b>Reducción:</b> {{c3::Ganancia de electrones}} (disminución de estado de oxidación). Ocurre en el {{c4::Cátodo}} (consonante-consonante); actúa como agente oxidante."))
     course.notes.append(n21)
 
     # 22. Celdas Galvánicas, Nernst y Faraday
     n22 = NoteNode("quim_22", "Celdas Galvánicas, Nernst y Faraday", 680.0, 1120.0, ["Química", "Celdas", "Nernst", "Faraday"])
     n22.add_card(ClozeCard("Potencial de Celda, Nernst y Ley de Faraday",
-        r"Potencial estándar: $E^\circ_{\text{celda}} = E^\circ_{\text{cátodo}} - E^\circ_{\text{ánodo}}$, con $\Delta G^\circ = {{c1::-n F E^\circ_{\text{celda}}::relación fundamental}}$."
-        r"\nEcuación de Nernst a $25^\circ\text{C}$:"
-        r"\n$$E_{\text{celda}} = {{c2::E^\circ_{\text{celda}} - \frac{0.0592}{n}\log_{10} Q::ecuación de Nernst}}$$"
-        r"\nMasa depositada por electrólisis: $m = {{c3::\frac{M \cdot I \cdot t}{n F}::fórmula de Faraday}}$ ($F = 96485\,\text{C/mol}$)."
-        r"\nEn equilibrio: $E_{\text{celda}} = 0 \implies E^\circ_{\text{celda}} = {{c4::\frac{0.0592}{n}\log_{10} K::cálculo de K}}$."))
+        r"Potencial estándar: $E^\circ_{\text{celda}} = E^\circ_{\text{cátodo}} - E^\circ_{\text{ánodo}}$, con $\Delta G^\circ = {{c1::-n F E^\circ_{\text{celda}}}}$."
+        r"<br>Ecuación de Nernst a $25^\circ\text{C}$:"
+        r"<br>$$E_{\text{celda}} = {{c2::E^\circ_{\text{celda}} - \frac{0.0592}{n}\log_{10} Q}}$$"
+        r"<br>Masa depositada por electrólisis: $m = {{c3::\frac{M \cdot I \cdot t}{n F}}}$ ($F = 96485\,\text{C/mol}$)."
+        r"<br>En equilibrio: $E_{\text{celda}} = 0 \implies E^\circ_{\text{celda}} = {{c4::\frac{0.0592}{n}\log_{10} K}}$."))
     n22.add_card(Flashcard("Celdas de Concentración y Puente Salino",
         r"¿Cómo funciona una celda de concentración y cuál es la función del puente salino?",
         r"1. <b>Celda de Concentración:</b> Electrodos idénticos sumergidos en soluciones del mismo catión pero a distinta concentración ($E^\circ_{\text{celda}} = 0$). Funciona espontáneamente por gradiente de entropía hacia la igualación de concentraciones:<br>"
@@ -928,17 +928,17 @@ def build_ofg_muerte_course() -> Course:
     n1 = NoteNode("ofg_01", "Antropología de la Muerte: Ritos de Paso", 80.0, 80.0, ["OFG Muerte", "Antropología", "Van Gennep"])
     n1.add_card(ClozeCard("El Modelo de Van Gennep en el Funeral Griego",
         r"Según Arnold van Gennep, el funeral es un rito de paso tripartito:"
-        r"\n1. Fase de {{c1::Separación::fase 1}} (aislamiento del cadáver impuro en el *oikos*)."
-        r"\n2. Fase Liminar o de {{c2::Transición::fase 2}} (el cortejo de la *ékfora* en la frontera urbana)."
-        r"\n3. Fase de {{c3::Reintegración / Agregación::fase 3}} (sepultura y banquete *perídeipnon*, reconstituyendo la comunidad viva)."))
+        r"<br>1. Fase de {{c1::Separación}} (aislamiento del cadáver impuro en el *oikos*)."
+        r"<br>2. Fase Liminar o de {{c2::Transición}} (el cortejo de la *ékfora* en la frontera urbana)."
+        r"<br>3. Fase de {{c3::Reintegración / Agregación}} (sepultura y banquete *perídeipnon*, reconstituyendo la comunidad viva)."))
     course.notes.append(n1)
 
     # 2. Escatología Homérica y Ontología de la Psyche
     n2 = NoteNode("ofg_02", "Escatología Homérica y la Sombra sin Fuerza", 380.0, 80.0, ["OFG Muerte", "Homero", "Hades", "Eidolon"])
     n2.add_card(ClozeCard("La Psyche en el Hades como Eidolon",
         r"En la épica homérica arcaica, la *psyche* subsiste en el Hades como:"
-        r"\n$$\text{Un } {{c1::*eidolon*::sombra homérica}}$$"
-        r"\nUna sombra vaporosa desprovista de fuerza vital ({{c2::*menos*::fuerza vital}}) y de sangre, en un letargo desposeído."))
+        r"<br>$$\text{Un } {{c1::*eidolon*}}$$"
+        r"<br>Una sombra vaporosa desprovista de fuerza vital ({{c2::*menos*}}) y de sangre, en un letargo desposeído."))
     n2.add_card(Flashcard("La Sentencia Trágica de Aquiles en la Odisea",
         r"¿Cuál es la afirmación de Aquiles en la Nekyia (Odisea XI) y su implicancia?",
         r"Aquiles proclama:<br>"
@@ -954,24 +954,24 @@ def build_ofg_muerte_course() -> Course:
         r"Mientras el cuerpo carezca de sepultura, las sombras ya cruzadas le impiden vadear el río, dejándolo vagar errante en la frontera liminar."))
     n3.add_card(ClozeCard("El Conflicto Sagrado en Antígona de Sófocles",
         r"Antígona desafía al rey Creonte apelando a:"
-        r"\n{{c1::Las leyes no escritas e inmutables de los dioses (*ágrapta nómina*)::ley divina}}"
-        r"\nque ordenan honrar al cadáver de su hermano por encima de cualquier prohibición civil."))
+        r"<br>{{c1::Las leyes no escritas e inmutables de los dioses (*ágrapta nómina*)}}"
+        r"<br>que ordenan honrar al cadáver de su hermano por encima de cualquier prohibición civil."))
     course.notes.append(n3)
 
     # 4. Dialéctica Sagrada: Míasma vs Ta Nomizómena
     n4 = NoteNode("ofg_04", "Dialéctica Sagrada: Míasma vs Ta Nomizómena", 980.0, 80.0, ["OFG Muerte", "Míasma", "Purificación", "Ta Nomizómena"])
     n4.add_card(ClozeCard("Definición de Míasma y Ta Nomizómena",
-        r"- {{c1::*Míasma*::impureza}}: La contaminación religiosa corruptora que emana del cadáver en descomposición."
-        r"\n- {{c2::*Ta nomizómena*::deber consuetudinario}}: Las honras fúnebres sagradas debidas por piedad."
-        r"\n- El cántaro en la entrada para purificación con agua ajena es el {{c3::*ardánion*::ánfora purificadora}}."))
+        r"- {{c1::*Míasma*}}: La contaminación religiosa corruptora que emana del cadáver en descomposición."
+        r"<br>- {{c2::*Ta nomizómena*}}: Las honras fúnebres sagradas debidas por piedad."
+        r"<br>- El cántaro en la entrada para purificación con agua ajena es el {{c3::*ardánion*}}."))
     course.notes.append(n4)
 
     # 5. Fase I: La Próthesis (Velatorio Doméstico)
     n5 = NoteNode("ofg_05", "Fase I: La Próthesis y el Oikos", 1280.0, 80.0, ["OFG Muerte", "Próthesis", "Kline", "Preparación"])
     n5.add_card(ClozeCard("Disposición del Difunto sobre la Kline",
         r"En la *próthesis*:"
-        r"\n- El cadáver se lava, se unge con ungüentos y se viste de blanco sobre el lecho mortuorio llamado {{c1::*kline*::lecho fúnebre}}."
-        r"\n- Los pies se orientan apuntando hacia {{c2::la puerta exterior de la casa::orientación corporal}}."))
+        r"<br>- El cadáver se lava, se unge con ungüentos y se viste de blanco sobre el lecho mortuorio llamado {{c1::*kline*}}."
+        r"<br>- Los pies se orientan apuntando hacia {{c2::la puerta exterior de la casa}}."))
     course.notes.append(n5)
 
     # 6. Protagonismo Femenino y Liturgia del Dolor: Góos vs Thrēnos
@@ -985,8 +985,8 @@ def build_ofg_muerte_course() -> Course:
     # 7. Fase II: La Ékfora (Cortejo Nocturno)
     n7 = NoteNode("ofg_07", "Fase II: La Ékfora y la Frontera Cívica", 380.0, 340.0, ["OFG Muerte", "Ékfora", "Cortejo", "Cerámico"])
     n7.add_card(ClozeCard("Temporalidad Sagrada de la Ékfora",
-        r"El traslado procesional del cuerpo a la necrópolis (el Cerámico) se llama {{c1::*ékfora*::segunda fase}}."
-        r"\nDebía realizarse forzosamente {{c2::antes de la salida del sol (de madrugada)::momento temporal}} para impedir que los rayos sagrados de Helios fueran mancillados por el *míasma*."))
+        r"El traslado procesional del cuerpo a la necrópolis (el Cerámico) se llama {{c1::*ékfora*}}."
+        r"<br>Debía realizarse forzosamente {{c2::antes de la salida del sol (de madrugada)}} para impedir que los rayos sagrados de Helios fueran mancillados por el *míasma*."))
     course.notes.append(n7)
 
     # 8. Conflicto Político de la Ékfora: Ostentación y Vendettas
@@ -999,14 +999,14 @@ def build_ofg_muerte_course() -> Course:
     # 9. Fase III: Sepultura, Inhumación vs Cremación en el Ática
     n9 = NoteNode("ofg_09", "Fase III: Depósito Corporal e Inhumación", 980.0, 340.0, ["OFG Muerte", "Sepultura", "Inhumación", "Cremación"])
     n9.add_card(ClozeCard("Inhumación Predominante en el Ática",
-        r"En la Atenas arcaica y clásica la práctica funeraria abrumadoramente dominante fue la {{c1::inhumación en tierra o sarcófago::práctica dominante}}, explicada arqueológicamente por {{c2::la grave escasez de madera para piras en el Ática::motivo ecológico-económico}}."))
+        r"En la Atenas arcaica y clásica la práctica funeraria abrumadoramente dominante fue la {{c1::inhumación en tierra o sarcófago}}, explicada arqueológicamente por {{c2::la grave escasez de madera para piras en el Ática}}."))
     course.notes.append(n9)
 
     # 10. Ofrendas Rituales: Libaciones Choai y Banquete Perídeipnon
     n10 = NoteNode("ofg_10", "Libaciones Choai y Banquete Perídeipnon", 1280.0, 340.0, ["OFG Muerte", "Choai", "Perídeipnon", "Reintegración"])
     n10.add_card(ClozeCard("Libaciones y Banquete de Reintegración",
-        r"- Libaciones sobre la tumba (vino puro, leche, miel y aceite): {{c1::*choai*::ofrendas líquidas}}."
-        r"\n- Banquete formal en el hogar purificado: {{c2::*perídeipnon*::banquete fúnebre}}, donde el difunto es el {{c3::anfitrión de honor::papel simbólico}}."))
+        r"- Libaciones sobre la tumba (vino puro, leche, miel y aceite): {{c1::*choai*}}."
+        r"<br>- Banquete formal en el hogar purificado: {{c2::*perídeipnon*}}, donde el difunto es el {{c3::anfitrión de honor}}."))
     course.notes.append(n10)
 
     # 11. Arqueología: Lekythoi y la Cámara Ciega
@@ -1021,18 +1021,18 @@ def build_ofg_muerte_course() -> Course:
     n12 = NoteNode("ofg_12", "El Óbolo Funerario y Caronte", 380.0, 600.0, ["OFG Muerte", "Óbolo", "Caronte", "Moneda"])
     n12.add_card(ClozeCard("Sentido Moral del Óbolo de Caronte",
         r"La moneda colocada en la boca o mano del difunto era el óbolo."
-        r"\nLejos de un mero peaje mercantil para Caronte, funcionaba como una {{c1::credencial cívica y moral::función simbólica}} que acreditaba que el muerto tenía {{c2::parientes solventes que ejecutaron las honras sagradas::prueba de honras}}."))
+        r"<br>Lejos de un mero peaje mercantil para Caronte, funcionaba como una {{c1::credencial cívica y moral}} que acreditaba que el muerto tenía {{c2::parientes solventes que ejecutaron las honras sagradas}}."))
     course.notes.append(n12)
 
     # 13. Topografía Sagrada del Hades: Ríos y Psicopompo
     n13 = NoteNode("ofg_13", "Topografía del Inframundo: Ríos Sagrados", 680.0, 600.0, ["OFG Muerte", "Hades", "Ríos", "Hermes"])
     n13.add_card(ClozeCard("Los Ríos del Hades y el Guía de Almas",
-        r"El dios que conduce las almas al inframundo es {{c1::Hermes Psicopompo::guía de almas}}."
-        r"\nLos ríos sagrados del Hades son:"
-        r"\n- El {{c2::Aqueronte::río del dolor}} (del dolor)."
-        r"\n- La {{c3::Estigia::río del juramento}} (del juramento sagrado e inviolable)."
-        r"\n- El {{c4::Lete::río del olvido}} (del olvido)."
-        r"\n- El Flegetonte (de fuego) y el Cocito (de los lamentos)."))
+        r"El dios que conduce las almas al inframundo es {{c1::Hermes Psicopompo}}."
+        r"<br>Los ríos sagrados del Hades son:"
+        r"<br>- El {{c2::Aqueronte}} (del dolor)."
+        r"<br>- La {{c3::Estigia}} (del juramento sagrado e inviolable)."
+        r"<br>- El {{c4::Lete}} (del olvido)."
+        r"<br>- El Flegetonte (de fuego) y el Cocito (de los lamentos)."))
     course.notes.append(n13)
 
     # 14. Reformas Suntuarias de Solón (594 a.C.)
@@ -1046,15 +1046,15 @@ def build_ofg_muerte_course() -> Course:
     # 15. Calendario Post-Sepulcral y Antesterias
     n15 = NoteNode("ofg_15", "Calendario Post-Sepulcral y Antesterias", 1280.0, 600.0, ["OFG Muerte", "Calendario", "Antesterias", "Chytroi"])
     n15.add_card(ClozeCard("Hitos del Luto y Fiesta de los Chytroi",
-        r"Visitas del calendario fúnebre: al tercer día ({{c1::*trita*::tercer día}}), noveno día ({{c2::*énata*::noveno día}}), trigésimo (*triakostia*) y al año (*eníausia*)."
-        r"\nEn las fiestas Antesterias se celebraba el día de los {{c3::*Chytroi* (las ollas)::día de sombras}}, ofreciendo gachas a las sombras que visitaban la ciudad."))
+        r"Visitas del calendario fúnebre: al tercer día ({{c1::*trita*}}), noveno día ({{c2::*énata*}}), trigésimo (*triakostia*) y al año (*eníausia*)."
+        r"<br>En las fiestas Antesterias se celebraba el día de los {{c3::*Chytroi* (las ollas)}}, ofreciendo gachas a las sombras que visitaban la ciudad."))
     course.notes.append(n15)
 
     # 16. Estética Clásica de la Memoria: Dexiosis y la Estela de Hegeso
     n16 = NoteNode("ofg_16", "Arte de la Memoria: Dexiosis y Ethos Clásico", 80.0, 860.0, ["OFG Muerte", "Dexiosis", "Hegeso", "Ethos"])
     n16.add_card(ClozeCard("El Motivo Iconográfico de la Dexiosis",
-        r"En las estelas fúnebres de mármol del Cerámico, el apretón solemne de manos entre el difunto y el deudo se llama {{c1::*dexiosis*::apretón de manos}}."
-        r"\nEncarna el *ethos* sereno y la {{c2::*kalokagathía*::virtud y belleza clásica}}, preservando la memoria imperecedera (*mneme*)."))
+        r"En las estelas fúnebres de mármol del Cerámico, el apretón solemne de manos entre el difunto y el deudo se llama {{c1::*dexiosis*}}."
+        r"<br>Encarna el *ethos* sereno y la {{c2::*kalokagathía*}}, preservando la memoria imperecedera (*mneme*)."))
     n16.add_card(Flashcard("Análisis Formal de la Estela de Hegeso",
         r"Describa la Estela de Hegeso y explique por qué rechaza el patetismo de la muerte biológica.",
         r"Hegeso aparece sentada contemplando con calma una joya extraída de un cofre que le sostiene su esclava.<br>"
@@ -1073,10 +1073,10 @@ def build_ofg_muerte_course() -> Course:
     n18 = NoteNode("ofg_18", "Guión Cronométrico (10:00) y Preguntas de Debate", 680.0, 860.0, ["OFG Muerte", "Guión", "Exposición", "Cronograma"])
     n18.add_card(ClozeCard("Estructura Cronométrica de 4 Expositores",
         r"Distribución estricta de la ponencia (10:00 exactos, 2:30 por expositor):"
-        r"\n- Turno I (0:00 - 2:30): {{c1::Expositor 1::turno 1}} (Finitud homérica, Odisea, míasma vs ta nomizómena)."
-        r"\n- Turno II (2:30 - 5:00): {{c2::Expositor 2::turno 2}} (Próthesis, ékfora, sepultura, choai y perídeipnon)."
-        r"\n- Turno III (5:00 - 7:30): {{c3::Expositor 3::turno 3}} (Lekythos, cámara ciega, leyes de Solón y dexiosis)."
-        r"\n- Turno IV (7:30 - 10:00): {{c4::Expositor 4::turno 4}} (Desamparo contemporáneo, Tres Tesis y plenario)."))
+        r"<br>- Turno I (0:00 - 2:30): {{c1::Expositor 1}} (Finitud homérica, Odisea, míasma vs ta nomizómena)."
+        r"<br>- Turno II (2:30 - 5:00): {{c2::Expositor 2}} (Próthesis, ékfora, sepultura, choai y perídeipnon)."
+        r"<br>- Turno III (5:00 - 7:30): {{c3::Expositor 3}} (Lekythos, cámara ciega, leyes de Solón y dexiosis)."
+        r"<br>- Turno IV (7:30 - 10:00): {{c4::Expositor 4}} (Desamparo contemporáneo, Tres Tesis y plenario)."))
     n18.add_card(Flashcard("Las Tres Tesis Vertebrales Finales",
         r"Enuncie las tres tesis académicas conclusivas de la ponencia.",
         r"1. <b>Tesis 1:</b> El rito no es salvación individual ultraterrena, sino una tecnología psicosocial indispensable para recomponer y proteger a la comunidad de los vivos.<br>"

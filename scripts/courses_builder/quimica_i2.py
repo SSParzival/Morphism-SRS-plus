@@ -15,10 +15,10 @@ def build_quimica_course() -> Course:
     n0 = NoteNode("quim_00", "Disoluciones: Unidades de Concentración y Dilución", 80.0, 40.0, ["Química", "Disoluciones", "Concentración"])
     n0.add_card(ClozeCard("Fórmulas Fundamentales de Concentración",
         r"Definiciones de unidades de concentración para mezclas homogéneas:"
-        r"\n- Molaridad ($M$): $$M = {{c1::\frac{n_{\text{soluto}}}{V_{\text{disolución (L)}}}::moles por litro de disolución}}$$"
-        r"\n- Molalidad ($m$): $$m = {{c2::\frac{n_{\text{soluto}}}{m_{\text{disolvente (kg)}}}::moles por kg de disolvente}}$$ (no varía con la temperatura)."
-        r"\n- Fracción Molar ($X_A$): $$X_A = {{c3::\frac{n_A}{n_{\text{total}}}::fracción adimensional}}$$ con $\sum X_i = 1$."
-        r"\n- Ley de Dilución: $$C_1 V_1 = {{c4::C_2 V_2::conservación de moles de soluto}}$$."))
+        r"<br>- Molaridad ($M$): $$M = {{c1::\frac{n_{\text{soluto}}}{V_{\text{disolución (L)}}}}}$$"
+        r"<br>- Molalidad ($m$): $$m = {{c2::\frac{n_{\text{soluto}}}{m_{\text{disolvente (kg)}}}}}$$ (no varía con la temperatura)."
+        r"<br>- Fracción Molar ($X_A$): $$X_A = {{c3::\frac{n_A}{n_{\text{total}}}}}$$ con $\sum X_i = 1$."
+        r"<br>- Ley de Dilución: $$C_1 V_1 = {{c4::C_2 V_2}}$$."))
     course.notes.append(n0)
 
     # --------------------------------------------------------------------------
@@ -27,9 +27,9 @@ def build_quimica_course() -> Course:
     n1 = NoteNode("quim_01", "Velocidad de Reacción y Expresiones Estequiométricas", 380.0, 40.0, ["Química", "Cinética", "Velocidad"])
     n1.add_card(ClozeCard("Expresión Diferencial de la Velocidad de Reacción",
         r"Para una reacción química general: $$a A + b B \longrightarrow c C + d D$$"
-        r"\nLa velocidad de reacción instantánea $v$ se define normalizada por los coeficientes estequiométricos:"
-        r"\n$$v = {{c1::-\frac{1}{a}\frac{d[A]}{dt} = -\frac{1}{b}\frac{d[B]}{dt} = +\frac{1}{c}\frac{d[C]}{dt} = +\frac{1}{d}\frac{d[D]}{dt}::expresión diferencial estequiométrica}}$$"
-        r"\nLos signos negativos en reactivos indican que {{c2::se consumen::disminución temporal}}, y los positivos en productos indican que {{c3::se forman::aparición temporal}}."))
+        r"<br>La velocidad de reacción instantánea $v$ se define normalizada por los coeficientes estequiométricos:"
+        r"<br>$$v = {{c1::-\frac{1}{a}\frac{d[A]}{dt} = -\frac{1}{b}\frac{d[B]}{dt} = +\frac{1}{c}\frac{d[C]}{dt} = +\frac{1}{d}\frac{d[D]}{dt}}}$$"
+        r"<br>Los signos negativos en reactivos indican que {{c2::se consumen}}, y los positivos en productos indican que {{c3::se forman}}."))
     n1.add_card(Flashcard("Ley Experimental de Velocidad y Órdenes de Reacción",
         r"Explique la diferencia fundamental entre los órdenes de reacción ($m, n$) y los coeficientes estequiométricos ($a, b$) en la ley de velocidad $v = k [A]^m [B]^n$.",
         r"1. <b>Ley de Velocidad:</b> $v = k [A]^m [B]^n$, donde $k$ es la constante de velocidad, $m$ es el orden parcial respecto a $A$, $n$ es el orden parcial respecto a $B$, y $(m + n)$ es el <b>orden global</b>.<br>"
@@ -43,15 +43,21 @@ def build_quimica_course() -> Course:
     n2 = NoteNode("quim_02", "Método de Velocidades Iniciales y Unidades de k", 680.0, 40.0, ["Química", "Cinética", "Constante k"])
     n2.add_card(ClozeCard("Unidades de la Constante de Velocidad k",
         r"Dado que la velocidad siempre tiene unidades de $[v] = M \cdot s^{-1} = \frac{\text{mol}}{\text{L}\cdot s}$, las unidades de $k$ dependen estrictamente del <b>orden global</b> $n_{\text{glob}}$:"
-        r"\n$$[k] = {{c1::M^{1 - n_{\text{glob}}} \cdot s^{-1} = \left(\frac{\text{mol}}{\text{L}}\right)^{1 - n_{\text{glob}}} \cdot s^{-1}::unidades de k}}$$"
-        r"\n- Orden 0: $[k] = M \cdot s^{-1}$."
-        r"\n- Orden 1: $[k] = s^{-1}$."
-        r"\n- Orden 2: $[k] = M^{-1} \cdot s^{-1} = \text{L}\cdot\text{mol}^{-1}\cdot s^{-1}$."))
+        r"<br>$$[k] = {{c1::M^{1 - n_{\text{glob}}} \cdot s^{-1} = \left(\frac{\text{mol}}{\text{L}}\right)^{1 - n_{\text{glob}}} \cdot s^{-1}}}$$"
+        r"<br>- Orden 0: $[k] = M \cdot s^{-1}$."
+        r"<br>- Orden 1: $[k] = s^{-1}$."
+        r"<br>- Orden 2: $[k] = M^{-1} \cdot s^{-1} = \text{L}\cdot\text{mol}^{-1}\cdot s^{-1}$."))
     n2.add_card(Flashcard("Determinación de Órdenes por Cociente de Experimentos",
         r"Si al duplicar la concentración $[A]_0$ manteniendo $[B]_0$ constante la velocidad inicial se cuadruplica, ¿cuál es el orden parcial respecto a $A$?",
         r"Por la ley de velocidad: $\frac{v_2}{v_1} = \left(\frac{[A]_2}{[A]_1}\right)^m$.<br>"
         r"Sustituyendo los datos: $4 = (2)^m \implies 2^2 = 2^m \implies m = 2$.<br>"
         r"Por lo tanto, la reacción es de <b>segundo orden</b> respecto a $A$."))
+    n2.add_card(Flashcard("Aproximación del Estado Estacionario (SSA) para Intermediarios",
+        r"¿En qué consiste la Aproximación del Estado Estacionario (SSA) y cómo se aplica para deducir la ley de velocidad a partir de un mecanismo con intermediarios reactivos?",
+        r"1. <b>Fundamento Químico:</b> Un intermediario de reacción $I$ es una especie muy reactiva formada en una etapa elemental que se consume casi de inmediato en la siguiente, por lo que su concentración $[I]$ se mantiene muy baja y cuasi-estacionaria.<br>"
+        r"2. <b>Condición Matemática:</b> La tasa neta de cambio de su concentración es aproximadamente nula:<br>"
+        r"$$\frac{d[I]}{dt} = v_{\text{formación}} - v_{\text{consumo}} \approx 0 \implies v_{\text{formación}} = v_{\text{consumo}}$$<br>"
+        r"3. <b>Eliminación del Intermediario:</b> Se despeja $[I]$ algebraicamente en función de los reactivos estables y constantes cinéticas $k_i$, y se sustituye en la expresión de formación de productos para obtener la ley de velocidad macroscópica observable."))
     course.notes.append(n2)
 
     # --------------------------------------------------------------------------
@@ -60,9 +66,9 @@ def build_quimica_course() -> Course:
     n3 = NoteNode("quim_03", "Leyes Cinéticas Integradas y Vida Media", 980.0, 40.0, ["Química", "Cinética", "Vida Media"])
     n3.add_card(ClozeCard("Comparativa de Leyes Integradas y Linealización",
         r"Ecuaciones integradas de concentración vs tiempo para $A \to \text{productos}$:"
-        r"\n- <b>Orden 0:</b> $[A]_t = {{c1::[A]_0 - kt::ecuación orden 0}}$ | Gráfico lineal: $[A]$ vs $t$ (pendiente $-k$) | Vida media: $t_{1/2} = {{c2::\frac{[A]_0}{2k}::vida media orden 0}}$."
-        r"\n- <b>Orden 1:</b> $\ln[A]_t = {{c3::\ln[A]_0 - kt::ecuación orden 1}}$ | Gráfico lineal: $\ln[A]$ vs $t$ (pendiente $-k$) | Vida media: $t_{1/2} = {{c4::\frac{\ln 2}{k} \approx \frac{0.693}{k}::vida media orden 1}}$ (independiente de $[A]_0$!)."
-        r"\n- <b>Orden 2:</b> $\frac{1}{[A]_t} = {{c5::\frac{1}{[A]_0} + kt::ecuación orden 2}}$ | Gráfico lineal: $\frac{1}{[A]}$ vs $t$ (pendiente $+k$) | Vida media: $t_{1/2} = {{c6::\frac{1}{k[A]_0}::vida media orden 2}}$."))
+        r"<br>- <b>Orden 0:</b> $[A]_t = {{c1::[A]_0 - kt}}$ | Gráfico lineal: $[A]$ vs $t$ (pendiente $-k$) | Vida media: $t_{1/2} = {{c2::\frac{[A]_0}{2k}}}$."
+        r"<br>- <b>Orden 1:</b> $\ln[A]_t = {{c3::\ln[A]_0 - kt}}$ | Gráfico lineal: $\ln[A]$ vs $t$ (pendiente $-k$) | Vida media: $t_{1/2} = {{c4::\frac{\ln 2}{k} \approx \frac{0.693}{k}}}$ (independiente de $[A]_0$!)."
+        r"<br>- <b>Orden 2:</b> $\frac{1}{[A]_t} = {{c5::\frac{1}{[A]_0} + kt}}$ | Gráfico lineal: $\frac{1}{[A]}$ vs $t$ (pendiente $+k$) | Vida media: $t_{1/2} = {{c6::\frac{1}{k[A]_0}}}$."))
     course.notes.append(n3)
 
     # --------------------------------------------------------------------------
@@ -83,11 +89,11 @@ def build_quimica_course() -> Course:
     n5 = NoteNode("quim_05", "Ecuación de Arrhenius y Energía de Activación", 380.0, 240.0, ["Química", "Arrhenius", "Energía Activación"])
     n5.add_card(ClozeCard("Ecuación de Arrhenius y Linealización",
         r"Dependencia de la constante de velocidad con la temperatura absoluta $T$:"
-        r"\n$$k = {{c1::A e^{-E_a / RT}::ecuación de Arrhenius}}$$"
-        r"\n- $E_a$: Energía de activación (energía mínima requerida para formar el complejo activado)."
-        r"\n- $A$: Factor preexponencial de frecuencia (frecuencia de colisiones con orientación espacial favorable)."
-        r"\n- Linealización: $$\ln k = {{c2::\ln A - \frac{E_a}{R}\left(\frac{1}{T}\right)::forma lineal de Arrhenius}}$$ (gráfico $\ln k$ vs $1/T$ tiene pendiente $-\frac{E_a}{R}$)."
-        r"\n- Ecuación de dos temperaturas: $$\ln\left(\frac{k_2}{k_1}\right) = {{c3::-\frac{E_a}{R}\left(\frac{1}{T_2} - \frac{1}{T_1}\right) = \frac{E_a}{R}\left(\frac{T_2 - T_1}{T_1 T_2}\right)::fórmula de 2 puntos}}$$."))
+        r"<br>$$k = {{c1::A e^{-E_a / RT}}}$$"
+        r"<br>- $E_a$: Energía de activación (energía mínima requerida para formar el complejo activado)."
+        r"<br>- $A$: Factor preexponencial de frecuencia (frecuencia de colisiones con orientación espacial favorable)."
+        r"<br>- Linealización: $$\ln k = {{c2::\ln A - \frac{E_a}{R}\left(\frac{1}{T}\right)}}$$ (gráfico $\ln k$ vs $1/T$ tiene pendiente $-\frac{E_a}{R}$)."
+        r"<br>- Ecuación de dos temperaturas: $$\ln\left(\frac{k_2}{k_1}\right) = {{c3::-\frac{E_a}{R}\left(\frac{1}{T_2} - \frac{1}{T_1}\right) = \frac{E_a}{R}\left(\frac{T_2 - T_1}{T_1 T_2}\right)}}$$."))
     n5.add_card(Flashcard("Perfiles de Energía Potencial y Catálisis",
         r"¿Cómo se relacionan las energías de activación directa e inversa con el cambio de entalpía $\Delta H$, y cuál es el efecto exacto de un catalizador?",
         r"1. <b>Relación entálpica:</b> $\Delta H_{\text{reacción}} = E_{a,\text{directa}} - E_{a,\text{inversa}}$.<br>"
@@ -103,15 +109,20 @@ def build_quimica_course() -> Course:
     n6 = NoteNode("quim_06", "Equilibrio Químico: Constantes Kc y Kp", 680.0, 240.0, ["Química", "Equilibrio", "Kc y Kp"])
     n6.add_card(ClozeCard("Relación Fundamental entre Kc y Kp",
         r"Para una reacción en fase gaseosa: $a A(g) + b B(g) \rightleftharpoons c C(g) + d D(g)$:"
-        r"\n- Constante en concentraciones molares: $$K_c = \frac{[C]^c [D]^d}{[A]^a [B]^b}$$"
-        r"\n- Constante en presiones parciales: $$K_p = \frac{P_C^c P_D^d}{P_A^a P_B^b}$$"
-        r"\n- Relación termodinámica ideal: $$K_p = {{c1::K_c (R T)^{\Delta n_{\text{gas}}}::conversión Kc a Kp}}$$"
-        r"\ndonde $\Delta n_{\text{gas}} = {{c2::(c + d) - (a + b)::variación de moles gaseosos}}$, y $R = 0.08206 \text{ atm}\cdot\text{L}/(\text{mol}\cdot\text{K})$."))
+        r"<br>- Constante en concentraciones molares: $$K_c = \frac{[C]^c [D]^d}{[A]^a [B]^b}$$"
+        r"<br>- Constante en presiones parciales: $$K_p = \frac{P_C^c P_D^d}{P_A^a P_B^b}$$"
+        r"<br>- Relación termodinámica ideal: $$K_p = {{c1::K_c (R T)^{\Delta n_{\text{gas}}}}}$$"
+        r"<br>donde $\Delta n_{\text{gas}} = {{c2::(c + d) - (a + b)}}$, y $R = 0.08206 \text{ atm}\cdot\text{L}/(\text{mol}\cdot\text{K})$."))
     n6.add_card(Flashcard("Equilibrios Heterogéneos y Omisión de Sólidos y Líquidos Puros",
         r"¿Por qué los sólidos puros (s) y los líquidos puros (l) no se incluyen en las expresiones de $K_c$ o $K_p$?",
         r"En termodinámica química, las constantes de equilibrio se escriben en términos de <b>actividades químicas</b> ($a_i$).<br>"
         r"Para sólidos puros y líquidos puros bajo presiones ordinarias, la concentración molar es constante (su densidad dividida por la masa molar no cambia) y su actividad estándar es idéntica a la unidad: $a_{\text{sólido}} = 1$, $a_{\text{líquido}} = 1$.<br>"
         r"Ejemplo: Para $\text{CaCO}_3(s) \rightleftharpoons \text{CaO}(s) + \text{CO}_2(g)$, $K_c = [\text{CO}_2]$ y $K_p = P_{\text{CO}_2}$."))
+    n6.add_card(ClozeCard("Solubilidad Condicionada por el pH en Sales Básicas",
+        r"Para una sal poco soluble cuyo anión proviene de un ácido débil, como $\text{CaF}_2(s) \rightleftharpoons \text{Ca}^{2+}(aq) + 2\text{F}^-(aq)$ con constante $K_{ps}$:"
+        r"<br>1. Al acidificar la disolución (disminuir el pH / aumentar $[\text{H}^+]$), los protones reaccionan con el anión fluoruro formando {{c1::el ácido débil poco disociado $\text{HF}$}}."
+        r"<br>2. Esta reacción secundaria consume $\text{F}^-$ libre, desplazando el equilibrio de solubilidad por Le Chatelier hacia {{c2::la derecha (hacia la disolución)}}."
+        r"<br>3. Por lo tanto, la solubilidad molar de $\text{CaF}_2$ {{c3::aumenta drásticamente a pH ácido}}, a diferencia de sales con aniones de ácidos fuertes como $\text{AgCl}$ donde el pH no afecta la solubilidad."))
     course.notes.append(n6)
 
     # --------------------------------------------------------------------------
@@ -120,9 +131,9 @@ def build_quimica_course() -> Course:
     n7 = NoteNode("quim_07", "Cociente Q y Principio de Le Chatelier", 980.0, 240.0, ["Química", "Le Chatelier", "Cociente Q"])
     n7.add_card(ClozeCard("Comparación Q vs K y Sentido Espontáneo de Avance",
         r"El cociente de reacción $Q$ tiene la misma forma matemática que $K$, pero evaluado con las concentraciones instantáneas no necesariamente en equilibrio:"
-        r"\n- Si $Q < K$: Existen menos productos de los requeridos; la reacción neta avanza hacia la {{c1::derecha (productos)::sentido directo}} ($\longrightarrow$)."
-        r"\n- Si $Q > K$: Existen más productos de los debidos; la reacción neta retrocede hacia la {{c2::izquierda (reactivos)::sentido inverso}} ($\longleftarrow$)."
-        r"\n- Si $Q = K$: El sistema se encuentra en {{c3::equilibrio químico dinámico::estado estacionario}}."))
+        r"<br>- Si $Q < K$: Existen menos productos de los requeridos; la reacción neta avanza hacia la {{c1::derecha (productos)}} ($\longrightarrow$)."
+        r"<br>- Si $Q > K$: Existen más productos de los debidos; la reacción neta retrocede hacia la {{c2::izquierda (reactivos)}} ($\longleftarrow$)."
+        r"<br>- Si $Q = K$: El sistema se encuentra en {{c3::equilibrio químico dinámico}}."))
     n7.add_card(Flashcard("Perturbaciones de Le Chatelier: Presión, Volumen y Gas Inerte",
         r"Analice el desplazamiento del equilibrio por el Principio de Le Chatelier ante: 1) Disminución de volumen (aumento de presión), 2) Adición de gas inerte a volumen constante, 3) Adición de gas inerte a presión constante.",
         r"1. <b>Disminución de volumen ($P \uparrow$):</b> El sistema se desplaza hacia el lado con <b>menor número de moles gaseosos</b> ($\Delta n_{\text{gas}}$ menor) para aliviar el aumento de presión.<br>"
@@ -136,9 +147,9 @@ def build_quimica_course() -> Course:
     n8 = NoteNode("quim_08", "Temperatura en el Equilibrio y Ecuación de Van 't Hoff", 80.0, 440.0, ["Química", "Van 't Hoff", "Termodinámica"])
     n8.add_card(ClozeCard("Ecuación de Van 't Hoff y Termodinámica",
         r"La única perturbación que altera el valor numérico de la constante de equilibrio $K$ es el cambio de <b>temperatura</b>:"
-        r"\n$$\ln\left(\frac{K_2}{K_1}\right) = {{c1::-\frac{\Delta H^\circ}{R}\left(\frac{1}{T_2} - \frac{1}{T_1}\right)::ecuación de Van 't Hoff}}$$"
-        r"\n- Reacción Endotérmica ($\Delta H^\circ > 0$, el calor actúa como reactivo): Al aumentar $T \implies$ {{c2::$K$ aumenta y se desplaza a productos::comportamiento endotérmico}}."
-        r"\n- Reacción Exotérmica ($\Delta H^\circ < 0$, el calor actúa como producto): Al aumentar $T \implies$ {{c3::$K$ disminuye y se desplaza a reactivos::comportamiento exotérmico}}."))
+        r"<br>$$\ln\left(\frac{K_2}{K_1}\right) = {{c1::-\frac{\Delta H^\circ}{R}\left(\frac{1}{T_2} - \frac{1}{T_1}\right)}}$$"
+        r"<br>- Reacción Endotérmica ($\Delta H^\circ > 0$, el calor actúa como reactivo): Al aumentar $T \implies$ {{c2::$K$ aumenta y se desplaza a productos}}."
+        r"<br>- Reacción Exotérmica ($\Delta H^\circ < 0$, el calor actúa como producto): Al aumentar $T \implies$ {{c3::$K$ disminuye y se desplaza a reactivos}}."))
     course.notes.append(n8)
 
     # --------------------------------------------------------------------------
@@ -147,10 +158,10 @@ def build_quimica_course() -> Course:
     n9 = NoteNode("quim_09", "Autoionización del Agua y Escalas de pH y pOH", 380.0, 440.0, ["Química", "Ácido-Base", "pH"])
     n9.add_card(ClozeCard("Autoionización del Agua y Kw",
         r"En disolución acuosa a $25^\circ\text{C}$:"
-        r"\n$$2 \text{H}_2\text{O}(l) \rightleftharpoons \text{H}_3\text{O}^+(aq) + \text{OH}^-(aq)$$"
-        r"\n- Producto iónico del agua: $$K_w = [\text{H}^+][\text{OH}^-] = {{c1::1.0 \times 10^{-14}::valor de Kw a 25C}}$$"
-        r"\n- Escalas logarítmicas: $\text{pH} = -\log[\text{H}^+]$ y $\text{pOH} = -\log[\text{OH}^-]$."
-        r"\n- Relación fundamental: $$\text{pH} + \text{pOH} = {{c2::14.00::suma a 25C}}$$ (a mayor temperatura, como la disociación es endotérmica, $K_w$ aumenta y el pH neutro disminuye)."))
+        r"<br>$$2 \text{H}_2\text{O}(l) \rightleftharpoons \text{H}_3\text{O}^+(aq) + \text{OH}^-(aq)$$"
+        r"<br>- Producto iónico del agua: $$K_w = [\text{H}^+][\text{OH}^-] = {{c1::1.0 \times 10^{-14}}}$$"
+        r"<br>- Escalas logarítmicas: $\text{pH} = -\log[\text{H}^+]$ y $\text{pOH} = -\log[\text{OH}^-]$."
+        r"<br>- Relación fundamental: $$\text{pH} + \text{pOH} = {{c2::14.00}}$$ (a mayor temperatura, como la disociación es endotérmica, $K_w$ aumenta y el pH neutro disminuye)."))
     course.notes.append(n9)
 
     # --------------------------------------------------------------------------
@@ -159,11 +170,11 @@ def build_quimica_course() -> Course:
     n10 = NoteNode("quim_10", "Ácidos Débiles, Tabla ICE y Regla del 5%", 680.0, 440.0, ["Química", "Ácidos Débiles", "Tabla ICE"])
     n10.add_card(ClozeCard("Tabla ICE y la Regla del 5%",
         r"Para un ácido monoprótico débil: $\text{HA} + \text{H}_2\text{O} \rightleftharpoons \text{H}_3\text{O}^+ + \text{A}^-$ con concentración inicial $C_0$:"
-        r"\nPor tabla ICE en equilibrio: $[\text{HA}] = C_0 - x$, $[\text{H}^+] = x$, $[\text{A}^-] = x$."
-        r"\n$$K_a = \frac{x^2}{C_0 - x}$$"
-        r"\n- <b>Regla del 5% / Criterio de los 400:</b> Si {{c1::$\frac{C_0}{K_a} > 400$::criterio de aproximación}}, se puede despreciar $x$ frente a $C_0$ ($C_0 - x \approx C_0$):"
-        r"\n$$x = [\text{H}^+] \approx {{c2::\sqrt{K_a C_0}::fórmula simplificada}}$$."
-        r"\nSi el porcentaje de ionización $\alpha = \frac{x}{C_0}\times 100\% > 5\%$, debe resolverse la ecuación cuadrática exacta."))
+        r"<br>Por tabla ICE en equilibrio: $[\text{HA}] = C_0 - x$, $[\text{H}^+] = x$, $[\text{A}^-] = x$."
+        r"<br>$$K_a = \frac{x^2}{C_0 - x}$$"
+        r"<br>- <b>Regla del 5% / Criterio de los 400:</b> Si {{c1::$\frac{C_0}{K_a} > 400$}}, se puede despreciar $x$ frente a $C_0$ ($C_0 - x \approx C_0$):"
+        r"<br>$$x = [\text{H}^+] \approx {{c2::\sqrt{K_a C_0}}}$$."
+        r"<br>Si el porcentaje de ionización $\alpha = \frac{x}{C_0}\times 100\% > 5\%$, debe resolverse la ecuación cuadrática exacta."))
     n10.add_card(Flashcard("Relación entre Pares Ácido-Base Conjugados",
         r"Deduzca la relación entre la constante de acidez $K_a$ de un ácido débil y la constante de basicidad $K_b$ de su base conjugada.",
         r"1. Ácido: $\text{HA} + \text{H}_2\text{O} \rightleftharpoons \text{H}_3\text{O}^+ + \text{A}^-$, con $K_a = \frac{[\text{H}_3\text{O}^+][\text{A}^-]}{[\text{HA}]}$.<br>"
@@ -191,9 +202,9 @@ def build_quimica_course() -> Course:
     n12 = NoteNode("quim_12", "Disoluciones Buffer y Henderson-Hasselbalch", 80.0, 640.0, ["Química", "Buffer", "Henderson-Hasselbalch"])
     n12.add_card(ClozeCard("Ecuación de Henderson-Hasselbalch",
         r"Para un sistema amortiguador compuesto por un ácido débil $\text{HA}$ y su base conjugada $\text{A}^-$:"
-        r"\n- Ecuación de Henderson-Hasselbalch: $$\text{pH} = {{c1::\text{p}K_a + \log\left(\frac{[\text{A}^-]}{[\text{HA}]}\right) = \text{p}K_a + \log\left(\frac{n_{\text{base}}}{n_{\text{ácido}}}\right)::ecuación reguladora}}$$."
-        r"\n- Máxima capacidad amortiguadora: Ocurre cuando $[\text{HA}] = [\text{A}^-]$, donde $\log(1) = 0 \implies \text{pH} = {{c2::\text{p}K_a::pH de máxima capacidad}}$."
-        r"\n- Rango eficaz de amortiguación: $$\text{pH} = {{c3::\text{p}K_a \pm 1::intervalo de amortiguación}}$$."))
+        r"<br>- Ecuación de Henderson-Hasselbalch: $$\text{pH} = {{c1::\text{p}K_a + \log\left(\frac{[\text{A}^-]}{[\text{HA}]}\right) = \text{p}K_a + \log\left(\frac{n_{\text{base}}}{n_{\text{ácido}}}\right)}}$$."
+        r"<br>- Máxima capacidad amortiguadora: Ocurre cuando $[\text{HA}] = [\text{A}^-]$, donde $\log(1) = 0 \implies \text{pH} = {{c2::\text{p}K_a}}$."
+        r"<br>- Rango eficaz de amortiguación: $$\text{pH} = {{c3::\text{p}K_a \pm 1}}$$."))
     n12.add_card(Flashcard("Perturbación Cuantitativa de Buffers ante Adición de Ácido/Base Fuerte",
         r"Explique la metodología de dos pasos para calcular el nuevo pH de un buffer tras agregar una cantidad estequiométrica $n_{\text{agregada}}$ de base fuerte (OH-) o ácido fuerte (H+).",
         r"1. <b>Paso 1: Estequiometría de Neutralización Completa (moles):</b><br>"
@@ -203,6 +214,16 @@ def build_quimica_course() -> Course:
         r"Nuevos moles: $n_{\text{A}^-}' = n_{\text{A}^-} - n_{\text{H}^+}$, y $n_{\text{HA}}' = n_{\text{HA}} + n_{\text{H}^+}$.<br>"
         r"2. <b>Paso 2: Recalcular pH con Henderson-Hasselbalch:</b><br>"
         r"$$\text{pH}' = \text{p}K_a + \log\left(\frac{n_{\text{A}^-}'}{n_{\text{HA}}'}\right)$$"))
+    n12.add_card(Flashcard("Cálculo del pH de Sales Anfolíticas / Anfóteras (NaHCO3)",
+        r"¿Cómo se deduce y calcula el pH de una disolución de un anfolito como el bicarbonato de sodio ($\text{NaHCO}_3$) a partir de las constantes de su ácido diprótico?",
+        r"1. <b>Equilibrios Simultáneos del Ión Hidrogenocarbonato ($\text{HCO}_3^-$):</b><br>"
+        r"- Como ácido: $\text{HCO}_3^- + \text{H}_2\text{O} \rightleftharpoons \text{CO}_3^{2-} + \text{H}_3\text{O}^+$, con $K_{a2} = \frac{[\text{H}^+][\text{CO}_3^{2-}]}{[\text{HCO}_3^-]}$.<br>"
+        r"- Como base: $\text{HCO}_3^- + \text{H}_2\text{O} \rightleftharpoons \text{H}_2\text{CO}_3 + \text{OH}^-$, con $K_b = \frac{K_w}{K_{a1}}$.<br>"
+        r"2. <b>Aproximación Sistemática:</b> Combinando los balances de materia y de carga (despreciando el aporte del agua frente a la sal):<br>"
+        r"$$[\text{H}^+] \approx \sqrt{\frac{K_{a1} K_{a2} C_0 + K_{a1} K_w}{K_{a1} + C_0}}$$<br>"
+        r"3. <b>Fórmula Operativa:</b> Cuando $C_0 \gg K_{a1}$ y $K_{a1} C_0 \gg K_w$, la concentración $C_0$ se cancela:<br>"
+        r"$$[\text{H}^+] \approx \sqrt{K_{a1} \cdot K_{a2}} \implies \text{pH} \approx \frac{\text{p}K_{a1} + \text{p}K_{a2}}{2}$$<br>"
+        r"¡El pH es prácticamente <b>independiente de la concentración</b> de la sal!"))
     course.notes.append(n12)
 
     # --------------------------------------------------------------------------
@@ -240,10 +261,15 @@ def build_quimica_course() -> Course:
     n15 = NoteNode("quim_15", "Celdas Galvánicas y Potenciales Estándar E0", 980.0, 640.0, ["Química", "Electroquímica", "Celdas Galvánicas"])
     n15.add_card(ClozeCard("Componentes Canónicos de una Celda Galvánica",
         r"En una celda electroquímica espontánea (galvánica o voltaica):"
-        r"\n- <b>Ánodo:</b> Electrodo con polaridad {{c1::negativa (-)::signo de ánodo}}, donde ocurre siempre la {{c2::oxidación::proceso anódico}} ($A \to A^{n+} + n e^-$)."
-        r"\n- <b>Cátodo:</b> Electrodo con polaridad {{c3::positiva (+)::signo de cátodo}}, donde ocurre siempre la {{c4::reducción::proceso catódico}} ($C^{m+} + m e^- \to C$)."
-        r"\n- <b>Puente Salino:</b> Mantiene la neutralidad eléctrica permitiendo que los {{c5::aniones migren al ánodo y los cationes al cátodo::flujo iónico}}."
-        r"\n- Potencial estándar de celda: $$E^\circ_{\text{celda}} = {{c6::E^\circ_{\text{cátodo}} - E^\circ_{\text{ánodo}}::potencial estándar}}$$ (utilizando siempre los potenciales de reducción de tabla)."))
+        r"<br>- <b>Ánodo:</b> Electrodo con polaridad {{c1::negativa (-)}}, donde ocurre siempre la {{c2::oxidación}} ($A \to A^{n+} + n e^-$)."
+        r"<br>- <b>Cátodo:</b> Electrodo con polaridad {{c3::positiva (+)}}, donde ocurre siempre la {{c4::reducción}} ($C^{m+} + m e^- \to C$)."
+        r"<br>- <b>Puente Salino:</b> Mantiene la neutralidad eléctrica permitiendo que los {{c5::aniones migren al ánodo y los cationes al cátodo}}."
+        r"<br>- Potencial estándar de celda: $$E^\circ_{\text{celda}} = {{c6::E^\circ_{\text{cátodo}} - E^\circ_{\text{ánodo}}}}$$ (utilizando siempre los potenciales de reducción de tabla)."))
+    n15.add_card(ClozeCard("Protección Catódica y Ánodos de Sacrificio",
+        r"Para prevenir la corrosión galvánica de estructuras enterradas o sumergidas de acero ($\text{Fe} \to \text{Fe}^{2+} + 2e^-$):"
+        r"<br>1. Se conecta eléctricamente la estructura a un metal con potencial estándar de reducción {{c1::más negativo que el del hierro}}, tal como {{c2::zinc ($\text{Zn}$) o magnesio ($\text{Mg}$)}}."
+        r"<br>2. El metal acoplado se oxida preferencialmente actuando como {{c3::ánodo de sacrificio}} y entregando electrones a la estructura."
+        r"<br>3. El acero se polariza como {{c4::cátodo}}, impidiendo su oxidación y garantizando su integridad mecánica mientras persista el ánodo de sacrificio."))
     course.notes.append(n15)
 
     # --------------------------------------------------------------------------
@@ -252,11 +278,11 @@ def build_quimica_course() -> Course:
     n16 = NoteNode("quim_16", "Nernst, Termodinámica y Leyes de Faraday", 80.0, 840.0, ["Química", "Nernst", "Faraday"])
     n16.add_card(ClozeCard("Relaciones Termodinámicas Fundamentales",
         r"Interconexión entre electroquímica y termodinámica química:"
-        r"\n- Energía Libre de Gibbs estándar: $$\Delta G^\circ = {{c1::-n F E^\circ_{\text{celda}}::energía libre}}$$ con $F = 96485 \text{ C/mol } e^-$."
-        r"\nPara que una reacción sea espontánea: $\Delta G^\circ < 0 \iff E^\circ_{\text{celda}} > 0$."
-        r"\n- Relación con la constante de equilibrio a $25^\circ\text{C}$ ($298.15\text{ K}$): $$E^\circ_{\text{celda}} = {{c2::\frac{0.0592}{n}\log K::potencial estándar vs K}}$$"
-        r"\n- Ecuación de Nernst para condiciones no estándar: $$E = {{c3::E^\circ - \frac{0.0592}{n}\log Q::ecuación de Nernst}}$$"
-        r"\nEn el equilibrio químico: $E = 0$ y $Q = K$."))
+        r"<br>- Energía Libre de Gibbs estándar: $$\Delta G^\circ = {{c1::-n F E^\circ_{\text{celda}}}}$$ con $F = 96485 \text{ C/mol } e^-$."
+        r"<br>Para que una reacción sea espontánea: $\Delta G^\circ < 0 \iff E^\circ_{\text{celda}} > 0$."
+        r"<br>- Relación con la constante de equilibrio a $25^\circ\text{C}$ ($298.15\text{ K}$): $$E^\circ_{\text{celda}} = {{c2::\frac{0.0592}{n}\log K}}$$"
+        r"<br>- Ecuación de Nernst para condiciones no estándar: $$E = {{c3::E^\circ - \frac{0.0592}{n}\log Q}}$$"
+        r"<br>En el equilibrio químico: $E = 0$ y $Q = K$."))
     n16.add_card(Flashcard("Leyes de Electrólisis de Faraday",
         r"Escriba la fórmula para calcular la masa $m$ de sustancia depositada o liberada en un electrodo durante una electrólisis con corriente $I$ durante un tiempo $t$.",
         r"1. <b>Carga eléctrica total transferida:</b> $q = I \cdot t$ (con $I$ en amperios y $t$ en segundos).<br>"
