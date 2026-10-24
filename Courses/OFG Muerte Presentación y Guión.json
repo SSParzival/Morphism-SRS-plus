@@ -16,19 +16,50 @@
       "desired_retention": 0.85,
       "cards": [
         {
-          "item_id": 1879938278970358439,
+          "item_id": 1879944629879549834,
           "type": "ClozeCard",
           "fsrs_card": {
-            "card_id": 1792848853082,
+            "card_id": 1792854909781,
             "state": 1,
             "step": 0,
             "stability": null,
             "difficulty": null,
-            "due": "2026-10-24T13:34:13.083884+00:00",
+            "due": "2026-10-24T15:15:09.782615+00:00",
             "last_review": null
           },
           "title": "El Modelo de Van Gennep en el Funeral Griego",
           "text": "Seg\u00fan Arnold van Gennep, el funeral es un rito de paso tripartito:\\n1. Fase de {{c1::Separaci\u00f3n::fase 1}} (aislamiento del cad\u00e1ver impuro en el *oikos*).\\n2. Fase Liminar o de {{c2::Transici\u00f3n::fase 2}} (el cortejo de la *\u00e9kfora* en la frontera urbana).\\n3. Fase de {{c3::Reintegraci\u00f3n / Agregaci\u00f3n::fase 3}} (sepultura y banquete *per\u00eddeipnon*, reconstituyendo la comunidad viva)."
+        },
+        {
+          "item_id": 1879944629905070618,
+          "type": "ClozeCard",
+          "fsrs_card": {
+            "card_id": 1792854909806,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T15:15:09.807149+00:00",
+            "last_review": null
+          },
+          "title": "El Esquema Tripartito de Arnold van Gennep",
+          "text": "En la antropolog\u00eda cl\u00e1sica de Arnold van Gennep (1909), el funeral griego se estructura como el paradigma de los <b>ritos de paso</b> en tres fases:\\n1. <b>Fase Preliminar (Separaci\u00f3n):</b> Ruptura del individuo con el mundo de los vivos: {{c1::La Pr\u00f3tesis (lavado, mortaja y velatorio en el oikos)::rito de separaci\u00f3n}}.\\n2. <b>Fase Liminar (Marginalidad / Tr\u00e1nsito):</b> El sujeto ya no pertenece a los vivos pero a\u00fan no ingresa al inframundo: {{c2::La \u00c9kfora (cortejo f\u00fanebre nocturno)::estado liminal}}.\\n3. <b>Fase Postliminar (Reintegraci\u00f3n):</b> El muerto se incorpora a los ancestros y la comunidad viva se restaura: {{c3::La Sepultura, libaciones y el Banquete Perideipnon::rito de reintegraci\u00f3n}}."
+        },
+        {
+          "item_id": 1879944629906653346,
+          "type": "Flashcard",
+          "fsrs_card": {
+            "card_id": 1792854909807,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T15:15:09.808209+00:00",
+            "last_review": null
+          },
+          "title": "Concepto de Liminalidad y Peligro de la Transici\u00f3n",
+          "front": "\u00bfPor qu\u00e9 la fase liminar es considerada el momento m\u00e1s peligroso tanto para el difunto como para la comunidad en la cosmovisi\u00f3n griega?",
+          "back": "Durante la liminalidad, el difunto carece de estatus social definido: ya no tiene cuerpo activo entre los vivos, pero su alma errante a\u00fan no cruza los r\u00edos del Hades ni es aceptada por las sombras subterr\u00e1neas.<br>Para la comunidad, este estado intermedio genera una intensa contaminaci\u00f3n ritual (<b>m\u00edasma</b>), ansiedad existencial y peligro de alteraci\u00f3n del orden c\u00f3smico. Solo la conclusi\u00f3n rigurosa de los ritos prescritos (<b>ta nomiz\u00f3mena</b>) pacifica al esp\u00edritu y clausura la brecha liminal."
         }
       ]
     },
@@ -47,35 +78,66 @@
       "desired_retention": 0.85,
       "cards": [
         {
-          "item_id": 1879938278971184162,
+          "item_id": 1879944629879651162,
           "type": "ClozeCard",
           "fsrs_card": {
-            "card_id": 1792848853083,
+            "card_id": 1792854909782,
             "state": 1,
             "step": 0,
             "stability": null,
             "difficulty": null,
-            "due": "2026-10-24T13:34:13.084965+00:00",
+            "due": "2026-10-24T15:15:09.783678+00:00",
             "last_review": null
           },
           "title": "La Psyche en el Hades como Eidolon",
           "text": "En la \u00e9pica hom\u00e9rica arcaica, la *psyche* subsiste en el Hades como:\\n$$\\text{Un } {{c1::*eidolon*::sombra hom\u00e9rica}}$$\\nUna sombra vaporosa desprovista de fuerza vital ({{c2::*menos*::fuerza vital}}) y de sangre, en un letargo despose\u00eddo."
         },
         {
-          "item_id": 1879938278972187377,
+          "item_id": 1879944629881525083,
           "type": "Flashcard",
           "fsrs_card": {
-            "card_id": 1792848853084,
+            "card_id": 1792854909783,
             "state": 1,
             "step": 0,
             "stability": null,
             "difficulty": null,
-            "due": "2026-10-24T13:34:13.086028+00:00",
+            "due": "2026-10-24T15:15:09.784737+00:00",
             "last_review": null
           },
           "title": "La Sentencia Tr\u00e1gica de Aquiles en la Odisea",
           "front": "\u00bfCu\u00e1l es la afirmaci\u00f3n de Aquiles en la Nekyia (Odisea XI) y su implicancia?",
           "back": "Aquiles proclama:<br><i>\u00abPreferir\u00eda ser siervo en la tierra de un campesino pobre y sin tierra antes que reinar sobre todos los muertos extintos.\u00bb</i><br><br>Demuestra el <b>despojo ontol\u00f3gico absoluto</b> de la muerte arcaica: no hay premios morales; el rito busca rescatar la memoria viva (*mneme*)."
+        },
+        {
+          "item_id": 1879944629906838360,
+          "type": "Flashcard",
+          "fsrs_card": {
+            "card_id": 1792854909808,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T15:15:09.809271+00:00",
+            "last_review": null
+          },
+          "title": "Patroclo y las S\u00faplicas a Aquiles en la Il\u00edada",
+          "front": "\u00bfQu\u00e9 mensaje le entrega la sombra de Patroclo a Aquiles en el canto XXIII de la Il\u00edada y cu\u00e1l es su significado escatol\u00f3gico?",
+          "back": "La sombra (eidolon) de Patroclo se aparece en sue\u00f1os a Aquiles y le ruega:<br><i>\u00ab\u00bfDuermes, Aquiles, y te has olvidado de m\u00ed?... Enti\u00e9rrame cuanto antes, para que pueda pasar las puertas del Hades. Me apartan las sombras, im\u00e1genes de los difuntos, y no me dejan mezclarme con ellas m\u00e1s all\u00e1 del r\u00edo...\u00bb</i> (Il\u00edada XXIII, 69-74).<br><b>Significado:</b> Sin los ritos funerarios y la sepultura, el alma queda atrapada en el umbral liminal, desterrada tanto del mundo terrenal como del reposo subterr\u00e1neo. El sepelio es un imperativo \u00e9tico ineludible."
+        },
+        {
+          "item_id": 1879944629908158717,
+          "type": "ClozeCard",
+          "fsrs_card": {
+            "card_id": 1792854909809,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T15:15:09.810327+00:00",
+            "last_review": null
+          },
+          "title": "El Conflicto Tr\u00e1gico en Ant\u00edgona de S\u00f3focles",
+          "text": "En la tragedia de S\u00f3focles, Ant\u00edgona desaf\u00eda el decreto real de Creonte que prohib\u00eda sepultar a su hermano Polinices:\\n- El conflicto contrapone la ley positiva del Estado ({{c1::$\\text{nomos}$::decreto humano}}) frente a las leyes sagradas eternas e inmutables de los dioses ({{c2::$\\text{themis}$ / leyes divinas no escritas::deber c\u00f3smico}}).\\n- Negar la sepultura es concebido como una agresi\u00f3n atroz contra el orden natural que atrae {{c3::el m\u00edasma (contaminaci\u00f3n colectiva) sobre toda la polis::consecuencia sacr\u00edlega}}."
         }
       ]
     },
@@ -94,15 +156,15 @@
       "desired_retention": 0.85,
       "cards": [
         {
-          "item_id": 1879938278974242191,
+          "item_id": 1879944629882639768,
           "type": "Flashcard",
           "fsrs_card": {
-            "card_id": 1792848853086,
+            "card_id": 1792854909784,
             "state": 1,
             "step": 0,
             "stability": null,
             "difficulty": null,
-            "due": "2026-10-24T13:34:13.087082+00:00",
+            "due": "2026-10-24T15:15:09.785799+00:00",
             "last_review": null
           },
           "title": "El Reclamo del Fantasma de Patroclo",
@@ -110,19 +172,34 @@
           "back": "<i>\u00ab\u00a1Sep\u00faltame cuanto antes para que pueda cruzar las puertas del Hades!\u00bb</i><br>Mientras el cuerpo carezca de sepultura, las sombras ya cruzadas le impiden vadear el r\u00edo, dej\u00e1ndolo vagar errante en la frontera liminar."
         },
         {
-          "item_id": 1879938278975467144,
+          "item_id": 1879944629883361627,
           "type": "ClozeCard",
           "fsrs_card": {
-            "card_id": 1792848853087,
+            "card_id": 1792854909785,
             "state": 1,
             "step": 0,
             "stability": null,
             "difficulty": null,
-            "due": "2026-10-24T13:34:13.088135+00:00",
+            "due": "2026-10-24T15:15:09.786858+00:00",
             "last_review": null
           },
           "title": "El Conflicto Sagrado en Ant\u00edgona de S\u00f3focles",
           "text": "Ant\u00edgona desaf\u00eda al rey Creonte apelando a:\\n{{c1::Las leyes no escritas e inmutables de los dioses (*\u00e1grapta n\u00f3mina*)::ley divina}}\\nque ordenan honrar al cad\u00e1ver de su hermano por encima de cualquier prohibici\u00f3n civil."
+        },
+        {
+          "item_id": 1879944629909595748,
+          "type": "ClozeCard",
+          "fsrs_card": {
+            "card_id": 1792854909810,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T15:15:09.811389+00:00",
+            "last_review": null
+          },
+          "title": "Naturaleza de la Psyche en el M\u00e1s All\u00e1",
+          "text": "En la concepci\u00f3n arcaica hom\u00e9rica:\\n- La muerte se produce cuando la {{c1::$\\text{psyche}$ (aliento vital)::alma}} abandona el cuerpo por la boca o una herida abierta.\\n- En el Hades, el alma subsiste \u00fanicamente como un {{c2::$\\text{eidolon}$ (sombra o simulacro incorp\u00f3reo)::imagen espectral}}, semejante al humo o al reflejo en un sue\u00f1o.\\n- La sombra carece de fuerza f\u00edsica ({{c3::$\\text{menos}$::vigor muscular}}) y de facultades cognitivas o memoria l\u00facida ({{c4::$\\text{phrenes}$::entendimiento}}), a menos que beba de la sangre fresca de los sacrificios (Nekuia de Odisea XI)."
         }
       ]
     },
@@ -141,19 +218,50 @@
       "desired_retention": 0.85,
       "cards": [
         {
-          "item_id": 1879938278976395852,
+          "item_id": 1879944629884529391,
           "type": "ClozeCard",
           "fsrs_card": {
-            "card_id": 1792848853088,
+            "card_id": 1792854909786,
             "state": 1,
             "step": 0,
             "stability": null,
             "difficulty": null,
-            "due": "2026-10-24T13:34:13.089189+00:00",
+            "due": "2026-10-24T15:15:09.787931+00:00",
             "last_review": null
           },
           "title": "Definici\u00f3n de M\u00edasma y Ta Nomiz\u00f3mena",
           "text": "- {{c1::*M\u00edasma*::impureza}}: La contaminaci\u00f3n religiosa corruptora que emana del cad\u00e1ver en descomposici\u00f3n.\\n- {{c2::*Ta nomiz\u00f3mena*::deber consuetudinario}}: Las honras f\u00fanebres sagradas debidas por piedad.\\n- El c\u00e1ntaro en la entrada para purificaci\u00f3n con agua ajena es el {{c3::*ard\u00e1nion*::\u00e1nfora purificadora}}."
+        },
+        {
+          "item_id": 1879944629910131475,
+          "type": "Flashcard",
+          "fsrs_card": {
+            "card_id": 1792854909811,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T15:15:09.812451+00:00",
+            "last_review": null
+          },
+          "title": "Los Cinco R\u00edos Sagrados del Hades",
+          "front": "Mencione los 5 r\u00edos del inframundo griego y su correspondencia aleg\u00f3rica.",
+          "back": "1. <b>Estigia (Styx):</b> El r\u00edo del odio sagrado, sobre el cual los mismos dioses prestan sus juramentos inviolables.<br>2. <b>Aqueronte (Acheron):</b> El r\u00edo de la aflicci\u00f3n y el dolor, que limita la entrada al reino subterr\u00e1neo y por cuyas aguas transita la barca de Caronte.<br>3. <b>Cocito (Cocytus):</b> El r\u00edo de los lamentos y el llanto f\u00fanebre.<br>4. <b>Flegetonte / Piriflegetonte:</b> El r\u00edo de fuego ardiente que rodea las profundidades del T\u00e1rtaro.<br>5. <b>Lete (Lethe):</b> El r\u00edo del olvido, de cuyas aguas beben las almas para borrar todos sus recuerdos de la vida terrenal."
+        },
+        {
+          "item_id": 1879944629911697439,
+          "type": "ClozeCard",
+          "fsrs_card": {
+            "card_id": 1792854909812,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T15:15:09.813511+00:00",
+            "last_review": null
+          },
+          "title": "Caronte, el \u00d3bolo Funerario y Hermes Psicopompo",
+          "text": "Tr\u00e1nsito de las almas hacia el inframundo:\\n- <b>Hermes Psicopompo:</b> Divinidad encargada de {{c1::guiar y conducir las almas::gu\u00eda psicopompo}} desde el mundo de la luz hasta las m\u00e1rgenes del Aqueronte.\\n- <b>Caronte:</b> El adusto barquero que exige el pago de {{c2::un \u00f3bolo de bronce colocado en la boca o sobre los ojos del difunto::moneda funeraria}}.\\n- Los insepultos o aquellos sin moneda quedan condenados a vagar {{c3::durante cien a\u00f1os en la orilla desolada::pena del insepulto}} antes de que se les permita cruzar."
         }
       ]
     },
@@ -172,19 +280,50 @@
       "desired_retention": 0.85,
       "cards": [
         {
-          "item_id": 1879938278976773702,
+          "item_id": 1879944629885312755,
           "type": "ClozeCard",
           "fsrs_card": {
-            "card_id": 1792848853089,
+            "card_id": 1792854909787,
             "state": 1,
             "step": 0,
             "stability": null,
             "difficulty": null,
-            "due": "2026-10-24T13:34:13.090243+00:00",
+            "due": "2026-10-24T15:15:09.789032+00:00",
             "last_review": null
           },
           "title": "Disposici\u00f3n del Difunto sobre la Kline",
           "text": "En la *pr\u00f3thesis*:\\n- El cad\u00e1ver se lava, se unge con ung\u00fcentos y se viste de blanco sobre el lecho mortuorio llamado {{c1::*kline*::lecho f\u00fanebre}}.\\n- Los pies se orientan apuntando hacia {{c2::la puerta exterior de la casa::orientaci\u00f3n corporal}}."
+        },
+        {
+          "item_id": 1879944629912350967,
+          "type": "ClozeCard",
+          "fsrs_card": {
+            "card_id": 1792854909813,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T15:15:09.814572+00:00",
+            "last_review": null
+          },
+          "title": "Liturgia Dom\u00e9stica de la Pr\u00f3thesis",
+          "text": "La primera etapa del funeral griego, la <b>Pr\u00f3thesis</b> (exposici\u00f3n p\u00fablica del cad\u00e1ver):\\n- Espacio: Ocurre al interior del {{c1::$\\text{oikos}$ (hogar familiar)::espacio dom\u00e9stico}} y se extiende por un d\u00eda completo.\\n- Preparaci\u00f3n del cad\u00e1ver (rol femenino exclusivo): Las mujeres de la familia cierran ojos y boca, lavan el cuerpo con agua caliente y perfumes, lo ungen con aceites y lo cubren con {{c2::mortajas blancas ($\\text{chla\u00edna}$)::vestidura f\u00fanebre}}.\\n- Colocaci\u00f3n de una rama de laurel o jarra con agua ({{c3::$\\text{ard\u00e1nion}$::agua lustradora}}) en la puerta de la casa para advertir a los transe\u00fantes sobre el m\u00edasma y permitir su purificaci\u00f3n al salir."
+        },
+        {
+          "item_id": 1879944629914127720,
+          "type": "Flashcard",
+          "fsrs_card": {
+            "card_id": 1792854909814,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T15:15:09.815632+00:00",
+            "last_review": null
+          },
+          "title": "Liturgia del Dolor: Distinci\u00f3n entre G\u00f3os y Thr\u0113nos",
+          "front": "Distinga formalmente las dos expresiones po\u00e9ticas y emocionales del lamento f\u00fanebre durante la pr\u00f3thesis.",
+          "back": "1. <b>G\u00f3os ($\\gamma\\acute{o}os$):</b> Lamento f\u00fanebre visceral, improvisado y desgarrador entonado exclusivamente por las mujeres emparentadas con el difunto. Se acompa\u00f1a de gestos f\u00edsicos cat\u00e1rticos: rasgarse las mejillas hasta sangrar, golpearse el pecho y mesarse los cabellos.<br>2. <b>Thr\u0113nos ($\\theta\\rho\\tilde{\\eta}\\nu os$):</b> Canto po\u00e9tico solemne, estructurado y compuesto por poetas o cantores profesionales contratados. Introduce templanza y orden reflexivo sobre la finitud de la vida, canalizando c\u00edvicamente el desborde pasional del g\u00f3os."
         }
       ]
     },
@@ -203,20 +342,35 @@
       "desired_retention": 0.85,
       "cards": [
         {
-          "item_id": 1879938278978571881,
+          "item_id": 1879944629887315163,
           "type": "Flashcard",
           "fsrs_card": {
-            "card_id": 1792848853090,
+            "card_id": 1792854909789,
             "state": 1,
             "step": 0,
             "stability": null,
             "difficulty": null,
-            "due": "2026-10-24T13:34:13.091298+00:00",
+            "due": "2026-10-24T15:15:09.790118+00:00",
             "last_review": null
           },
           "title": "Diferencia entre G\u00f3os y Thr\u0113nos",
           "front": "Distinga antropol\u00f3gicamente entre el *g\u00f3os* y el *thr\u0113nos*.",
           "back": "1. <b>El *G\u00f3os* (Lamento Femenino):</b> Improvisado, desgarrador y antifonal de las parientes, con somatizaci\u00f3n extrema (rasgarse mejillas, mesarse cabellos, golpearse el pecho).<br>2. <b>El *Thr\u0113nos* (Canto Po\u00e9tico Masculino):</b> Composici\u00f3n coral formal de poetas profesionales que exalta la virtud c\u00edvica (*aret\u00e9*) y el linaje con distanciamiento solemne."
+        },
+        {
+          "item_id": 1879944629914334816,
+          "type": "ClozeCard",
+          "fsrs_card": {
+            "card_id": 1792854909815,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T15:15:09.816694+00:00",
+            "last_review": null
+          },
+          "title": "La Procesi\u00f3n C\u00edvica de la \u00c9kfora",
+          "text": "La segunda etapa, la <b>\u00c9kfora</b> (traslado del cuerpo):\\n- Momento: Se realiza obligatoriamente {{c1::antes de la salida del sol::momento liminal crepuscular}} para evitar contaminar con el m\u00edasma los rayos de Helios y la actividad c\u00edvica de la polis.\\n- Recorrido: El f\u00e9retro es llevado en carro o andas desde el hogar dom\u00e9stico hasta {{c2::la necr\u00f3polis extramuros (el Cer\u00e1mico en Atenas)::cementerio fuera de las murallas}}.\\n- Comitiva: Los hombres encabezan la procesi\u00f3n en solemne silencio c\u00edvico, seguidos por el f\u00e9retro y las mujeres detr\u00e1s con estrictas restricciones de edad y parentesco."
         }
       ]
     },
@@ -235,19 +389,35 @@
       "desired_retention": 0.85,
       "cards": [
         {
-          "item_id": 1879938278979239247,
+          "item_id": 1879944629888429586,
           "type": "ClozeCard",
           "fsrs_card": {
-            "card_id": 1792848853091,
+            "card_id": 1792854909790,
             "state": 1,
             "step": 0,
             "stability": null,
             "difficulty": null,
-            "due": "2026-10-24T13:34:13.092356+00:00",
+            "due": "2026-10-24T15:15:09.791178+00:00",
             "last_review": null
           },
           "title": "Temporalidad Sagrada de la \u00c9kfora",
           "text": "El traslado procesional del cuerpo a la necr\u00f3polis (el Cer\u00e1mico) se llama {{c1::*\u00e9kfora*::segunda fase}}.\\nDeb\u00eda realizarse forzosamente {{c2::antes de la salida del sol (de madrugada)::momento temporal}} para impedir que los rayos sagrados de Helios fueran mancillados por el *m\u00edasma*."
+        },
+        {
+          "item_id": 1879944629916084673,
+          "type": "Flashcard",
+          "fsrs_card": {
+            "card_id": 1792854909816,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T15:15:09.817755+00:00",
+            "last_review": null
+          },
+          "title": "Sepultura, Libaciones Choai y Banquete Per\u00eddeipnon",
+          "front": "Describa los ritos de dep\u00f3sito corporal, ofrendas y el banquete post-sepulcral en la fase III.",
+          "back": "1. <b>Dep\u00f3sito:</b> Puede ser <b>inhumaci\u00f3n</b> (en sarc\u00f3fagos de piedra o tierra) o <b>cremaci\u00f3n</b> en pira de le\u00f1a, tras la cual las cenizas se depositan en \u00e1nforas de bronce o cer\u00e1mica.<br>2. <b>Ajuar y Vasos Funerarios:</b> Se depositan ofrendas, armas, joyas y de manera paradigm\u00e1tica <b>lekythoi de fondo blanco</b> (vasos esbeltos pintados para contener aceites perfumados).<br>3. <b>Libaciones ($\\text{choa\u00ed}$):</b> Derramamiento de sustancias sagradas sobre la tumba para alimentar a las sombras subterr\u00e1neas: miel, leche, vino puro, aceite y agua.<br>4. <b>Banquete Reintegrador ($\\text{Per\u00eddeipnon}$):</b> La comitiva regresa a la casa del difunto. Tras purificar el recinto, celebran una comida colectiva en honor al fallecido, marcando el retorno a la vida ordinaria de la comunidad."
         }
       ]
     },
@@ -266,20 +436,35 @@
       "desired_retention": 0.85,
       "cards": [
         {
-          "item_id": 1879938278979853646,
+          "item_id": 1879944629889630622,
           "type": "Flashcard",
           "fsrs_card": {
-            "card_id": 1792848853092,
+            "card_id": 1792854909791,
             "state": 1,
             "step": 0,
             "stability": null,
             "difficulty": null,
-            "due": "2026-10-24T13:34:13.093421+00:00",
+            "due": "2026-10-24T15:15:09.792253+00:00",
             "last_review": null
           },
           "title": "La \u00c9kfora como Detonante de Guerra Civil Facciosa",
           "front": "\u00bfPor qu\u00e9 los cortejos f\u00fanebres aristocr\u00e1ticos amenazaban el orden c\u00edvico?",
           "back": "Las familias nobles (*eup\u00e1tridas*) convert\u00edan la *\u00e9kfora* en propaganda din\u00e1stica, desfilando con carros de lujo y pla\u00f1ideras contratadas, usando el llanto para instigar venganzas de sangre (*vendettas* cl\u00e1nicas) entre familias rivales, amenazando la paz de la *polis*."
+        },
+        {
+          "item_id": 1879944629916394030,
+          "type": "ClozeCard",
+          "fsrs_card": {
+            "card_id": 1792854909817,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T15:15:09.818817+00:00",
+            "last_review": null
+          },
+          "title": "Restricciones Suntuarias y Contenci\u00f3n Femenina",
+          "text": "Las reformas legales de Sol\u00f3n en Atenas (594 a.C.) regularon severamente los rituales funerarios aristocr\u00e1ticos:\\n1. <b>Prohibici\u00f3n de automutilaciones:</b> Se vet\u00f3 expresamente que las mujeres {{c1::se laceraran la carne, se golpearan el pecho con violencia y entonaran lamentos desmedidos::frenado del goos}}.\\n2. <b>Restricci\u00f3n de aforo:</b> Solo pod\u00edan asistir a la pr\u00f3thesis y cortejo mujeres {{c2::parientes de hasta segundo grado y mayores de 60 a\u00f1os::limitaci\u00f3n de asistentes}}.\\n3. <b>Motivaci\u00f3n sociopol\u00edtica crucial:</b> Evitar que los clanes aristocr\u00e1ticos convirtieran el funeral en una exhibici\u00f3n de poder din\u00e1stico que {{c3::incitara facciones, lealtades privadas y venganzas de sangre ($\\text{vendettas}$)::control estatal de la violencia}} frente a la supremac\u00eda de la polis democr\u00e1tica."
         }
       ]
     },
@@ -298,19 +483,35 @@
       "desired_retention": 0.85,
       "cards": [
         {
-          "item_id": 1879938278981718838,
+          "item_id": 1879944629890277960,
           "type": "ClozeCard",
           "fsrs_card": {
-            "card_id": 1792848853093,
+            "card_id": 1792854909792,
             "state": 1,
             "step": 0,
             "stability": null,
             "difficulty": null,
-            "due": "2026-10-24T13:34:13.094476+00:00",
+            "due": "2026-10-24T15:15:09.793325+00:00",
             "last_review": null
           },
           "title": "Inhumaci\u00f3n Predominante en el \u00c1tica",
           "text": "En la Atenas arcaica y cl\u00e1sica la pr\u00e1ctica funeraria abrumadoramente dominante fue la {{c1::inhumaci\u00f3n en tierra o sarc\u00f3fago::pr\u00e1ctica dominante}}, explicada arqueol\u00f3gicamente por {{c2::la grave escasez de madera para piras en el \u00c1tica::motivo ecol\u00f3gico-econ\u00f3mico}}."
+        },
+        {
+          "item_id": 1879944629918133770,
+          "type": "Flashcard",
+          "fsrs_card": {
+            "card_id": 1792854909818,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T15:15:09.819879+00:00",
+            "last_review": null
+          },
+          "title": "El Motivo Escult\u00f3rico de la Dexiosis",
+          "front": "\u00bfQu\u00e9 representa el gesto de la dexiosis en las estelas funerarias cl\u00e1sicas de m\u00e1rmol del Cer\u00e1mico ateniense?",
+          "back": "La <b>dexiosis</b> ($\\delta\\varepsilon\\xi\\acute{\\iota}\\omega\\sigma\\iota\\varsigma$) es el solemne apret\u00f3n de manos derechas representado en altorrelieve entre la figura sentada (habitualmente el difunto) y una figura de pie (un familiar vivo: c\u00f3nyuge, padre o hijo).<br><b>Significado simb\u00f3lico:</b><br>1. <b>V\u00ednculo ininterrumpido:</b> Es a la vez un gesto de despedida definitiva y una promesa de lazo indisoluble m\u00e1s all\u00e1 de la tumba.<br>2. <b>Serenidad cl\u00e1sica (sophrosyne):</b> Los rostros no expresan desesperaci\u00f3n desgarradora, sino una calma digna y melanc\u00f3lica.<br>3. <b>Victoria de la memoria ($\\text{mneme}$):</b> Inmortaliza la identidad civil y afectiva del difunto frente al olvido an\u00f3nimo del Hades."
         }
       ]
     },
@@ -329,19 +530,34 @@
       "desired_retention": 0.85,
       "cards": [
         {
-          "item_id": 1879938278982212696,
+          "item_id": 1879944629891664697,
           "type": "ClozeCard",
           "fsrs_card": {
-            "card_id": 1792848853094,
+            "card_id": 1792854909793,
             "state": 1,
             "step": 0,
             "stability": null,
             "difficulty": null,
-            "due": "2026-10-24T13:34:13.095530+00:00",
+            "due": "2026-10-24T15:15:09.794387+00:00",
             "last_review": null
           },
           "title": "Libaciones y Banquete de Reintegraci\u00f3n",
           "text": "- Libaciones sobre la tumba (vino puro, leche, miel y aceite): {{c1::*choai*::ofrendas l\u00edquidas}}.\\n- Banquete formal en el hogar purificado: {{c2::*per\u00eddeipnon*::banquete f\u00fanebre}}, donde el difunto es el {{c3::anfitri\u00f3n de honor::papel simb\u00f3lico}}."
+        },
+        {
+          "item_id": 1879944629919063771,
+          "type": "ClozeCard",
+          "fsrs_card": {
+            "card_id": 1792854909819,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T15:15:09.820942+00:00",
+            "last_review": null
+          },
+          "title": "Ciclo Temporal del Luto y Antesterias",
+          "text": "Ritos post-funerarios en la tradici\u00f3n griega:\\n- Calendario ritual del duelo: Conmemoraciones peri\u00f3dicas en la tumba con ofrendas en el d\u00eda {{c1::3 ($\\text{trita}$), d\u00eda 9 ($\\text{enata}$) y d\u00eda 30 ($\\text{triakostia}$)::fechas del luto}}, clausurando el luto formal.\\n- <b>Las Antesterias:</b> Festival dionis\u00edaco de primavera cuya tercera jornada se llamaba el d\u00eda de los {{c2::$\\text{Chytroi}$ (las ollas de gachas)::d\u00eda de los muertos}}.\\n- En esa fecha, los esp\u00edritus de los muertos ascend\u00edan al mundo de los vivos. Al anochecer, los cabezas de familia los expulsaban con la c\u00e9lebre f\u00f3rmula ritual apotropaica: {{c3::\u00ab\u00a1Fuera Keres, que han terminado las Antesterias!\u00bb::despedida de esp\u00edritus}}."
         }
       ]
     },
@@ -360,20 +576,51 @@
       "desired_retention": 0.85,
       "cards": [
         {
-          "item_id": 1879938278983520011,
+          "item_id": 1879944629893196252,
           "type": "Flashcard",
           "fsrs_card": {
-            "card_id": 1792848853095,
+            "card_id": 1792854909794,
             "state": 1,
             "step": 0,
             "stability": null,
             "difficulty": null,
-            "due": "2026-10-24T13:34:13.096584+00:00",
+            "due": "2026-10-24T15:15:09.795449+00:00",
             "last_review": null
           },
           "title": "Econom\u00eda Ritual de la C\u00e1mara Ciega en Lekythoi",
           "front": "\u00bfQu\u00e9 revel\u00f3 el hallazgo arqueol\u00f3gico de la c\u00e1mara ciega en los lekythoi de fondo blanco?",
           "back": "Muchos lekythoi conten\u00edan una peque\u00f1a c\u00e1psula sellada en el cuello que reten\u00eda apenas unas gotas de perfume costoso, manteniendo el resto del vaso vac\u00edo.<br>Demuestra el pragmatismo \u00e1tico: cumplir el decoro sagrado exterior sin incurrir en un gasto econ\u00f3mico ruinoso."
+        },
+        {
+          "item_id": 1879944629919677706,
+          "type": "Flashcard",
+          "fsrs_card": {
+            "card_id": 1792854909820,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T15:15:09.822004+00:00",
+            "last_review": null
+          },
+          "title": "Cronograma Exacto de los 4 Expositores (10:00 Minutos)",
+          "front": "Detalle la asignaci\u00f3n tem\u00e1tica y distribuci\u00f3n temporal de los 4 expositores para la ponencia.",
+          "back": "1. <b>Expositor 1 (00:00 - 02:30 | Slides 1 a 3):</b> Introducci\u00f3n y Escatolog\u00eda.<br>Tema: La muerte como quiebre ontol\u00f3gico en la H\u00e9lade, modelo de Van Gennep, la psyche hom\u00e9rica y la topograf\u00eda m\u00edtica del Hades.<br>2. <b>Expositor 2 (02:30 - 05:00 | Slides 4 a 6):</b> La Arquitectura del Tr\u00edptico Ritual.<br>Tema: Contenci\u00f3n del m\u00edasma, la Pr\u00f3thesis en el oikos, la \u00c9kfora antes del amanecer y la Sepultura/Banquete Perideipnon.<br>3. <b>Expositor 3 (05:00 - 07:30 | Slides 7 a 9):</b> Conflicto Pol\u00edtico, Leyes de Sol\u00f3n y Memoria.<br>Tema: Restricciones de Sol\u00f3n al duelo aristocr\u00e1tico, estelas del Cer\u00e1mico, motivo de la dexiosis y el discurso de Pericles.<br>4. <b>Expositor 4 (07:30 - 10:00 | Slides 10 a 12):</b> S\u00edntesis \u00c9tica y Conexi\u00f3n con MED836.<br>Tema: Di\u00e1logo con el duelo contempor\u00e1neo, desamparo simb\u00f3lico hospitalario y cierre formal en 10:00 exactos."
+        },
+        {
+          "item_id": 1879944629922561857,
+          "type": "ClozeCard",
+          "fsrs_card": {
+            "card_id": 1792854909822,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T15:15:09.823062+00:00",
+            "last_review": null
+          },
+          "title": "Banco de Preguntas Estrat\u00e9gicas para la Defensa Oral (Q&A)",
+          "text": "Preparaci\u00f3n para la ronda de preguntas del profesor y ayudantes:\\n- Pregunta: \u00bfPor qu\u00e9 Sol\u00f3n restringi\u00f3 el luto de las mujeres y no el de los hombres?\\n- Respuesta clave: Porque el lamento femenino ({{c1::$\\text{g\u00f3os}$::lamento visceral}}) era el veh\u00edculo emocional que movilizaba {{c2::el honor aristocr\u00e1tico del clan ($\\text{g\u00e9nos}$) hacia venganzas de sangre::mecanismo faccioso}}, mientras que la polis naciente necesitaba imponer la ley comunitaria por encima de la venganza privada.\\n- Pregunta: \u00bfQu\u00e9 ense\u00f1a la dexiosis a la bio\u00e9tica contempor\u00e1nea?\\n- Respuesta clave: Que el final de la vida no es un fracaso t\u00e9cnico que deba ocultarse, sino un {{c3::acontecimiento relacional digno de memoria y despedida compartida::sentido bio\u00e9tico}}."
         }
       ]
     },
@@ -392,15 +639,15 @@
       "desired_retention": 0.85,
       "cards": [
         {
-          "item_id": 1879938278984339347,
+          "item_id": 1879944629893455458,
           "type": "ClozeCard",
           "fsrs_card": {
-            "card_id": 1792848853096,
+            "card_id": 1792854909795,
             "state": 1,
             "step": 0,
             "stability": null,
             "difficulty": null,
-            "due": "2026-10-24T13:34:13.097646+00:00",
+            "due": "2026-10-24T15:15:09.796512+00:00",
             "last_review": null
           },
           "title": "Sentido Moral del \u00d3bolo de Caronte",
@@ -423,15 +670,15 @@
       "desired_retention": 0.85,
       "cards": [
         {
-          "item_id": 1879938278985868794,
+          "item_id": 1879944629895202072,
           "type": "ClozeCard",
           "fsrs_card": {
-            "card_id": 1792848853097,
+            "card_id": 1792854909796,
             "state": 1,
             "step": 0,
             "stability": null,
             "difficulty": null,
-            "due": "2026-10-24T13:34:13.098720+00:00",
+            "due": "2026-10-24T15:15:09.797574+00:00",
             "last_review": null
           },
           "title": "Los R\u00edos del Hades y el Gu\u00eda de Almas",
@@ -454,15 +701,15 @@
       "desired_retention": 0.85,
       "cards": [
         {
-          "item_id": 1879938278986616608,
+          "item_id": 1879944629895809851,
           "type": "Flashcard",
           "fsrs_card": {
-            "card_id": 1792848853098,
+            "card_id": 1792854909797,
             "state": 1,
             "step": 0,
             "stability": null,
             "difficulty": null,
-            "due": "2026-10-24T13:34:13.099813+00:00",
+            "due": "2026-10-24T15:15:09.798637+00:00",
             "last_review": null
           },
           "title": "Las Reformas Suntuarias de Sol\u00f3n (594 a.C.)",
@@ -486,15 +733,15 @@
       "desired_retention": 0.85,
       "cards": [
         {
-          "item_id": 1879938278987518196,
+          "item_id": 1879944629896898257,
           "type": "ClozeCard",
           "fsrs_card": {
-            "card_id": 1792848853099,
+            "card_id": 1792854909798,
             "state": 1,
             "step": 0,
             "stability": null,
             "difficulty": null,
-            "due": "2026-10-24T13:34:13.100867+00:00",
+            "due": "2026-10-24T15:15:09.799699+00:00",
             "last_review": null
           },
           "title": "Hitos del Luto y Fiesta de los Chytroi",
@@ -517,30 +764,30 @@
       "desired_retention": 0.85,
       "cards": [
         {
-          "item_id": 1879938278988456148,
+          "item_id": 1879944629898098839,
           "type": "ClozeCard",
           "fsrs_card": {
-            "card_id": 1792848853100,
+            "card_id": 1792854909799,
             "state": 1,
             "step": 0,
             "stability": null,
             "difficulty": null,
-            "due": "2026-10-24T13:34:13.101929+00:00",
+            "due": "2026-10-24T15:15:09.800762+00:00",
             "last_review": null
           },
           "title": "El Motivo Iconogr\u00e1fico de la Dexiosis",
           "text": "En las estelas f\u00fanebres de m\u00e1rmol del Cer\u00e1mico, el apret\u00f3n solemne de manos entre el difunto y el deudo se llama {{c1::*dexiosis*::apret\u00f3n de manos}}.\\nEncarna el *ethos* sereno y la {{c2::*kalokagath\u00eda*::virtud y belleza cl\u00e1sica}}, preservando la memoria imperecedera (*mneme*)."
         },
         {
-          "item_id": 1879938278989509609,
+          "item_id": 1879944629899136125,
           "type": "Flashcard",
           "fsrs_card": {
-            "card_id": 1792848853101,
+            "card_id": 1792854909800,
             "state": 1,
             "step": 0,
             "stability": null,
             "difficulty": null,
-            "due": "2026-10-24T13:34:13.102991+00:00",
+            "due": "2026-10-24T15:15:09.801820+00:00",
             "last_review": null
           },
           "title": "An\u00e1lisis Formal de la Estela de Hegeso",
@@ -564,15 +811,15 @@
       "desired_retention": 0.85,
       "cards": [
         {
-          "item_id": 1879938278991225543,
+          "item_id": 1879944629899873689,
           "type": "Flashcard",
           "fsrs_card": {
-            "card_id": 1792848853102,
+            "card_id": 1792854909801,
             "state": 1,
             "step": 0,
             "stability": null,
             "difficulty": null,
-            "due": "2026-10-24T13:34:13.104045+00:00",
+            "due": "2026-10-24T15:15:09.802885+00:00",
             "last_review": null
           },
           "title": "Muerte Ritual Hel\u00e9nica vs Muerte Hospitalaria Moderna",
@@ -596,35 +843,65 @@
       "desired_retention": 0.85,
       "cards": [
         {
-          "item_id": 1879938278992455717,
+          "item_id": 1879944629900964996,
           "type": "ClozeCard",
           "fsrs_card": {
-            "card_id": 1792848853104,
+            "card_id": 1792854909802,
             "state": 1,
             "step": 0,
             "stability": null,
             "difficulty": null,
-            "due": "2026-10-24T13:34:13.105107+00:00",
+            "due": "2026-10-24T15:15:09.803950+00:00",
             "last_review": null
           },
           "title": "Estructura Cronom\u00e9trica de 4 Expositores",
           "text": "Distribuci\u00f3n estricta de la ponencia (10:00 exactos, 2:30 por expositor):\\n- Turno I (0:00 - 2:30): {{c1::Expositor 1::turno 1}} (Finitud hom\u00e9rica, Odisea, m\u00edasma vs ta nomiz\u00f3mena).\\n- Turno II (2:30 - 5:00): {{c2::Expositor 2::turno 2}} (Pr\u00f3thesis, \u00e9kfora, sepultura, choai y per\u00eddeipnon).\\n- Turno III (5:00 - 7:30): {{c3::Expositor 3::turno 3}} (Lekythos, c\u00e1mara ciega, leyes de Sol\u00f3n y dexiosis).\\n- Turno IV (7:30 - 10:00): {{c4::Expositor 4::turno 4}} (Desamparo contempor\u00e1neo, Tres Tesis y plenario)."
         },
         {
-          "item_id": 1879938278994236022,
+          "item_id": 1879944629902531894,
           "type": "Flashcard",
           "fsrs_card": {
-            "card_id": 1792848853105,
+            "card_id": 1792854909803,
             "state": 1,
             "step": 0,
             "stability": null,
             "difficulty": null,
-            "due": "2026-10-24T13:34:13.106169+00:00",
+            "due": "2026-10-24T15:15:09.805010+00:00",
             "last_review": null
           },
           "title": "Las Tres Tesis Vertebrales Finales",
           "front": "Enuncie las tres tesis acad\u00e9micas conclusivas de la ponencia.",
           "back": "1. <b>Tesis 1:</b> El rito no es salvaci\u00f3n individual ultraterrena, sino una tecnolog\u00eda psicosocial indispensable para recomponer y proteger a la comunidad de los vivos.<br>2. <b>Tesis 2:</b> Las reformas de Sol\u00f3n (594 a.C.) marcan el nacimiento de la pol\u00edtica c\u00edvica al someter el dolor tribal al imperio de la ley com\u00fan.<br>3. <b>Tesis 3:</b> Frente al aislamiento higienizado moderno, la experiencia hel\u00e9nica demuestra que el duelo requiere ser visibilizado, corporeizado y ritualizado colectivamente."
+        }
+      ]
+    },
+    {
+      "note_id": "ofg_00",
+      "title": "R\u00fabrica de Evaluaci\u00f3n MED836 y Criterios Orales",
+      "x": 80.0,
+      "y": 40.0,
+      "tags": [
+        "OFG",
+        "R\u00fabrica",
+        "Evaluaci\u00f3n"
+      ],
+      "note_type": "standard",
+      "desired_retention": 0.85,
+      "cards": [
+        {
+          "item_id": 1879944629903881465,
+          "type": "ClozeCard",
+          "fsrs_card": {
+            "card_id": 1792854909805,
+            "state": 1,
+            "step": 0,
+            "stability": null,
+            "difficulty": null,
+            "due": "2026-10-24T15:15:09.806087+00:00",
+            "last_review": null
+          },
+          "title": "Criterios de Evaluaci\u00f3n Oficial MED836",
+          "text": "La r\u00fabrica de evaluaci\u00f3n para la ponencia oral universitaria exige:\\n1. <b>Ajuste cronom\u00e9trico estricto:</b> La disertaci\u00f3n debe durar exactamente {{c1::10 minutos (10:00)::tiempo asignado}} repartidos equitativamente entre los 4 expositores (2:30 c/u).\\n2. <b>Dominio conceptual:</b> Manejo fluido de los conceptos griegos sin lectura mec\u00e1nica: {{c2::$\\text{prothesis}, \\text{ekphora}, \\text{psyche}, \\text{eidolon}, \\text{miasma}, \\text{dexiosis}, \\text{mneme}$::terminolog\u00eda fundamental}}.\\n3. <b>Integraci\u00f3n con la medicina y bio\u00e9tica (MED836):</b> Analizar c\u00f3mo los ritos antiguos ilustran la necesidad humana universal de {{c3::contenci\u00f3n simb\u00f3lica del duelo y dignidad del cad\u00e1ver::nexo con la medicina contempor\u00e1nea}}."
         }
       ]
     }
@@ -724,6 +1001,31 @@
       "source_id": "ofg_17",
       "target_id": "ofg_18",
       "label": "Cr\u00edtica Contempor\u00e1nea a Debate Final"
+    },
+    {
+      "source_id": "ofg_00",
+      "target_id": "ofg_01",
+      "label": ""
+    },
+    {
+      "source_id": "ofg_01",
+      "target_id": "ofg_05",
+      "label": ""
+    },
+    {
+      "source_id": "ofg_06",
+      "target_id": "ofg_07",
+      "label": ""
+    },
+    {
+      "source_id": "ofg_08",
+      "target_id": "ofg_09",
+      "label": ""
+    },
+    {
+      "source_id": "ofg_00",
+      "target_id": "ofg_11",
+      "label": ""
     }
   ]
 }

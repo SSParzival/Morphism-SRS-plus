@@ -167,8 +167,116 @@ Morphism SRS Plus introduces first-class Cloze Deletion cards:
 
 ---
 
+## 🏗️ Clean Modular Architecture
+
+Morphism SRS Plus has been reorganized into a modular, clean package hierarchy with backward-compatible root entry points:
+
+```
+Morphism-SRS-plus/
+├── src/
+│   └── morphism/
+│       ├── core/                      # Domain logic, models, storage, themes, FSRS scheduler
+│       │   ├── app_paths.py           # Canonical paths & XDG compliance
+│       │   ├── course_storage.py      # JSON serialization & .morphism course packages
+│       │   ├── models.py              # Course, NoteNode, Flashcard, ClozeCard, ProofSequenceCard
+│       │   ├── scheduler_manager.py   # FSRS engine adapter & interval calculations
+│       │   ├── theme_manager.py       # JSON theme loader & dynamic QSS generator
+│       │   └── styles.py              # Theme styling bridge
+│       ├── ui/
+│       │   ├── views/                 # Full-window interactive views
+│       │   │   ├── graph_view.py      # OpenGL-accelerated node/edge canvas with zoom & search
+│       │   │   ├── review_view.py     # Flashcard, Proof sequence & Cloze review widget
+│       │   │   ├── courses_widget.py  # Drag-and-drop course and folder organizer
+│       │   │   └── stats_widget.py    # Retrievability charts & study heatmap
+│       │   └── dialogs/               # Modeless & modal dialogs
+│       │       ├── node_editor_dialog.py        # MathJax live preview card & node editor
+│       │       ├── scratchbook_dialog.py        # Side-by-side scratchpad with vector preview
+│       │       ├── retrievability_plot_dialog.py# Chart.js decay curve analyzer
+│       │       └── due_forecast_dialog.py       # Future due date calendar forecast
+│       └── app.py                     # Main application window & Qt lifecycle
+├── scripts/
+│   ├── courses_builder/               # Modular exam course builders
+│   │   ├── em_i2.py                   # Electricidad y Magnetismo I2 (FIS1533)
+│   │   ├── real_i3.py                 # Análisis Real I3 (MAT2514)
+│   │   ├── quimica_i2.py              # Química para Ingenieros I2 (QIM100E)
+│   │   └── ofg_muerte.py              # Ritos Funerarios Grecia Antigua (MED836)
+│   ├── build_courses_data.py          # Course generation generator
+│   ├── generate_massive_courses.py    # Complete exam course compiler
+│   ├── update_android_app.py          # Android seed courses & asset synchronization
+│   ├── build_apk.sh                   # Standalone Android APK build toolchain
+│   ├── run.sh                         # Linux/macOS launcher
+│   ├── setup.sh                       # Virtual environment & dependency installer
+│   └── install_desktop.sh             # Linux XDG desktop integration
+├── android/                           # Complete Android AAPT2/D8 source tree
+├── Courses/                           # 4 enriched official courses (JSON format)
+├── themes/                            # JSON theme definitions (including Bisexual Midnight)
+├── morphism-srs-plus.apk              # Pre-compiled standalone Android APK
+├── main.py                            # Backward-compatible root entry point
+├── run.sh                             # Fast root launcher
+└── build_apk.sh                       # Root APK compilation shortcut
+```
+
+---
+
+## 📚 Enriched Exam Courses Included
+
+The repository comes preloaded with 4 comprehensive courses matching the official syllabi, guides, and exam rubrics:
+
+1. **⚡ Electricidad y Magnetismo (I2) — FIS1533**
+   - Polarización y cargas ligadas $\rho_b = -\nabla \cdot \mathbf{P}$, $\sigma_b = \mathbf{P} \cdot \hat{n}$, neutralidad global.
+   - Desplazamiento $\mathbf{D}$, condiciones de frontera y capacitancia multicapa.
+   - Fuerzas en dieléctricos (a $Q$ cte vs a $V$ cte), resistencia por rebanado geométrico ($RC = \rho \varepsilon$).
+   - Transitorios RC con balance energético riguroso (teorema del 50% de disipación Joule).
+   - Fuerza de Lorentz, trabajo nulo, efecto Hall, ciclotrón, selector de Wien y espectrómetro de masas.
+   - Ley de Biot-Savart vectorial de 5 pasos, espiras, arcos y cables infinitos.
+   - Ley de Ampère, cilindros con $J(r) = C r^k$, solenoide y toroide.
+   - Magnetismo en la materia: $\mathbf{M}$, corrientes ligadas, campo auxiliar $\mathbf{H}$ y potencial vector $\mathbf{A}$.
+   - Inducción de Faraday-Lenz, FEM de movimiento, frenado magnético, autoinductancia y transitorios RL.
+   - Rúbrica oficial FIS1533, doctrina de arrastre de error (*error-carrying*) y parametrización de rescate $I_0$.
+
+2. **📐 Análisis Real (I3) — MAT2514**
+   - Decálogo oficial de demostraciones: Apertura, Justificación, Hilado y Cierre (4/16 pts).
+   - Las 7 intuiciones nucleares y radar de diagnóstico rápido de la I3.
+   - Convergencia puntual vs uniforme, criterio del supremo, evaluación en sucesiones móviles $x_n = c/n$.
+   - Teorema de continuidad del límite uniforme (técnica $\varepsilon/3$) y Test M de Weierstrass.
+   - Teorema de Dini y desglose exhaustivo de sus 3 hipótesis con contraejemplos.
+   - Completitud de $(C(K), \|\cdot\|_\infty)$ y propiedades del espacio $C^1([a, b])$.
+   - Integración y diferenciación término a término bajo convergencia uniforme.
+   - Equicontinuidad, familias uniformemente Lipschitz y Teorema de Arzelà-Ascoli en compactos.
+   - Operadores integrales compactos de Fredholm.
+   - Teorema de Stone-Weierstrass: polinomios pares, funciones bivariadas y productos tensoriales.
+   - Teorema del Punto Fijo de Banach, cotas de error a priori/a posteriori, iterados contractivos y Picard-Lindelöf.
+
+3. **🧪 Química para Ingenieros (I2) — QIM100E**
+   - Unidades de concentración ($M, m, X_i$, \% m/m, \% m/v) y dilución $C_1 V_1 = C_2 V_2$.
+   - Velocidad diferencial estequiométrica, leyes de velocidad y método de velocidades iniciales.
+   - Cinética integrada de orden 0, 1 y 2, gráficos de linealización y vida media $t_{1/2}$.
+   - Condiciones de pseudo-primer orden ($[B]_0 \gg [A]_0$).
+   - Ecuación de Arrhenius, perfiles de energía potencial, complejo activado y catálisis.
+   - Equilibrio químico: $K_c, K_p = K_c(RT)^{\Delta n_{\text{gas}}}$, cociente $Q$ y Le Chatelier.
+   - Efecto térmico vía Ecuación de Van 't Hoff para reacciones endotérmicas y exotérmicas.
+   - Ácido-Base: autoionización del agua, $K_w$, ácidos y bases débiles, tabla ICE y regla del 5%.
+   - Hidrólisis de sales, disoluciones amortiguadoras (Henderson-Hasselbalch) y adición de ácidos/bases fuertes.
+   - Curvas de titulación, punto de semi-equivalencia ($\text{pH} = \text{p}K_a$) y punto de equivalencia.
+   - Método del ión-electrón en medio ácido y básico, celdas galvánicas, potenciales $E^\circ$ y Nernst.
+   - Relaciones termodinámicas ($\Delta G^\circ = -n F E^\circ = -RT \ln K$) y electrólisis de Faraday.
+
+4. **🏺 OFG Muerte (Presentación y Guión: Ritos Funerarios en la Grecia Antigua) — MED836**
+   - Rúbrica oficial MED836 y cronograma exacto de 10:00 minutos para 4 expositores (2:30 c/u).
+   - Antropología de los ritos de paso (Arnold van Gennep): Separación, Liminalidad y Reintegración.
+   - El deber sagrado de sepultura: Patroclo y Aquiles en la Ilíada; la tragedia de Antígona (themis vs nomos).
+   - Escatología homérica: ontología de la $\text{psyche}$ como $\text{eidolon}$ sin fuerza ($\text{menos}$) ni razón ($\text{phrenes}$).
+   - Geografía del Hades: los 5 ríos (Estigia, Aqueronte, Cocito, Flegetonte, Lete), Caronte, óbolo y Hermes Psicopompo.
+   - El Tríptico Ritual Canónico: Próthesis en el oikos, lamentos $\text{góos}$ vs $\text{thrēnos}$, Ékfora presolar y Sepultura/Perídeipnon.
+   - Leyes suntuarias de Solón (594 a.C.): contención del luto femenino y neutralización de venganzas aristocráticas.
+   - Arte funerario en el Cerámico: estelas de mármol y el motivo de la $\text{dexiosis}$ (apretón de manos vivo-muerto).
+   - Calendario del luto post-sepulcral (trita, enata, triakostia) y Fiestas Antesterias (día de los Chytroi).
+   - Guión de locución diapositiva por diapositiva con marcas visuales de coordinación y banco de preguntas para la defensa (Q&A).
+
+---
+
 ## 📄 License & Credits
 
 - Distributed under the **GPL-3.0 License**.
 - Based on the original [Morphism-SRS](https://github.com/VAMarques/Morphism-SRS) by VAMarques.
-- Enhanced and maintained as **Morphism SRS Plus**.
+- Enhanced and maintained as **Morphism SRS Plus** by SSParzival.
