@@ -184,9 +184,9 @@ Morphism SRS Plus introduces first-class Cloze Deletion cards:
 
 ---
 
-## 🏗️ Clean Modular Architecture & Proto 2 Integration
+## 🏗️ Clean Modular Architecture
 
-Morphism SRS Plus integrates both the modular **Morphism Plus** production engine and the complete **Prototype 2 (SQLite v2 & DSL)** architecture:
+Morphism SRS Plus has been reorganized into a modular, clean package hierarchy with backward-compatible root entry points:
 
 ```
 Morphism-SRS-plus/
@@ -202,7 +202,7 @@ Morphism-SRS-plus/
 │   │   └── ui/                        # Full-window interactive views & dialogs
 │   │       ├── views/                 # Graph, Review, Courses, and Stats views
 │   │       └── dialogs/               # Node Editor, Scratchbook, Retrievability, Due Forecast
-│   └── morphism_srs/                  # Proto 2 Architecture (SQLite v2 & Microservices)
+│   └── morphism_srs/                  # Next-Gen Morphism Architecture (SQLite v2 & Microservices)
 │       ├── controllers/               # ReviewSessionController, ExplorerController, BrowserController
 │       ├── domain/                    # Atomic Cards, NoteReviewMode (standard | serial | cloze)
 │       ├── services/
@@ -212,7 +212,7 @@ Morphism-SRS-plus/
 │       │   └── mobile_server.py       # WiFi HTTP/WebSocket sync server & QR generator
 │       ├── storage/                   # SQLite v2 UnitOfWork, schema_v2.sql & repositories
 │       └── theming/ & web_engine/     # QSS templates & shared QWebEngineProfile
-├── specZ/                             # Complete Prototype 2 Whitepapers & Technical Specs
+├── specZ/                             # Technical Whitepapers & Specifications
 │   ├── 01_ARCHITECTURE_AND_PROJECT_STRUCTURE.md
 │   ├── 02_DATABASE_AND_SQL_SPECIFICATION.md
 │   ├── 03_THEMING_QSS_AND_CSS_ARCHITECTURE.md
@@ -235,20 +235,24 @@ Morphism-SRS-plus/
 ├── android/                           # Complete Android AAPT2/D8 source tree
 ├── Courses/                           # 4 enriched official courses (JSON format)
 ├── themes/                            # JSON theme definitions (including Bisexual Midnight)
-├── tests/                             # Unified 34-test test suite (Morphism Plus + Proto 2)
-├── morphism-srs-plus.apk              # Pre-compiled standalone Android APK (928 KB)
+├── tests/                             # Unified 34-test test suite for Morphism
+├── morphism-srs-plus.apk              # Pre-compiled standalone Android APK (932 KB)
 ├── main.py                            # Multi-target application entry point
-├── run_proto2.py                      # Dedicated Proto 2 application launcher
+├── run_proto2.py                      # Morphism v2 launcher
 ├── run.sh                             # Fast root launcher
 └── build_apk.sh                       # Root APK compilation shortcut
 ```
 
-### Running Proto 2
-To launch the Proto 2 SQLite v2 interface:
+### Multi-Engine Launchers
+Morphism SRS Plus supports launching both the standard engine and the next-generation SQLite v2 architecture:
 ```bash
+# Launch standard engine
+./run.sh
+# or: python main.py
+
+# Launch SQLite v2 engine
 ./run_proto2.py
-# or
-python main.py --proto2
+# or: python main.py --v2
 ```
 
 ---
