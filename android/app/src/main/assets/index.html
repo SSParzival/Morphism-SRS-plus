@@ -939,6 +939,7 @@
                 processEscapes: true,
                 packages: {'[+]': ['color', 'ams']},
                 macros: {
+                    "ce": ["{\\mathrm{#1}}", 1],
                     "norm": ["{\\left\\|#1\\right\\|}", 1],
                     "abs": ["{\\left|#1\\right|}", 1],
                     "parens": ["{\\left(#1\\right)}", 1],
@@ -977,6 +978,19 @@
                     "End": "{\\operatorname{End}}",
                     "id": "{\\operatorname{id}}",
                     "tensor": "{\\otimes}"
+                }
+            },
+            startup: {
+                typeset: false,
+                ready: () => {
+                    MathJax.startup.defaultReady();
+                    MathJax.startup.promise.then(() => {
+                        console.log("MathJax engine is fully ready.");
+                        const front = document.getElementById('review-front-content');
+                        if (front && front.innerHTML.trim() && window.app && typeof window.app._typesetMath === 'function') {
+                            window.app._typesetMath([front]);
+                        }
+                    });
                 }
             },
             svg: {

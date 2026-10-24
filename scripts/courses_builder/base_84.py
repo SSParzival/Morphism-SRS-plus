@@ -388,7 +388,7 @@ def build_analisis_real_course() -> Course:
     n3.add_card(ClozeCard("Funciones Lipschitz y Hölder",
         r"- Lipschitz: $d_Y(f(x), f(x')) \le L d_X(x, x') \implies$ uniformemente continua con $\delta = {{c1::\varepsilon / L}}$."
         r"<br>- Hölder de orden $\alpha \in (0, 1]$: $d_Y(f(x), f(x')) \le C (d_X(x, x'))^\alpha \implies$ uniformemente continua con $\delta = {{c2::(\varepsilon / C)^{1/\alpha}}}$."
-        r"<br>- Refutación secuencial: $f$ es discontinua si existe $x_n \to x_0$ con {{c3::f(x_n) \not\to f(x_0)}}."))
+        r"<br>- Refutación secuencial: $f$ es discontinua si existe $x_n \to x_0$ con {{c3::$f(x_n) \not\to f(x_0)$}}."))
     n3.add_card(Flashcard("Función Hölder no Lipschitziana",
         r"Muestre que la función $f(x) = \sqrt{x}$ en $[0, 1]$ es $1/2$-Hölder continua pero NO es Lipschitziana.",
         r"1. <b>Hölder $\alpha = 1/2$:</b> Para $x, y \ge 0$, se cumple $|\sqrt{x} - \sqrt{y}| \le \sqrt{|x - y|}$. Por ende es $1/2$-Hölder con constante $C = 1$.<br>"
@@ -782,7 +782,7 @@ def build_quimica_course() -> Course:
     # 14. Grado de Disociación Gaseosa alpha
     n14 = NoteNode("quim_14", "Grado de Disociación Gaseosa alpha", 980.0, 600.0, ["Química", "Disociación", "alpha"])
     n14.add_card(Flashcard("Deducción de Kp con Grado de Disociación alpha",
-        r"Para $\ce{A(g) <=> B(g) + C(g)}$ a presión $P_{\text{tot}}$, deduzca $K_p$ en función de $\alpha$ y $P_{\text{tot}}$.",
+        r"Para $\text{A}(g) \rightleftharpoons \text{B}(g) + \text{C}(g)$ a presión $P_{\text{tot}}$, deduzca $K_p$ en función de $\alpha$ y $P_{\text{tot}}$.",
         r"1. Moles en equilibrio: $n_A = n_0(1-\alpha)$, $n_B = n_C = n_0\alpha$. Total: $n_{\text{tot}} = n_0(1+\alpha)$.<br>"
         r"2. Fracciones molares: $X_A = \frac{1-\alpha}{1+\alpha}$, $X_B = X_C = \frac{\alpha}{1+\alpha}$.<br>"
         r"3. Constante $K_p$:<br>$$K_p = \frac{P_B P_C}{P_A} = \frac{\left(\frac{\alpha}{1+\alpha} P_{\text{tot}}\right)^2}{\frac{1-\alpha}{1+\alpha} P_{\text{tot}}} = \frac{\alpha^2}{1-\alpha^2} P_{\text{tot}}$$"))
@@ -811,9 +811,9 @@ def build_quimica_course() -> Course:
         r"En tal caso: $[\text{H}^+] \approx \sqrt{K_a C_0} \implies \text{pH} = \frac{1}{2}(\text{p}K_a - \log_{10} C_0)$.<br>"
         r"2. <b>Si $\frac{C_0}{K_a} \le 400$:</b> Obligatorio resolver la cuadrática exacta: $x^2 + K_a x - K_a C_0 = 0$."))
     n16.add_card(ClozeCard("Ácidos Polipróticos",
-        r"Para un ácido poliprótico como $\ce{H3PO4}$ donde $K_{a1} \gg K_{a2} \gg K_{a3}$:"
+        r"Para un ácido poliprótico como $\text{H}_3\text{PO}_4$ donde $K_{a1} \gg K_{a2} \gg K_{a3}$:"
         r"<br>- El pH está gobernado casi exclusivamente por {{c1::la primera disociación Ka1}}."
-        r"<br>- La concentración del anión divalente es $[\ce{HPO4^{2-}}] \approx {{c2::K_{a2}}}$."))
+        r"<br>- La concentración del anión divalente es $[\text{HPO}_4^{2-}] \approx {{c2::K_{a2}}}$."))
     course.notes.append(n16)
 
     # 17. Hidrólisis de Sales Básicas y Ácidas
@@ -822,7 +822,7 @@ def build_quimica_course() -> Course:
         r"Para concentración de sal $C_s$:"
         r"<br>- Sal básica ($A^-$): $K_b = \frac{K_w}{K_a}$, $[\text{OH}^-] \approx {{c1::\sqrt{K_b C_s} = \sqrt{\frac{K_w}{K_a} C_s}}}$."
         r"<br>- Sal ácida ($BH^+$): $K_a = \frac{K_w}{K_b}$, $[\text{H}^+] \approx {{c2::\sqrt{K_a C_s} = \sqrt{\frac{K_w}{K_b} C_s}}}$."
-        r"<br>- Sales de ácido fuerte y base fuerte (ej. $\ce{NaCl}$): no se hidrolizan, $\text{pH} = {{c3::7.00}}$."))
+        r"<br>- Sales de ácido fuerte y base fuerte (ej. $\text{NaCl}$): no se hidrolizan, $\text{pH} = {{c3::7.00}}$."))
     course.notes.append(n17)
 
     # 18. Soluciones Buffer y Henderson-Hasselbalch
@@ -849,10 +849,10 @@ def build_quimica_course() -> Course:
     # 20. Titulaciones y Puntos de Equivalencia
     n20 = NoteNode("quim_20", "Titulaciones y Puntos de Equivalencia", 1280.0, 860.0, ["Química", "Titulación", "Equivalencia", "Semiequivalencia"])
     n20.add_card(Flashcard("Puntos Notables en Curva de Titulación Ácido Débil - Base Fuerte",
-        r"Describa el pH en los 4 puntos clave de titulación de $HA$ con $\ce{NaOH}$.",
+        r"Describa el pH en los 4 puntos clave de titulación de $\text{HA}$ con $\text{NaOH}$.",
         r"1. <b>Inicio ($V_b = 0$):</b> Ácido débil solo $\implies [\text{H}^+] \approx \sqrt{K_a C_0}$.<br>"
-        r"2. <b>Semiequivalencia ($V_b = V_{\text{eq}}/2$):</b> $[HA] = [A^-] \implies \mathbf{\text{pH} = \text{p}K_a}$.<br>"
-        r"3. <b>Equivalencia ($V_b = V_{\text{eq}}$):</b> Todo es sal $A^-$, pH <b>básico ($\text{pH} > 7$)</b> por hidrólisis: $[\text{OH}^-] = \sqrt{K_b C_{\text{sal}}}$.<br>"
+        r"2. <b>Semiequivalencia ($V_b = V_{\text{eq}}/2$):</b> $[\text{HA}] = [\text{A}^-] \implies \text{pH} = \text{p}K_a$.<br>"
+        r"3. <b>Equivalencia ($V_b = V_{\text{eq}}$):</b> Todo es sal $\text{A}^-$, pH <b>básico ($\text{pH} > 7$)</b> por hidrólisis: $[\text{OH}^-] = \sqrt{K_b C_{\text{sal}}}$.<br>"
         r"4. <b>Exceso ($V_b > V_{\text{eq}}$):</b> Dominado por el exceso de $\text{OH}^-$ fuerte."))
     course.notes.append(n20)
 
@@ -885,7 +885,7 @@ def build_quimica_course() -> Course:
         r"¿Cómo funciona una celda de concentración y cuál es la función del puente salino?",
         r"1. <b>Celda de Concentración:</b> Electrodos idénticos sumergidos en soluciones del mismo catión pero a distinta concentración ($E^\circ_{\text{celda}} = 0$). Funciona espontáneamente por gradiente de entropía hacia la igualación de concentraciones:<br>"
         r"$$E = -\frac{0.0592}{n} \log_{10}\left(\frac{[C]_{\text{dil}}}{[C]_{\text{conc}}}\right) > 0$$<br>"
-        r"2. <b>Puente Salino ($\ce{KCl}$ o $\ce{KNO3}$):</b> Cierra el circuito eléctrico manteniendo la electroneutralidad: los aniones migran al ánodo y los cationes al cátodo, evitando la acumulación de cargas que detendría la corriente."))
+        r"2. <b>Puente Salino ($\text{KCl}$ o $\text{KNO}_3$):</b> Cierra el circuito eléctrico manteniendo la electroneutralidad: los aniones migran al ánodo y los cationes al cátodo, evitando la acumulación de cargas que detendría la corriente."))
     course.notes.append(n22)
 
     # Edges Química

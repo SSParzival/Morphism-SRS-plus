@@ -175,5 +175,69 @@ class TestMorphismPlus(unittest.TestCase):
                 os.remove(pkg_path)
             course_storage.delete_course("Test Linear Algebra")
 
+    def test_nested_latex_and_mathbf_cloze_rendering(self):
+        """Verify that LaTeX with mathbf and nested braces renders cleanly on front and back."""
+        text = r"Regla BAC-CAB: $$\mathbf{A} \times (\mathbf{B} \times \mathbf{C}) = {{c1::\mathbf{B}(\mathbf{A}\cdot\mathbf{C}) - \mathbf{C}(\mathbf{A}\cdot\mathbf{B})}}$$<br>Desplazamiento: $\mathbf{D} = {{c2::\varepsilon_0 \mathbf{E} + \mathbf{P}}}$ y carga ${{c3::Q_{f,\text{enc}}}}$."
+        card = ClozeCard("Identidades Vectoriales", text)
+        
+        front = card.get_html_front()
+        back = card.get_html_back()
+
+        # Front checks
+        self.assertNotIn("{{c1::", front)
+        self.assertNotIn("{{c2::", front)
+        self.assertNotIn("{{c3::", front)
+        self.assertIn("cloze-bracket", front)
+        self.assertNotIn("cloze-revealed", front)
+
+        # Back checks
+        self.assertNotIn("{{c1::", back)
+        self.assertNotIn("{{c2::", back)
+        self.assertNotIn("{{c3::", back)
+        self.assertIn("cloze-revealed", back)
+        self.assertIn(r"\mathbf{B}(\mathbf{A}\cdot\mathbf{C})", back)
+        self.assertIn(r"\varepsilon_0 \mathbf{E} + \mathbf{P}", back)
+        self.assertIn(r"Q_{f,\text{enc}}", back)
+
+        # Delimiter balance check
+        self.assertEqual(front.count("$") % 2, 0)
+        self.assertEqual(back.count("$") % 2, 0)
+
+    def test_all_courses_math_and_mathbf_integrity(self):
+        """Verify that all cards across all courses have balanced math delimiters and no raw LaTeX outside math."""
+        import json, glob, re
+        course_files = sorted(set(glob.glob("Courses/*.json") + ["android/app/src/main/assets/seed_courses.json"]))
+        self.assertGreater(len(course_files), 0)
+
+        latex_outside_regex = re.compile(r"\\(mathbf|boldsymbol|vec|hat|nabla|frac|sqrt|text|alpha|beta|gamma|epsilon|varepsilon|mu|pi|rho|sigma|tau|theta|phi|omega|int|oint|iint|iiint|partial|times|cdot|pm|le|ge|ne|approx|equiv|to|not|in|subset|cap|cup|forall|exists|ce)\b")
+
+        total_cards_checked = 0
+        for path in course_files:
+            with open(path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            courses = data if isinstance(data, list) else [data]
+            for c in courses:
+                for n in c.get("notes", []):
+                    for card in n.get("cards", []):
+                        total_cards_checked += 1
+                        for field in ["text", "front", "back", "premise"]:
+                            val = card.get(field, "")
+                            if not val:
+                                continue
+                            # Verify balanced $
+                            self.assertEqual(
+                                val.count("$") % 2, 0,
+                                f"Odd dollar count in {path} [{c.get('name')}] node {n.get('note_id')} card {card.get('title')} field {field}"
+                            )
+                            # Strip math blocks and verify no raw LaTeX commands outside
+                            stripped = re.sub(r"\$\$[\s\S]*?\$\$", " ", val)
+                            stripped = re.sub(r"\$[^\$]+?\$", " ", stripped)
+                            outside_matches = latex_outside_regex.findall(stripped)
+                            self.assertEqual(
+                                len(outside_matches), 0,
+                                f"Raw LaTeX outside math mode in {path} [{c.get('name')}] node {n.get('note_id')} card {card.get('title')}: {outside_matches}"
+                            )
+        self.assertGreaterEqual(total_cards_checked, 200)
+
 if __name__ == "__main__":
     unittest.main()
