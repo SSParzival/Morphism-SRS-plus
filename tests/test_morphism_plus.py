@@ -32,6 +32,7 @@ class TestMorphismPlus(unittest.TestCase):
         self.assertGreaterEqual(len(themes), 5, "At least 5 JSON themes should be loaded")
 
         theme_ids = [t["id"] for t in themes]
+        self.assertIn("bisexual_midnight", theme_ids)
         self.assertIn("dark_modern", theme_ids)
         self.assertIn("catppuccin_mocha", theme_ids)
         self.assertIn("nord", theme_ids)

@@ -10,7 +10,7 @@ from app_paths import THEMES_DIR, SETTINGS_FILE
 FONT_FAMILY_STACK = '-apple-system, BlinkMacSystemFont, "Inter", "Ubuntu", "DejaVu Sans", "Liberation Sans", "Segoe UI", Roboto, sans-serif'
 MONO_FONT_STACK = '"JetBrains Mono", "Fira Code", "DejaVu Sans Mono", "Liberation Mono", "Cascadia Code", monospace'
 
-DEFAULT_THEME_ID = "dark_modern"
+DEFAULT_THEME_ID = "bisexual_midnight"
 
 class ThemeManager(QObject):
     """
@@ -450,14 +450,14 @@ QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {{
 
     def _get_fallback_theme(self) -> Dict[str, Any]:
         return {
-            "id": "dark_modern",
-            "name": "Dark Modern",
+            "id": "bisexual_midnight",
+            "name": "Bisexual Midnight 💖💜💙",
             "is_dark": True,
             "colors": {
-                "window_bg": "#0b0f19",
-                "surface_bg": "#1e293b",
-                "text_primary": "#f8fafc",
-                "accent": "#6366f1"
+                "window_bg": "#000000",
+                "surface_bg": "#0B0710",
+                "text_primary": "#F7F1F8",
+                "accent": "#F02A8C"
             }
         }
 

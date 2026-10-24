@@ -12,6 +12,10 @@ THEMES_DIR = os.path.join(BASE_DIR, "themes")
 SCRATCHBOOK_DIR = os.path.join(BASE_DIR, "scratchbook")
 SETTINGS_FILE = os.path.join(BASE_DIR, "settings.json")
 
+# Linux XDG Cache Directories
+CACHE_DIR = os.path.join(os.path.expanduser("~/.cache"), "morphism-srs-plus")
+WEB_CACHE_DIR = os.path.join(CACHE_DIR, "webengine")
+
 # Core Assets
 ICON_PNG = os.path.join(BASE_DIR, "icon.png")
 ICON_ICO = os.path.join(BASE_DIR, "icon.ico")

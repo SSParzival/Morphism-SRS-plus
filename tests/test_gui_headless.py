@@ -3,6 +3,7 @@ import sys
 import unittest
 
 os.environ["QT_QPA_PLATFORM"] = "offscreen"
+os.environ["MESA_DEBUG"] = "silent"
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if BASE_DIR not in sys.path:
@@ -33,7 +34,7 @@ class TestGUIHeadless(unittest.TestCase):
     def test_theme_switching_on_window(self):
         window = MainWindow()
         tm = ThemeManager.get_instance()
-        for t in ["nord", "catppuccin_mocha", "github_light", "dark_modern"]:
+        for t in ["bisexual_midnight", "nord", "catppuccin_mocha", "github_light", "dark_modern"]:
             tm.set_theme(t, self.app)
             self.assertEqual(tm.active_theme_id, t)
 

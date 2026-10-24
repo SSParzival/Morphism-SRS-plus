@@ -42,6 +42,8 @@ class NoteNodeItem(QGraphicsRectItem):
         self.setFlag(QGraphicsItem.ItemIsSelectable, True)
         self.setFlag(QGraphicsItem.ItemSendsGeometryChanges, True)
         self.setAcceptHoverEvents(True)
+        # DeviceCoordinateCache boosts rendering performance significantly when panning or moving nodes
+        self.setCacheMode(QGraphicsItem.DeviceCoordinateCache)
 
         self._setup_appearance()
 
@@ -100,6 +102,16 @@ class NoteNodeItem(QGraphicsRectItem):
         self.edges.append(edge_item)
 
     def itemChange(self, change, value):
+        if change == QGraphicsItem.ItemPositionChange and self.scene():
+            views = self.scene().views()
+            if views and getattr(views[0], 'is_snapping_enabled', False):
+                pos = value
+                grid_x = getattr(views[0], 'GRID_X', 300)
+                grid_y = getattr(views[0], 'GRID_Y', 130)
+                snapped_x = round(pos.x() / grid_x) * grid_x
+                snapped_y = round(pos.y() / grid_y) * grid_y
+                return QPointF(snapped_x, snapped_y)
+
         if change == QGraphicsItem.ItemPositionHasChanged:
             self.note.x = self.pos().x()
             self.note.y = self.pos().y()
@@ -118,7 +130,7 @@ class NoteNodeItem(QGraphicsRectItem):
         path.addRoundedRect(0, 0, self.WIDTH, self.HEIGHT, self.CORNER_RADIUS, self.CORNER_RADIUS)
 
         if self.isSelected():
-            sel_color = QColor(gc.get("selection_border", "#38bdf8"))
+            sel_color = QColor(gc.get("selection_border", "#F02A8C"))
             painter.setPen(QPen(sel_color, 3, Qt.DashLine))
         else:
             painter.setPen(self.border_pen)
@@ -184,25 +196,6 @@ class NoteNodeItem(QGraphicsRectItem):
             self.signals.note_force_review_requested.emit(self.note)
         elif action == act_delete:
             self.signals.note_delete_requested.emit(self.note)
-
-    def itemChange(self, change, value):
-        if change == QGraphicsItem.ItemPositionChange and self.scene():
-            views = self.scene().views()
-            if views and getattr(views[0], 'is_snapping_enabled', False):
-                pos = value
-                grid_x = getattr(views[0], 'GRID_X', 300)
-                grid_y = getattr(views[0], 'GRID_Y', 130)
-                snapped_x = round(pos.x() / grid_x) * grid_x
-                snapped_y = round(pos.y() / grid_y) * grid_y
-                return QPointF(snapped_x, snapped_y)
-
-        if change == QGraphicsItem.ItemPositionHasChanged:
-            self.note.x = self.pos().x()
-            self.note.y = self.pos().y()
-            for edge_item in self.edges:
-                edge_item.update_position()
-
-        return super().itemChange(change, value)
 
 
 class NoteEdgeItem(QGraphicsPathItem):
@@ -275,7 +268,10 @@ class NoteEdgeItem(QGraphicsPathItem):
 
 
 class GraphWidget(QGraphicsView):
-    """Infinite canvas graphics view supporting drag, zoom, search highlight, and prerequisite linking."""
+    """
+    High-performance infinite canvas graphics view optimized for Linux CachyOS / Wayland.
+    Supports middle-click dragging, smooth cursor-anchored zoom, search highlight, and grid snapping.
+    """
 
     GRID_X = 300
     GRID_Y = 130
@@ -291,6 +287,10 @@ class GraphWidget(QGraphicsView):
         self.node_items: Dict[str, NoteNodeItem] = {}
         self.edge_items: List[NoteEdgeItem] = []
         self.is_snapping_enabled = False
+
+        # Middle mouse button panning state
+        self._is_middle_panning = False
+        self._last_middle_pos = None
 
         # Interactive Prerequisite Linking Mode State
         self.prereq_target_node: Optional[NoteNode] = None
@@ -319,16 +319,35 @@ class GraphWidget(QGraphicsView):
     def _setup_canvas(self):
         self.setRenderHint(QPainter.Antialiasing)
         self.setRenderHint(QPainter.SmoothPixmapTransform)
+        self.setRenderHint(QPainter.TextAntialiasing)
         self.setDragMode(QGraphicsView.ScrollHandDrag)
-        self.setViewportUpdateMode(QGraphicsView.FullViewportUpdate)
+        # BoundingRectViewportUpdate provides vastly superior performance compared to FullViewportUpdate
+        self.setViewportUpdateMode(QGraphicsView.BoundingRectViewportUpdate)
+        # Smooth cursor-anchored zoom
+        self.setTransformationAnchor(QGraphicsView.AnchorUnderMouse)
+        self.setResizeAnchor(QGraphicsView.AnchorUnderMouse)
+        self.setCacheMode(QGraphicsView.CacheBackground)
         self.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.setMouseTracking(True)
         self._apply_canvas_theme()
 
+        # Try hardware accelerated OpenGL viewport on Linux CachyOS / Mesa
+        try:
+            from PySide6.QtOpenGLWidgets import QOpenGLWidget
+            from PySide6.QtGui import QSurfaceFormat
+            fmt = QSurfaceFormat()
+            fmt.setSamples(4)
+            QSurfaceFormat.setDefaultFormat(fmt)
+            gl_viewport = QOpenGLWidget()
+            gl_viewport.setFormat(fmt)
+            self.setViewport(gl_viewport)
+        except Exception:
+            pass
+
     def _apply_canvas_theme(self):
         gc = ThemeManager.get_instance().get_graph_colors()
-        bg_color = gc.get("canvas_bg", "#0b0f19")
+        bg_color = gc.get("canvas_bg", "#000000")
         self.setStyleSheet(f"background-color: {bg_color}; border: none;")
         self.setBackgroundBrush(QBrush(QColor(bg_color)))
 
@@ -342,10 +361,9 @@ class GraphWidget(QGraphicsView):
 
     def drawBackground(self, painter: QPainter, rect: QRectF):
         super().drawBackground(painter, rect)
-        # Draw subtle grid dots when snapping is enabled
         if self.is_snapping_enabled:
             gc = ThemeManager.get_instance().get_graph_colors()
-            dot_color = QColor(gc.get("grid_color", "#334155"))
+            dot_color = QColor(gc.get("grid_color", "#1C1024"))
             painter.setPen(QPen(dot_color, 2))
             
             left = int(rect.left()) - (int(rect.left()) % self.GRID_X)
@@ -457,7 +475,48 @@ class GraphWidget(QGraphicsView):
             self.temp_prereq_path_item = None
         self.setCursor(Qt.ArrowCursor)
 
+    def mousePressEvent(self, event):
+        # Middle click pans canvas smoothly
+        if event.button() == Qt.MiddleButton:
+            self._is_middle_panning = True
+            self._last_middle_pos = event.pos()
+            self.setCursor(Qt.ClosedHandCursor)
+            event.accept()
+            return
+
+        if self.prereq_target_node:
+            scene_pos = self.mapToScene(event.pos())
+            items = self.scene.items(scene_pos)
+            clicked_node_item = None
+
+            for it in items:
+                curr = it
+                while curr and not isinstance(curr, NoteNodeItem):
+                    curr = curr.parentItem()
+                if isinstance(curr, NoteNodeItem):
+                    clicked_node_item = curr
+                    break
+
+            if clicked_node_item:
+                clicked_note = clicked_node_item.note
+                if clicked_note.note_id != self.prereq_target_node.note_id:
+                    self.signals.prereq_edge_created.emit(clicked_note.note_id, self.prereq_target_node.note_id)
+                self.stop_prereq_mode()
+            else:
+                self.stop_prereq_mode()
+            return
+
+        super().mousePressEvent(event)
+
     def mouseMoveEvent(self, event):
+        if getattr(self, "_is_middle_panning", False):
+            delta = event.pos() - self._last_middle_pos
+            self._last_middle_pos = event.pos()
+            self.horizontalScrollBar().setValue(self.horizontalScrollBar().value() - delta.x())
+            self.verticalScrollBar().setValue(self.verticalScrollBar().value() - delta.y())
+            event.accept()
+            return
+
         if self.prereq_target_node and self.temp_prereq_path_item:
             target_item = self.node_items.get(self.prereq_target_node.note_id)
             if target_item:
@@ -483,37 +542,39 @@ class GraphWidget(QGraphicsView):
 
         super().mouseMoveEvent(event)
 
-    def mousePressEvent(self, event):
-        if self.prereq_target_node:
-            scene_pos = self.mapToScene(event.pos())
-            items = self.scene.items(scene_pos)
-            clicked_node_item = None
-
-            for it in items:
-                curr = it
-                while curr and not isinstance(curr, NoteNodeItem):
-                    curr = curr.parentItem()
-                if isinstance(curr, NoteNodeItem):
-                    clicked_node_item = curr
-                    break
-
-            if clicked_node_item:
-                clicked_note = clicked_node_item.note
-                if clicked_note.note_id != self.prereq_target_node.note_id:
-                    self.signals.prereq_edge_created.emit(clicked_note.note_id, self.prereq_target_node.note_id)
-                self.stop_prereq_mode()
-            else:
-                self.stop_prereq_mode()
+    def mouseReleaseEvent(self, event):
+        if event.button() == Qt.MiddleButton and getattr(self, "_is_middle_panning", False):
+            self._is_middle_panning = False
+            self.setCursor(Qt.ArrowCursor if not self.prereq_target_node else Qt.CrossCursor)
+            event.accept()
             return
-
-        super().mousePressEvent(event)
+        super().mouseReleaseEvent(event)
 
     def wheelEvent(self, event):
-        zoom_factor = 1.15
-        if event.angleDelta().y() > 0:
-            self.scale(zoom_factor, zoom_factor)
-        else:
-            self.scale(1 / zoom_factor, 1 / zoom_factor)
+        """Smooth Wayland / high-DPI mouse wheel and touchpad zoom anchored to mouse cursor."""
+        angle = event.angleDelta().y()
+        if angle != 0:
+            factor = 1.0 + (angle / 1200.0)
+            factor = max(0.85, min(1.2, factor))
+            self.scale(factor, factor)
+        event.accept()
+
+    def keyPressEvent(self, event):
+        if event.key() in (Qt.Key_Delete, Qt.Key_Backspace):
+            selected = self.scene.selectedItems()
+            for it in selected:
+                if isinstance(it, NoteNodeItem):
+                    self.signals.note_delete_requested.emit(it.note)
+                    break
+            event.accept()
+            return
+        elif event.key() == Qt.Key_Escape:
+            self.stop_prereq_mode()
+            self.clear_search_highlight()
+            self.scene.clearSelection()
+            event.accept()
+            return
+        super().keyPressEvent(event)
 
     def auto_arrange(self):
         """

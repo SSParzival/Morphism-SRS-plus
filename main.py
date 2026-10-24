@@ -8,7 +8,7 @@ from PySide6.QtWidgets import (QApplication, QMainWindow, QStackedWidget,
                                QLabel, QPushButton, QMessageBox, QInputDialog, QTabBar,
                                QDialog, QListWidget, QListWidgetItem, QLineEdit, QComboBox)
 from PySide6.QtCore import Qt, QSize
-from PySide6.QtGui import QAction, QIcon, QKeySequence
+from PySide6.QtGui import QAction, QIcon, QKeySequence, QShortcut
 
 from models import Course, NoteNode, NoteEdge, Flashcard, ProofSequenceCard, ClozeCard, ReviewLogRecord
 from scheduler_manager import SchedulerManager
@@ -22,7 +22,7 @@ from courses_widget import CoursesWidget
 from stats_widget import StatsWidget
 import course_storage
 from theme_manager import ThemeManager, attach_dark_view
-from app_paths import ICON_PNG, ICON_ICO
+from app_paths import ICON_PNG, ICON_ICO, WEB_CACHE_DIR
 from fsrs import Rating, Card as FSRSCard
 
 class DeletePrereqsDialog(QDialog):
@@ -188,6 +188,7 @@ class MainWindow(QMainWindow):
 
         self._init_data()
         self._setup_ui()
+        self._setup_global_shortcuts()
 
     def _init_data(self):
         """Ensure seed courses exist and load default course."""
@@ -389,6 +390,41 @@ class MainWindow(QMainWindow):
         # Set default tab to Explorer (1)
         self.tab_bar.setCurrentIndex(1)
         self._update_title()
+
+    def _setup_global_shortcuts(self):
+        """Setup keyboard shortcuts for rapid navigation, canvas interaction, and review actions."""
+        # Ledger Tab switching: Alt+1 to Alt+4
+        QShortcut(QKeySequence("Alt+1"), self, activated=lambda: self.tab_bar.setCurrentIndex(0))
+        QShortcut(QKeySequence("Alt+2"), self, activated=lambda: self.tab_bar.setCurrentIndex(1))
+        QShortcut(QKeySequence("Alt+3"), self, activated=lambda: self.tab_bar.setCurrentIndex(2))
+        QShortcut(QKeySequence("Alt+4"), self, activated=lambda: self.tab_bar.setCurrentIndex(3))
+
+        # Search focus: Ctrl+F or Ctrl+K (focuses explorer note search)
+        def _focus_search():
+            self.tab_bar.setCurrentIndex(1)
+            self.txt_graph_search.setFocus()
+            self.txt_graph_search.selectAll()
+
+        QShortcut(QKeySequence("Ctrl+F"), self, activated=_focus_search)
+        QShortcut(QKeySequence("Ctrl+K"), self, activated=_focus_search)
+
+        # File & Note management shortcuts
+        QShortcut(QKeySequence("Ctrl+S"), self, activated=lambda: self.save_data(silent=False))
+        QShortcut(QKeySequence("Ctrl+N"), self, activated=self._create_new_note)
+
+        # Explorer canvas viewport zoom shortcuts
+        QShortcut(QKeySequence("Ctrl+="), self, activated=lambda: self.graph_view.zoom_in())
+        QShortcut(QKeySequence("Ctrl++"), self, activated=lambda: self.graph_view.zoom_in())
+        QShortcut(QKeySequence("Ctrl+-"), self, activated=lambda: self.graph_view.zoom_out())
+        QShortcut(QKeySequence("Ctrl+0"), self, activated=lambda: self.graph_view.zoom_reset())
+        QShortcut(QKeySequence("Ctrl+Shift+F"), self, activated=lambda: self.graph_view.fit_all())
+
+        # Review undo shortcut: Ctrl+Z
+        def _try_review_undo():
+            if self.stack.currentIndex() == 2:
+                self._on_undo_rating_requested()
+
+        QShortcut(QKeySequence("Ctrl+Z"), self, activated=_try_review_undo)
 
     def _populate_themes(self):
         tm = ThemeManager.get_instance()
@@ -813,13 +849,27 @@ class MainWindow(QMainWindow):
 
 
 if __name__ == "__main__":
-    # Platform-specific app ID for Windows taskbar grouping
+    # Platform-specific configurations
     if sys.platform == 'win32':
         myappid = 'morphism.srs.plus.app.1.0'
         try:
             ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
         except Exception:
             pass
+    elif sys.platform.startswith('linux'):
+        # CachyOS / Wayland / Mesa GPU optimizations
+        os.environ.setdefault("QT_QPA_PLATFORM", "wayland;xcb")
+        os.environ.setdefault("QT_ENABLE_HIGHDPI_SCALING", "1")
+        # Silence non-fatal RADV warnings on newer AMD GPUs
+        os.environ.setdefault("MESA_DEBUG", "silent")
+
+    # High DPI fractional scaling rounding policy for KDE Plasma 6 Wayland
+    if hasattr(Qt.HighDpiScaleFactorRoundingPolicy, "PassThrough"):
+        QApplication.setHighDpiScaleFactorRoundingPolicy(Qt.HighDpiScaleFactorRoundingPolicy.PassThrough)
+
+    # Share OpenGL contexts between widgets (QOpenGLWidget viewport & QWebEngineView)
+    if hasattr(Qt.ApplicationAttribute, "AA_ShareOpenGLContexts"):
+        QApplication.setAttribute(Qt.ApplicationAttribute.AA_ShareOpenGLContexts)
 
     app = QApplication(sys.argv)
     
@@ -827,7 +877,17 @@ if __name__ == "__main__":
     if hasattr(app, "setDesktopFileName"):
         app.setDesktopFileName("morphism-srs-plus.desktop")
 
-    # Apply saved JSON Theme
+    # Isolate WebEngine cache in XDG cache directory
+    try:
+        from PySide6.QtWebEngineCore import QWebEngineProfile
+        profile = QWebEngineProfile.defaultProfile()
+        if profile:
+            profile.setCachePath(WEB_CACHE_DIR)
+            profile.setPersistentStoragePath(WEB_CACHE_DIR)
+    except Exception:
+        pass
+
+    # Apply saved JSON Theme (defaults to Bisexual Midnight)
     tm = ThemeManager.get_instance()
     tm.apply_theme_to_app(app)
 
