@@ -268,12 +268,65 @@ class TestMorphismPlus(unittest.TestCase):
             self.assertIn(f"{theme_id}:", app_js)
         self.assertIn("canvas_bg", app_js)
         self.assertIn("grid_color", app_js)
-        self.assertIn("morphism_courses_v7", app_js)
+        self.assertIn("morphism_courses_v8", app_js)
 
         # 4. Check MainActivity.java has Javascript back handler integration
         with open("android/app/src/main/java/org/morphism/srs/plus/MainActivity.java", "r", encoding="utf-8") as f:
             main_activity = f.read()
         self.assertIn("window.onAndroidBackPressed", main_activity)
+
+    def test_offline_mathjax_bundle_and_boldsymbol_integrity(self):
+        """Verify full MathJax 3 bundle with offline boldsymbol, mhchem, and modal preview typesetting."""
+        vendor_path = "src/morphism_srs/resources/web/vendor/mathjax/tex-svg-full.js"
+        android_path = "android/app/src/main/assets/tex-svg.js"
+        root_path = "assets/tex-svg.js"
+
+        self.assertTrue(os.path.exists(vendor_path), "Vendor full MathJax should exist")
+        self.assertTrue(os.path.exists(android_path), "Android MathJax asset should exist")
+        self.assertTrue(os.path.exists(root_path), "Root MathJax asset should exist")
+
+        vendor_size = os.path.getsize(vendor_path)
+        android_size = os.path.getsize(android_path)
+        root_size = os.path.getsize(root_path)
+
+        self.assertEqual(vendor_size, android_size, "Android tex-svg.js must match full bundle")
+        self.assertEqual(vendor_size, root_size, "Root tex-svg.js must match full bundle")
+        self.assertGreater(android_size, 2_200_000, "MathJax bundle must be the full 2.2+ MB build")
+
+        # Verify offline boldsymbol preLoad in bundle
+        with open(android_path, "r", encoding="utf-8") as f:
+            content = f.read()
+        self.assertIn('preLoad("[tex]/action","[tex]/ams"', content)
+        self.assertIn('"[tex]/boldsymbol"', content)
+        self.assertIn('BoldsymbolMethods', content)
+
+        # Verify index.html package config and autoload blocking
+        with open("android/app/src/main/assets/index.html", "r", encoding="utf-8") as f:
+            html = f.read()
+        self.assertIn("'[+]': ['color', 'ams', 'boldsymbol'", html)
+        self.assertIn("autoload: {", html)
+        self.assertIn("boldsymbol: []", html)
+        self.assertIn('"bm": ["{\\\\boldsymbol{#1}}", 1]', html)
+
+        # Verify app.js node modal previews call _typesetMath
+        with open("android/app/src/main/assets/app.js", "r", encoding="utf-8") as f:
+            app_js = f.read()
+        self.assertIn("this._typesetMath([previewBox])", app_js)
+
+        # Verify no stray /n in any course cards
+        import json, glob, re
+        for p in glob.glob("Courses/*.json"):
+            with open(p, "r", encoding="utf-8") as f:
+                cdata = json.load(f)
+            for note in cdata.get("notes", []):
+                for card in note.get("cards", []):
+                    for field in ["front", "back", "text", "premise"]:
+                        val = card.get(field, "")
+                        if not isinstance(val, str):
+                            continue
+                        # Ensure no stray slash-n intended as newline
+                        slash_n_matches = re.findall(r'(?:^|[\.\:\;\?\!\s])\/n(?:[\s\-\dA-Z]|$)', val)
+                        self.assertEqual(len(slash_n_matches), 0, f"Stray /n found in {p} card {card.get('id')}: {slash_n_matches}")
 
 if __name__ == "__main__":
     unittest.main()

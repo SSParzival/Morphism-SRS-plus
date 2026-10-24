@@ -23,13 +23,16 @@ echo "=================================================================="
 echo "⚡ Building Morphism SRS Plus Android APK (.apk)"
 echo "=================================================================="
 
-# Ensure shared assets exist in Android assets folder
+# Ensure shared offline math & chart assets exist and are up to date
 mkdir -p "$ANDROID_DIR/app/src/main/assets"
-if [ ! -f "$ANDROID_DIR/app/src/main/assets/tex-svg.js" ] && [ -f "$ROOT_DIR/assets/tex-svg.js" ]; then
-    cp "$ROOT_DIR/assets/tex-svg.js" "$ANDROID_DIR/app/src/main/assets/"
+echo "➔ Synchronizing MathJax full offline bundle & Chart.js..."
+if [ -f "$ROOT_DIR/src/morphism_srs/resources/web/vendor/mathjax/tex-svg-full.js" ]; then
+    cp -f "$ROOT_DIR/src/morphism_srs/resources/web/vendor/mathjax/tex-svg-full.js" "$ANDROID_DIR/app/src/main/assets/tex-svg.js"
+    cp -f "$ROOT_DIR/src/morphism_srs/resources/web/vendor/mathjax/tex-svg-full.js" "$ROOT_DIR/assets/tex-svg.js"
 fi
-if [ ! -f "$ANDROID_DIR/app/src/main/assets/chart.js" ] && [ -f "$ROOT_DIR/assets/chart.js" ]; then
-    cp "$ROOT_DIR/assets/chart.js" "$ANDROID_DIR/app/src/main/assets/"
+if [ -f "$ROOT_DIR/src/morphism_srs/resources/web/vendor/chartjs/chart.umd.min.js" ]; then
+    cp -f "$ROOT_DIR/src/morphism_srs/resources/web/vendor/chartjs/chart.umd.min.js" "$ANDROID_DIR/app/src/main/assets/chart.js"
+    cp -f "$ROOT_DIR/src/morphism_srs/resources/web/vendor/chartjs/chart.umd.min.js" "$ROOT_DIR/assets/chart.js"
 fi
 
 # Ensure build tools exist

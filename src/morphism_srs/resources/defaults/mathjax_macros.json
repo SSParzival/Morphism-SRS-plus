@@ -2,8 +2,10 @@
   "inlineMath": [["$", "$"], ["\\(", "\\)"]],
   "displayMath": [["$$", "$$"], ["\\[", "\\]"]],
   "processEscapes": true,
-  "packages": {"[+]": ["color", "ams"]},
+  "packages": {"[+]": ["color", "ams", "boldsymbol", "mhchem", "mathtools", "cancel", "cases", "centernot", "unicode"]},
   "macros": {
+    "bm": ["{\\boldsymbol{#1}}", 1],
+    "ce": ["{\\mathrm{#1}}", 1],
     "norm": ["{\\left\\|#1\\right\\|}", 1],
     "abs": ["{\\left|#1\\right|}", 1],
     "parens": ["{\\left(#1\\right)}", 1],

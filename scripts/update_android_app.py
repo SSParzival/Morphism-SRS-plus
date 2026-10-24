@@ -33,11 +33,28 @@ content = content[:start_idx] + new_seed_str + content[end_idx + len(end_needle)
 # Fix Cloze split("::", 1) bug
 content = content.replace('p1.split("::", 1)', 'p1.split("::")')
 
+import shutil
+
+# Ensure offline vendor bundles are synchronized
+tex_vendor = os.path.join(ROOT_DIR, "src/morphism_srs/resources/web/vendor/mathjax/tex-svg-full.js")
+tex_android = os.path.join(ROOT_DIR, "android/app/src/main/assets/tex-svg.js")
+tex_root = os.path.join(ROOT_DIR, "assets/tex-svg.js")
+if os.path.exists(tex_vendor):
+    shutil.copyfile(tex_vendor, tex_android)
+    shutil.copyfile(tex_vendor, tex_root)
+
+chart_vendor = os.path.join(ROOT_DIR, "src/morphism_srs/resources/web/vendor/chartjs/chart.umd.min.js")
+chart_android = os.path.join(ROOT_DIR, "android/app/src/main/assets/chart.js")
+chart_root = os.path.join(ROOT_DIR, "assets/chart.js")
+if os.path.exists(chart_vendor):
+    shutil.copyfile(chart_vendor, chart_android)
+    shutil.copyfile(chart_vendor, chart_root)
+
 # Update storage keys to ensure automatic migration on mobile
-for old_v in ['"morphism_courses"', '"morphism_courses_v2"', '"morphism_courses_v3"', '"morphism_courses_v4"', '"morphism_courses_v5"', '"morphism_courses_v6"']:
-    content = content.replace(old_v, '"morphism_courses_v7"')
-for old_v in ['"morphism_active_course"', '"morphism_active_course_v2"', '"morphism_active_course_v3"', '"morphism_active_course_v4"', '"morphism_active_course_v5"', '"morphism_active_course_v6"']:
-    content = content.replace(old_v, '"morphism_active_course_v7"')
+for old_v in ['"morphism_courses"', '"morphism_courses_v2"', '"morphism_courses_v3"', '"morphism_courses_v4"', '"morphism_courses_v5"', '"morphism_courses_v6"', '"morphism_courses_v7"']:
+    content = content.replace(old_v, '"morphism_courses_v8"')
+for old_v in ['"morphism_active_course"', '"morphism_active_course_v2"', '"morphism_active_course_v3"', '"morphism_active_course_v4"', '"morphism_active_course_v5"', '"morphism_active_course_v6"', '"morphism_active_course_v7"']:
+    content = content.replace(old_v, '"morphism_active_course_v8"')
 
 # Update restore message
 content = content.replace(

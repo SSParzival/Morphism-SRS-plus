@@ -1023,12 +1023,25 @@
 
     <script>
         window.MathJax = {
+            loader: {
+                load: ['[tex]/color', '[tex]/ams', '[tex]/boldsymbol', '[tex]/mhchem', '[tex]/mathtools', '[tex]/cancel', '[tex]/cases', '[tex]/centernot', '[tex]/unicode', '[tex]/noerrors', '[tex]/noundefined']
+            },
             tex: {
                 inlineMath: [['$', '$'], ['\\(', '\\)']],
                 displayMath: [['$$', '$$'], ['\\[', '\\]']],
                 processEscapes: true,
-                packages: {'[+]': ['color', 'ams']},
+                packages: {'[+]': ['color', 'ams', 'boldsymbol', 'mhchem', 'mathtools', 'cancel', 'cases', 'centernot', 'unicode', 'noerrors', 'noundefined']},
+                autoload: {
+                    boldsymbol: [],
+                    mhchem: [],
+                    mathtools: [],
+                    cancel: [],
+                    cases: [],
+                    centernot: [],
+                    unicode: []
+                },
                 macros: {
+                    "bm": ["{\\boldsymbol{#1}}", 1],
                     "ce": ["{\\mathrm{#1}}", 1],
                     "norm": ["{\\left\\|#1\\right\\|}", 1],
                     "abs": ["{\\left|#1\\right|}", 1],
@@ -1075,7 +1088,7 @@
                 ready: () => {
                     MathJax.startup.defaultReady();
                     MathJax.startup.promise.then(() => {
-                        console.log("MathJax engine is fully ready.");
+                        console.log("MathJax engine is fully ready with offline boldsymbol & mhchem.");
                         const front = document.getElementById('review-front-content');
                         if (front && front.innerHTML.trim() && window.app && typeof window.app._typesetMath === 'function') {
                             window.app._typesetMath([front]);
