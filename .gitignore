@@ -35,3 +35,9 @@ assets/chart.js
 # OS generated files
 .DS_Store
 Thumbs.db
+
+# Android build artifacts and toolchain
+android_tools/
+android/build/
+android/app/src/main/assets/tex-svg.js
+android/app/src/main/assets/chart.js

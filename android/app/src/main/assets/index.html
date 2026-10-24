@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#000000">
+    <title>Morphism SRS Plus Mobile</title>
+    <style>
+        :root {
+            --bg-color: #000000;
+            --surface-bg: #0B0710;
+            --card-bg: #171019;
+            --border-color: #3D2148;
+            --accent: #F02A8C;
+            --accent-hover: #FF70B7;
+            --text-color: #F7F1F8;
+            --text-muted: #806F86;
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", sans-serif;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Top Header */
+        header {
+            height: 52px;
+            background: var(--surface-bg);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 14px;
+            z-index: 100;
+        }
+
+        .header-title {
+            font-weight: 800;
+            font-size: 16px;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .header-course-badge {
+            font-size: 12px;
+            background: rgba(240, 42, 140, 0.15);
+            color: var(--accent);
+            padding: 3px 8px;
+            border-radius: 12px;
+            border: 1px solid var(--accent);
+            max-width: 140px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .btn-icon {
+            background: transparent;
+            border: none;
+            color: var(--text-color);
+            font-size: 18px;
+            padding: 6px;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        /* View Container */
+        main {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .view-page {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .view-page.active {
+            display: flex;
+        }
+
+        /* Bottom Tab Navigation */
+        nav {
+            height: 58px;
+            background: var(--surface-bg);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            z-index: 100;
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        .nav-tab {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            position: relative;
+            transition: color 0.2s;
+        }
+
+        .nav-tab.active {
+            color: var(--accent);
+        }
+
+        .nav-tab .icon {
+            font-size: 20px;
+            margin-bottom: 2px;
+        }
+
+        .tab-badge {
+            position: absolute;
+            top: 6px;
+            right: 25%;
+            background: var(--accent);
+            color: #ffffff;
+            font-size: 10px;
+            font-weight: 800;
+            border-radius: 10px;
+            padding: 1px 6px;
+        }
+
+        /* Graph Canvas Screen */
+        #graph-canvas {
+            width: 100%;
+            height: 100%;
+            touch-action: none;
+            background: var(--bg-color);
+        }
+
+        .graph-search-bar {
+            position: absolute;
+            top: 12px;
+            left: 14px;
+            right: 14px;
+            background: rgba(11, 7, 16, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            padding: 6px 14px;
+            z-index: 10;
+        }
+
+        .graph-search-bar input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: var(--text-color);
+            font-size: 14px;
+            outline: none;
+        }
+
+        .floating-controls {
+            position: absolute;
+            bottom: 16px;
+            right: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .fab {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--card-bg);
+            color: var(--accent);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+            cursor: pointer;
+        }
+
+        .fab.fab-primary {
+            background: var(--accent);
+            color: #ffffff;
+            width: 52px;
+            height: 52px;
+            font-size: 22px;
+        }
+
+        /* Review Screen */
+        .review-container {
+            flex: 1;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            align-items: center;
+        }
+
+        .review-card {
+            width: 100%;
+            max-width: 600px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+            user-select: text;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 12px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 6px;
+        }
+
+        .card-body {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .cloze-bracket {
+            color: #78A9FF;
+            font-weight: bold;
+            padding: 2px 6px;
+            background: rgba(120, 169, 255, 0.15);
+            border-radius: 4px;
+            border: 1px dashed #78A9FF;
+            cursor: pointer;
+        }
+
+        .cloze-revealed {
+            color: #80D6A3;
+            font-weight: bold;
+            padding: 2px 6px;
+            background: rgba(128, 214, 163, 0.2);
+            border-radius: 4px;
+            border: 1px solid #80D6A3;
+        }
+
+        .proof-step {
+            margin-bottom: 8px;
+            padding: 8px 10px;
+            border-left: 3px solid #80D6A3;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 6px;
+        }
+
+        hr.divider {
+            border: 0;
+            height: 1px;
+            background: var(--border-color);
+            margin: 16px 0;
+        }
+
+        /* Review Buttons Controls */
+        .review-controls {
+            width: 100%;
+            padding: 12px 16px;
+            background: var(--surface-bg);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn-rating-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            width: 100%;
+        }
+
+        .btn-rating {
+            height: 52px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .btn-again { background: #4D1D24; color: #FF8B9D; border-color: #FF667D; }
+        .btn-hard  { background: #4D3B1A; color: #FFE09A; border-color: #F7C873; }
+        .btn-good  { background: #1C3C28; color: #A5E6BC; border-color: #80D6A3; }
+        .btn-easy  { background: #1A2C4A; color: #A5C5FF; border-color: #78A9FF; }
+
+        .btn-rating .forecast {
+            font-size: 10px;
+            opacity: 0.8;
+            margin-top: 2px;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 16px;
+            height: 50px;
+            border-radius: 12px;
+            border: none;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .btn-undo {
+            background: transparent;
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 8px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        /* Generic Modals */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 500;
+            padding: 20px;
+        }
+
+        .modal-overlay.open {
+            display: flex;
+        }
+
+        .modal-box {
+            width: 100%;
+            max-width: 440px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 20px;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        .theme-option {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 14px;
+            background: var(--surface-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            margin-bottom: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .theme-option.active {
+            border-color: var(--accent);
+            box-shadow: 0 0 10px rgba(240, 42, 140, 0.3);
+        }
+
+        /* Scratchbook & Stats View */
+        .scrollable-view {
+            padding: 16px;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 14px;
+            text-align: center;
+        }
+
+        .stat-val {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--accent);
+        }
+
+        .stat-lbl {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .heatmap-container {
+            display: grid;
+            grid-template-columns: repeat(14, 1fr);
+            gap: 4px;
+            margin-top: 12px;
+        }
+
+        .heatmap-cell {
+            aspect-ratio: 1;
+            background: var(--surface-bg);
+            border-radius: 3px;
+        }
+
+        .course-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 14px;
+            margin-bottom: 12px;
+        }
+
+        .course-card.active-course {
+            border-color: var(--accent);
+        }
+
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 12px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+        }
+    </style>
+
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            svg: {
+                fontCache: 'local'
+            }
+        };
+    </script>
+    <script src="tex-svg.js"></script>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="header-title">
+            <span>⚡ Morphism+</span>
+            <span class="header-course-badge" id="lbl-active-course">Default</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:6px;">
+            <button class="btn-icon" id="btn-theme-selector" title="Tema">🎨</button>
+        </div>
+    </header>
+
+    <!-- Main View Pages -->
+    <main>
+        <!-- 1. Graph Explorer Page -->
+        <div class="view-page active" id="view-graph">
+            <div class="graph-search-bar">
+                <span style="margin-right:8px; opacity:0.6;">🔍</span>
+                <input type="text" id="txt-graph-search" placeholder="Buscar conceptos o fórmulas...">
+            </div>
+            <canvas id="graph-canvas"></canvas>
+            <div class="floating-controls">
+                <button class="fab fab-primary" id="btn-review-due" title="Repasar Pendientes">🎯</button>
+                <button class="fab" id="btn-add-note" title="Nueva Nota">+</button>
+                <button class="fab" id="btn-auto-layout" title="Auto Organizar">⚡</button>
+                <button class="fab" id="btn-fit-graph" title="Ajustar">⛶</button>
+            </div>
+        </div>
+
+        <!-- 2. Review Page -->
+        <div class="view-page" id="view-review">
+            <div class="review-container">
+                <div id="review-empty-state" style="text-align:center; padding:50px 20px;">
+                    <div style="font-size:36px; margin-bottom:12px;">☕</div>
+                    <div style="font-size:18px; font-weight:bold; color:var(--accent);">No hay repaso activo</div>
+                    <div style="font-size:14px; color:var(--text-muted); margin-top:6px;">Selecciona una nota en el Explorador o pulsa 🎯 para empezar.</div>
+                </div>
+
+                <div class="review-card" id="review-card-container" style="display:none;">
+                    <div style="font-size:12px; color:var(--text-muted); margin-bottom:6px;" id="review-card-header">Note</div>
+                    <div id="review-front-content"></div>
+                    <div id="review-back-content" style="display:none;"></div>
+                </div>
+            </div>
+
+            <div class="review-controls" id="review-bottom-controls" style="display:none;">
+                <button class="btn-primary" id="btn-show-answer">Mostrar Solución</button>
+                <div class="btn-rating-grid" id="rating-buttons-row" style="display:none;">
+                    <button class="btn-rating btn-again" id="btn-again">Again<span class="forecast" id="forecast-again">10m</span></button>
+                    <button class="btn-rating btn-hard" id="btn-hard">Hard<span class="forecast" id="forecast-hard">1d</span></button>
+                    <button class="btn-rating btn-good" id="btn-good">Good<span class="forecast" id="forecast-good">3d</span></button>
+                    <button class="btn-rating btn-easy" id="btn-easy">Easy<span class="forecast" id="forecast-easy">7d</span></button>
+                </div>
+                <button class="btn-undo" id="btn-undo" disabled>↩ Deshacer Última Calificación</button>
+            </div>
+        </div>
+
+        <!-- 3. Courses Page -->
+        <div class="view-page" id="view-courses">
+            <div class="scrollable-view">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+                    <h3 style="margin:0; color:var(--accent);">📚 Cursos de Matemáticas</h3>
+                    <label class="btn-sm btn-primary" style="display:flex; align-items:center; cursor:pointer;">
+                        📥 Importar
+                        <input type="file" id="file-import-course" accept=".json,.morphism,.zip" style="display:none;">
+                    </label>
+                </div>
+                <div id="courses-list-container"></div>
+            </div>
+        </div>
+
+        <!-- 4. Stats Page -->
+        <div class="view-page" id="view-stats">
+            <div class="scrollable-view">
+                <h3 style="margin-top:0; color:var(--accent);">📈 Rendimiento FSRS</h3>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-val" id="stat-total-cards">0</div>
+                        <div class="stat-lbl">Tarjetas Totales</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-val" id="stat-due-cards" style="color:#FF667D;">0</div>
+                        <div class="stat-lbl">Pendientes Hoy</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-val" id="stat-notes-count">0</div>
+                        <div class="stat-lbl">Nodos / Conceptos</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-val" id="stat-retention">85%</div>
+                        <div class="stat-lbl">Retención Deseada</div>
+                    </div>
+                </div>
+
+                <div class="stat-card" style="text-align:left;">
+                    <div style="font-weight:bold; font-size:14px; margin-bottom:6px;">Actividad de Repaso (Últimos Días)</div>
+                    <div class="heatmap-container" id="stats-heatmap-grid"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Scratchbook Page -->
+        <div class="view-page" id="view-scratch">
+            <div class="scrollable-view" style="display:flex; flex-direction:column; height:100%;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                    <h3 style="margin:0; color:var(--accent);">✏️ Scratchbook Matemático</h3>
+                    <span id="scratch-counter" style="font-size:12px; color:var(--text-muted);">0 car.</span>
+                </div>
+                <textarea id="scratch-editor" style="width:100%; height:160px; background:var(--card-bg); color:var(--text-color); border:1px solid var(--border-color); border-radius:10px; padding:12px; font-family:monospace; font-size:14px; outline:none; resize:none;"></textarea>
+                <div style="font-size:13px; font-weight:bold; color:var(--text-muted); margin:12px 0 6px 0;">Vista Previa MathJax:</div>
+                <div id="scratch-preview" style="flex:1; background:var(--card-bg); border:1px solid var(--border-color); border-radius:10px; padding:14px; overflow-y:auto; user-select:text;"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Bottom Navigation Bar -->
+    <nav>
+        <button class="nav-tab active" data-tab="graph">
+            <span class="icon">🗺️</span>
+            <span>Grafo</span>
+        </button>
+        <button class="nav-tab" data-tab="review">
+            <span class="icon">📝</span>
+            <span>Repaso</span>
+            <span class="tab-badge" id="badge-due-count">0</span>
+        </button>
+        <button class="nav-tab" data-tab="courses">
+            <span class="icon">📚</span>
+            <span>Cursos</span>
+        </button>
+        <button class="nav-tab" data-tab="stats">
+            <span class="icon">📈</span>
+            <span>Stats</span>
+        </button>
+        <button class="nav-tab" data-tab="scratch">
+            <span class="icon">✏️</span>
+            <span>Notas</span>
+        </button>
+    </nav>
+
+    <!-- Theme Modal -->
+    <div class="modal-overlay" id="modal-theme">
+        <div class="modal-box">
+            <h3 style="margin-top:0; color:var(--accent);">🎨 Seleccionar Tema</h3>
+            <div id="theme-options-list"></div>
+            <button class="btn-primary" style="margin-top:14px;" onclick="document.getElementById('modal-theme').classList.remove('open')">Cerrar</button>
+        </div>
+    </div>
+
+    <!-- Node Details Bottom Sheet -->
+    <div class="modal-overlay" id="modal-node-details">
+        <div class="modal-box">
+            <h3 id="modal-node-title" style="margin-top:0; color:var(--accent);">Nota</h3>
+            <div id="modal-node-info" style="color:var(--text-muted); font-size:14px; line-height:1.6; margin-bottom:16px;"></div>
+            <button class="btn-primary" id="btn-review-this-node" style="margin-bottom:8px;">▶ Repasar Esta Nota</button>
+            <button class="btn-sm btn-outline" style="width:100%; height:42px;" onclick="document.getElementById('modal-node-details').classList.remove('open')">Cerrar</button>
+        </div>
+    </div>
+
+    <script src="fsrs.js"></script>
+    <script src="graph.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

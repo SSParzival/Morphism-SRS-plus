@@ -91,6 +91,34 @@ This installs `morphism-srs-plus.desktop` and the high-resolution vector icon in
 
 ---
 
+## 📱 Android App (.apk)
+
+**Morphism SRS Plus** includes a lightweight, native, and high-performance Android application (< 1 MB!) designed specifically for mobile touch screens.
+
+### Features on Android:
+- **Bisexual Midnight 💖💜💙** preinstalled by default (pure `#000000` AMOLED background, neon pink `#F02A8C` and violet accents).
+- **Interactive Multi-Touch Canvas**: Pinch-to-zoom (2 fingers), pan (1 finger), auto-arrange, and real-time concept search.
+- **Offline MathJax 3 Vector Math**: Render complex equations, integrals, matrices, and dual spaces with zero latency.
+- **Full FSRS Scheduling**: Client-side Free Spaced Repetition Scheduler (`Again`, `Hard`, `Good`, `Easy`) with interval forecasts.
+- **Course Interoperability**: Seamlessly import and export `.json` and `.morphism` courses between your Linux PC and Android phone.
+- **Cloze & Proof Sequences**: Tap-to-reveal clozes and incremental step-by-step proofs.
+
+### 📲 Installing on your Android phone:
+1. Copy [`morphism-srs-plus.apk`](file:///home/ssparzival/Proyectos/GitHub/Morphism-SRS-plus/morphism-srs-plus.apk) to your phone (via USB, Telegram, Google Drive, or local network).
+2. Tap the `.apk` file to install it!
+3. Alternatively, install via ADB:
+   ```bash
+   adb install morphism-srs-plus.apk
+   ```
+
+### 🛠️ Rebuilding the APK:
+A self-contained build script is included that bootstraps the lightweight toolchain and builds the signed APK in under 2 seconds:
+```bash
+./build_apk.sh
+```
+
+---
+
 ## 🪟 Windows Setup
 
 1. Open PowerShell or Command Prompt in the repository folder:
