@@ -149,46 +149,46 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838648684748,
+                        "item_id": 1879963223559698717,
                         "type": "ClozeCard",
                         "title": "Regla BAC-CAB e Identidades de Rotacional",
                         "text": "Triple producto vectorial: $$\\mathbf{A} \\times (\\mathbf{B} \\times \\mathbf{C}) = {{c1::\\mathbf{B}(\\mathbf{A}\\cdot\\mathbf{C}) - \\mathbf{C}(\\mathbf{A}\\cdot\\mathbf{B})}}$$<br>Identidades diferenciales nulas: $\\nabla \\times (\\nabla f) = {{c2::\\mathbf{0}}}$ y $\\nabla \\cdot (\\nabla \\times \\mathbf{A}) = {{c3::0}}$."
                     },
                     {
-                        "item_id": 1879961838649905998,
+                        "item_id": 1879963223561258547,
                         "type": "Flashcard",
                         "title": "Operadores en Coordenadas Cilíndricas y Esféricas",
                         "front": "Escriba la divergencia $\\nabla \\cdot \\mathbf{A}$ en cilíndricas y esféricas.",
                         "back": "1. <b>Cilíndricas $(r, \\theta, z)$:</b> $\\nabla \\cdot \\mathbf{A} = \\frac{1}{r}\\partial_r(r A_r) + \\frac{1}{r}\\partial_\\theta A_\\theta + \\partial_z A_z$.<br>2. <b>Esféricas $(r, \\theta, \\phi)$:</b> $\\nabla \\cdot \\mathbf{A} = \\frac{1}{r^2}\\partial_r(r^2 A_r) + \\frac{1}{r\\sin\\theta}\\partial_\\theta(\\sin\\theta A_\\theta) + \\frac{1}{r\\sin\\theta}\\partial_\\phi A_\\phi$."
                     },
                     {
-                        "item_id": 1879961838650815705,
+                        "item_id": 1879963223562976178,
                         "type": "ClozeCard",
                         "title": "Laplaciano Vectorial y Teorema de Stokes",
                         "text": "El laplaciano de un campo vectorial se descompone como: $$\\nabla^2 \\mathbf{A} = {{c1::\\nabla(\\nabla \\cdot \\mathbf{A}) - \\nabla \\times (\\nabla \\times \\mathbf{A})}}$$<br>Teorema de Stokes: $\\oint_{\\partial S} \\mathbf{A} \\cdot d\\boldsymbol{\\ell} = {{c2::\\iint_S (\\nabla \\times \\mathbf{A}) \\cdot d\\mathbf{S}}}$."
                     },
                     {
-                        "item_id": 1879961838697012838,
+                        "item_id": 1879963223608532782,
                         "type": "ClozeCard",
                         "title": "Identidades Vectoriales y Regla BAC-CAB",
                         "text": "Identidades fundamentales para campos vectoriales en electrodinámica:<br>- Regla BAC-CAB: $$\\mathbf{A} \\times (\\mathbf{B} \\times \\mathbf{C}) = {{c1::\\mathbf{B}(\\mathbf{A}\\cdot\\mathbf{C}) - \\mathbf{C}(\\mathbf{A}\\cdot\\mathbf{B})}}$$<br>- Identidades nulas: $\\nabla \\times (\\nabla f) = {{c2::\\mathbf{0}}}$ y $\\nabla \\cdot (\\nabla \\times \\mathbf{A}) = {{c3::0}}$.<br>- Laplaciano vectorial: $\\nabla^2 \\mathbf{A} = {{c4::\\nabla(\\nabla \\cdot \\mathbf{A}) - \\nabla \\times (\\nabla \\times \\mathbf{A})}}$."
                     },
                     {
-                        "item_id": 1879961838698276205,
+                        "item_id": 1879963223609416959,
                         "type": "Flashcard",
                         "title": "Operadores Diferenciales en Cilíndricas y Esféricas",
                         "front": "Escriba la divergencia $\\nabla \\cdot \\mathbf{A}$ y el rotacional $\\nabla \\times \\mathbf{A}$ en coordenadas cilíndricas $(r, \\theta, z)$.",
                         "back": "1. <b>Divergencia Cilíndrica:</b><br>$$\\nabla \\cdot \\mathbf{A} = \\frac{1}{r}\\frac{\\partial(r A_r)}{\\partial r} + \\frac{1}{r}\\frac{\\partial A_\\theta}{\\partial \\theta} + \\frac{\\partial A_z}{\\partial z}$$<br>2. <b>Rotacional Cilíndrico:</b><br>$$\\nabla \\times \\mathbf{A} = \\left(\\frac{1}{r}\\frac{\\partial A_z}{\\partial \\theta} - \\frac{\\partial A_\\theta}{\\partial z}\\right)\\hat{r} + \\left(\\frac{\\partial A_r}{\\partial z} - \\frac{\\partial A_z}{\\partial r}\\right)\\hat{\\theta} + \\frac{1}{r}\\left(\\frac{\\partial(r A_\\theta)}{\\partial r} - \\frac{\\partial A_r}{\\partial \\theta}\\right)\\hat{z}$$"
                     },
                     {
-                        "item_id": 1879961838699147695,
+                        "item_id": 1879963223609955322,
                         "type": "Flashcard",
                         "title": "Divergencia del Campo Coulombiano y Delta de Dirac",
                         "front": "Demuestre por qué formalmente $\\nabla \\cdot \\left(\\frac{\\hat{r}}{r^2}\\right) = 4\\pi \\delta^3(\\mathbf{r})$ integrando contra una función de prueba suave $f(\\mathbf{r})$.",
                         "back": "1. <b>Identidad del producto vectorial:</b> $\\nabla \\cdot (f \\mathbf{V}) = f(\\nabla \\cdot \\mathbf{V}) + \\nabla f \\cdot \\mathbf{V}$ con $\\mathbf{V} = \\frac{\\hat{r}}{r^2}$.<br>2. <b>Integral en bola $B_\\varepsilon$ centrada en el origen:</b><br>$$I = \\int_{B_\\varepsilon} f \\left[\\nabla \\cdot \\frac{\\hat{r}}{r^2}\\right] dV = \\int_{B_\\varepsilon} \\nabla \\cdot \\left(f \\frac{\\hat{r}}{r^2}\\right) dV - \\int_{B_\\varepsilon} \\nabla f \\cdot \\frac{\\hat{r}}{r^2} dV$$<br>3. <b>Término de borde por Gauss:</b> $\\oint_{S_\\varepsilon} f \\frac{\\hat{r}}{\\varepsilon^2} \\cdot (\\hat{r}\\varepsilon^2 d\\Omega) = \\oint_{S_\\varepsilon} f d\\Omega$. Al tomar $\\varepsilon \\to 0$, $f \\to f(\\mathbf{0})$, obteniendo $f(\\mathbf{0})\\oint d\\Omega = 4\\pi f(\\mathbf{0})$.<br>4. <b>Término volumétrico del gradiente:</b> En esféricas, $\\int_{B_\\varepsilon} (\\nabla f \\cdot \\hat{r}) dr d\\Omega$. Como $\\nabla f$ es acotada y $r \\in [0, \\varepsilon]$, la integral tiende a $0$ cuando $\\varepsilon \\to 0$.<br>5. <b>Conclusión distributiva:</b> $\\int_{\\mathbb{R}^3} f(\\mathbf{r}) \\left[\\nabla \\cdot \\frac{\\hat{r}}{r^2}\\right] dV = 4\\pi f(\\mathbf{0}) \\implies \\nabla \\cdot \\left(\\frac{\\hat{r}}{r^2}\\right) = 4\\pi \\delta^3(\\mathbf{r})$."
                     },
                     {
-                        "item_id": 1879961838701698332,
+                        "item_id": 1879963223611334279,
                         "type": "ProofSequenceCard",
                         "title": "Teorema de Stokes en Superficies Parametrizadas",
                         "premise": "Demuestre el Teorema de Stokes $\\oint_{\\partial S} \\mathbf{F} \\cdot d\\mathbf{r} = \\iint_S (\\nabla \\times \\mathbf{F}) \\cdot d\\mathbf{S}$ para una superficie suave $S$ parametrizada por $f: D \\subseteq \\mathbb{R}^2 \\to S \\subseteq \\mathbb{R}^3$.",
@@ -216,13 +216,13 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838651871819,
+                        "item_id": 1879963223564152477,
                         "type": "ClozeCard",
                         "title": "Definición de Cargas Ligadas",
                         "text": "A partir del vector polarización $\\mathbf{P}$:<br>- Densidad volumétrica ligada: $\\rho_b = {{c1::-\\nabla \\cdot \\mathbf{P}}}$<br>- Densidad superficial ligada: $\\sigma_b = {{c2::\\mathbf{P} \\cdot \\hat{n}}}$."
                     },
                     {
-                        "item_id": 1879961838653173028,
+                        "item_id": 1879963223565015693,
                         "type": "ProofSequenceCard",
                         "title": "Carga Ligada Total Nula en Dieléctricos Neutros",
                         "premise": "Demostrar que la carga ligada neta de un dieléctrico neutro cerrado es idénticamente cero.",
@@ -234,14 +234,14 @@ const SEED_COURSES = [
                         ]
                     },
                     {
-                        "item_id": 1879961838653882955,
+                        "item_id": 1879963223566667674,
                         "type": "Flashcard",
                         "title": "Potencial Electrostático de un Dipolo Puntual",
                         "front": "¿Cuál es el potencial $V(\\mathbf{r})$ y campo $\\mathbf{E}(\\mathbf{r})$ de un dipolo puntual $\\mathbf{p}$ en el origen?",
                         "back": "1. <b>Potencial:</b> $V(\\mathbf{r}) = \\frac{1}{4\\pi\\varepsilon_0}\\frac{\\mathbf{p}\\cdot\\hat{r}}{r^2} = \\frac{1}{4\\pi\\varepsilon_0}\\frac{\\mathbf{p}\\cdot\\mathbf{r}}{r^3}$.<br>2. <b>Campo Eléctrico:</b> $\\mathbf{E}(\\mathbf{r}) = -\\nabla V = \\frac{1}{4\\pi\\varepsilon_0}\\frac{3(\\mathbf{p}\\cdot\\hat{r})\\hat{r} - \\mathbf{p}}{r^3}$."
                     },
                     {
-                        "item_id": 1879961838703366756,
+                        "item_id": 1879963223613224667,
                         "type": "ProofSequenceCard",
                         "title": "Neutralidad Neta de Dieléctricos Neutros",
                         "premise": "Demuestre rigurosamente que la carga ligada neta de un dieléctrico neutro de volumen $V$ y frontera $\\partial V$ es idénticamente cero.",
@@ -268,26 +268,26 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838656189390,
+                        "item_id": 1879963223567266089,
                         "type": "ClozeCard",
                         "title": "Ley de Gauss en Dieléctricos",
                         "text": "El vector desplazamiento se define como $\\mathbf{D} = {{c1::\\varepsilon_0 \\mathbf{E} + \\mathbf{P}}}$.<br>Ley de Gauss en dieléctricos: $\\nabla \\cdot \\mathbf{D} = {{c2::\\rho_f}}$ y $\\oint \\mathbf{D} \\cdot d\\mathbf{A} = {{c3::Q_{f,\\text{enc}}}}$."
                     },
                     {
-                        "item_id": 1879961838657269113,
+                        "item_id": 1879963223567899996,
                         "type": "Flashcard",
                         "title": "Relaciones Constitutivas en Medios LHI",
                         "front": "En un dieléctrico Lineal, Homogéneo e Isótropo (LHI), ¿cuáles son las relaciones entre $\\mathbf{P}, \\mathbf{E}, \\mathbf{D}, \\chi_e, \\kappa$ y $\\varepsilon$?",
                         "back": "1. $\\mathbf{P} = \\varepsilon_0 \\chi_e \\mathbf{E} = (\\varepsilon - \\varepsilon_0)\\mathbf{E}$.<br>2. $\\mathbf{D} = \\varepsilon \\mathbf{E} = \\kappa \\varepsilon_0 \\mathbf{E}$.<br>3. $\\kappa = \\varepsilon_r = 1 + \\chi_e$ y $\\varepsilon = \\kappa \\varepsilon_0$."
                     },
                     {
-                        "item_id": 1879961838704586621,
+                        "item_id": 1879963223614104721,
                         "type": "ClozeCard",
                         "title": "Ley de Gauss Generalizada",
                         "text": "El vector desplazamiento eléctrico se define como: $$\\mathbf{D} = {{c1::\\varepsilon_0 \\mathbf{E} + \\mathbf{P}}}$$<br>La Ley de Gauss en dieléctricos depende <b>exclusivamente</b> de las cargas libres:<br>- Forma diferencial: $\\nabla \\cdot \\mathbf{D} = {{c2::\\rho_f}}$<br>- Forma integral: $\\oint_{\\partial V} \\mathbf{D} \\cdot d\\mathbf{A} = {{c3::Q_{f,\\text{enc}}}}$."
                     },
                     {
-                        "item_id": 1879961838705195133,
+                        "item_id": 1879963223615734275,
                         "type": "Flashcard",
                         "title": "Cálculo de E a partir de D en Medios LHI",
                         "front": "¿Cómo se relacionan $\\mathbf{D}, \\mathbf{E}, \\mathbf{P}$ en un medio Lineal, Homogéneo e Isótropo (LHI) con susceptibilidad $\\chi_e$ y permitividad relativa $\\kappa$?",
@@ -309,32 +309,32 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838658512631,
+                        "item_id": 1879963223569623128,
                         "type": "ClozeCard",
                         "title": "Continuidad y Salto en la Interfaz",
                         "text": "En la interfaz entre dos dieléctricos:<br>- Componente tangencial: ${{c1::E_{1t} - E_{2t} = 0}}$ (pues $\\nabla \\times \\mathbf{E} = \\mathbf{0}$).<br>- Componente normal: ${{c2::D_{1n} - D_{2n} = \\sigma_f}}$.<br>Si no hay carga libre ($\\sigma_f = 0$): $D_{1n} = D_{2n} \\iff \\varepsilon_1 E_{1n} = \\varepsilon_2 E_{2n}$."
                     },
                     {
-                        "item_id": 1879961838659329472,
+                        "item_id": 1879963223570456248,
                         "type": "Flashcard",
                         "title": "Ley de Refracción de Líneas de Campo Eléctrico",
                         "front": "Deduzca la relación entre los ángulos de incidencia y refracción $(\\theta_1, \\theta_2)$ respecto a la normal en una interfaz sin cargas libres.",
                         "back": "Por condiciones de borde:<br>1. $E_{1t} = E_{2t} \\implies E_1 \\sin\\theta_1 = E_2 \\sin\\theta_2$.<br>2. $D_{1n} = D_{2n} \\implies \\varepsilon_1 E_1 \\cos\\theta_1 = \\varepsilon_2 E_2 \\cos\\theta_2$.<br>3. Dividiendo ambas ecuaciones:<br>$$\\frac{\\tan\\theta_1}{\\tan\\theta_2} = \\frac{\\varepsilon_1}{\\varepsilon_2} = \\frac{\\kappa_1}{\\kappa_2}$$"
                     },
                     {
-                        "item_id": 1879961838660908404,
+                        "item_id": 1879963223571768582,
                         "type": "ClozeCard",
                         "title": "Interfaz Conductor-Dieléctrico",
                         "text": "En la superficie de un conductor ideal en equilibrio en contacto con dieléctrico $\\varepsilon$:<br>- Campo tangencial: $E_t = {{c1::0}}$.<br>- Campo normal exterior: $E_n = {{c2::\\frac{\\sigma_f}{\\varepsilon}}}$."
                     },
                     {
-                        "item_id": 1879961838706684511,
+                        "item_id": 1879963223616575278,
                         "type": "ClozeCard",
                         "title": "Discontinuidad Normal y Continuidad Tangencial",
                         "text": "En la interfaz entre dos medios dieléctricos (medio 1 y medio 2), con normal $\\hat{n}_{1\\to 2}$ apuntando hacia el medio 2:<br>- Componente normal de $\\mathbf{D}$: $$D_{2n} - D_{1n} = {{c1::\\sigma_f}}$$Si la interfaz no tiene carga libre ($\\sigma_f = 0$): $D_{1n} = D_{2n}$ (continuo).<br>- Componente tangencial de $\\mathbf{E}$: $$E_{2t} - E_{1t} = {{c2::0}}$$ (consecuencia de $\\nabla \\times \\mathbf{E} = \\mathbf{0}$).<br>- Ley de refracción de líneas de campo: $$\\frac{\\tan\\theta_1}{\\tan\\theta_2} = {{c3::\\frac{\\varepsilon_1}{\\varepsilon_2}}}$$ (donde $\\theta$ es el ángulo respecto a la normal)."
                     },
                     {
-                        "item_id": 1879961838707416676,
+                        "item_id": 1879963223618166035,
                         "type": "Flashcard",
                         "title": "Deducción de la Ley de Refracción en Interfaces Dieléctricas",
                         "front": "¿Cómo se deduce la ley de refracción $\\frac{\\tan\\theta_1}{\\tan\\theta_2} = \\frac{\\varepsilon_1}{\\varepsilon_2}$ para las líneas de campo eléctrico en la frontera libre de carga ($\\sigma_f = 0$) entre dos dieléctricos lineales?",
@@ -357,27 +357,27 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838662126054,
+                        "item_id": 1879963223572775265,
                         "type": "Flashcard",
                         "title": "Campo Interior y Polarización en Esfera Dieléctrica",
                         "front": "Para una esfera dieléctrica LHI de permitividad $\\varepsilon$ en campo uniforme exterior $\\mathbf{E}_0$, calcule $\\mathbf{E}_{\\text{int}}$ y $\\mathbf{P}$.",
                         "back": "1. <b>Campo Interior Uniforme:</b> $\\mathbf{E}_{\\text{int}} = \\frac{3}{\\kappa + 2} \\mathbf{E}_0 = \\frac{3\\varepsilon_0}{\\varepsilon + 2\\varepsilon_0} \\mathbf{E}_0$.<br>2. <b>Polarización Interior:</b> $\\mathbf{P} = 3\\varepsilon_0 \\left(\\frac{\\kappa - 1}{\\kappa + 2}\\right) \\mathbf{E}_0$.<br>3. <b>Cargas Ligadas:</b> $\\rho_b = 0$, y $\\sigma_b = P \\cos\\theta$."
                     },
                     {
-                        "item_id": 1879961838662381986,
+                        "item_id": 1879963223573972899,
                         "type": "ClozeCard",
                         "title": "Cilindro Dieléctrico en Campo Transversal",
                         "text": "Para un cilindro dieléctrico infinito en campo uniforme perpendicular $\\mathbf{E}_0$:<br>- Campo eléctrico interior: $\\mathbf{E}_{\\text{int}} = {{c1::\\frac{2}{\\kappa + 1} \\mathbf{E}_0}}$<br>- Polarización interior: $\\mathbf{P} = {{c2::2\\varepsilon_0 \\frac{\\kappa - 1}{\\kappa + 1} \\mathbf{E}_0}}$."
                     },
                     {
-                        "item_id": 1879961838709221064,
+                        "item_id": 1879963223618461006,
                         "type": "Flashcard",
                         "title": "Estratificación Serie vs Paralelo en Placas Planas",
                         "front": "Considere un condensador de placas planas paralelas de área $A$ y separación $d$. Compare cómo modelar la capacitancia equivalente si el dieléctrico se divide: a) en rebanadas paralelas a las placas, b) en rebanadas perpendiculares a las placas.",
                         "back": "1. <b>Paralelo a las placas (Serie):</b> Las líneas de campo cruzan sucesivamente ambos dieléctricos. $D$ es continuo. Las diferencias de potencial se suman: $\\Delta V = \\Delta V_1 + \\Delta V_2$.<br>$$\\frac{1}{C_{\\text{eq}}} = \\frac{1}{C_1} + \\frac{1}{C_2} = \\frac{d_1}{\\kappa_1 \\varepsilon_0 A} + \\frac{d_2}{\\kappa_2 \\varepsilon_0 A}$$<br>2. <b>Perpendicular a las placas (Paralelo):</b> Ambas regiones comparten la misma diferencia de potencial $\\Delta V_0$. Las cargas libres se reparten: $Q_{\\text{tot}} = Q_1 + Q_2$.<br>$$C_{\\text{eq}} = C_1 + C_2 = \\frac{\\kappa_1 \\varepsilon_0 A_1}{d} + \\frac{\\kappa_2 \\varepsilon_0 A_2}{d}$$"
                     },
                     {
-                        "item_id": 1879961838709852284,
+                        "item_id": 1879963223619867211,
                         "type": "ClozeCard",
                         "title": "Dieléctrico Inhomogéneo Continuo",
                         "text": "Para un condensador plano con permitividad dependiente de la posición $\\kappa(x)$ entre $x = 0$ y $x = d$:<br>Como $D$ es constante en $x$: $E(x) = \\frac{D}{\\varepsilon_0 \\kappa(x)} = \\frac{Q}{\\varepsilon_0 A \\kappa(x)}$.<br>La diferencia de potencial es: $$\\Delta V = \\int_0^d E(x) dx = \\frac{Q}{\\varepsilon_0 A} {{c1::\\int_0^d \\frac{dx}{\\kappa(x)}}}$$<br>Por lo tanto, la capacitancia es: $$C = \\frac{\\varepsilon_0 A}{\\int_0^d \\frac{dx}{\\kappa(x)}}$$."
@@ -398,26 +398,26 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838664221639,
+                        "item_id": 1879963223575180115,
                         "type": "ClozeCard",
                         "title": "Capas Dieléctricas en Serie vs Paralelo",
                         "text": "En capacitores de placas paralelas:<br>- Capas perpendiculares a $\\mathbf{E}$ (apiladas en espesor): suman en {{c1::serie}}, $\\frac{1}{C} = \\sum \\frac{d_i}{\\varepsilon_i A}$.<br>- Capas paralelas a $\\mathbf{E}$ (yuxtapuestas en área): suman en {{c2::paralelo}}, $C = \\sum \\frac{\\varepsilon_i A_i}{d}$."
                     },
                     {
-                        "item_id": 1879961838664557098,
+                        "item_id": 1879963223576116918,
                         "type": "Flashcard",
                         "title": "Capacitancia Cilíndrica y Esférica con Dieléctrico",
                         "front": "Escriba la capacitancia de un cable coaxial ($a < b$, largo $L$) y de un capacitor esférico ($a < b$) llenos de dieléctrico $\\varepsilon$.",
                         "back": "1. <b>Cilíndrico:</b> $C = \\frac{2\\pi \\varepsilon L}{\\ln(b/a)}$.<br>2. <b>Esférico:</b> $C = 4\\pi \\varepsilon \\frac{ab}{b - a}$."
                     },
                     {
-                        "item_id": 1879961838711232677,
+                        "item_id": 1879963223620623846,
                         "type": "ClozeCard",
                         "title": "Fuerza a Carga Constante vs a Voltaje Constante",
                         "text": "Cálculo de la fuerza mecánica sobre una placa dieléctrica que penetra una distancia $x$ en un condensador:<br>- Condensador desconectado ($Q = \\text{cte}$): $$F_x = {{c1::-\\left(\\frac{\\partial U}{\\partial x}\\right)_Q}}$$ con $U = \\frac{Q^2}{2 C(x)} \\implies F_x = +\\frac{Q^2}{2 C^2}\\frac{dC}{dx} = +\\frac{1}{2}V^2 \\frac{dC}{dx}$.<br>- Condensador conectado a batería ($V = \\text{cte}$): $$F_x = {{c2::+\\left(\\frac{\\partial U}{\\partial x}\\right)_V}} = {{c3::+\\frac{1}{2}V^2 \\frac{dC}{dx}}}$$.<br>¡En ambos casos la fuerza neta es <b>atractiva</b> hacia el interior del condensador!"
                     },
                     {
-                        "item_id": 1879961838711487047,
+                        "item_id": 1879963223622048752,
                         "type": "ProofSequenceCard",
                         "title": "Deducción de la Fuerza a Voltaje Constante con Trabajo de la Fuente",
                         "premise": "Demuestre por balance de trabajo virtual que $F_x = +\\left(\\frac{\\partial U}{\\partial x}\\right)_V = \\frac{1}{2}V^2 \\frac{dC}{dx}$ cuando el condensador está conectado a una batería de voltaje $V_0$.",
@@ -444,13 +444,13 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838666679615,
+                        "item_id": 1879963223577124930,
                         "type": "ClozeCard",
                         "title": "Fuerza Electrostática: Carga vs Voltaje Constante",
                         "text": "Por el método del trabajo virtual, la fuerza sobre un dieléctrico móvil es:<br>- A carga constante $Q$: $F_x = {{c1::-\\left(\\frac{\\partial U}{\\partial x}\\right)_Q}}$<br>- A voltaje constante $V$: $F_x = {{c2::+\\left(\\frac{\\partial U}{\\partial x}\\right)_V = +\\frac{1}{2} V^2 \\frac{dC}{dx}}}$.<br>El dieléctrico es siempre {{c3::succionado hacia el interior del capacitor}}."
                     },
                     {
-                        "item_id": 1879961838667481143,
+                        "item_id": 1879963223577972959,
                         "type": "ProofSequenceCard",
                         "title": "Fuerza sobre Placa Dieléctrica Parcialmente Insertada",
                         "premise": "Calcular la fuerza $F_x$ sobre una lámina dieléctrica de ancho $w$ y espesor $d$ insertada distancia $x$ a voltaje fijo $V$.",
@@ -462,13 +462,13 @@ const SEED_COURSES = [
                         ]
                     },
                     {
-                        "item_id": 1879961838668724094,
+                        "item_id": 1879963223578594561,
                         "type": "ClozeCard",
                         "title": "Presión Electrostática en Conductor",
                         "text": "La fuerza por unidad de área (presión electrostática hacia el exterior) en la superficie de un conductor cargado es:<br>$$P_{\\text{es}} = {{c1::\\frac{\\sigma^2}{2\\varepsilon_0} = \\frac{1}{2} \\varepsilon_0 E^2}}$$<br>Siempre está dirigida hacia {{c2::el exterior del conductor}} independientemente del signo de $\\sigma$."
                     },
                     {
-                        "item_id": 1879961838712652865,
+                        "item_id": 1879963223624159365,
                         "type": "ClozeCard",
                         "title": "Ecuación de Continuidad y Corriente Eléctrica",
                         "text": "Definición y principios fundamentales de corrientes eléctricas:<br>- Corriente total que atraviesa una superficie $S$: $$I = \\iint_S {{c1::\\mathbf{J} \\cdot d\\mathbf{A}}}$$<br>- Densidad microscópica de corriente: $$\\mathbf{J} = {{c2::n q \\mathbf{v}_d}}$$<br>- Ecuación de continuidad (conservación local de la carga): $$\\nabla \\cdot \\mathbf{J} = {{c3::-\\frac{\\partial \\rho}{\\partial t}}}$$.<br>En corriente estacionaria ($\\partial\\rho/\\partial t = 0$): $\\nabla \\cdot \\mathbf{J} = 0$."
@@ -490,26 +490,26 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838670099737,
+                        "item_id": 1879963223580010126,
                         "type": "ClozeCard",
                         "title": "Ecuación de Continuidad y Tiempo de Relajación",
                         "text": "Conservación de la carga: $\\nabla \\cdot \\mathbf{J} + {{c1::\\frac{\\partial \\rho}{\\partial t}}} = 0$.<br>En un conductor óhmico homogéneo: $\\rho(t) = \\rho_0 e^{-t/\\tau_{\\text{rel}}}$ con tiempo de relajación $\\tau_{\\text{rel}} = {{c2::\\frac{\\varepsilon}{\\sigma}}}$."
                     },
                     {
-                        "item_id": 1879961838714450391,
+                        "item_id": 1879963223624519461,
                         "type": "Flashcard",
                         "title": "Modelo Microscópico de Drude para la Conductividad",
                         "front": "Deduzca la relación entre conductividad eléctrica $\\sigma$, densidad de portadores $n$, masa $m$, carga $q$ y tiempo medio de colisión $\\tau$ en el modelo de Drude.",
                         "back": "1. En estado estacionario, el arrastre eléctrico se equilibra con el frenado por colisiones:<br>$$q \\mathbf{E} - \\frac{m \\mathbf{v}_d}{\\tau} = \\mathbf{0} \\implies \\mathbf{v}_d = \\frac{q \\tau}{m}\\mathbf{E}$$<br>2. Sustituyendo en la densidad de corriente $\\mathbf{J} = n q \\mathbf{v}_d$:<br>$$\\mathbf{J} = n q \\left(\\frac{q \\tau}{m}\\mathbf{E}\\right) = \\left(\\frac{n q^2 \\tau}{m}\\right)\\mathbf{E} = \\sigma \\mathbf{E}$$<br>3. Conductividad de Drude: $\\sigma = \\frac{n q^2 \\tau}{m}$, y resistividad: $\\rho = \\frac{1}{\\sigma} = \\frac{m}{n q^2 \\tau}$."
                     },
                     {
-                        "item_id": 1879961838715194402,
+                        "item_id": 1879963223626107912,
                         "type": "ClozeCard",
                         "title": "Teorema Dual de Resistencia y Capacitancia (RC = rho * eps)",
                         "text": "Para cualquier estructura conductora con dos electrodos inmersos en un medio con resistividad uniforme $\\rho$ y permitividad dieléctrica $\\varepsilon$:<br>- La resistencia $R$ y la capacitancia $C$ satisfacen la relación universal: $$R \\cdot C = {{c1::\\rho \\varepsilon = \\frac{\\varepsilon}{\\sigma}}}$$<br>Ejemplo: En un cilindro coaxial hueco de longitud $L$ con radios $a$ y $b$ ($b > a$):<br>$$C = \\frac{2\\pi \\varepsilon L}{\\ln(b/a)} \\implies R = {{c2::\\frac{\\rho \\ln(b/a)}{2\\pi L}}}$$."
                     },
                     {
-                        "item_id": 1879961838716177350,
+                        "item_id": 1879963223626756805,
                         "type": "Flashcard",
                         "title": "Vector de Poynting y Disipación Joule en un Resistor Cilíndrico",
                         "front": "¿Cómo demuestra el vector de Poynting $\\mathbf{S} = \\frac{1}{\\mu_0}(\\mathbf{E} \\times \\mathbf{B})$ que la energía disipada por efecto Joule en un cable cilíndrico de radio $a$, largo $L$ y resistencia $R$ proviene del campo electromagnético circundante?",
@@ -532,26 +532,26 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838670964995,
+                        "item_id": 1879963223581107475,
                         "type": "ClozeCard",
                         "title": "Conductividad de Drude y Teorema Dual RC",
                         "text": "Conductividad microscópica según Drude: $\\sigma = {{c1::\\frac{n q^2 \\tau}{m}}}$.<br>Teorema Dual RC entre resistencia y capacitancia para cualquier geometría en medio LHI:<br>$$R \\cdot C = {{c2::\\frac{\\varepsilon}{\\sigma} = \\rho_e \\varepsilon}}$$"
                     },
                     {
-                        "item_id": 1879961838671801027,
+                        "item_id": 1879963223582769291,
                         "type": "Flashcard",
                         "title": "Resistencia de Puesta a Tierra Semiesférica",
                         "front": "Calcule la resistencia de puesta a tierra de un electrodo semiesférico de radio $a$ enterrado en suelo con conductividad $\\sigma$.",
                         "back": "1. Por simetría radial, la corriente $I$ fluye por la semiesfera de área $2\\pi r^2$: $J(r) = \\frac{I}{2\\pi r^2}$.<br>2. Campo eléctrico: $E(r) = \\frac{J}{\\sigma} = \\frac{I}{2\\pi \\sigma r^2}$.<br>3. Diferencia de potencial hasta el infinito: $V = \\int_a^\\infty E(r) dr = \\frac{I}{2\\pi \\sigma a}$.<br>4. Resistencia de tierra: $R = \\frac{V}{I} = \\frac{1}{2\\pi \\sigma a}$."
                     },
                     {
-                        "item_id": 1879961838717386088,
+                        "item_id": 1879963223627702537,
                         "type": "ClozeCard",
                         "title": "Carga de un Condensador en Circuito RC",
                         "text": "Considere un circuito con fuente de FEM $\\mathcal{E}$, resistencia $R$ y condensador $C$ inicialmente descargado ($q(0) = 0$):<br>- Ecuación diferencial por Kirchhoff: $$\\mathcal{E} - R\\frac{dq}{dt} - \\frac{q}{C} = 0$$<br>- Carga en función del tiempo: $$q(t) = {{c1::C\\mathcal{E}(1 - e^{-t/RC})}}$$<br>- Corriente en función del tiempo: $$i(t) = \\frac{dq}{dt} = {{c2::\\frac{\\mathcal{E}}{R}e^{-t/RC}}}$$<br>- Constante de tiempo: $\\tau = {{c3::RC}}$."
                     },
                     {
-                        "item_id": 1879961838718518255,
+                        "item_id": 1879963223628846131,
                         "type": "ProofSequenceCard",
                         "title": "Balance Energético en Carga RC: El Teorema del 50%",
                         "premise": "Demuestre rigurosamente que al cargar completamente un condensador desde una fuente de FEM constante $\\mathcal{E}$, exactamente el 50% de la energía entregada por la fuente se disipa en la resistencia, sin importar el valor de $R$.",
@@ -580,19 +580,19 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838672812234,
+                        "item_id": 1879963223584237768,
                         "type": "ClozeCard",
                         "title": "Equivalentes de Thévenin, Norton y Máxima Potencia",
                         "text": "Equivalentes de red lineal:<br>- Thévenin: Fuente $V_{th}$ en serie con $R_{th}$.<br>- Norton: Fuente de corriente $I_N = {{c1::\\frac{V_{th}}{R_{th}}}}$ en paralelo con $R_{th}$.<br>- Condición de máxima potencia transferida a $R_L$: $R_L = {{c2::R_{th}}}$ con $P_{\\max} = {{c3::\\frac{V_{th}^2}{4 R_{th}}}}$."
                     },
                     {
-                        "item_id": 1879961838720852491,
+                        "item_id": 1879963223630555823,
                         "type": "ClozeCard",
                         "title": "Fuerza de Lorentz y Trabajo Nulo",
                         "text": "Fuerza total sobre una carga $q$ con velocidad $\\mathbf{v}$ en presencia de campos $\\mathbf{E}$ y $\\mathbf{B}$:<br>$$\\mathbf{F} = {{c1::q(\\mathbf{E} + \\mathbf{v} \\times \\mathbf{B})}}$$<br>- Trabajo de la fuerza magnética sobre la carga: $$dW_B = \\mathbf{F}_B \\cdot d\\mathbf{r} = q(\\mathbf{v} \\times \\mathbf{B}) \\cdot (\\mathbf{v} dt) = {{c2::0}}$$Por lo tanto, un campo magnético estático <b>nunca</b> altera la energía cinética de una partícula; solo curva su trayectoria."
                     },
                     {
-                        "item_id": 1879961838721070552,
+                        "item_id": 1879963223631161721,
                         "type": "Flashcard",
                         "title": "Dispositivos Electromagnéticos Canónicos",
                         "front": "Escriba las ecuaciones de operación para: 1) Selector de velocidades de Wien, 2) Radio de ciclotrón y frecuencia angular, 3) Espectrómetro de masas de Bainbridge.",
@@ -615,7 +615,7 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838673829914,
+                        "item_id": 1879963223585612571,
                         "type": "ProofSequenceCard",
                         "title": "Balance de Energía del 50% en Carga RC",
                         "premise": "Demostrar que en la carga de un condensador desde 0 hasta $C\\mathcal{E}$, el 50% de la energía de la fuente se disipa en calor.",
@@ -628,14 +628,14 @@ const SEED_COURSES = [
                         ]
                     },
                     {
-                        "item_id": 1879961838675206502,
+                        "item_id": 1879963223585718650,
                         "type": "Flashcard",
                         "title": "Comportamiento en Transitorios: t=0+ vs t->infinito",
                         "front": "¿Cómo se modelan los capacitores e inductores en $t=0^+$ y en $t \\to \\infty$?",
                         "back": "1. <b>Capacitor:</b><br>- En $t=0^+$: <b>Cortocircuito</b> ($\\Delta V_C = 0$).<br>- En $t\\to\\infty$: <b>Circuito abierto</b> ($i_C = 0$).<br><br>2. <b>Inductor:</b><br>- En $t=0^+$: <b>Circuito abierto</b> ($i_L = 0$).<br>- En $t\\to\\infty$: <b>Cortocircuito</b> ($\\Delta V_L = 0$)."
                     },
                     {
-                        "item_id": 1879961838722036144,
+                        "item_id": 1879963223632417801,
                         "type": "ClozeCard",
                         "title": "Voltaje Hall y Coeficiente Hall",
                         "text": "En una cinta conductora de espesor $t$ y ancho $w$ por la que fluye corriente $I$ inmersa en campo magnético perpendicular $B$:<br>- Campo eléctrico transversal de equilibrio (Hall): $E_H = v_d B$.<br>- Voltaje transversal Hall: $$V_H = E_H w = v_d B w = {{c1::\\frac{I B}{n q t}}}$$.<br>- Coeficiente Hall: $$R_H = {{c2::\\frac{1}{n q}}}$$.<br>- Significado físico crucial: El signo medido de $V_H$ permite distinguir si los portadores mayoritarios de carga son {{c3::electrones negativos ($q < 0$) o huecos positivos ($q > 0$)}}."
@@ -657,20 +657,20 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838676340441,
+                        "item_id": 1879963223587788828,
                         "type": "ClozeCard",
                         "title": "Fuerza de Lorentz y Radio Ciclotrónico",
                         "text": "Fuerza total: $\\mathbf{F} = q(\\mathbf{E} + \\mathbf{v}\\times\\mathbf{B})$.<br>La potencia del campo magnético es $P = \\mathbf{F}_B \\cdot \\mathbf{v} = {{c1::0}}$, por lo que {{c2::nunca altera la energía cinética}}.<br>Radio ciclotrón: $r_c = {{c3::\\frac{m v_\\perp}{q B}}}$, período: $T = {{c4::\\frac{2\\pi m}{q B}}}$."
                     },
                     {
-                        "item_id": 1879961838677681300,
+                        "item_id": 1879963223587916031,
                         "type": "Flashcard",
                         "title": "Paso de la Trayectoria Helicoidal",
                         "front": "Si una partícula entra a un campo $\\mathbf{B}$ con ángulo $\\alpha$ respecto a las líneas de campo, ¿cuál es el paso de avance $p$?",
                         "back": "1. Componente paralela constante: $v_\\parallel = v \\cos\\alpha$.<br>2. Período de giro en el plano transversal: $T = \\frac{2\\pi m}{q B}$.<br>3. Paso helicoidal: $p = v_\\parallel T = \\frac{2\\pi m v \\cos\\alpha}{q B}$."
                     },
                     {
-                        "item_id": 1879961838723536974,
+                        "item_id": 1879963223633326362,
                         "type": "ProofSequenceCard",
                         "title": "Fuerza Magnética Neta Nula en Espira Cerrada en Campo Uniforme",
                         "premise": "Demuestre que la fuerza magnética neta que experimenta cualquier espira conductora cerrada de geometría arbitraria en un campo magnético uniforme $\\mathbf{B}_0$ es idénticamente cero.",
@@ -683,7 +683,7 @@ const SEED_COURSES = [
                         ]
                     },
                     {
-                        "item_id": 1879961838724895345,
+                        "item_id": 1879963223634310444,
                         "type": "ClozeCard",
                         "title": "Torque y Momento Dipolar Magnético",
                         "text": "Para una espira conductora de área vectorial $\\mathbf{A} = A \\hat{n}$ y corriente $I$:<br>- Momento dipolar magnético: $$\\mathbf{m} = {{c1::I \\mathbf{A} = I A \\hat{n}}}$$<br>- Torque magnético en campo uniforme $\\mathbf{B}$: $$\\boldsymbol{\\tau} = {{c2::\\mathbf{m} \\times \\mathbf{B}}}$$<br>- Energía potencial dipolar: $$U = {{c3::-\\mathbf{m} \\cdot \\mathbf{B}}}$$.<br>- Fuerza sobre un dipolo en campo magnético <b>no uniforme</b>: $$\\mathbf{F} = {{c4::\\nabla(\\mathbf{m} \\cdot \\mathbf{B})}}$$."
@@ -705,19 +705,19 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838678160070,
+                        "item_id": 1879963223588971589,
                         "type": "ClozeCard",
                         "title": "Fórmulas del Efecto Hall y Selector",
                         "text": "- Selector de velocidades con $\\mathbf{E} \\perp \\mathbf{B}$: velocidad filtrada $v = {{c1::\\frac{E}{B}}}$.<br>- Voltaje de Hall en cinta de espesor $t$: $\\Delta V_H = {{c2::\\frac{I B}{n q t} = R_H \\frac{I B}{t}}}$.<br>- Coeficiente de Hall: $R_H = {{c3::\\frac{1}{nq}}}$, cuyo signo revela el tipo de portadores mayoritarios."
                     },
                     {
-                        "item_id": 1879961838725486321,
+                        "item_id": 1879963223635701475,
                         "type": "ClozeCard",
                         "title": "Fórmula Vectorial de Biot-Savart",
                         "text": "Campo magnético generado por un elemento de corriente $I d\\boldsymbol{\\ell}'$ ubicado en $\\mathbf{r}'$ evaluado en el punto $\\mathbf{r}$:<br>$$d\\mathbf{B}(\\mathbf{r}) = \\frac{\\mu_0 I}{4\\pi} {{c1::\\frac{d\\boldsymbol{\\ell}' \\times (\\mathbf{r} - \\mathbf{r}')}{|\\mathbf{r} - \\mathbf{r}'|^3}}}$$<br>En términos del vector unitario de separación $\\hat{\\boldsymbol{\\mathcal{R}}} = \\frac{\\mathbf{r}-\\mathbf{r}'}{|\\mathbf{r}-\\mathbf{r}'|}$:<br>$$d\\mathbf{B}(\\mathbf{r}) = \\frac{\\mu_0 I}{4\\pi}\\frac{d\\boldsymbol{\\ell}' \\times \\hat{\\boldsymbol{\\mathcal{R}}}}{\\mathcal{R}^2}$$."
                     },
                     {
-                        "item_id": 1879961838726425131,
+                        "item_id": 1879963223636200931,
                         "type": "Flashcard",
                         "title": "Los 5 Pasos Infalibles para Resolver Biot-Savart en Examen",
                         "front": "Explique la metodología paso a paso para calcular el campo de Biot-Savart sin equivocarse en signos ni factores geométricos.",
@@ -740,20 +740,20 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838679048237,
+                        "item_id": 1879963223590788125,
                         "type": "ClozeCard",
                         "title": "Fuerza y Torque sobre Espiras",
                         "text": "Fuerza elemental sobre corriente: $d\\mathbf{F} = {{c1::I d\\boldsymbol{\\ell} \\times \\mathbf{B}}}$.<br>Para una espira plana de área vectorial $\\mathbf{A}$ con corriente $I$:<br>- Momento dipolar: $\\boldsymbol{\\mu} = {{c2::I \\mathbf{A}}}$<br>- Torque: $\\boldsymbol{\\tau} = {{c3::\\boldsymbol{\\mu} \\times \\mathbf{B}}}$<br>- Energía potencial: $U = {{c4::-\\boldsymbol{\\mu} \\cdot \\mathbf{B}}}$."
                     },
                     {
-                        "item_id": 1879961838727946081,
+                        "item_id": 1879963223637260861,
                         "type": "Flashcard",
                         "title": "Segmento Recto y Cable Infinito",
                         "front": "Escriba el campo magnético $\\mathbf{B}$ generado por un segmento rectilíneo finito a distancia perpendicular $d$, y deduzca el límite para un hilo infinito.",
                         "back": "1. <b>Segmento finito entre ángulos $\\theta_1$ y $\\theta_2$:</b><br>$$B = \\frac{\\mu_0 I}{4\\pi d}(\\sin\\theta_2 - \\sin\\theta_1)$$ (donde los ángulos se miden respecto a la normal al cable).<br>2. <b>Cable rectilíneo infinito:</b> Hacia un extremo $\\theta_1 = -\\pi/2$ ($\\sin\\theta_1 = -1$) y hacia el otro $\\theta_2 = +\\pi/2$ ($\\sin\\theta_2 = +1$):<br>$$B = \\frac{\\mu_0 I}{4\\pi d}(1 - (-1)) = \\frac{\\mu_0 I}{2\\pi d}$$ con dirección azimutal $\\hat{\\phi}$ según la regla de la mano derecha."
                     },
                     {
-                        "item_id": 1879961838729002481,
+                        "item_id": 1879963223638197044,
                         "type": "ClozeCard",
                         "title": "Espira Circular en el Eje de Simetría",
                         "text": "Para una espira circular de radio $R$ con corriente $I$ centrada en el origen sobre el plano $xy$:<br>- Campo magnético en cualquier punto $z$ sobre su eje de simetría: $$\\mathbf{B}(z) = {{c1::\\frac{\\mu_0 I R^2}{2(R^2 + z^2)^{3/2}}\\hat{z}}}$$<br>- En el centro de la espira ($z = 0$): $$\\mathbf{B}(0) = {{c2::\\frac{\\mu_0 I}{2R}\\hat{z}}}$$<br>- Arco circular plano de ángulo $\\Delta\\phi$ en su centro de curvatura: $$B = {{c3::\\frac{\\mu_0 I \\Delta\\phi}{4\\pi R}}}$$."
@@ -774,19 +774,19 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838680352526,
+                        "item_id": 1879963223591918417,
                         "type": "ClozeCard",
                         "title": "Fórmulas de Biot-Savart para Alambres",
                         "text": "Ley de Biot-Savart: $d\\mathbf{B} = \\frac{\\mu_0 I}{4\\pi}\\frac{d\\boldsymbol{\\ell}\\times\\hat{r}}{r^2}$.<br>- Segmento finito entre $\\theta_1$ y $\\theta_2$: $B = {{c1::\\frac{\\mu_0 I}{4\\pi d}(\\sin\\theta_2 - \\sin\\theta_1)}}$.<br>- Hilo infinito: $B = {{c2::\\frac{\\mu_0 I}{2\\pi d}}}$.<br>- Puntos colineales en la prolongación del alambre: $B = {{c3::0}}$."
                     },
                     {
-                        "item_id": 1879961838729909802,
+                        "item_id": 1879963223640187187,
                         "type": "ClozeCard",
                         "title": "Ley de Ampère en Formas Integral y Diferencial",
                         "text": "La Ley de Ampère para magnetostática relaciona la circulación del campo magnético con la corriente libre encerrada:<br>- Forma integral: $$\\oint_C \\mathbf{B} \\cdot d\\boldsymbol{\\ell} = {{c1::\\mu_0 I_{\\text{enc}} = \\mu_0 \\iint_S \\mathbf{J} \\cdot d\\mathbf{A}}}$$<br>- Forma diferencial (rotacional): $$\\nabla \\times \\mathbf{B} = {{c2::\\mu_0 \\mathbf{J}}}$$<br>Para que la ley permita despejar $|\\mathbf{B}|$ algebraicamente, el lazo amperiano $C$ debe satisfacer simetría tal que $\\mathbf{B}$ sea {{c3::paralelo y constante a lo largo de $C$}}."
                     },
                     {
-                        "item_id": 1879961838730990238,
+                        "item_id": 1879963223641184598,
                         "type": "Flashcard",
                         "title": "Cilindro con Densidad de Corriente No Uniforme J(r)",
                         "front": "Un conductor cilíndrico de radio $R$ conduce corriente con densidad $\\mathbf{J}(r) = C r^k \\hat{z}$. Calcule el campo $\\mathbf{B}(r)$ en el interior ($r < R$) y en el exterior ($r > R$).",
@@ -809,7 +809,7 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838681475801,
+                        "item_id": 1879963223592463824,
                         "type": "ProofSequenceCard",
                         "title": "Campo en el Eje de Espira Circular",
                         "premise": "Calcular el campo axial $B_z(z)$ de una espira circular de radio $R$ con corriente $I$.",
@@ -822,26 +822,26 @@ const SEED_COURSES = [
                         ]
                     },
                     {
-                        "item_id": 1879961838682675914,
+                        "item_id": 1879963223593068446,
                         "type": "Flashcard",
                         "title": "Bobinas de Helmholtz: Campo Óptimamente Homogéneo",
                         "front": "¿Por qué en las bobinas de Helmholtz la separación óptima entre bobinas es $d = R$?",
                         "back": "En el punto medio $z=0$ entre ambas bobinas coaxiales:<br>1. Por simetría par, la primera derivada es nula: $\\frac{dB}{dz} = 0$.<br>2. La segunda derivada es proporcional a $(4d^2 - R^2)$. Fijando $d=R$, se anula idénticamente: $\\frac{d^2 B}{dz^2} = 0$.<br>3. Las variaciones espaciales son de orden cuatro ($O(z^4)$), logrando la máxima uniformidad magnética experimental."
                     },
                     {
-                        "item_id": 1879961838684786272,
+                        "item_id": 1879963223594819178,
                         "type": "ClozeCard",
                         "title": "Campo en el Centro de un Arco Circular",
                         "text": "Para un arco circular de radio $R$ que subtiende un ángulo $\\alpha$ (en radianes) con corriente $I$:<br>$$B_{\\text{centro}} = {{c1::\\frac{\\mu_0 I \\alpha}{4\\pi R}}}$$<br>Si es una espira completa ($\\alpha = 2\\pi$): $B = \\frac{\\mu_0 I}{2R}$."
                     },
                     {
-                        "item_id": 1879961838732258079,
+                        "item_id": 1879963223641445184,
                         "type": "ClozeCard",
                         "title": "Magnetización M y Corrientes Ligadas",
                         "text": "En un material magnético con magnetización $\\mathbf{M}$ (momento dipolar magnético por volumen):<br>- Densidad volumétrica de corriente ligada: $$\\mathbf{J}_b = {{c1::\\nabla \\times \\mathbf{M}}}$$<br>- Densidad superficial de corriente ligada: $$\\mathbf{K}_b = {{c2::\\mathbf{M} \\times \\hat{n}}}$$<br>- Campo auxiliar $\\mathbf{H}$ (depende solo de corrientes libres): $$\\mathbf{H} = {{c3::\\frac{\\mathbf{B}}{\\mu_0} - \\mathbf{M}}}$$ y $\\oint_C \\mathbf{H} \\cdot d\\boldsymbol{\\ell} = I_{f,\\text{enc}}$."
                     },
                     {
-                        "item_id": 1879961838733307907,
+                        "item_id": 1879963223644325675,
                         "type": "Flashcard",
                         "title": "Medios Magnéticos Lineales: Diamagnetismo, Paramagnetismo y Ferromagnetismo",
                         "front": "Explique las relaciones constitutivas $\\mathbf{M} = \\chi_m \\mathbf{H}$ y $\\mathbf{B} = \\mu \\mathbf{H}$, distinguiendo las tres clases de materiales magnéticos.",
@@ -863,20 +863,20 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838685706659,
+                        "item_id": 1879963223595749651,
                         "type": "ClozeCard",
                         "title": "Fuerza entre Hilos Paralelos",
                         "text": "Fuerza por unidad de longitud entre dos conductores paralelos separados distancia $d$:<br>$$\\frac{F}{L} = {{c1::\\frac{\\mu_0 I_1 I_2}{2\\pi d}}}$$<br>- Corrientes en el mismo sentido: se {{c2::atraen}}.<br>- Corrientes en sentidos opuestos: se {{c3::repelen}}."
                     },
                     {
-                        "item_id": 1879961838686496243,
+                        "item_id": 1879963223596560825,
                         "type": "Flashcard",
                         "title": "Fuerza Neta sobre Espira Coplanar a Hilo Infinito",
                         "front": "Una espira rectangular de lados $a$ (paralelo) y $b$ (perpendicular) con corriente $I_2$ se sitúa a distancia $d$ de un hilo largo con corriente $I_1$. Calcule la fuerza neta.",
                         "back": "1. Los lados perpendiculares sufren fuerzas opuestas que se cancelan vectorialmente.<br>2. Lado cercano (atracción): $F_1 = \\frac{\\mu_0 I_1 I_2 a}{2\\pi d}$.<br>3. Lado lejano (repulsión): $F_2 = \\frac{\\mu_0 I_1 I_2 a}{2\\pi (d+b)}$.<br>4. Fuerza Neta Atractiva:<br>$$F_{\\text{net}} = \\frac{\\mu_0 I_1 I_2 a b}{2\\pi d(d+b)}$$"
                     },
                     {
-                        "item_id": 1879961838734269884,
+                        "item_id": 1879963223645295479,
                         "type": "ClozeCard",
                         "title": "Definición y Propiedades del Potencial Vector A",
                         "text": "Como la divergencia del campo magnético es nula ($\\nabla \\cdot \\mathbf{B} = 0$), existe un potencial vector $\\mathbf{A}$ tal que:<br>$$\\mathbf{B} = {{c1::\\nabla \\times \\mathbf{A}}}$$<br>- Gauge de Coulomb (norma estándar en magnetostática): $$\\nabla \\cdot \\mathbf{A} = {{c2::0}}$$<br>- Ecuación de Poisson para $\\mathbf{A}$: $$\\nabla^2 \\mathbf{A} = {{c3::-\\mu_0 \\mathbf{J}}}$$<br>- Flujo magnético a través de superficie $S$ con borde $\\partial S$ (por Stokes): $$\\Phi_B = \\iint_S \\mathbf{B} \\cdot d\\mathbf{A} = {{c4::\\oint_{\\partial S} \\mathbf{A} \\cdot d\\boldsymbol{\\ell}}}$$."
@@ -898,19 +898,19 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838687488852,
+                        "item_id": 1879963223597282420,
                         "type": "ClozeCard",
                         "title": "Formas de la Ley de Ampère",
                         "text": "- Integral: $\\oint_{\\mathcal{C}} \\mathbf{B} \\cdot d\\boldsymbol{\\ell} = {{c1::\\mu_0 I_{\\text{enc}}}}$<br>- Diferencial: $\\nabla \\times \\mathbf{B} = {{c2::\\mu_0 \\mathbf{J}}}$.<br>- En solenoide ideal de $n$ espiras/metro: interior $B = {{c3::\\mu_0 n I}}$, exterior $B \\approx 0$.<br>- En toroide de $N$ espiras y radio medio $r$: $B(r) = {{c4::\\frac{\\mu_0 N I}{2\\pi r}}}$."
                     },
                     {
-                        "item_id": 1879961838734926841,
+                        "item_id": 1879963223646094612,
                         "type": "ClozeCard",
                         "title": "Ley de Faraday y Ley de Lenz",
                         "text": "Principios fundamentales de la inducción electromagnética:<br>- Ley de Faraday: La fuerza electromotriz inducida en un circuito cerrado es igual al negativo de la tasa de cambio del flujo magnético: $$\\mathcal{E} = {{c1::-\\frac{d\\Phi_B}{dt}}}$$ donde $\\Phi_B = \\iint_S \\mathbf{B} \\cdot d\\mathbf{A}$.<br>- Ley de Lenz: El signo negativo indica que la corriente inducida genera un campo magnético que {{c2::se opone al cambio del flujo magnético original}}.<br>- Forma diferencial de Maxwell-Faraday: $$\\nabla \\times \\mathbf{E} = {{c3::-\\frac{\\partial \\mathbf{B}}{\\partial t}}}$$."
                     },
                     {
-                        "item_id": 1879961838735669402,
+                        "item_id": 1879963223647177155,
                         "type": "ProofSequenceCard",
                         "title": "Mecanismo Dual de Inducción: FEM de Movimiento vs Campo Eléctrico Inducido",
                         "premise": "Distinga formalmente los dos mecanismos físicos que producen FEM en la ley de Faraday.",
@@ -922,7 +922,7 @@ const SEED_COURSES = [
                         ]
                     },
                     {
-                        "item_id": 1879961838737080583,
+                        "item_id": 1879963223648058660,
                         "type": "ClozeCard",
                         "title": "Corrientes Parásitas (Foucault) y Frenado Electromagnético",
                         "text": "Cuando un conductor macizo se desplaza a través de un campo magnético no homogéneo o variable:<br>1. Se generan lazos de corriente inducida cerrados en la masa del metal llamados {{c1::corrientes de Foucault (eddy currents)}}.<br>2. Según la Ley de Lenz, estas corrientes generan una fuerza magnética neta $\\mathbf{F} = \\int (\\mathbf{J}_{\\text{ind}} \\times \\mathbf{B}) dV$ que {{c2::se opone al movimiento relativo del conductor}} (frenado electromagnético).<br>3. Para mitigar las pérdidas por disipación de calor ($P = \\int \\mathbf{J}^2 / \\sigma \\, dV$) en núcleos ferromagnéticos de transformadores, se utiliza hierro {{c3::laminado con placas aisladas eléctricamente entre sí}} en vez de un bloque macizo."
@@ -944,20 +944,20 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838689237861,
+                        "item_id": 1879963223599046354,
                         "type": "ClozeCard",
                         "title": "Magnetización y Campo Auxiliar H",
                         "text": "A partir del vector magnetización $\\mathbf{M}$:<br>- Corriente volumétrica ligada: $\\mathbf{J}_b = {{c1::\\nabla \\times \\mathbf{M}}}$<br>- Corriente superficial ligada: $\\mathbf{K}_b = {{c2::\\mathbf{M} \\times \\hat{n}}}$<br>- Campo auxiliar: $\\mathbf{H} = {{c3::\\frac{\\mathbf{B}}{\\mu_0} - \\mathbf{M}}}$, con $\\oint \\mathbf{H} \\cdot d\\boldsymbol{\\ell} = I_{f,\\text{enc}}$."
                     },
                     {
-                        "item_id": 1879961838690250824,
+                        "item_id": 1879963223599468633,
                         "type": "Flashcard",
                         "title": "Condiciones de Borde en Interfaces Magnéticas",
                         "front": "¿Cuáles son las condiciones de frontera para $\\mathbf{B}$ y $\\mathbf{H}$ en la interfaz entre dos medios magnéticos?",
                         "back": "1. <b>Componente normal de $\\mathbf{B}$:</b> Es estrictamente continua:<br>$$B_{1n} - B_{2n} = 0 \\iff B_{1n} = B_{2n}$$<br>(debido a $\\nabla \\cdot \\mathbf{B} = 0$, no existen monopolos magnéticos).<br>2. <b>Componente tangencial de $\\mathbf{H}$:</b> Salto determinado por la corriente libre superficial $\\mathbf{K}_f$:<br>$$\\mathbf{H}_{1t} - \\mathbf{H}_{2t} = \\mathbf{K}_f \\times \\hat{n}$$<br>Si no hay corrientes libres superficiales ($\\mathbf{K}_f = \\mathbf{0}$): $H_{1t} = H_{2t}$."
                     },
                     {
-                        "item_id": 1879961838738729778,
+                        "item_id": 1879963223648649351,
                         "type": "ClozeCard",
                         "title": "Barra Deslizante en Rieles con Resistencia",
                         "text": "Una barra conductora de masa $m$ y longitud $L$ se desliza a velocidad inicial $v_0$ sobre rieles paralelos sin fricción conectados por una resistencia $R$, en un campo magnético uniforme perpendicular $B \\hat{z}$:<br>- FEM inducida por movimiento: $$\\mathcal{E} = {{c1::B L v}}$$.<br>- Corriente inducida: $$I = \\frac{\\mathcal{E}}{R} = \\frac{B L v}{R}$$.<br>- Fuerza magnética de frenado sobre la barra: $$F_x = -I L B = {{c2::-\\frac{B^2 L^2}{R}v}}$$.<br>- Ecuación de movimiento: $$m \\frac{dv}{dt} = -\\frac{B^2 L^2}{R}v \\implies v(t) = {{c3::v_0 e^{-t/\\tau_m}}}$$, con tiempo característico $\\tau_m = \\frac{m R}{B^2 L^2}$."
@@ -979,26 +979,26 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838691252145,
+                        "item_id": 1879963223600919864,
                         "type": "ClozeCard",
                         "title": "Leyes de Faraday y Lenz",
                         "text": "Fuerza electromotriz inducida en circuito cerrado:<br>$$\\mathcal{E} = \\oint \\mathbf{E} \\cdot d\\boldsymbol{\\ell} = {{c1::-\\frac{d\\Phi_B}{dt}}}$$<br>Forma diferencial de Maxwell-Faraday:<br>$$\\nabla \\times \\mathbf{E} = {{c2::-\\frac{\\partial \\mathbf{B}}{\\partial t}}}$$<br>El signo negativo de Lenz impone que la corriente inducida {{c3::se opone al cambio de flujo}}."
                     },
                     {
-                        "item_id": 1879961838739846718,
+                        "item_id": 1879963223649955622,
                         "type": "Flashcard",
                         "title": "Definición de Autoinductancia L e Inductancia Mutua M",
                         "front": "Defina inductancia propia $L$, inductancia mutua $M_{12}$, y exprese la autoinductancia de un solenoide ideal de $n$ vueltas/metro, longitud $\\ell$ y sección $A$.",
                         "back": "1. <b>Autoinductancia:</b> $L = \\frac{N \\Phi_B}{I}$. La FEM autoinducida es $\\mathcal{E}_L = -L \\frac{di}{dt}$.<br>2. <b>Inductancia de solenoide ideal:</b> Con $B = \\mu_0 n I$ y flujo por vuelta $\\Phi_1 = B A = \\mu_0 n I A$:<br>$$L = \\frac{N (B A)}{I} = \\frac{(n \\ell)(\\mu_0 n I A)}{I} = \\mu_0 n^2 A \\ell = \\mu_0 n^2 V$$<br>3. <b>Inductancia Mutua y Reciprocidad:</b> $M_{12} = \\frac{N_2 \\Phi_{21}}{I_1} = M_{21} = M$.<br>4. <b>Densidad de energía magnética:</b> $u_B = \\frac{B^2}{2\\mu_0}$, y energía total $U_B = \\frac{1}{2} L I^2$."
                     },
                     {
-                        "item_id": 1879961838741834249,
+                        "item_id": 1879963223651272424,
                         "type": "ClozeCard",
                         "title": "Transitorio RL Serie",
                         "text": "En un circuito con fuente $\\mathcal{E}$, resistencia $R$ e inductor $L$ cerrado en $t = 0$ con $i(0) = 0$:<br>- Ecuación diferencial: $$\\mathcal{E} - L\\frac{di}{dt} - R i = 0$$<br>- Crecimiento de corriente: $$i(t) = {{c1::\\frac{\\mathcal{E}}{R}(1 - e^{-t/\\tau_L})}}$$ donde la constante inductiva es $\\tau_L = {{c2::\\frac{L}{R}}}$.<br>- Desconexión de la fuente: $$i(t) = {{c3::I_0 e^{-t/\\tau_L}}}$$."
                     },
                     {
-                        "item_id": 1879961838741997701,
+                        "item_id": 1879963223652566635,
                         "type": "ClozeCard",
                         "title": "Inductancia Mutua de Dos Solenoides Coaxiales Largos",
                         "text": "Considere dos solenoides coaxiales largos de longitud $\\ell$: uno interior de radio $r_1$ con $N_1$ vueltas, y uno exterior de radio $r_2 > r_1$ con $N_2$ vueltas:<br>- Haciendo circular corriente $I_1$ en el solenoide interior: produce campo uniforme $B_1 = {{c1::\\mu_0 \\frac{N_1}{\\ell} I_1}}$ confinado en el radio $r_1$.<br>- Flujo a través de cada espira del solenoide 2: $\\Phi_{21} = B_1 (\\pi r_1^2) = \\mu_0 \\frac{N_1}{\\ell} I_1 (\\pi r_1^2)$ (limitado por el área {{c2::del solenoide interior $r_1$}}).<br>- Inductancia mutua del sistema: $$M = \\frac{N_2 \\Phi_{21}}{I_1} = {{c3::\\mu_0 \\frac{N_1 N_2}{\\ell} \\pi r_1^2}}$$<br>- Por el teorema de reciprocidad: si circulara $I_2$ por el solenoide exterior, se obtiene exactamente {{c4::el mismo valor de $M$}}."
@@ -1019,34 +1019,34 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838691731579,
+                        "item_id": 1879963223601869487,
                         "type": "ProofSequenceCard",
                         "title": "Conservación de Energía en Barra Deslizante sobre Rieles",
                         "premise": "Demostrar que la potencia mecánica suministrada a una barra deslizante perpendicular a rieles coincide con la disipada por Joule.",
                         "steps": [
-                            "FEM inducida de movimiento: $\\mathcal{E} = v B L$, corriente $I = \\frac{\\mathcal{E}}{R} = \\frac{v B L}{R}$.",
-                            "Fuerza magnética de frenado de Lorentz: $F_m = I L B = \\frac{v B^2 L^2}{R}$.",
-                            "Potencia mecánica requerida: $P_{\\text{mec}} = F_m v = \\frac{v^2 B^2 L^2}{R}$.",
-                            "Potencia disipada en la resistencia: $P_{\\text{dis}} = I^2 R = \\left(\\frac{v B L}{R}\\right)^2 R = \\frac{v^2 B^2 L^2}{R}$.",
-                            "Se verifica estrictamente: $P_{\\text{mec}} = P_{\\text{dis}}$."
+                            "<b>FEM inducida de movimiento y corriente:</b><br>$$\\mathcal{E} = v B L \\implies I = \\frac{\\mathcal{E}}{R} = \\frac{v B L}{R}$$",
+                            "<b>Fuerza magnética de frenado de Lorentz:</b><br>$$F_m = I L B = \\frac{v B^2 L^2}{R}$$",
+                            "<b>Potencia mecánica requerida suministrada:</b><br>$$P_{\\text{mec}} = F_m v = \\frac{v^2 B^2 L^2}{R}$$",
+                            "<b>Potencia eléctrica disipada por Joule en la resistencia:</b><br>$$P_{\\text{dis}} = I^2 R = \\left(\\frac{v B L}{R}\\right)^2 R = \\frac{v^2 B^2 L^2}{R}$$",
+                            "<b>Conclusión del balance energético:</b><br>Se verifica estrictamente que $P_{\\text{mec}} = P_{\\text{dis}} \\quad \\blacksquare$"
                         ]
                     },
                     {
-                        "item_id": 1879961838693034070,
+                        "item_id": 1879963223604331348,
                         "type": "Flashcard",
                         "title": "Disco de Faraday (Generador Homopolar)",
                         "front": "Un disco conductor de radio $R$ gira con velocidad angular constante $\\omega$ en un campo magnético uniforme paralelo a su eje $\\mathbf{B} = B\\hat{z}$. Calcule la FEM inducida entre el centro y el borde.",
                         "back": "1. Cada elemento radial a distancia $r$ se mueve a velocidad $v(r) = \\omega r$.<br>2. Campo eléctrico de Lorentz de movimiento: $\\mathbf{E}_m = \\mathbf{v} \\times \\mathbf{B} = (\\omega r \\hat{\\theta}) \\times (B \\hat{z}) = \\omega r B \\hat{r}$.<br>3. La FEM entre el eje y el borde del disco es:<br>$$\\mathcal{E} = \\int_0^R \\mathbf{E}_m \\cdot d\\mathbf{r} = \\int_0^R \\omega B r \\, dr = \\frac{1}{2} B \\omega R^2$$"
                     },
                     {
-                        "item_id": 1879961838742951221,
+                        "item_id": 1879963223653381068,
                         "type": "Flashcard",
                         "title": "Las 3 Integrales Clásicas de Biot-Savart en Examen",
                         "front": "Escriba los resultados de las 3 integrales indefinidas más recurrentes en problemas de electrostática y Biot-Savart.",
                         "back": "1. <b>Integral tipo Biot-Savart transversal:</b><br>$$\\int \\frac{dx}{(x^2 + a^2)^{3/2}} = \\frac{x}{a^2 \\sqrt{x^2 + a^2}} + C$$<br>2. <b>Integral tipo Biot-Savart con numerador $x$:</b><br>$$\\int \\frac{x \\, dx}{(x^2 + a^2)^{3/2}} = -\\frac{1}{\\sqrt{x^2 + a^2}} + C$$<br>3. <b>Integral logarítmica de alambre:</b><br>$$\\int \\frac{dx}{\\sqrt{x^2 + a^2}} = \\ln\\left(x + \\sqrt{x^2 + a^2}\\right) + C$$"
                     },
                     {
-                        "item_id": 1879961838744170653,
+                        "item_id": 1879963223654544232,
                         "type": "ClozeCard",
                         "title": "Análisis Dimensional y Unidades SI en Electromagnetismo",
                         "text": "Unidades fundamentales para verificar dimensiones en la I2:<br>- Campo Eléctrico: $[\\mathbf{E}] = {{c1::\\text{V/m} = \\text{N/C}}}$<br>- Desplazamiento Eléctrico: $[\\mathbf{D}] = {{c2::\\text{C/m}^2}}$<br>- Campo Magnético: $[\\mathbf{B}] = {{c3::\\text{T} = \\frac{\\text{N}}{\\text{A}\\cdot\\text{m}} = \\frac{\\text{kg}}{\\text{s}^2\\cdot\\text{A}}}}$<br>- Campo Auxiliar H: $[\\mathbf{H}] = {{c4::\\text{A/m}}}$<br>- Inductancia: $[L] = {{c5::\\text{H} = \\Omega \\cdot \\text{s} = \\frac{\\text{T}\\cdot\\text{m}^2}{\\text{A}}}}$."
@@ -1068,7 +1068,7 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838693958393,
+                        "item_id": 1879963223604673275,
                         "type": "ClozeCard",
                         "title": "Inductancia y Densidad de Energía Magnética",
                         "text": "- Teorema de reciprocidad: ${{c1::M_{12} = M_{21} = M}}$.<br>- Energía en un inductor: $U_B = {{c2::\\frac{1}{2} L I^2}}$.<br>- Densidad volumétrica de energía magnética: $u_B = {{c3::\\frac{B^2}{2\\mu_0} = \\frac{1}{2}\\mathbf{B}\\cdot\\mathbf{H}}}$.<br>- Constante de tiempo de circuito RL: $\\tau_L = {{c4::\\frac{L}{R}}}$."
@@ -1089,13 +1089,13 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838694708274,
+                        "item_id": 1879963223605723592,
                         "type": "ClozeCard",
                         "title": "Doctrina Oficial de Arrastre de Error (Error-Carrying)",
                         "text": "En las pautas de corrección de FIS1533:<br>1. Si cometes un error algebraico en la parte (a), pero en la parte (b) utilizas tu resultado erróneo con {{c1::la metodología y ecuaciones correctas}}, recibes {{c2::el 100% del puntaje metodológico}} de la parte (b).<br>2. <b>Parametrización de Emergencia:</b> Si te bloqueas en una integral complicada, define formalmente {{c3::$I_0 = \\int \\dots$}} y continúa resolviendo las partes siguientes en función de $I_0$ para salvar hasta el {{c4::80% del puntaje total}}."
                     },
                     {
-                        "item_id": 1879961838695942331,
+                        "item_id": 1879963223607261095,
                         "type": "Flashcard",
                         "title": "Protocolo Universal de 4 Pasos para Todo Ejercicio de la I2",
                         "front": "¿Cuáles son los 4 pasos sistemáticos indispensables para abordar cualquier problema de FIS1533 asegurando el máximo puntaje?",
@@ -1306,26 +1306,26 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838748196172,
+                        "item_id": 1879963223658049456,
                         "type": "ClozeCard",
                         "title": "Axiomas Métricos y Topología Relativa",
                         "text": "Axiomas métricos: no negatividad, separación $d(x, y)=0 \\iff x=y$, simetría y {{c1::desigualdad triangular $d(x, z) \\le d(x, y) + d(y, z)$}}.<br>En subespacio $S \\subseteq X$, un conjunto $U_S$ es abierto relativo si y sólo si ${{c2::U_S = U \\cap S}}$ con $U$ abierto en $X$."
                     },
                     {
-                        "item_id": 1879961838749898471,
+                        "item_id": 1879963223659723648,
                         "type": "Flashcard",
                         "title": "Bolas en la Métrica Discreta",
                         "front": "Sea $X$ dotado de la métrica discreta $d(x, y) = 1$ si $x \\ne y$ y $0$ si $x = y$. Describa las bolas abiertas $B(x, r)$ para $r \\le 1$ y $r > 1$.",
                         "back": "1. <b>Para $r \\le 1$:</b> $B(x, r) = \\{y \\in X : d(x, y) < r\\} = \\{x\\}$ (el singleton individual). En consecuencia, todo subconjunto de $X$ es abierto (y por ende también cerrado).<br>2. <b>Para $r > 1$:</b> $B(x, r) = X$ (todo el espacio métrico)."
                     },
                     {
-                        "item_id": 1879961838792187398,
+                        "item_id": 1879963223699092671,
                         "type": "ClozeCard",
                         "title": "Definición Cuantificada de Convergencia Uniforme",
                         "text": "Dada una sucesión de funciones $f_n: E \\to \\mathbb{R}$:<br>- Convergencia puntual ($f_n \\to f$ en $E$): $$\\forall x \\in E, \\; \\forall \\varepsilon > 0, \\; \\exists N(x, \\varepsilon) \\in \\mathbb{N}, \\; \\forall n \\ge N \\implies |f_n(x) - f(x)| < \\varepsilon$$<br>- Convergencia uniforme ($f_n \\rightrightarrows f$ en $E$): $$\\forall \\varepsilon > 0, \\; \\exists N(\\varepsilon) \\in \\mathbb{N}, \\; \\forall n \\ge N, \\; \\forall x \\in E \\implies {{c1::|f_n(x) - f(x)| < \\varepsilon}}$$<br>- Criterio del Supremo: $f_n \\rightrightarrows f$ en $E \\iff {{c2::\\lim_{n\\to\\infty} \\sup_{x \\in E} |f_n(x) - f(x)| = 0}}$."
                     },
                     {
-                        "item_id": 1879961838793849428,
+                        "item_id": 1879963223700173756,
                         "type": "Flashcard",
                         "title": "Romper Convergencia Uniforme: Evaluación en Sucesión Móvil",
                         "front": "¿Cómo se utiliza una sucesión de puntos móviles $x_n \\in E$ para demostrar que una sucesión de funciones no converge uniformemente?",
@@ -1347,26 +1347,26 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838750797528,
+                        "item_id": 1879963223661175653,
                         "type": "ClozeCard",
                         "title": "Cuatro Caracterizaciones Equivalentes de Continuidad",
                         "text": "Para $f: X \\to Y$, son equivalentes:<br>(i) $\\forall U \\subseteq Y$ abierto $\\implies f^{-1}(U)$ es {{c1::abierto en X}}.<br>(ii) $\\forall F \\subseteq Y$ cerrado $\\implies f^{-1}(F)$ es {{c2::cerrado en X}}.<br>(iii) $\\forall A \\subseteq X \\implies f(\\overline{A}) \\subseteq {{c3::\\overline{f(A)}}}$.<br>(iv) Continuidad secuencial: $x_n \\to x_0 \\implies f(x_n) \\to f(x_0)$."
                     },
                     {
-                        "item_id": 1879961838751965669,
+                        "item_id": 1879963223662171188,
                         "type": "Flashcard",
                         "title": "Falla de Conexidad en Preimágenes",
                         "front": "¿Preserva la continuidad la conexidad en preimágenes? Muestre un contraejemplo donde $V$ es conexo pero $f^{-1}(V)$ es disconexo.",
                         "back": "<b>Respuesta:</b> NO. La continuidad preserva conexidad en la <b>imagen directa</b> ($f(X)$ es conexo), pero NO en preimágenes.<br><b>Contraejemplo:</b> $f: \\mathbb{R} \\to \\mathbb{R}$ dada por $f(x) = x^2$ es continua. El intervalo $V = (1, 4)$ es conexo en $\\mathbb{R}$.<br>Sin embargo, su preimagen es:<br>$$f^{-1}((1, 4)) = (-2, -1) \\cup (1, 2)$$<br>la cual es unión disjunta de dos abiertos no vacíos, luego es <b>disconexa</b>."
                     },
                     {
-                        "item_id": 1879961838795071768,
+                        "item_id": 1879963223701273060,
                         "type": "ClozeCard",
                         "title": "Convergencia Uniforme en Subintervalos Compactos",
                         "text": "Para la familia $f_n(x) = \\frac{n x}{1 + n^2 x^2}$:<br>1. En $[0, 1]$, la convergencia <b>no</b> es uniforme pues el pico de altura $1/2$ ocurre en $x_n = 1/n \\to 0$.<br>2. Sin embargo, en cualquier subintervalo compacto $[a, 1]$ con $a > 0$:<br>Para $n$ tal que $1/n < a$, la función es decreciente en $[a, 1]$, luego: $$\\sup_{x \\in [a, 1]} |f_n(x)| = f_n(a) = {{c1::\\frac{n a}{1 + n^2 a^2}}} \\le \\frac{n a}{n^2 a^2} = {{c2::\\frac{1}{n a} \\to 0}}$$<br>Por lo tanto, $f_n \\rightrightarrows 0$ uniformemente en {{c3::$[a, 1]$ para todo $a > 0$}}."
                     },
                     {
-                        "item_id": 1879961838795462260,
+                        "item_id": 1879963223702928909,
                         "type": "ProofSequenceCard",
                         "title": "Límite Uniforme de Funciones Acotadas es Acotado",
                         "premise": "Demuestre que si $f_n: E \\to \\mathbb{R}$ son funciones acotadas y $f_n \\rightrightarrows f$ uniformemente en $E$, entonces el límite $f$ es acotado.",
@@ -1394,26 +1394,26 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838752568815,
+                        "item_id": 1879963223662744802,
                         "type": "ClozeCard",
                         "title": "Funciones Lipschitz y Hölder",
                         "text": "- Lipschitz: $d_Y(f(x), f(x')) \\le L d_X(x, x') \\implies$ uniformemente continua con $\\delta = {{c1::\\varepsilon / L}}$.<br>- Hölder de orden $\\alpha \\in (0, 1]$: $d_Y(f(x), f(x')) \\le C (d_X(x, x'))^\\alpha \\implies$ uniformemente continua con $\\delta = {{c2::(\\varepsilon / C)^{1/\\alpha}}}$.<br>- Refutación secuencial: $f$ es discontinua si existe $x_n \\to x_0$ con {{c3::$f(x_n) \\not\\to f(x_0)$}}."
                     },
                     {
-                        "item_id": 1879961838753866633,
+                        "item_id": 1879963223663682779,
                         "type": "Flashcard",
                         "title": "Función Hölder no Lipschitziana",
                         "front": "Muestre que la función $f(x) = \\sqrt{x}$ en $[0, 1]$ es $1/2$-Hölder continua pero NO es Lipschitziana.",
                         "back": "1. <b>Hölder $\\alpha = 1/2$:</b> Para $x, y \\ge 0$, se cumple $|\\sqrt{x} - \\sqrt{y}| \\le \\sqrt{|x - y|}$. Por ende es $1/2$-Hölder con constante $C = 1$.<br>2. <b>No Lipschitz:</b> Evaluando en $y = 0$: $\\frac{|f(x) - f(0)|}{|x - 0|} = \\frac{\\sqrt{x}}{x} = \\frac{1}{\\sqrt{x}} \\to \\infty$ cuando $x \\to 0^+$. Al no ser el cociente acotado, no existe constante $L$ finita."
                     },
                     {
-                        "item_id": 1879961838796949791,
+                        "item_id": 1879963223703549023,
                         "type": "ClozeCard",
                         "title": "Criterio M de Weierstrass para Series de Funciones",
                         "text": "Sea $\\sum_{n=1}^\\infty f_n(x)$ una serie de funciones en $E$. Si existe una sucesión de constantes reales $M_n \\ge 0$ tales que:<br>1. $|f_n(x)| \\le M_n$ para todo $x \\in E$ y todo $n \\in \\mathbb{N}$.<br>2. La serie numérica converge: $$\\sum_{n=1}^\\infty M_n < \\infty$$<br>Entonces la serie de funciones $\\sum f_n(x)$ converge {{c1::absoluta y uniformemente en $E$}}.<br>Si además cada $f_n$ es continua, la suma $S(x) = \\sum f_n(x)$ es {{c2::continua en $E$}}."
                     },
                     {
-                        "item_id": 1879961838798235410,
+                        "item_id": 1879963223704636717,
                         "type": "Flashcard",
                         "title": "Criterio de Cauchy Uniforme",
                         "front": "Enuncie el Criterio de Cauchy Uniforme y explique por qué es fundamental para probar convergencia uniforme sin conocer el límite a priori.",
@@ -1435,14 +1435,14 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838754955210,
+                        "item_id": 1879963223664587052,
                         "type": "Flashcard",
                         "title": "Teorema de Coincidencia en Subconjuntos Densos",
                         "front": "Sean $f, g: X \\to Y$ continuas con $Y$ métrico. Pruebe que $\\{x : f(x) = g(x)\\}$ es cerrado y que si coinciden en un denso $D$, coinciden en todo $X$.",
                         "back": "1. La función $h(x) = d_Y(f(x), g(x))$ es continua. El conjunto de coincidencia es $E = h^{-1}(\\{0\\})$, que es cerrado por ser preimagen de un cerrado.<br>2. Si $f|_D = g|_D$, entonces $D \\subseteq E$. Tomando clausuras: $X = \\overline{D} \\subseteq \\overline{E} = E$, por lo que $E = X$, demostrando $f \\equiv g$."
                     },
                     {
-                        "item_id": 1879961838798573925,
+                        "item_id": 1879963223705344065,
                         "type": "ProofSequenceCard",
                         "title": "Demostración del Teorema de Continuidad del Límite Uniforme",
                         "premise": "Demuestre que si $f_n \\in C(E)$ y $f_n \\rightrightarrows f$ uniformemente en $E$, entonces $f \\in C(E)$.",
@@ -1456,7 +1456,7 @@ const SEED_COURSES = [
                         ]
                     },
                     {
-                        "item_id": 1879961838800127498,
+                        "item_id": 1879963223706830533,
                         "type": "ClozeCard",
                         "title": "Punto Móvil en Convergencia Uniforme",
                         "text": "Si $f_n \\rightrightarrows f$ uniformemente en $E$ y $f$ es continua, entonces para <b>toda</b> sucesión $x_n \\to x_0$ en $E$:<br>$$\\lim_{n\\to\\infty} f_n(x_n) = {{c1::f(x_0)}}$$<br>Demostración por descomposición triangular:<br>$|f_n(x_n) - f(x_0)| \\le |f_n(x_n) - f(x_n)| + |f(x_n) - f(x_0)| \\le {{c2::\\|f_n - f\\|_\\infty + |f(x_n) - f(x_0)| \\to 0}}$."
@@ -1478,7 +1478,7 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838755604270,
+                        "item_id": 1879963223665837007,
                         "type": "ProofSequenceCard",
                         "title": "Demostración de que d(x, A) es 1-Lipschitz",
                         "premise": "Demostrar que $|d(x, A) - d(y, A)| \\le d(x, y)$ para todo $x, y \\in X$.",
@@ -1491,26 +1491,26 @@ const SEED_COURSES = [
                         ]
                     },
                     {
-                        "item_id": 1879961838756761307,
+                        "item_id": 1879963223667231988,
                         "type": "ClozeCard",
                         "title": "Clausura Topológica con la Distancia",
                         "text": "Un punto $x$ pertenece a la clausura $\\overline{A}$ si y sólo si:<br>$$d(x, A) = {{c1::0}}$$<br>Si $A$ es cerrado: $x \\in A \\iff d(x, A) = 0$."
                     },
                     {
-                        "item_id": 1879961838801111994,
+                        "item_id": 1879963223708241206,
                         "type": "ClozeCard",
                         "title": "Las 3 Hipótesis Indispensables del Teorema de Dini",
                         "text": "Sea $K$ un espacio métrico y $f_n: K \\to \\mathbb{R}$ una sucesión de funciones continuas. El Teorema de Dini garantiza que $f_n \\rightrightarrows f$ uniformemente si se cumplen <b>exactamente</b> estas 3 hipótesis:<br>1. El dominio $K$ es {{c1::compacto}}.<br>2. La sucesión es {{c2::monótona puntual}} ($f_n(x) \\le f_{n+1}(x)$ o viceversa para todo $x$).<br>3. La función límite puntual $f$ es {{c3::continua en $K$}}."
                     },
                     {
-                        "item_id": 1879961838802216307,
+                        "item_id": 1879963223708807586,
                         "type": "Flashcard",
                         "title": "Los 3 Contraejemplos si Falla una Hipótesis de Dini",
                         "front": "Muestre tres contraejemplos donde falla exactamente una de las hipótesis de Dini y la convergencia deja de ser uniforme.",
                         "back": "1. <b>Falla Compacidad:</b> $f_n(x) = \\frac{1}{1 + n x}$ en $(0, 1)$ (abierto). Es monótona decreciente, límite $f(0) = 0$ continuo en $(0,1)$, pero no uniforme pues $\\sup |f_n| = 1$.<br>2. <b>Falla Monotonía:</b> $f_n(x) = \\frac{n x}{1 + n^2 x^2}$ en $[0, 1]$ (compacto). Dominio compacto, límite continuo $f \\equiv 0$, pero para $x$ fijo $f_n(x)$ primero crece y luego decrece (no monótona); $f_n(1/n) = 1/2 \\not\\to 0$.<br>3. <b>Falla Continuidad del Límite:</b> $f_n(x) = x^n$ en $[0, 1]$ (compacto). Monótona decreciente, pero el límite puntual $f(x) = 0$ en $[0,1)$ y $f(1)=1$ es discontinuo."
                     },
                     {
-                        "item_id": 1879961838803638249,
+                        "item_id": 1879963223710102744,
                         "type": "ProofSequenceCard",
                         "title": "Demostración Topológica del Teorema de Dini",
                         "premise": "Demuestre el Teorema de Dini: Si $K$ es un espacio métrico compacto y $(f_n)_{n=1}^\\infty \\subset C(K)$ es una sucesión monótona decreciente que converge puntualmente a $0$, entonces $f_n \\rightrightarrows 0$ uniformemente en $K$.",
@@ -1539,27 +1539,27 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838759581466,
+                        "item_id": 1879963223668324366,
                         "type": "Flashcard",
                         "title": "Construcción Explícita del Lema de Urysohn Métrico",
                         "front": "Dados dos cerrados disjuntos $A, B \\subset X$, construya una función continua que separe $f|_A \\equiv 0$ y $f|_B \\equiv 1$.",
                         "back": "Como $A \\cap B = \\emptyset$ y son cerrados, $d(x, A) + d(x, B) > 0 \\quad \\forall x \\in X$.<br>Se define:<br>$$f(x) = \\frac{d(x, A)}{d(x, A) + d(x, B)}$$<br>1. $x \\in A \\implies d(x, A) = 0 \\implies f(x) = 0$.<br>2. $x \\in B \\implies d(x, B) = 0 \\implies f(x) = 1$.<br>3. Es continua por ser cociente de funciones 1-Lipschitz con denominador no nulo."
                     },
                     {
-                        "item_id": 1879961838760478706,
+                        "item_id": 1879963223668895345,
                         "type": "ClozeCard",
                         "title": "Separación entre Compacto y Cerrado Disjuntos",
                         "text": "Si $K$ es compacto, $F$ es cerrado y $K \\cap F = \\emptyset$:<br>$$\\text{dist}(K, F) = \\inf_{x \\in K, y \\in F} d(x, y) {{c1::> 0 (es estrictamente positiva)}}$$<br>Falla si ninguno es compacto: $y = 0$ y $x y = 1$ en $\\mathbb{R}^2$ tienen distancia {{c2::0 (cero)}}."
                     },
                     {
-                        "item_id": 1879961838804308092,
+                        "item_id": 1879963223710517429,
                         "type": "Flashcard",
                         "title": "Completitud del Espacio de Banach (C(K), ||.||_inf)",
                         "front": "Demuestre que para cualquier espacio métrico compacto $K$, el espacio $C(K, \\mathbb{R})$ con la norma del supremo $\\|f\\|_\\infty = \\max_{x \\in K}|f(x)|$ es un espacio métrico completo (espacio de Banach).",
                         "back": "1. Sea $(f_n)$ una sucesión de Cauchy en $(C(K), \\|\\cdot\\|_\\infty)$. Para cada $\\varepsilon > 0$, existe $N$ tal que $\\forall n, m \\ge N$, $\\sup_{x \\in K}|f_n(x) - f_m(x)| < \\varepsilon$.<br>2. Para cada $x \\in K$ fijo: $|f_n(x) - f_m(x)| \\le \\|f_n - f_m\\|_\\infty < \\varepsilon$, luego $(f_n(x))$ es una sucesión de Cauchy en $\\mathbb{R}$.<br>3. Por completitud de $\\mathbb{R}$, existe el límite puntual $f(x) = \\lim_{n\\to\\infty} f_n(x)$.<br>4. Tomando $m \\to \\infty$ en la desigualdad de Cauchy: $|f_n(x) - f(x)| \\le \\varepsilon$ para todo $n \\ge N$ y todo $x \\in K$, lo que prueba que $f_n \\rightrightarrows f$ uniformemente.<br>5. Por el teorema de continuidad del límite uniforme, $f$ es continua en $K$, luego $f \\in C(K)$. Así, $C(K)$ es completo $\\blacksquare$."
                     },
                     {
-                        "item_id": 1879961838806572212,
+                        "item_id": 1879963223711564757,
                         "type": "ClozeCard",
                         "title": "El Espacio C1([a,b]): Completo en su Norma, Incompleto en Norma Infinito",
                         "text": "En el espacio de funciones continuamente diferenciables $C^1([a, b])$:<br>- Con la norma natural $\\|f\\|_{C^1} = {{c1::\\|f\\|_\\infty + \\|f'\\|_\\infty}}$, el espacio es {{c2::completo (espacio de Banach)}}.<br>- Con la norma del supremo $\\|\\cdot\\|_\\infty$, el espacio $C^1([a, b])$ es {{c3::incompleto y denso en $C([a, b])$}}, pues existen sucesiones de funciones $C^1$ (como aproximaciones suaves de $|x|$) que convergen uniformemente a funciones que no son derivables."
@@ -1580,19 +1580,19 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838760898515,
+                        "item_id": 1879963223669667154,
                         "type": "ClozeCard",
                         "title": "Preservación de Compacidad y Teorema de Extremos",
                         "text": "Si $f: X \\to Y$ es continua y $K \\subseteq X$ es compacto, $f(K)$ es {{c1::compacto en Y}}.<br>Teorema de Weierstrass: Toda $f: K \\to \\mathbb{R}$ continua sobre un compacto no vacío es acotada y {{c2::alcanza su máximo y su mínimo absoluto}}."
                     },
                     {
-                        "item_id": 1879961838806911033,
+                        "item_id": 1879963223712854739,
                         "type": "ClozeCard",
                         "title": "Intercambio de Límite e Integral de Riemann",
                         "text": "Si $f_n \\in \\mathcal{R}([a, b])$ y $f_n \\rightrightarrows f$ uniformemente en $[a, b]$:<br>1. La función límite $f$ es integrable Riemann: $f \\in \\mathcal{R}([a, b])$.<br>2. El límite conmuta con la integral: $$\\lim_{n\\to\\infty} \\int_a^b f_n(x) dx = {{c1::\\int_a^b f(x) dx = \\int_a^b \\lim_{n\\to\\infty} f_n(x) dx}}$$.<br>Cota del error de integración: $$\\left|\\int_a^b f_n(x) dx - \\int_a^b f(x) dx\\right| \\le {{c2::(b - a) \\|f_n - f\\|_\\infty \\to 0}}$$."
                     },
                     {
-                        "item_id": 1879961838808439383,
+                        "item_id": 1879963223714210386,
                         "type": "Flashcard",
                         "title": "Teorema de Diferenciación Término a Término",
                         "front": "¿Cuáles son las hipótesis rigurosas para derivar término a término una sucesión de funciones diferenciables?",
@@ -1614,27 +1614,27 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838762651949,
+                        "item_id": 1879963223671361020,
                         "type": "Flashcard",
                         "title": "Teorema de la Inversa Continua sobre Compactos",
                         "front": "Demuestre que si $K$ es compacto y $f: K \\to Y$ es continua y biyectiva, entonces $f^{-1}: Y \\to K$ es continua.",
                         "back": "Para probar que $g = f^{-1}$ es continua, se prueba que la preimagen de cualquier cerrado $F \\subseteq K$ es cerrada:<br>$g^{-1}(F) = f(F)$.<br>1. $F$ cerrado en compacto $K \\implies F$ es compacto.<br>2. $f$ continua $\\implies f(F)$ es compacto en $Y$.<br>3. En todo espacio métrico, compacto implica cerrado $\\implies f(F)$ es cerrado en $Y$. Por ende, $f^{-1}$ es continua."
                     },
                     {
-                        "item_id": 1879961838763253687,
+                        "item_id": 1879963223672206817,
                         "type": "Flashcard",
                         "title": "Contraejemplo: Falla de Inversa Continua sin Compacidad",
                         "front": "Muestre una biyección continua con inversa discontinua por no ser el dominio compacto.",
                         "back": "$f: [0, 2\\pi) \\to S^1, \\quad t \\mapsto (\\cos t, \\sin t)$.<br>1. $f$ es continua y biyectiva.<br>2. Su inversa $f^{-1}$ es discontinua en $(1, 0)$: puntos con $t_n = 2\\pi - 1/n$ tienden a $(1, 0)$, pero $f^{-1} \\to 2\\pi \\ne 0$."
                     },
                     {
-                        "item_id": 1879961838809305363,
+                        "item_id": 1879963223714917033,
                         "type": "ClozeCard",
                         "title": "Definición de Equicontinuidad",
                         "text": "Sea $(X, d)$ un espacio métrico. Una familia de funciones $\\mathcal{F} \\subset C(X)$ es equicontinua en $x_0 \\in X$ si:<br>$$\\forall \\varepsilon > 0, \\; \\exists \\delta > 0, \\; \\forall f \\in \\mathcal{F}, \\; \\forall x \\in X \\implies d(x, x_0) < \\delta \\implies {{c1::|f(x) - f(x_0)| < \\varepsilon}}$$<br>La clave metodológica es que $\\delta$ depende exclusivamente de $\\varepsilon$ y $x_0$, pero es <b>común para toda la familia infinita</b> $\\mathcal{F}$.<br>Si cada $f \\in \\mathcal{F}$ es $L$-Lipschitz con una misma constante $L$: $$|f(x) - f(y)| \\le L d(x, y) \\implies \\delta = {{c2::\\frac{\\varepsilon}{L}}}$$ luego toda familia uniformemente Lipschitz es equicontinua."
                     },
                     {
-                        "item_id": 1879961838810578328,
+                        "item_id": 1879963223717520390,
                         "type": "ProofSequenceCard",
                         "title": "Teorema de Arzelà-Ascoli en Espacios Métricos Compactos",
                         "premise": "Enuncie la caracterización de relativa compacidad en $C(K)$ dada por el Teorema de Arzelà-Ascoli.",
@@ -1647,7 +1647,7 @@ const SEED_COURSES = [
                         ]
                     },
                     {
-                        "item_id": 1879961838811495971,
+                        "item_id": 1879963223718230840,
                         "type": "Flashcard",
                         "title": "Método Diagonal de Cantor en la Demostración de Arzelà-Ascoli",
                         "front": "¿Cómo opera el método de selección diagonal de Cantor para extraer una subsucesión convergente sobre un conjunto numerable denso $D = \\{x_1, x_2, \\dots\\} \\subset K$?",
@@ -1669,7 +1669,7 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838764087368,
+                        "item_id": 1879963223673527593,
                         "type": "ProofSequenceCard",
                         "title": "Demostración Rigurosa de Heine-Cantor",
                         "premise": "Demostrar que toda función continua sobre un compacto es uniformemente continua.",
@@ -1683,13 +1683,13 @@ const SEED_COURSES = [
                         ]
                     },
                     {
-                        "item_id": 1879961838765352640,
+                        "item_id": 1879963223674633261,
                         "type": "ClozeCard",
                         "title": "Funciones Periódicas Continuas en R",
                         "text": "Toda función $f: \\mathbb{R} \\to \\mathbb{R}$ continua y periódica es {{c1::uniformemente continua en todo R}}.<br>Demostración: Por Heine-Cantor es uniformemente continua en el intervalo compacto $[0, 2T]$, y la periodicidad extiende el mismo $\\delta$ a todo $\\mathbb{R}$."
                     },
                     {
-                        "item_id": 1879961838812225734,
+                        "item_id": 1879963223718960725,
                         "type": "Flashcard",
                         "title": "Familia Equicontinua y Puntualmente Acotada pero No Uniformemente Acotada en R",
                         "front": "Construya un contraejemplo que demuestre que si el dominio $X$ no es compacto, una familia puede ser equicontinua y puntualmente acotada sin ser uniformemente acotada ni relativamente compacta.",
@@ -1711,13 +1711,13 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838766505355,
+                        "item_id": 1879963223675055379,
                         "type": "ClozeCard",
                         "title": "Teorema de Extensión Única al Completado",
                         "text": "Si $D \\subset X$ es denso ($\\overline{D} = X$), $Y$ es completo y $f: D \\to Y$ es uniformemente continua:<br>Existe {{c1::una única extensión continua $\\tilde{f}: X \\to Y$}} y además es {{c2::uniformemente continua}} en todo $X$."
                     },
                     {
-                        "item_id": 1879961838813934337,
+                        "item_id": 1879963223720196918,
                         "type": "ClozeCard",
                         "title": "Regularización Equicontinua por Operadores Integrales",
                         "text": "Sea $k: [a, b] \\times [a, b] \\to \\mathbb{R}$ un núcleo continuo. Se define el operador integral de Fredholm $T: C([a, b]) \\to C([a, b])$ por: $$(T f)(x) = \\int_a^b k(x, y) f(y) dy$$<br>1. Como $[a, b] \\times [a, b]$ es compacto, $k$ es uniformemente continuo por Heine-Cantor: dado $\\varepsilon > 0$, existe $\\delta > 0$ tal que $|x_1 - x_2| < \\delta \\implies |k(x_1, y) - k(x_2, y)| < \\frac{\\varepsilon}{(b - a) M}$.<br>2. Si $B = \\{f \\in C([a, b]) : \\|f\\|_\\infty \\le M\\}$ es la bola cerrada acotada, entonces la imagen $T(B)$ es {{c1::equicontinua y uniformemente acotada}}.<br>3. Por el Teorema de Arzelà-Ascoli, el operador integral $T$ es un {{c2::operador compacto}} (transforma conjuntos acotados en relativamente compactos)."
@@ -1739,7 +1739,7 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838767489706,
+                        "item_id": 1879963223676426208,
                         "type": "ClozeCard",
                         "title": "Definición de Conexidad e Intervalos en R",
                         "text": "Un espacio métrico $X$ es conexo si sus únicos subconjuntos clopen son {{c1::$\\emptyset$ y $X$}}.<br>En $\\mathbb{R}$, un conjunto $E \\subseteq \\mathbb{R}$ es conexo si y sólo si es {{c2::un intervalo}}.<br>Si $f$ es continua y $X$ es conexo, $f(X)$ es {{c3::conexo}}."
@@ -1761,7 +1761,7 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838769280799,
+                        "item_id": 1879963223678918044,
                         "type": "ProofSequenceCard",
                         "title": "Teorema del Punto Fijo en 1D",
                         "premise": "Demostrar que toda función continua $f: [a, b] \\to [a, b]$ posee al menos un punto fijo.",
@@ -1773,20 +1773,20 @@ const SEED_COURSES = [
                         ]
                     },
                     {
-                        "item_id": 1879961838770936375,
+                        "item_id": 1879963223679412307,
                         "type": "Flashcard",
                         "title": "Invarianza Topológica por Remoción de Puntos (Corte)",
                         "front": "Demuestre que $[0, 1)$ no es homeomorfo a $(0, 1)$ y que $\\mathbb{R}$ no es homeomorfo a $\\mathbb{R}^2$.",
                         "back": "1. <b>$[0, 1)$ vs $(0, 1)$:</b> Removiendo el punto $0$, $[0, 1)\\setminus\\{0\\} = (0, 1)$ es <b>conexo</b>. Pero remover cualquier punto $f(0)$ en $(0, 1)$ produce dos intervalos disjuntos, conjunto <b>disconexo</b>.<br>2. <b>$\\mathbb{R}$ vs $\\mathbb{R}^2$:</b> $\\mathbb{R}\\setminus\\{p\\}$ tiene 2 componentes conexas, mientras que $\\mathbb{R}^2\\setminus\\{q\\}$ permanece <b>conexo</b>."
                     },
                     {
-                        "item_id": 1879961838816373690,
+                        "item_id": 1879963223723375199,
                         "type": "ClozeCard",
                         "title": "Densidad de Productos g(x)h(y) en C(X x Y)",
                         "text": "Sean $X$ e $Y$ espacios métricos compactos. Considere el conjunto de sumas finitas de funciones separables: $$\\mathcal{A} = \\left\\{\\sum_{i=1}^m g_i(x) h_i(y) : g_i \\in C(X), h_i \\in C(Y), m \\in \\mathbb{N}\\right\\}$$<br>- $\\mathcal{A}$ es una subálgebra de $C(X \\times Y, \\mathbb{R})$ que contiene a las constantes ($1 \\cdot 1 = 1$).<br>- Si $(x_1, y_1) \\ne (x_2, y_2)$, supongamos $x_1 \\ne x_2$. Por Urysohn existe $g \\in C(X)$ con $g(x_1) \\ne g(x_2)$, luego $F(x, y) = g(x) \\cdot 1$ separa los puntos.<br>- Por el Teorema de Stone-Weierstrass, $\\mathcal{A}$ es {{c1::densa en $C(X \\times Y, \\mathbb{R})$}} bajo la norma del supremo."
                     },
                     {
-                        "item_id": 1879961838817598159,
+                        "item_id": 1879963223724304572,
                         "type": "Flashcard",
                         "title": "Grados Acotados: Límite Uniforme de Polinomios de Grado <= d",
                         "front": "Demuestre que si una sucesión de polinomios $(P_n)_{n=1}^\\infty$ con grado $\\deg(P_n) \\le d$ converge uniformemente en $[a, b]$ a una función $f$, entonces $f$ es necesariamente un polinomio de grado $\\le d$.",
@@ -1808,26 +1808,26 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838772076149,
+                        "item_id": 1879963223680556404,
                         "type": "ClozeCard",
                         "title": "Arcoconexidad vs Conexidad",
                         "text": "Todo espacio arcoconexo es {{c1::conexo}}.<br>El recíproco es falso: El contraejemplo clásico es {{c2::la curva seno del topólogo}}, la cual es conexa pero no arcoconexa."
                     },
                     {
-                        "item_id": 1879961838818864566,
+                        "item_id": 1879963223725900231,
                         "type": "ClozeCard",
                         "title": "Definición de Contracción y Teorema de Banach",
                         "text": "Sea $(X, d)$ un espacio métrico <b>completo</b> no vacío. Una aplicación $T: X \\to X$ es una contracción estricta si existe $k \\in [0, 1)$ tal que:<br>$$d(T(x), T(y)) \\le {{c1::k \\cdot d(x, y)}} \\quad \\forall x, y \\in X$$<br>El Teorema del Punto Fijo de Banach asegura que:<br>1. Existe un {{c2::único punto fijo}} $x^* \\in X$ tal que $T(x^*) = x^*$.<br>2. Para <b>cualquier</b> semilla inicial $x_0 \\in X$, la sucesión iterativa $x_{n+1} = T(x_n)$ converge a $x^*$: $$\\lim_{n\\to\\infty} x_n = x^*$$."
                     },
                     {
-                        "item_id": 1879961838820218817,
+                        "item_id": 1879963223726808700,
                         "type": "Flashcard",
                         "title": "Cotas de Error a Priori y a Posteriori de Banach",
                         "front": "Escriba las cotas analíticas del error $d(x_n, x^*)$ en el Teorema del Punto Fijo de Banach.",
                         "back": "1. <b>Estimación a priori (depende solo del primer paso $d(x_0, x_1)$):</b><br>$$d(x_n, x^*) \\le \\frac{k^n}{1 - k} d(x_0, x_1)$$<br>Permite calcular el número mínimo de iteraciones $n$ necesarias para garantizar un error menor a $\\varepsilon$ antes de empezar a iterar.<br>2. <b>Estimación a posteriori (depende del paso actual $d(x_{n-1}, x_n)$):</b><br>$$d(x_n, x^*) \\le \\frac{k}{1 - k} d(x_n, x_{n-1})$$<br>Permite detener la iteración numérica en tiempo real cuando la diferencia entre pasos consecutivos cae por debajo del umbral deseado."
                     },
                     {
-                        "item_id": 1879961838820564727,
+                        "item_id": 1879963223728031155,
                         "type": "Flashcard",
                         "title": "Lema de Grönwall y Demostración de Unicidad en Picard-Lindelöf",
                         "front": "Enuncie la desigualdad integral de Grönwall y demuestre cómo garantiza la unicidad global de la solución al problema de Cauchy $y' = f(t, y), y(t_0) = y_0$ con $f$ Lipschitz en $y$.",
@@ -1849,20 +1849,20 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838772525788,
+                        "item_id": 1879963223681818524,
                         "type": "ClozeCard",
                         "title": "Convergencia Uniforme con Norma Infinito",
                         "text": "Una sucesión $f_n: X \\to Y$ converge uniformemente a $f$ si y sólo si:<br>$$\\lim_{n \\to \\infty} \\|f_n - f\\|_\\infty = \\lim_{n \\to \\infty} {{c1::\\sup_{x \\in X} d_Y(f_n(x), f(x)) = 0}}$$<br>El índice $N(\\varepsilon)$ es {{c2::independiente del punto x}}."
                     },
                     {
-                        "item_id": 1879961838822771771,
+                        "item_id": 1879963223728817300,
                         "type": "Flashcard",
                         "title": "Contraejemplo: Desigualdad Débil d(T(x), T(y)) < d(x, y) Sin Punto Fijo",
                         "front": "Muestre que la condición débil $d(T(x), T(y)) < d(x, y)$ para todo $x \\ne y$ en un espacio métrico completo no garantiza la existencia de punto fijo si el dominio no es compacto.",
                         "back": "Considere el espacio métrico completo $X = [1, \\infty)$ con la distancia usual, y la función:<br>$$T(x) = x + \\frac{1}{x}$$<br>1. <b>Derivada:</b> $T'(x) = 1 - \\frac{1}{x^2}$. Para todo $x \\in (1, \\infty)$, $0 < T'(x) < 1$.<br>2. Por el Teorema del Valor Medio: $|T(x) - T(y)| = T'(\\xi)|x - y| < |x - y|$ para todo $x \\ne y$.<br>3. Sin embargo, no existe constante $k < 1$ estricta, pues $\\sup_{x \\ge 1} T'(x) = 1$.<br>4. Ecuación de punto fijo: $T(x^*) = x^* \\implies x^* + \\frac{1}{x^*} = x^* \\implies \\frac{1}{x^*} = 0$, que <b>no tiene solución</b> en $[1, \\infty)$.<br>(Nota: En cambio, por el Teorema de Edelstein, si el espacio es <b>compacto</b>, la condición estricta $d(T(x), T(y)) < d(x, y)$ sí garantiza punto fijo único)."
                     },
                     {
-                        "item_id": 1879961838824074630,
+                        "item_id": 1879963223729909753,
                         "type": "ClozeCard",
                         "title": "Teorema del Iterado Contractivo (T^m es Contracción)",
                         "text": "Sea $(X, d)$ un espacio métrico completo y $T: X \\to X$ una aplicación tal que para algún entero $m \\ge 1$, el iterado $T^m$ es una contracción estricta:<br>$$d(T^m(x), T^m(y)) \\le k d(x, y) \\quad (k < 1)$$<br>Entonces $T$ posee un {{c1::único punto fijo}} $x^* \\in X$ ($T(x^*) = x^*$)!<br>Demostración: Por Banach, $T^m$ tiene punto fijo único $x^*$. Entonces: $$T^m(T(x^*)) = T(T^m(x^*)) = {{c2::T(x^*)}}$$<br>Por unicidad del punto fijo de $T^m$, debe ser $T(x^*) = x^*$. Esta técnica es el motor fundamental para resolver {{c3::ecuaciones integrales de Volterra y el teorema de Picard-Lindelöf}}."
@@ -1883,7 +1883,7 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838774253916,
+                        "item_id": 1879963223682330554,
                         "type": "Flashcard",
                         "title": "Criterio de Puntos Móviles para Refutar Convergencia Uniforme",
                         "front": "¿Cómo se refuta la convergencia uniforme mediante puntos móviles?",
@@ -1905,7 +1905,7 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838775103489,
+                        "item_id": 1879963223683764964,
                         "type": "ProofSequenceCard",
                         "title": "Demostración de Continuidad del Límite Uniforme",
                         "premise": "Demostrar que el límite uniforme de funciones continuas es continuo.",
@@ -1933,7 +1933,7 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838776194203,
+                        "item_id": 1879963223684905505,
                         "type": "ClozeCard",
                         "title": "Criterio M de Weierstrass y Completitud",
                         "text": "Si $|f_n(x)| \\le M_n$ con $\\sum M_n < \\infty$, la serie $\\sum f_n(x)$ converge {{c1::absoluta y uniformemente en X}}.<br>El espacio métrico $(C(K, \\mathbb{R}), \\|\\cdot\\|_\\infty)$ sobre un compacto $K$ es un espacio de Banach, es decir, es {{c2::completo}}."
@@ -1955,13 +1955,13 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838776662723,
+                        "item_id": 1879963223685921178,
                         "type": "ClozeCard",
                         "title": "Hipótesis del Teorema de Dini",
                         "text": "Teorema de Dini: Si $K$ es compacto, $f_n$ continuas, $f_n \\to f$ puntualmente con $f$ continua y la convergencia es monótona ($f_{n+1} \\le f_n$), entonces la convergencia es forzosamente {{c1::uniforme en K}}."
                     },
                     {
-                        "item_id": 1879961838777983040,
+                        "item_id": 1879963223686423134,
                         "type": "Flashcard",
                         "title": "Catálogo de Fallas de Hipótesis de Dini",
                         "front": "Muestre las 3 fallas clásicas de Dini: (1) Sin compacidad, (2) Sin monotonía, (3) Límite discontinuo.",
@@ -1984,13 +1984,13 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838779191676,
+                        "item_id": 1879963223687871143,
                         "type": "ClozeCard",
                         "title": "Teorema de Arzelà-Ascoli",
                         "text": "En compacto $K$, una familia $\\mathcal{F} \\subset C(K, \\mathbb{R})$ es relativamente compacta si y sólo si:<br>1. Es {{c1::puntualmente acotada}} ($\\forall x \\in K, \\sup_{f \\in \\mathcal{F}} |f(x)| < \\infty$).<br>2. Es {{c2::equicontinua en K}}."
                     },
                     {
-                        "item_id": 1879961838779692719,
+                        "item_id": 1879963223688880245,
                         "type": "ProofSequenceCard",
                         "title": "Esquema Demostrativo de Arzelà-Ascoli",
                         "premise": "Resumir la demostración de Arzelà-Ascoli usando Cantor y redes finitas.",
@@ -2019,13 +2019,13 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838781390252,
+                        "item_id": 1879963223689535275,
                         "type": "ClozeCard",
                         "title": "Enunciado de Stone-Weierstrass",
                         "text": "Una subálgebra $\\mathcal{A} \\subset C(K, \\mathbb{R})$ sobre un compacto $K$ es densa si y sólo si:<br>1. {{c1::Separa puntos}}: $\\forall x \\ne y \\implies \\exists f \\in \\mathcal{A} : f(x) \\ne f(y)$.<br>2. {{c2::Contiene las funciones constantes}}: $\\mathbf{1} \\in \\mathcal{A}$."
                     },
                     {
-                        "item_id": 1879961838782093273,
+                        "item_id": 1879963223690665365,
                         "type": "Flashcard",
                         "title": "Subálgebra que no Separa Puntos",
                         "front": "Muestre una subálgebra que no sea densa en $C([-1, 1], \\mathbb{R})$ por no separar puntos.",
@@ -2047,7 +2047,7 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838784124980,
+                        "item_id": 1879963223691819949,
                         "type": "ClozeCard",
                         "title": "Densidad Polinomial y Trigonométrica",
                         "text": "- Polinomios $\\mathbb{R}[x]$ son densos en $(C([a, b], \\mathbb{R}), \\|\\cdot\\|_\\infty)$.<br>- Polinomios trigonométricos son densos en el espacio de funciones continuas y {{c1::periódicas de período $2\\pi$}}."
@@ -2069,7 +2069,7 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838785880312,
+                        "item_id": 1879963223692831686,
                         "type": "ProofSequenceCard",
                         "title": "Punto Fijo de Banach y Cotas de Error",
                         "premise": "Probar la convergencia de iteradas $x_{n+1} = T(x_n)$ para contracción $k < 1$ en espacio completo.",
@@ -2081,7 +2081,7 @@ const SEED_COURSES = [
                         ]
                     },
                     {
-                        "item_id": 1879961838786546471,
+                        "item_id": 1879963223694506712,
                         "type": "Flashcard",
                         "title": "Teorema de Edelstein en Espacios Compactos",
                         "front": "Enuncie el Teorema de Edelstein de contracción débil.",
@@ -2103,20 +2103,20 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838787423727,
+                        "item_id": 1879963223695195431,
                         "type": "ClozeCard",
                         "title": "La Rúbrica Oficial de 4 Puntos por Demostración",
                         "text": "En MAT2514, cada problema de 16 puntos asigna 4 puntos (25% del puntaje) exclusivamente a la estructura de la escritura:<br>1. <b>Apertura (1 pt):</b> Declarar qué se va a probar y la estrategia formal (ej: {{c1::«Fijemos $\\varepsilon > 0$. Buscamos $N \\in \\mathbb{N}$ tal que...» o «Por contradicción, supongamos...»}}).<br>2. <b>Justificación (1 pt):</b> Citar {{c2::cada teorema o hipótesis por su nombre oficial}} (ej: «Puesto que $K$ es compacto, por Weierstrass...»).<br>3. <b>Hilado (1 pt):</b> Conectar deductivamente las proposiciones evitando {{c3::yuxtaponer fórmulas huérfanas sin conectores lógicos}}.<br>4. <b>Cierre (1 pt):</b> Declarar formalmente el final: {{c4::«Por lo tanto, la propiedad se cumple para todo $x \\in K$. Q.E.D.»}}."
                     },
                     {
-                        "item_id": 1879961838788995383,
+                        "item_id": 1879963223697628821,
                         "type": "Flashcard",
                         "title": "Las 7 Intuiciones Nucleares de la I3",
                         "front": "Mencione las 7 intuiciones visuales de la I3 y su efecto técnico operativo.",
                         "back": "1. <b>Compacidad:</b> «Finito disfrazado»: de todo recubrimiento abierto se extrae subrecubrimiento finito. Weierstrass y Heine-Cantor.<br>2. <b>Conexidad:</b> «Sin grietas»: el espacio no se puede partir en dos abiertos disjuntos no vacíos. Mapeos continuos preservan conexidad.<br>3. <b>Convergencia Uniforme:</b> «Tubo rígido»: para $n \\ge N$, todas las curvas $f_n(x)$ caen en la banda $[f(x)-\\varepsilon, f(x)+\\varepsilon]$ para todo $x$ a la vez.<br>4. <b>Equicontinuidad:</b> «Oscilación coordinada»: una misma lupa $\\delta(\\varepsilon)$ controla la pendiente de todas las infinitas funciones a la vez.<br>5. <b>Arzelà–Ascoli:</b> «Compacidad en dimensión infinita»: la bola cerrada no es compacta en $C(K)$; equicontinuidad + acotación garantizan subsucesión convergente.<br>6. <b>Stone–Weierstrass:</b> «ADN algebraico»: si un subconjunto cerrado bajo sumas y productos separa puntos y no se anula, es denso en $C(X)$.<br>7. <b>Punto Fijo de Banach:</b> «Imán métrico»: una contracción $k < 1$ en un espacio métrico completo colapsa cualquier semilla hacia un punto fijo único."
                     },
                     {
-                        "item_id": 1879961838790296282,
+                        "item_id": 1879963223698366255,
                         "type": "ProofSequenceCard",
                         "title": "Equivalencia Darboux Implica Riemann para Funciones Acotadas",
                         "premise": "Demuestre que si una función acotada $f: [a, b] \\to \\mathbb{R}$ es Darboux integrable ($I = \\underline{\\int}_a^b f = \\overline{\\int}_a^b f$), entonces $f$ es Riemann integrable en el sentido clásico.",
@@ -2146,13 +2146,13 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838814524339,
+                        "item_id": 1879963223721716244,
                         "type": "ClozeCard",
                         "title": "Hipótesis del Teorema de Stone-Weierstrass",
                         "text": "Sea $X$ un espacio métrico compacto. Una subálgebra $\\mathcal{A} \\subset C(X, \\mathbb{R})$ es densa en $(C(X), \\|\\cdot\\|_\\infty)$ ($\\overline{\\mathcal{A}} = C(X)$) si cumple las dos condiciones canónicas:<br>1. <b>Separa puntos:</b> $$\\forall x \\ne y \\in X, \\; \\exists f \\in \\mathcal{A} \\implies {{c1::f(x) \\ne f(y)}}$$<br>2. <b>No se anula idénticamente en ningún punto:</b> $$\\forall x \\in X, \\; \\exists g \\in \\mathcal{A} \\implies {{c2::g(x) \\ne 0}}$$(Si $\\mathcal{A}$ contiene a las funciones constantes, la condición 2 se satisface de forma automática)."
                     },
                     {
-                        "item_id": 1879961838816268125,
+                        "item_id": 1879963223722466504,
                         "type": "Flashcard",
                         "title": "Aplicación Canónica: Polinomios Pares Aproximan Funciones Pares",
                         "front": "Demuestre mediante Stone-Weierstrass que el álgebra de polinomios pares $\\mathcal{A} = \\text{span}\\{x^{2k} : k \\ge 0\\}$ es densa en el espacio de funciones pares continuas $C_{\\text{par}}([-1, 1]) = \\{f \\in C([-1, 1]) : f(-x) = f(x)\\}$.",
@@ -2357,26 +2357,26 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838825803739,
+                        "item_id": 1879963223733520467,
                         "type": "ClozeCard",
                         "title": "Definición Estequiométrica de Velocidad",
                         "text": "Para $aA + bB \\to cC + dD$:<br>$$v = {{c1::-\\frac{1}{a}\\frac{d[A]}{dt} = -\\frac{1}{b}\\frac{d[B]}{dt} = \\frac{1}{c}\\frac{d[C]}{dt} = \\frac{1}{d}\\frac{d[D]}{dt}}}$$<br>Ley diferencial general: $v = k [A]^x [B]^y$, donde $x, y$ se obtienen {{c2::experimentalmente}}."
                     },
                     {
-                        "item_id": 1879961838828191036,
+                        "item_id": 1879963223733777829,
                         "type": "Flashcard",
                         "title": "Estequiometría de Velocidad en Reacción N2O5",
                         "front": "Para $2\\text{N}_2\\text{O}_5 \\to 4\\text{NO}_2 + \\text{O}_2$, exprese la relación entre la velocidad de desaparición de reactivo y aparición de productos.",
                         "back": "$$v = -\\frac{1}{2}\\frac{d[\\text{N}_2\\text{O}_5]}{dt} = \\frac{1}{4}\\frac{d[\\text{NO}_2]}{dt} = \\frac{d[\\text{O}_2]}{dt}$$<br>Por ende: $\\frac{d[\\text{NO}_2]}{dt} = -2\\frac{d[\\text{N}_2\\text{O}_5]}{dt}$, es decir, el dióxido de nitrógeno aparece al doble de rapidez con que desaparece el pentóxido de dinitrógeno."
                     },
                     {
-                        "item_id": 1879961838860954342,
+                        "item_id": 1879963223767915701,
                         "type": "ClozeCard",
                         "title": "Expresión Diferencial de la Velocidad de Reacción",
                         "text": "Para una reacción química general: $$a A + b B \\longrightarrow c C + d D$$<br>La velocidad de reacción instantánea $v$ se define normalizada por los coeficientes estequiométricos:<br>$$v = {{c1::-\\frac{1}{a}\\frac{d[A]}{dt} = -\\frac{1}{b}\\frac{d[B]}{dt} = +\\frac{1}{c}\\frac{d[C]}{dt} = +\\frac{1}{d}\\frac{d[D]}{dt}}}$$<br>Los signos negativos en reactivos indican que {{c2::se consumen}}, y los positivos en productos indican que {{c3::se forman}}."
                     },
                     {
-                        "item_id": 1879961838862284795,
+                        "item_id": 1879963223768801171,
                         "type": "Flashcard",
                         "title": "Ley Experimental de Velocidad y Órdenes de Reacción",
                         "front": "Explique la diferencia fundamental entre los órdenes de reacción ($m, n$) y los coeficientes estequiométricos ($a, b$) en la ley de velocidad $v = k [A]^m [B]^n$.",
@@ -2398,27 +2398,27 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838829190743,
+                        "item_id": 1879963223735359587,
                         "type": "ClozeCard",
                         "title": "Unidades de la Constante de Velocidad k",
                         "text": "Para reacción de orden global $n$:<br>$$[k] = {{c1::\\text{M}^{1-n} \\cdot \\text{s}^{-1} = \\text{mol}^{1-n} \\cdot \\text{L}^{n-1} \\cdot \\text{s}^{-1}}}$$<br>- Orden 0: $[k] = {{c2::\\text{M}\\cdot\\text{s}^{-1}}}$<br>- Orden 1: $[k] = {{c3::\\text{s}^{-1}}}$<br>- Orden 2: $[k] = {{c4::\\text{M}^{-1}\\cdot\\text{s}^{-1}}}$."
                     },
                     {
-                        "item_id": 1879961838831006602,
+                        "item_id": 1879963223737012689,
                         "type": "Flashcard",
                         "title": "Algoritmo: Método de Velocidades Iniciales",
                         "front": "¿Cómo se determinan los órdenes parciales en una tabla de ensayos experimentales?",
                         "back": "1. Elegir dos ensayos donde cambie $[A]$ y los demás reactivos se mantengan constantes.<br>2. Cociente de velocidades: $\\frac{v_2}{v_1} = \\left(\\frac{[A]_2}{[A]_1}\\right)^x \\implies x = \\frac{\\ln(v_2/v_1)}{\\ln([A]_2/[A]_1)}$.<br>3. Despejar $k = \\frac{v_0}{[A]_0^x [B]_0^y}$ y asignar sus unidades estrictas $\\text{M}^{1-n}\\text{s}^{-1}$."
                     },
                     {
-                        "item_id": 1879961838864814477,
+                        "item_id": 1879963223770450748,
                         "type": "Flashcard",
                         "title": "Determinación de Órdenes por Cociente de Experimentos",
                         "front": "Si al duplicar la concentración $[A]_0$ manteniendo $[B]_0$ constante la velocidad inicial se cuadruplica, ¿cuál es el orden parcial respecto a $A$?",
                         "back": "Por la ley de velocidad: $\\frac{v_2}{v_1} = \\left(\\frac{[A]_2}{[A]_1}\\right)^m$.<br>Sustituyendo los datos: $4 = (2)^m \\implies 2^2 = 2^m \\implies m = 2$.<br>Por lo tanto, la reacción es de <b>segundo orden</b> respecto a $A$."
                     },
                     {
-                        "item_id": 1879961838866161068,
+                        "item_id": 1879963223772071356,
                         "type": "Flashcard",
                         "title": "Aproximación del Estado Estacionario (SSA) para Intermediarios",
                         "front": "¿En qué consiste la Aproximación del Estado Estacionario (SSA) y cómo se aplica para deducir la ley de velocidad a partir de un mecanismo con intermediarios reactivos?",
@@ -2440,13 +2440,13 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838831236338,
+                        "item_id": 1879963223738311862,
                         "type": "ClozeCard",
                         "title": "Leyes de Orden Cero",
                         "text": "Para reacción de orden 0 ($v = k$):<br>- Concentración temporal: $[A]_t = {{c1::[A]_0 - kt}}$<br>- Vida media: $t_{1/2} = {{c2::\\frac{[A]_0}{2k}}}$<br>- Gráfico lineal: $[A]$ vs $t$ con pendiente {{c3::-k}}."
                     },
                     {
-                        "item_id": 1879961838866697086,
+                        "item_id": 1879963223772817945,
                         "type": "ClozeCard",
                         "title": "Comparativa de Leyes Integradas y Linealización",
                         "text": "Ecuaciones integradas de concentración vs tiempo para $A \\to \\text{productos}$:<br>- <b>Orden 0:</b> $[A]_t = {{c1::[A]_0 - kt}}$ | Gráfico lineal: $[A]$ vs $t$ (pendiente $-k$) | Vida media: $t_{1/2} = {{c2::\\frac{[A]_0}{2k}}}$.<br>- <b>Orden 1:</b> $\\ln[A]_t = {{c3::\\ln[A]_0 - kt}}$ | Gráfico lineal: $\\ln[A]$ vs $t$ (pendiente $-k$) | Vida media: $t_{1/2} = {{c4::\\frac{\\ln 2}{k} \\approx \\frac{0.693}{k}}}$ (independiente de $[A]_0$!).<br>- <b>Orden 2:</b> $\\frac{1}{[A]_t} = {{c5::\\frac{1}{[A]_0} + kt}}$ | Gráfico lineal: $\\frac{1}{[A]}$ vs $t$ (pendiente $+k$) | Vida media: $t_{1/2} = {{c6::\\frac{1}{k[A]_0}}}$."
@@ -2467,20 +2467,20 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838832712540,
+                        "item_id": 1879963223739674465,
                         "type": "ClozeCard",
                         "title": "Leyes de Primer Orden",
                         "text": "Para reacción de orden 1 ($v = k[A]$):<br>- Concentración: $\\ln[A]_t = {{c1::\\ln[A]_0 - kt \\iff [A]_t = [A]_0 e^{-kt}}}$<br>- Vida media: $t_{1/2} = {{c2::\\frac{\\ln 2}{k} \\approx \\frac{0.6931}{k}}}$ ({{c3::independiente de [A]_0}}).<br>- Gráfico lineal: $\\ln[A]$ vs $t$ con pendiente $-k$."
                     },
                     {
-                        "item_id": 1879961838833976365,
+                        "item_id": 1879963223740082245,
                         "type": "Flashcard",
                         "title": "Datación por Carbono-14",
                         "front": "Deduzca la fórmula para calcular la edad $t$ de un fósil a partir de su actividad remanente $A_t$ y su vida media $t_{1/2}$.",
                         "back": "El decaimiento radiactivo es cinéticamente de primer orden puro:<br>$$k = \\frac{\\ln 2}{t_{1/2}}$$<br>De la ley integrada: $\\ln(A_t / A_0) = -k t \\implies t = \\frac{1}{k}\\ln\\left(\\frac{A_0}{A_t}\\right) = \\frac{t_{1/2}}{\\ln 2} \\ln\\left(\\frac{A_0}{A_t}\\right)$."
                     },
                     {
-                        "item_id": 1879961838868482118,
+                        "item_id": 1879963223774860564,
                         "type": "Flashcard",
                         "title": "Estrategia de Exceso de Reactivo para Pseudo-Orden",
                         "front": "Explique cómo se diseñan las condiciones experimentales de pseudo-primer orden para estudiar reacciones de orden superior como $v = k [A] [B]$.",
@@ -2502,19 +2502,19 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838834477944,
+                        "item_id": 1879963223741615722,
                         "type": "ClozeCard",
                         "title": "Leyes de Segundo Orden",
                         "text": "Para orden 2 ($v = k[A]^2$):<br>- Integrada: $\\frac{1}{[A]_t} = {{c1::\\frac{1}{[A]_0} + kt}}$<br>- Vida media: $t_{1/2} = {{c2::\\frac{1}{k[A]_0}}}$<br>- Gráfico lineal: $1/[A]$ vs $t$ con pendiente {{c3::+k (positiva)}}."
                     },
                     {
-                        "item_id": 1879961838869343791,
+                        "item_id": 1879963223776078642,
                         "type": "ClozeCard",
                         "title": "Ecuación de Arrhenius y Linealización",
                         "text": "Dependencia de la constante de velocidad con la temperatura absoluta $T$:<br>$$k = {{c1::A e^{-E_a / RT}}}$$<br>- $E_a$: Energía de activación (energía mínima requerida para formar el complejo activado).<br>- $A$: Factor preexponencial de frecuencia (frecuencia de colisiones con orientación espacial favorable).<br>- Linealización: $$\\ln k = {{c2::\\ln A - \\frac{E_a}{R}\\left(\\frac{1}{T}\\right)}}$$ (gráfico $\\ln k$ vs $1/T$ tiene pendiente $-\\frac{E_a}{R}$).<br>- Ecuación de dos temperaturas: $$\\ln\\left(\\frac{k_2}{k_1}\\right) = {{c3::-\\frac{E_a}{R}\\left(\\frac{1}{T_2} - \\frac{1}{T_1}\\right) = \\frac{E_a}{R}\\left(\\frac{T_2 - T_1}{T_1 T_2}\\right)}}$$."
                     },
                     {
-                        "item_id": 1879961838870402137,
+                        "item_id": 1879963223776887493,
                         "type": "Flashcard",
                         "title": "Perfiles de Energía Potencial y Catálisis",
                         "front": "¿Cómo se relacionan las energías de activación directa e inversa con el cambio de entalpía $\\Delta H$, y cuál es el efecto exacto de un catalizador?",
@@ -2537,33 +2537,33 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838835275445,
+                        "item_id": 1879963223742654271,
                         "type": "ClozeCard",
                         "title": "Ecuación de Arrhenius",
                         "text": "Ecuación de Arrhenius:<br>$$k = {{c1::A e^{-E_a/(RT)}}}$$<br>Linealizada: $\\ln k = \\ln A - \\frac{E_a}{R}\\frac{1}{T}$ con pendiente {{c2::-E_a/R}}.<br>Dos temperaturas: $\\ln(k_2/k_1) = {{c3::\\frac{E_a}{R}\\left(\\frac{1}{T_1} - \\frac{1}{T_2}\\right)}}$."
                     },
                     {
-                        "item_id": 1879961838836392070,
+                        "item_id": 1879963223743931780,
                         "type": "Flashcard",
                         "title": "Regla de Duplicación cada 10°C",
                         "front": "Si una reacción duplica su velocidad al pasar de $20^\\circ\\text{C}$ a $30^\\circ\\text{C}$ ($k_2/k_1 = 2$), calcule $E_a$.",
                         "back": "$T_1 = 293.15\\,\\text{K}$ y $T_2 = 303.15\\,\\text{K}$.<br>$\\ln 2 = \\frac{E_a}{8.314}\\left(\\frac{10}{293.15 \\times 303.15}\\right) \\implies E_a \\approx 51.2\\,\\text{kJ/mol}$."
                     },
                     {
-                        "item_id": 1879961838871293597,
+                        "item_id": 1879963223777835800,
                         "type": "ClozeCard",
                         "title": "Relación Fundamental entre Kc y Kp",
                         "text": "Para una reacción en fase gaseosa: $a A(g) + b B(g) \\rightleftharpoons c C(g) + d D(g)$:<br>- Constante en concentraciones molares: $$K_c = \\frac{[C]^c [D]^d}{[A]^a [B]^b}$$<br>- Constante en presiones parciales: $$K_p = \\frac{P_C^c P_D^d}{P_A^a P_B^b}$$<br>- Relación termodinámica ideal: $$K_p = {{c1::K_c (R T)^{\\Delta n_{\\text{gas}}}}}$$<br>donde $\\Delta n_{\\text{gas}} = {{c2::(c + d) - (a + b)}}$, y $R = 0.08206 \\text{ atm}\\cdot\\text{L}/(\\text{mol}\\cdot\\text{K})$."
                     },
                     {
-                        "item_id": 1879961838872463985,
+                        "item_id": 1879963223779688988,
                         "type": "Flashcard",
                         "title": "Equilibrios Heterogéneos y Omisión de Sólidos y Líquidos Puros",
                         "front": "¿Por qué los sólidos puros (s) y los líquidos puros (l) no se incluyen en las expresiones de $K_c$ o $K_p$?",
                         "back": "En termodinámica química, las constantes de equilibrio se escriben en términos de <b>actividades químicas</b> ($a_i$).<br>Para sólidos puros y líquidos puros bajo presiones ordinarias, la concentración molar es constante (su densidad dividida por la masa molar no cambia) y su actividad estándar es idéntica a la unidad: $a_{\\text{sólido}} = 1$, $a_{\\text{líquido}} = 1$.<br>Ejemplo: Para $\\text{CaCO}_3(s) \\rightleftharpoons \\text{CaO}(s) + \\text{CO}_2(g)$, $K_c = [\\text{CO}_2]$ y $K_p = P_{\\text{CO}_2}$."
                     },
                     {
-                        "item_id": 1879961838873320941,
+                        "item_id": 1879963223780728462,
                         "type": "ClozeCard",
                         "title": "Solubilidad Condicionada por el pH en Sales Básicas",
                         "text": "Para una sal poco soluble cuyo anión proviene de un ácido débil, como $\\text{CaF}_2(s) \\rightleftharpoons \\text{Ca}^{2+}(aq) + 2\\text{F}^-(aq)$ con constante $K_{ps}$:<br>1. Al acidificar la disolución (disminuir el pH / aumentar $[\\text{H}^+]$), los protones reaccionan con el anión fluoruro formando {{c1::el ácido débil poco disociado $\\text{HF}$}}.<br>2. Esta reacción secundaria consume $\\text{F}^-$ libre, desplazando el equilibrio de solubilidad por Le Chatelier hacia {{c2::la derecha (hacia la disolución)}}.<br>3. Por lo tanto, la solubilidad molar de $\\text{CaF}_2$ {{c3::aumenta drásticamente a pH ácido}}, a diferencia de sales con aniones de ácidos fuertes como $\\text{AgCl}$ donde el pH no afecta la solubilidad."
@@ -2585,19 +2585,19 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838837694233,
+                        "item_id": 1879963223744097202,
                         "type": "ClozeCard",
                         "title": "Etapa Limitante y Estado Estacionario",
                         "text": "- La velocidad global está gobernada por la etapa {{c1::más lenta (Rate Determining Step, RDS)}}.<br>- Para intermediarios reactivos inestables $I$: $\\frac{d[I]}{dt} \\approx {{c2::0 (Aproximación de Estado Estacionario, SSA)}}$.<br>- Si $[B]_0 \\gg [A]_0$, se sigue cinética de {{c3::pseudo-primer orden}} con $k_{\\text{obs}} = k[B]_0^y$."
                     },
                     {
-                        "item_id": 1879961838874032870,
+                        "item_id": 1879963223780812511,
                         "type": "ClozeCard",
                         "title": "Comparación Q vs K y Sentido Espontáneo de Avance",
                         "text": "El cociente de reacción $Q$ tiene la misma forma matemática que $K$, pero evaluado con las concentraciones instantáneas no necesariamente en equilibrio:<br>- Si $Q < K$: Existen menos productos de los requeridos; la reacción neta avanza hacia la {{c1::derecha (productos)}} ($\\longrightarrow$).<br>- Si $Q > K$: Existen más productos de los debidos; la reacción neta retrocede hacia la {{c2::izquierda (reactivos)}} ($\\longleftarrow$).<br>- Si $Q = K$: El sistema se encuentra en {{c3::equilibrio químico dinámico}}."
                     },
                     {
-                        "item_id": 1879961838875526560,
+                        "item_id": 1879963223782169071,
                         "type": "Flashcard",
                         "title": "Perturbaciones de Le Chatelier: Presión, Volumen y Gas Inerte",
                         "front": "Analice el desplazamiento del equilibrio por el Principio de Le Chatelier ante: 1) Disminución de volumen (aumento de presión), 2) Adición de gas inerte a volumen constante, 3) Adición de gas inerte a presión constante.",
@@ -2619,14 +2619,14 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838838633273,
+                        "item_id": 1879963223745435683,
                         "type": "Flashcard",
                         "title": "Rol del Catalizador: Qué Altera y Qué NO Altera",
                         "front": "En una reacción reversible, ¿qué magnitudes altera y cuáles NO altera un catalizador?",
                         "back": "1. <b>SÍ altera:</b> Disminuye $E_a$; incrementa $k_{\\text{dir}}$ y $k_{\\text{inv}}$ en el mismo factor; acelera el tiempo de llegada al equilibrio.<br>2. <b>NO altera:</b> $\\Delta G^\\circ$, $\\Delta H^\\circ$, $K_{\\text{eq}}$ ni las concentraciones finales de equilibrio. No se consume."
                     },
                     {
-                        "item_id": 1879961838877107830,
+                        "item_id": 1879963223783401127,
                         "type": "ClozeCard",
                         "title": "Ecuación de Van 't Hoff y Termodinámica",
                         "text": "La única perturbación que altera el valor numérico de la constante de equilibrio $K$ es el cambio de <b>temperatura</b>:<br>$$\\ln\\left(\\frac{K_2}{K_1}\\right) = {{c1::-\\frac{\\Delta H^\\circ}{R}\\left(\\frac{1}{T_2} - \\frac{1}{T_1}\\right)}}$$<br>- Reacción Endotérmica ($\\Delta H^\\circ > 0$, el calor actúa como reactivo): Al aumentar $T \\implies$ {{c2::$K$ aumenta y se desplaza a productos}}.<br>- Reacción Exotérmica ($\\Delta H^\\circ < 0$, el calor actúa como producto): Al aumentar $T \\implies$ {{c3::$K$ disminuye y se desplaza a reactivos}}."
@@ -2648,13 +2648,13 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838839528520,
+                        "item_id": 1879963223746269444,
                         "type": "ClozeCard",
                         "title": "Relación entre Kp y Kc",
                         "text": "Para reacción gaseosa $aA(g) + bB(g) \\rightleftharpoons cC(g) + dD(g)$:<br>$$K_p = {{c1::K_c (RT)^{\\Delta n_{(g)}}}}$$<br>donde $\\Delta n_{(g)} = {{c2::(c + d) - (a + b)}}$.<br>Si $\\Delta n_{(g)} = 0 \\implies K_p {{c3::= K_c}}$."
                     },
                     {
-                        "item_id": 1879961838877228721,
+                        "item_id": 1879963223784161288,
                         "type": "ClozeCard",
                         "title": "Autoionización del Agua y Kw",
                         "text": "En disolución acuosa a $25^\\circ\\text{C}$:<br>$$2 \\text{H}_2\\text{O}(l) \\rightleftharpoons \\text{H}_3\\text{O}^+(aq) + \\text{OH}^-(aq)$$<br>- Producto iónico del agua: $$K_w = [\\text{H}^+][\\text{OH}^-] = {{c1::1.0 \\times 10^{-14}}}$$<br>- Escalas logarítmicas: $\\text{pH} = -\\log[\\text{H}^+]$ y $\\text{pOH} = -\\log[\\text{OH}^-]$.<br>- Relación fundamental: $$\\text{pH} + \\text{pOH} = {{c2::14.00}}$$ (a mayor temperatura, como la disociación es endotérmica, $K_w$ aumenta y el pH neutro disminuye)."
@@ -2675,19 +2675,19 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838841415506,
+                        "item_id": 1879963223747328953,
                         "type": "ClozeCard",
                         "title": "Criterio de Evolución con Q",
                         "text": "- Si $Q < K$: La reacción avanza hacia la {{c1::derecha (hacia productos)}}.<br>- Si $Q = K$: Sistema en {{c2::equilibrio dinámico}}.<br>- Si $Q > K$: La reacción avanza hacia la {{c3::izquierda (hacia reactivos)}}.<br>Regla de sólidos y líquidos puros: Tienen actividad 1 y {{c4::NO se incluyen en K}}."
                     },
                     {
-                        "item_id": 1879961838878196794,
+                        "item_id": 1879963223785315088,
                         "type": "ClozeCard",
                         "title": "Tabla ICE y la Regla del 5%",
                         "text": "Para un ácido monoprótico débil: $\\text{HA} + \\text{H}_2\\text{O} \\rightleftharpoons \\text{H}_3\\text{O}^+ + \\text{A}^-$ con concentración inicial $C_0$:<br>Por tabla ICE en equilibrio: $[\\text{HA}] = C_0 - x$, $[\\text{H}^+] = x$, $[\\text{A}^-] = x$.<br>$$K_a = \\frac{x^2}{C_0 - x}$$<br>- <b>Regla del 5% / Criterio de los 400:</b> Si {{c1::$\\frac{C_0}{K_a} > 400$}}, se puede despreciar $x$ frente a $C_0$ ($C_0 - x \\approx C_0$):<br>$$x = [\\text{H}^+] \\approx {{c2::\\sqrt{K_a C_0}}}$$.<br>Si el porcentaje de ionización $\\alpha = \\frac{x}{C_0}\\times 100\\% > 5\\%$, debe resolverse la ecuación cuadrática exacta."
                     },
                     {
-                        "item_id": 1879961838879615757,
+                        "item_id": 1879963223786953876,
                         "type": "Flashcard",
                         "title": "Relación entre Pares Ácido-Base Conjugados",
                         "front": "Deduzca la relación entre la constante de acidez $K_a$ de un ácido débil y la constante de basicidad $K_b$ de su base conjugada.",
@@ -2710,13 +2710,13 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838842216252,
+                        "item_id": 1879963223748661224,
                         "type": "ClozeCard",
                         "title": "Energía Libre y Constante de Equilibrio",
                         "text": "$$\\Delta G^\\circ = {{c1::-RT \\ln K}} \\iff K = {{c2::\\exp\\left(-\\frac{\\Delta G^\\circ}{RT}\\right)}}$$<br>Bajo condiciones no estándar:<br>$$\\Delta G = {{c3::\\Delta G^\\circ + RT \\ln Q}}$$<br>En el equilibrio: $\\Delta G = {{c4::0}}$."
                     },
                     {
-                        "item_id": 1879961838881045760,
+                        "item_id": 1879963223788008264,
                         "type": "Flashcard",
                         "title": "Diagnóstico del Comportamiento Ácido-Base de Sales",
                         "front": "Clasifique el carácter de las disoluciones acuosas de: 1) NaCl, 2) NH4Cl, 3) CH3COONa, 4) NH4F.",
@@ -2739,27 +2739,27 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838842712757,
+                        "item_id": 1879963223750051536,
                         "type": "Flashcard",
                         "title": "Efecto de Compresión y Gases Inertes",
                         "front": "Analice según Le Châtelier: (1) Reducción de volumen, y (2) Adición de gas inerte a volumen constante.",
                         "back": "1. <b>Reducción de volumen:</b> Aumenta la presión; se desplaza hacia el lado con <b>menor número de moles gaseosos</b>.<br>2. <b>Gas inerte a volumen constante:</b> Las presiones parciales de reactivos y productos no cambian; $Q$ permanece intacto y el equilibrio <b>NO se desplaza</b>."
                     },
                     {
-                        "item_id": 1879961838882594679,
+                        "item_id": 1879963223788809745,
                         "type": "ClozeCard",
                         "title": "Ecuación de Henderson-Hasselbalch",
                         "text": "Para un sistema amortiguador compuesto por un ácido débil $\\text{HA}$ y su base conjugada $\\text{A}^-$:<br>- Ecuación de Henderson-Hasselbalch: $$\\text{pH} = {{c1::\\text{p}K_a + \\log\\left(\\frac{[\\text{A}^-]}{[\\text{HA}]}\\right) = \\text{p}K_a + \\log\\left(\\frac{n_{\\text{base}}}{n_{\\text{ácido}}}\\right)}}$$.<br>- Máxima capacidad amortiguadora: Ocurre cuando $[\\text{HA}] = [\\text{A}^-]$, donde $\\log(1) = 0 \\implies \\text{pH} = {{c2::\\text{p}K_a}}$.<br>- Rango eficaz de amortiguación: $$\\text{pH} = {{c3::\\text{p}K_a \\pm 1}}$$."
                     },
                     {
-                        "item_id": 1879961838883686716,
+                        "item_id": 1879963223789352171,
                         "type": "Flashcard",
                         "title": "Perturbación Cuantitativa de Buffers ante Adición de Ácido/Base Fuerte",
                         "front": "Explique la metodología de dos pasos para calcular el nuevo pH de un buffer tras agregar una cantidad estequiométrica $n_{\\text{agregada}}$ de base fuerte (OH-) o ácido fuerte (H+).",
                         "back": "1. <b>Paso 1: Estequiometría de Neutralización Completa (moles):</b><br>- Si se agrega $\\text{OH}^-$: Reacciona con el ácido débil: $\\text{HA} + \\text{OH}^- \\longrightarrow \\text{A}^- + \\text{H}_2\\text{O}$.<br>Nuevos moles: $n_{\\text{HA}}' = n_{\\text{HA}} - n_{\\text{OH}^-}$, y $n_{\\text{A}^-}' = n_{\\text{A}^-} + n_{\\text{OH}^-}$.<br>- Si se agrega $\\text{H}^+$: Reacciona con la base conjugada: $\\text{A}^- + \\text{H}^+ \\longrightarrow \\text{HA}$.<br>Nuevos moles: $n_{\\text{A}^-}' = n_{\\text{A}^-} - n_{\\text{H}^+}$, y $n_{\\text{HA}}' = n_{\\text{HA}} + n_{\\text{H}^+}$.<br>2. <b>Paso 2: Recalcular pH con Henderson-Hasselbalch:</b><br>$$\\text{pH}' = \\text{p}K_a + \\log\\left(\\frac{n_{\\text{A}^-}'}{n_{\\text{HA}}'}\\right)$$"
                     },
                     {
-                        "item_id": 1879961838885107363,
+                        "item_id": 1879963223790389991,
                         "type": "Flashcard",
                         "title": "Cálculo del pH de Sales Anfolíticas / Anfóteras (NaHCO3)",
                         "front": "¿Cómo se deduce y calcula el pH de una disolución de un anfolito como el bicarbonato de sodio ($\\text{NaHCO}_3$) a partir de las constantes de su ácido diprótico?",
@@ -2781,13 +2781,13 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838845542436,
+                        "item_id": 1879963223750705161,
                         "type": "ClozeCard",
                         "title": "Ecuación de van 't Hoff",
                         "text": "La temperatura es la ÚNICA variable que cambia el valor de $K$:<br>$$\\ln\\left(\\frac{K_2}{K_1}\\right) = {{c1::\\frac{\\Delta H^\\circ}{R}\\left(\\frac{T_2 - T_1}{T_1 T_2}\\right)}}$$<br>- Endotérmica ($\\Delta H^\\circ > 0$): Aumentar $T$ {{c2::aumenta K (favorece productos)}}.<br>- Exotérmica ($\\Delta H^\\circ < 0$): Aumentar $T$ {{c3::disminuye K (favorece reactivos)}}."
                     },
                     {
-                        "item_id": 1879961838886323606,
+                        "item_id": 1879963223793109632,
                         "type": "Flashcard",
                         "title": "Las 4 Regiones de Titulación de Ácido Débil con Base Fuerte",
                         "front": "Describa los 4 puntos clave en la curva de titulación de un ácido débil HA con una base fuerte NaOH.",
@@ -2809,14 +2809,14 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838846597153,
+                        "item_id": 1879963223751477296,
                         "type": "Flashcard",
                         "title": "Deducción de Kp con Grado de Disociación alpha",
                         "front": "Para $\\text{A}(g) \\rightleftharpoons \\text{B}(g) + \\text{C}(g)$ a presión $P_{\\text{tot}}$, deduzca $K_p$ en función de $\\alpha$ y $P_{\\text{tot}}$.",
                         "back": "1. Moles en equilibrio: $n_A = n_0(1-\\alpha)$, $n_B = n_C = n_0\\alpha$. Total: $n_{\\text{tot}} = n_0(1+\\alpha)$.<br>2. Fracciones molares: $X_A = \\frac{1-\\alpha}{1+\\alpha}$, $X_B = X_C = \\frac{\\alpha}{1+\\alpha}$.<br>3. Constante $K_p$:<br>$$K_p = \\frac{P_B P_C}{P_A} = \\frac{\\left(\\frac{\\alpha}{1+\\alpha} P_{\\text{tot}}\\right)^2}{\\frac{1-\\alpha}{1+\\alpha} P_{\\text{tot}}} = \\frac{\\alpha^2}{1-\\alpha^2} P_{\\text{tot}}$$"
                     },
                     {
-                        "item_id": 1879961838887341326,
+                        "item_id": 1879963223794027432,
                         "type": "ProofSequenceCard",
                         "title": "Algoritmo de 7 Pasos para Balancear Reacciones Redox en Medio Ácido y Básico",
                         "premise": "Describa la secuencia estandarizada del método del ión-electrón para balancear cualquier reacción redox.",
@@ -2847,26 +2847,26 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838846919204,
+                        "item_id": 1879963223753257056,
                         "type": "ClozeCard",
                         "title": "Constante Kw y Relación pH-pOH",
                         "text": "A $25^\\circ\\text{C}$:<br>- $K_w = [\\text{H}^+][\\text{OH}^-] = {{c1::1.0 \\times 10^{-14}}}$<br>- $\\text{pH} + \\text{pOH} = {{c2::14.00}}$<br>- Pares conjugados: $K_a \\cdot K_b = {{c3::K_w}}$ y $\\text{p}K_a + \\text{p}K_b = 14.00$."
                     },
                     {
-                        "item_id": 1879961838848449985,
+                        "item_id": 1879963223753895683,
                         "type": "Flashcard",
                         "title": "Variación de Kw con la Temperatura",
                         "front": "La autoionización del agua es endotérmica ($\\Delta H^\\circ > 0$). A $50^\\circ\\text{C}$, $K_w = 5.5 \\times 10^{-14}$. Calcule el pH neutro.",
                         "back": "En agua pura neutra: $[\\text{H}^+] = [\\text{OH}^-] = \\sqrt{K_w} = \\sqrt{5.5 \\times 10^{-14}} \\approx 2.345 \\times 10^{-7}\\,\\text{M}$.<br>$$\\text{pH} = -\\log_{10}(2.345 \\times 10^{-7}) \\approx 6.63$$<br>El agua sigue siendo <b>estrictamente neutra</b> a pesar de tener $\\text{pH} = 6.63$, porque $[\\text{H}^+] = [\\text{OH}^-]$."
                     },
                     {
-                        "item_id": 1879961838887942168,
+                        "item_id": 1879963223794968057,
                         "type": "ClozeCard",
                         "title": "Componentes Canónicos de una Celda Galvánica",
                         "text": "En una celda electroquímica espontánea (galvánica o voltaica):<br>- <b>Ánodo:</b> Electrodo con polaridad {{c1::negativa (-)}}, donde ocurre siempre la {{c2::oxidación}} ($A \\to A^{n+} + n e^-$).<br>- <b>Cátodo:</b> Electrodo con polaridad {{c3::positiva (+)}}, donde ocurre siempre la {{c4::reducción}} ($C^{m+} + m e^- \\to C$).<br>- <b>Puente Salino:</b> Mantiene la neutralidad eléctrica permitiendo que los {{c5::aniones migren al ánodo y los cationes al cátodo}}.<br>- Potencial estándar de celda: $$E^\\circ_{\\text{celda}} = {{c6::E^\\circ_{\\text{cátodo}} - E^\\circ_{\\text{ánodo}}}}$$ (utilizando siempre los potenciales de reducción de tabla)."
                     },
                     {
-                        "item_id": 1879961838889598954,
+                        "item_id": 1879963223796044163,
                         "type": "ClozeCard",
                         "title": "Protección Catódica y Ánodos de Sacrificio",
                         "text": "Para prevenir la corrosión galvánica de estructuras enterradas o sumergidas de acero ($\\text{Fe} \\to \\text{Fe}^{2+} + 2e^-$):<br>1. Se conecta eléctricamente la estructura a un metal con potencial estándar de reducción {{c1::más negativo que el del hierro}}, tal como {{c2::zinc ($\\text{Zn}$) o magnesio ($\\text{Mg}$)}}.<br>2. El metal acoplado se oxida preferencialmente actuando como {{c3::ánodo de sacrificio}} y entregando electrones a la estructura.<br>3. El acero se polariza como {{c4::cátodo}}, impidiendo su oxidación y garantizando su integridad mecánica mientras persista el ánodo de sacrificio."
@@ -2888,26 +2888,26 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838848933860,
+                        "item_id": 1879963223755897866,
                         "type": "Flashcard",
                         "title": "Cálculo de pH y Criterio de la Regla del 5%",
                         "front": "Para un ácido débil $HA$ ($C_0, K_a$), ¿cuándo vale $[\\text{H}^+] \\approx \\sqrt{K_a C_0}$?",
                         "back": "1. <b>Regla del 5%:</b> Válida si $\\alpha = x/C_0 < 0.05$, equivalente a:<br>$$\\frac{C_0}{K_a} > 400$$<br>En tal caso: $[\\text{H}^+] \\approx \\sqrt{K_a C_0} \\implies \\text{pH} = \\frac{1}{2}(\\text{p}K_a - \\log_{10} C_0)$.<br>2. <b>Si $\\frac{C_0}{K_a} \\le 400$:</b> Obligatorio resolver la cuadrática exacta: $x^2 + K_a x - K_a C_0 = 0$."
                     },
                     {
-                        "item_id": 1879961838850124111,
+                        "item_id": 1879963223757630618,
                         "type": "ClozeCard",
                         "title": "Ácidos Polipróticos",
                         "text": "Para un ácido poliprótico como $\\text{H}_3\\text{PO}_4$ donde $K_{a1} \\gg K_{a2} \\gg K_{a3}$:<br>- El pH está gobernado casi exclusivamente por {{c1::la primera disociación Ka1}}.<br>- La concentración del anión divalente es $[\\text{HPO}_4^{2-}] \\approx {{c2::K_{a2}}}$."
                     },
                     {
-                        "item_id": 1879961838890610169,
+                        "item_id": 1879963223797326751,
                         "type": "ClozeCard",
                         "title": "Relaciones Termodinámicas Fundamentales",
                         "text": "Interconexión entre electroquímica y termodinámica química:<br>- Energía Libre de Gibbs estándar: $$\\Delta G^\\circ = {{c1::-n F E^\\circ_{\\text{celda}}}}$$ con $F = 96485 \\text{ C/mol } e^-$.<br>Para que una reacción sea espontánea: $\\Delta G^\\circ < 0 \\iff E^\\circ_{\\text{celda}} > 0$.<br>- Relación con la constante de equilibrio a $25^\\circ\\text{C}$ ($298.15\\text{ K}$): $$E^\\circ_{\\text{celda}} = {{c2::\\frac{0.0592}{n}\\log K}}$$<br>- Ecuación de Nernst para condiciones no estándar: $$E = {{c3::E^\\circ - \\frac{0.0592}{n}\\log Q}}$$<br>En el equilibrio químico: $E = 0$ y $Q = K$."
                     },
                     {
-                        "item_id": 1879961838891132836,
+                        "item_id": 1879963223798202097,
                         "type": "Flashcard",
                         "title": "Leyes de Electrólisis de Faraday",
                         "front": "Escriba la fórmula para calcular la masa $m$ de sustancia depositada o liberada en un electrodo durante una electrólisis con corriente $I$ durante un tiempo $t$.",
@@ -2930,7 +2930,7 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838851327798,
+                        "item_id": 1879963223757722958,
                         "type": "ClozeCard",
                         "title": "Fórmulas de Hidrólisis de Sales",
                         "text": "Para concentración de sal $C_s$:<br>- Sal básica ($A^-$): $K_b = \\frac{K_w}{K_a}$, $[\\text{OH}^-] \\approx {{c1::\\sqrt{K_b C_s} = \\sqrt{\\frac{K_w}{K_a} C_s}}}$.<br>- Sal ácida ($BH^+$): $K_a = \\frac{K_w}{K_b}$, $[\\text{H}^+] \\approx {{c2::\\sqrt{K_a C_s} = \\sqrt{\\frac{K_w}{K_b} C_s}}}$.<br>- Sales de ácido fuerte y base fuerte (ej. $\\text{NaCl}$): no se hidrolizan, $\\text{pH} = {{c3::7.00}}$."
@@ -2951,7 +2951,7 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838852244216,
+                        "item_id": 1879963223759711135,
                         "type": "ClozeCard",
                         "title": "Ecuación de Henderson-Hasselbalch",
                         "text": "Para amortiguador de ácido débil $HA$ y su sal $A^-$:<br>$$\\text{pH} = {{c1::\\text{p}K_a + \\log_{10}\\left(\\frac{[A^-]}{[HA]}\\right) = \\text{p}K_a + \\log_{10}\\left(\\frac{n_{A^-}}{n_{HA}}\\right)}}$$<br>Máxima capacidad amortiguadora: cuando $[A^-] = [HA]$, donde $\\text{pH} = {{c2::\\text{p}K_a}}$.<br>Rango de amortiguamiento útil: $\\text{pH} = {{c3::\\text{p}K_a \\pm 1}}$."
@@ -2973,7 +2973,7 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838853688132,
+                        "item_id": 1879963223760470938,
                         "type": "ProofSequenceCard",
                         "title": "Cálculo de pH tras Perturbar un Buffer con Ácido o Base Fuerte",
                         "premise": "Determinar el nuevo pH de un buffer tras agregar ácido o base fuerte.",
@@ -3001,7 +3001,7 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838854720072,
+                        "item_id": 1879963223761294310,
                         "type": "Flashcard",
                         "title": "Puntos Notables en Curva de Titulación Ácido Débil - Base Fuerte",
                         "front": "Describa el pH en los 4 puntos clave de titulación de $\\text{HA}$ con $\\text{NaOH}$.",
@@ -3024,7 +3024,7 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838855459885,
+                        "item_id": 1879963223762092543,
                         "type": "ProofSequenceCard",
                         "title": "Algoritmo de Balanceo Ion-Electrón",
                         "premise": "Pasos algorítmicos para balancear semirreacciones redox.",
@@ -3038,7 +3038,7 @@ const SEED_COURSES = [
                         ]
                     },
                     {
-                        "item_id": 1879961838857108462,
+                        "item_id": 1879963223763595119,
                         "type": "ClozeCard",
                         "title": "Conceptos de Oxidación y Reducción",
                         "text": "- <b>Oxidación:</b> {{c1::Pérdida de electrones}} (aumento de estado de oxidación). Ocurre en el {{c2::Ánodo}} (vocal-vocal); actúa como agente reductor.<br>- <b>Reducción:</b> {{c3::Ganancia de electrones}} (disminución de estado de oxidación). Ocurre en el {{c4::Cátodo}} (consonante-consonante); actúa como agente oxidante."
@@ -3060,13 +3060,13 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838857407294,
+                        "item_id": 1879963223763991836,
                         "type": "ClozeCard",
                         "title": "Potencial de Celda, Nernst y Ley de Faraday",
                         "text": "Potencial estándar: $E^\\circ_{\\text{celda}} = E^\\circ_{\\text{cátodo}} - E^\\circ_{\\text{ánodo}}$, con $\\Delta G^\\circ = {{c1::-n F E^\\circ_{\\text{celda}}}}$.<br>Ecuación de Nernst a $25^\\circ\\text{C}$:<br>$$E_{\\text{celda}} = {{c2::E^\\circ_{\\text{celda}} - \\frac{0.0592}{n}\\log_{10} Q}}$$<br>Masa depositada por electrólisis: $m = {{c3::\\frac{M \\cdot I \\cdot t}{n F}}}$ ($F = 96485\\,\\text{C/mol}$).<br>En equilibrio: $E_{\\text{celda}} = 0 \\implies E^\\circ_{\\text{celda}} = {{c4::\\frac{0.0592}{n}\\log_{10} K}}$."
                     },
                     {
-                        "item_id": 1879961838858475804,
+                        "item_id": 1879963223765534404,
                         "type": "Flashcard",
                         "title": "Celdas de Concentración y Puente Salino",
                         "front": "¿Cómo funciona una celda de concentración y cuál es la función del puente salino?",
@@ -3088,7 +3088,7 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838860013011,
+                        "item_id": 1879963223766816129,
                         "type": "ClozeCard",
                         "title": "Fórmulas Fundamentales de Concentración",
                         "text": "Definiciones de unidades de concentración para mezclas homogéneas:<br>- Molaridad ($M$): $$M = {{c1::\\frac{n_{\\text{soluto}}}{V_{\\text{disolución (L)}}}}}$$<br>- Molalidad ($m$): $$m = {{c2::\\frac{n_{\\text{soluto}}}{m_{\\text{disolvente (kg)}}}}}$$ (no varía con la temperatura).<br>- Fracción Molar ($X_A$): $$X_A = {{c3::\\frac{n_A}{n_{\\text{total}}}}}$$ con $\\sum X_i = 1$.<br>- Ley de Dilución: $$C_1 V_1 = {{c4::C_2 V_2}}$$."
@@ -3277,19 +3277,19 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838896410823,
+                        "item_id": 1879963223801292015,
                         "type": "ClozeCard",
                         "title": "El Modelo de Van Gennep en el Funeral Griego",
                         "text": "Según Arnold van Gennep, el funeral es un rito de paso tripartito:<br>1. Fase de {{c1::Separación}} (aislamiento del cadáver impuro en el *oikos*).<br>2. Fase Liminar o de {{c2::Transición}} (el cortejo de la *ékfora* en la frontera urbana).<br>3. Fase de {{c3::Reintegración / Agregación}} (sepultura y banquete *perídeipnon*, reconstituyendo la comunidad viva)."
                     },
                     {
-                        "item_id": 1879961838921334750,
+                        "item_id": 1879963223826862612,
                         "type": "ClozeCard",
                         "title": "El Esquema Tripartito de Arnold van Gennep",
                         "text": "En la antropología clásica de Arnold van Gennep (1909), el funeral griego se estructura como el paradigma de los <b>ritos de paso</b> en tres fases:<br>1. <b>Fase Preliminar (Separación):</b> Ruptura del individuo con el mundo de los vivos: {{c1::La Prótesis (lavado, mortaja y velatorio en el oikos)}}.<br>2. <b>Fase Liminar (Marginalidad / Tránsito):</b> El sujeto ya no pertenece a los vivos pero aún no ingresa al inframundo: {{c2::La Ékfora (cortejo fúnebre nocturno)}}.<br>3. <b>Fase Postliminar (Reintegración):</b> El muerto se incorpora a los ancestros y la comunidad viva se restaura: {{c3::La Sepultura, libaciones y el Banquete Perideipnon}}."
                     },
                     {
-                        "item_id": 1879961838923660909,
+                        "item_id": 1879963223827582859,
                         "type": "Flashcard",
                         "title": "Concepto de Liminalidad y Peligro de la Transición",
                         "front": "¿Por qué la fase liminar es considerada el momento más peligroso tanto para el difunto como para la comunidad en la cosmovisión griega?",
@@ -3312,33 +3312,33 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838897214543,
+                        "item_id": 1879963223802488897,
                         "type": "ClozeCard",
                         "title": "La Psyche en el Hades como Eidolon",
                         "text": "En la épica homérica arcaica, la *psyche* subsiste en el Hades como:<br>$$\\text{Un } {{c1::*eidolon*}}$$<br>Una sombra vaporosa desprovista de fuerza vital ({{c2::*menos*}}) y de sangre, en un letargo desposeído."
                     },
                     {
-                        "item_id": 1879961838899164900,
+                        "item_id": 1879963223803464928,
                         "type": "Flashcard",
                         "title": "La Sentencia Trágica de Aquiles en la Odisea",
                         "front": "¿Cuál es la afirmación de Aquiles en la Nekyia (Odisea XI) y su implicancia?",
                         "back": "Aquiles proclama:<br><i>«Preferiría ser siervo en la tierra de un campesino pobre y sin tierra antes que reinar sobre todos los muertos extintos.»</i><br><br>Demuestra el <b>despojo ontológico absoluto</b> de la muerte arcaica: no hay premios morales; el rito busca rescatar la memoria viva (*mneme*)."
                     },
                     {
-                        "item_id": 1879961838924638650,
+                        "item_id": 1879963223828469363,
                         "type": "Flashcard",
                         "title": "Patroclo y las Súplicas a Aquiles en la Ilíada",
                         "front": "¿Qué mensaje le entrega la sombra de Patroclo a Aquiles en el canto XXIII de la Ilíada y cuál es su significado escatológico?",
                         "back": "La sombra (eidolon) de Patroclo se aparece en sueños a Aquiles y le ruega:<br><i>«¿Duermes, Aquiles, y te has olvidado de mí?... Entiérrame cuanto antes, para que pueda pasar las puertas del Hades. Me apartan las sombras, imágenes de los difuntos, y no me dejan mezclarme con ellas más allá del río...»</i> (Ilíada XXIII, 69-74).<br><b>Significado:</b> Sin los ritos funerarios y la sepultura, el alma queda atrapada en el umbral liminal, desterrada tanto del mundo terrenal como del reposo subterráneo. El sepelio es un imperativo ético ineludible."
                     },
                     {
-                        "item_id": 1879961838926137855,
+                        "item_id": 1879963223829407608,
                         "type": "ClozeCard",
                         "title": "El Conflicto Trágico en Antígona de Sófocles",
                         "text": "En la tragedia de Sófocles, Antígona desafía el decreto real de Creonte que prohibía sepultar a su hermano Polinices:<br>- El conflicto contrapone la ley positiva del Estado ({{c1::$\\text{nomos}$}}) frente a las leyes sagradas eternas e inmutables de los dioses ({{c2::$\\text{themis}$ / leyes divinas no escritas}}).<br>- Negar la sepultura es concebido como una agresión atroz contra el orden natural que atrae {{c3::el míasma (contaminación colectiva) sobre toda la polis}}."
                     },
                     {
-                        "item_id": 1879961838926465050,
+                        "item_id": 1879963223830197206,
                         "type": "Flashcard",
                         "title": "La Embajada de Príamo ante Aquiles: Compasión y Tregua Funeraria (Ilíada XXIV)",
                         "front": "¿Cuál es la trascendencia ética y ritual del encuentro entre el rey Príamo y Aquiles en el canto XXIV de la Ilíada para el rescate del cadáver de Héctor?",
@@ -3361,26 +3361,26 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838899710293,
+                        "item_id": 1879963223804434801,
                         "type": "Flashcard",
                         "title": "El Reclamo del Fantasma de Patroclo",
                         "front": "¿Qué implora la sombra insepulta de Patroclo a Aquiles en Ilíada XXIII?",
                         "back": "<i>«¡Sepúltame cuanto antes para que pueda cruzar las puertas del Hades!»</i><br>Mientras el cuerpo carezca de sepultura, las sombras ya cruzadas le impiden vadear el río, dejándolo vagar errante en la frontera liminar."
                     },
                     {
-                        "item_id": 1879961838900287009,
+                        "item_id": 1879963223805012595,
                         "type": "ClozeCard",
                         "title": "El Conflicto Sagrado en Antígona de Sófocles",
                         "text": "Antígona desafía al rey Creonte apelando a:<br>{{c1::Las leyes no escritas e inmutables de los dioses (*ágrapta nómina*)}}<br>que ordenan honrar al cadáver de su hermano por encima de cualquier prohibición civil."
                     },
                     {
-                        "item_id": 1879961838927683263,
+                        "item_id": 1879963223831193330,
                         "type": "ClozeCard",
                         "title": "Naturaleza de la Psyche en el Más Allá",
                         "text": "En la concepción arcaica homérica:<br>- La muerte se produce cuando la {{c1::$\\text{psyche}$ (aliento vital)}} abandona el cuerpo por la boca o una herida abierta.<br>- En el Hades, el alma subsiste únicamente como un {{c2::$\\text{eidolon}$ (sombra o simulacro incorpóreo)}}, semejante al humo o al reflejo en un sueño.<br>- La sombra carece de fuerza física ({{c3::$\\text{menos}$}}) y de facultades cognitivas o memoria lúcida ({{c4::$\\text{phrenes}$}}), a menos que beba de la sangre fresca de los sacrificios (Nekuia de Odisea XI)."
                     },
                     {
-                        "item_id": 1879961838929538686,
+                        "item_id": 1879963223833018427,
                         "type": "Flashcard",
                         "title": "La Lucha contra el Olvido: Mnēme, Léthē y Kléos Aphthiton",
                         "front": "Explique la tensión cosmovisional entre el olvido del Hades (Léthē) y la trascendencia heroica (Kléos aphthiton / Mnēme) en la cultura griega.",
@@ -3403,20 +3403,20 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838901394527,
+                        "item_id": 1879963223806794796,
                         "type": "ClozeCard",
                         "title": "Definición de Míasma y Ta Nomizómena",
                         "text": "- {{c1::*Míasma*}}: La contaminación religiosa corruptora que emana del cadáver en descomposición.<br>- {{c2::*Ta nomizómena*}}: Las honras fúnebres sagradas debidas por piedad.<br>- El cántaro en la entrada para purificación con agua ajena es el {{c3::*ardánion*}}."
                     },
                     {
-                        "item_id": 1879961838929779222,
+                        "item_id": 1879963223834190213,
                         "type": "Flashcard",
                         "title": "Los Cinco Ríos Sagrados del Hades",
                         "front": "Mencione los 5 ríos del inframundo griego y su correspondencia alegórica.",
                         "back": "1. <b>Estigia (Styx):</b> El río del odio sagrado, sobre el cual los mismos dioses prestan sus juramentos inviolables.<br>2. <b>Aqueronte (Acheron):</b> El río de la aflicción y el dolor, que limita la entrada al reino subterráneo y por cuyas aguas transita la barca de Caronte.<br>3. <b>Cocito (Cocytus):</b> El río de los lamentos y el llanto fúnebre.<br>4. <b>Flegetonte / Piriflegetonte:</b> El río de fuego ardiente que rodea las profundidades del Tártaro.<br>5. <b>Lete (Lethe):</b> El río del olvido, de cuyas aguas beben las almas para borrar todos sus recuerdos de la vida terrenal."
                     },
                     {
-                        "item_id": 1879961838930973211,
+                        "item_id": 1879963223834528840,
                         "type": "ClozeCard",
                         "title": "Caronte, el Óbolo Funerario y Hermes Psicopompo",
                         "text": "Tránsito de las almas hacia el inframundo:<br>- <b>Hermes Psicopompo:</b> Divinidad encargada de {{c1::guiar y conducir las almas}} desde el mundo de la luz hasta las márgenes del Aqueronte.<br>- <b>Caronte:</b> El adusto barquero que exige el pago de {{c2::un óbolo de bronce colocado en la boca o sobre los ojos del difunto}}.<br>- Los insepultos o aquellos sin moneda quedan condenados a vagar {{c3::durante cien años en la orilla desolada}} antes de que se les permita cruzar."
@@ -3438,19 +3438,19 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838902868581,
+                        "item_id": 1879963223807774622,
                         "type": "ClozeCard",
                         "title": "Disposición del Difunto sobre la Kline",
                         "text": "En la *próthesis*:<br>- El cadáver se lava, se unge con ungüentos y se viste de blanco sobre el lecho mortuorio llamado {{c1::*kline*}}.<br>- Los pies se orientan apuntando hacia {{c2::la puerta exterior de la casa}}."
                     },
                     {
-                        "item_id": 1879961838932122678,
+                        "item_id": 1879963223836134006,
                         "type": "ClozeCard",
                         "title": "Liturgia Doméstica de la Próthesis",
                         "text": "La primera etapa del funeral griego, la <b>Próthesis</b> (exposición pública del cadáver):<br>- Espacio: Ocurre al interior del {{c1::$\\text{oikos}$ (hogar familiar)}} y se extiende por un día completo.<br>- Preparación del cadáver (rol femenino exclusivo): Las mujeres de la familia cierran ojos y boca, lavan el cuerpo con agua caliente y perfumes, lo ungen con aceites y lo cubren con {{c2::mortajas blancas ($\\text{chlaína}$)}}.<br>- Colocación de una rama de laurel o jarra con agua ({{c3::$\\text{ardánion}$}}) en la puerta de la casa para advertir a los transeúntes sobre el míasma y permitir su purificación al salir."
                     },
                     {
-                        "item_id": 1879961838933691974,
+                        "item_id": 1879963223837537851,
                         "type": "Flashcard",
                         "title": "Liturgia del Dolor: Distinción entre Góos y Thrēnos",
                         "front": "Distinga formalmente las dos expresiones poéticas y emocionales del lamento fúnebre durante la próthesis.",
@@ -3473,14 +3473,14 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838903469824,
+                        "item_id": 1879963223808667713,
                         "type": "Flashcard",
                         "title": "Diferencia entre Góos y Thrēnos",
                         "front": "Distinga antropológicamente entre el *góos* y el *thrēnos*.",
                         "back": "1. <b>El *Góos* (Lamento Femenino):</b> Improvisado, desgarrador y antifonal de las parientes, con somatización extrema (rasgarse mejillas, mesarse cabellos, golpearse el pecho).<br>2. <b>El *Thrēnos* (Canto Poético Masculino):</b> Composición coral formal de poetas profesionales que exalta la virtud cívica (*areté*) y el linaje con distanciamiento solemne."
                     },
                     {
-                        "item_id": 1879961838934699037,
+                        "item_id": 1879963223838793506,
                         "type": "ClozeCard",
                         "title": "La Procesión Cívica de la Ékfora",
                         "text": "La segunda etapa, la <b>Ékfora</b> (traslado del cuerpo):<br>- Momento: Se realiza obligatoriamente {{c1::antes de la salida del sol}} para evitar contaminar con el míasma los rayos de Helios y la actividad cívica de la polis.<br>- Recorrido: El féretro es llevado en carro o andas desde el hogar doméstico hasta {{c2::la necrópolis extramuros (el Cerámico en Atenas)}}.<br>- Comitiva: Los hombres encabezan la procesión en solemne silencio cívico, seguidos por el féretro y las mujeres detrás con estrictas restricciones de edad y parentesco."
@@ -3502,20 +3502,20 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838905319541,
+                        "item_id": 1879963223809272505,
                         "type": "ClozeCard",
                         "title": "Temporalidad Sagrada de la Ékfora",
                         "text": "El traslado procesional del cuerpo a la necrópolis (el Cerámico) se llama {{c1::*ékfora*}}.<br>Debía realizarse forzosamente {{c2::antes de la salida del sol (de madrugada)}} para impedir que los rayos sagrados de Helios fueran mancillados por el *míasma*."
                     },
                     {
-                        "item_id": 1879961838935705979,
+                        "item_id": 1879963223840162957,
                         "type": "Flashcard",
                         "title": "Sepultura, Libaciones Choai y Banquete Perídeipnon",
                         "front": "Describa los ritos de depósito corporal, ofrendas y el banquete post-sepulcral en la fase III.",
                         "back": "1. <b>Depósito:</b> Puede ser <b>inhumación</b> (en sarcófagos de piedra o tierra) o <b>cremación</b> en pira de leña, tras la cual las cenizas se depositan en ánforas de bronce o cerámica.<br>2. <b>Ajuar y Vasos Funerarios:</b> Se depositan ofrendas, armas, joyas y de manera paradigmática <b>lekythoi de fondo blanco</b> (vasos esbeltos pintados para contener aceites perfumados).<br>3. <b>Libaciones ($\\text{choaí}$):</b> Derramamiento de sustancias sagradas sobre la tumba para alimentar a las sombras subterráneas: miel, leche, vino puro, aceite y agua.<br>4. <b>Banquete Reintegrador ($\\text{Perídeipnon}$):</b> La comitiva regresa a la casa del difunto. Tras purificar el recinto, celebran una comida colectiva en honor al fallecido, marcando el retorno a la vida ordinaria de la comunidad."
                     },
                     {
-                        "item_id": 1879961838935876596,
+                        "item_id": 1879963223841093425,
                         "type": "ClozeCard",
                         "title": "El Banquete Fúnebre (Perídeipnon) y Reintegración del Oikos",
                         "text": "Culminada la sepultura y el derramamiento de las libaciones ($\\text{choaí}$):<br>1. Los familiares retornan a la casa purificada y celebran el {{c1::$\\text{Perídeipnon}$ (banquete fúnebre)}}, en el cual el difunto es considerado simbólicamente el {{c2::anfitrión de honor}}.<br>2. El propósito antropológico nuclear es la {{c3::reintegración postliminar}}: tras el desgarro de la separación y la liminalidad, compartir el pan y el vino reconstruye la cohesión comunitaria del $\\text{oikos}$.<br>3. Los discursos laudatorios cierran la fase de peligro ritual y restauran formalmente {{c4::el orden cívico ordinario de los deudos}}."
@@ -3537,14 +3537,14 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838905601290,
+                        "item_id": 1879963223811001927,
                         "type": "Flashcard",
                         "title": "La Ékfora como Detonante de Guerra Civil Facciosa",
                         "front": "¿Por qué los cortejos fúnebres aristocráticos amenazaban el orden cívico?",
                         "back": "Las familias nobles (*eupátridas*) convertían la *ékfora* en propaganda dinástica, desfilando con carros de lujo y plañideras contratadas, usando el llanto para instigar venganzas de sangre (*vendettas* clánicas) entre familias rivales, amenazando la paz de la *polis*."
                     },
                     {
-                        "item_id": 1879961838938718865,
+                        "item_id": 1879963223842445289,
                         "type": "ClozeCard",
                         "title": "Restricciones Suntuarias y Contención Femenina",
                         "text": "Las reformas legales de Solón en Atenas (594 a.C.) regularon severamente los rituales funerarios aristocráticos:<br>1. <b>Prohibición de automutilaciones:</b> Se vetó expresamente que las mujeres {{c1::se laceraran la carne, se golpearan el pecho con violencia y entonaran lamentos desmedidos}}.<br>2. <b>Restricción de aforo:</b> Solo podían asistir a la próthesis y cortejo mujeres {{c2::parientes de hasta segundo grado y mayores de 60 años}}.<br>3. <b>Motivación sociopolítica crucial:</b> Evitar que los clanes aristocráticos convirtieran el funeral en una exhibición de poder dinástico que {{c3::incitara facciones, lealtades privadas y venganzas de sangre ($\\text{vendettas}$)}} frente a la supremacía de la polis democrática."
@@ -3566,13 +3566,13 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838907197443,
+                        "item_id": 1879963223812057591,
                         "type": "ClozeCard",
                         "title": "Inhumación Predominante en el Ática",
                         "text": "En la Atenas arcaica y clásica la práctica funeraria abrumadoramente dominante fue la {{c1::inhumación en tierra o sarcófago}}, explicada arqueológicamente por {{c2::la grave escasez de madera para piras en el Ática}}."
                     },
                     {
-                        "item_id": 1879961838939667661,
+                        "item_id": 1879963223842889758,
                         "type": "Flashcard",
                         "title": "El Motivo Escultórico de la Dexiosis",
                         "front": "¿Qué representa el gesto de la dexiosis en las estelas funerarias clásicas de mármol del Cerámico ateniense?",
@@ -3595,13 +3595,13 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838909579226,
+                        "item_id": 1879963223812661596,
                         "type": "ClozeCard",
                         "title": "Libaciones y Banquete de Reintegración",
                         "text": "- Libaciones sobre la tumba (vino puro, leche, miel y aceite): {{c1::*choai*}}.<br>- Banquete formal en el hogar purificado: {{c2::*perídeipnon*}}, donde el difunto es el {{c3::anfitrión de honor}}."
                     },
                     {
-                        "item_id": 1879961838940205721,
+                        "item_id": 1879963223843775854,
                         "type": "ClozeCard",
                         "title": "Ciclo Temporal del Luto y Antesterias",
                         "text": "Ritos post-funerarios en la tradición griega:<br>- Calendario ritual del duelo: Conmemoraciones periódicas en la tumba con ofrendas en el día {{c1::3 ($\\text{trita}$), día 9 ($\\text{enata}$) y día 30 ($\\text{triakostia}$)}}, clausurando el luto formal.<br>- <b>Las Antesterias:</b> Festival dionisíaco de primavera cuya tercera jornada se llamaba el día de los {{c2::$\\text{Chytroi}$ (las ollas de gachas)}}.<br>- En esa fecha, los espíritus de los muertos ascendían al mundo de los vivos. Al anochecer, los cabezas de familia los expulsaban con la célebre fórmula ritual apotropaica: {{c3::«¡Fuera Keres, que han terminado las Antesterias!»}}."
@@ -3623,21 +3623,21 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838910235061,
+                        "item_id": 1879963223813674227,
                         "type": "Flashcard",
                         "title": "Economía Ritual de la Cámara Ciega en Lekythoi",
                         "front": "¿Qué reveló el hallazgo arqueológico de la cámara ciega en los lekythoi de fondo blanco?",
                         "back": "Muchos lekythoi contenían una pequeña cápsula sellada en el cuello que retenía apenas unas gotas de perfume costoso, manteniendo el resto del vaso vacío.<br>Demuestra el pragmatismo ático: cumplir el decoro sagrado exterior sin incurrir en un gasto económico ruinoso."
                     },
                     {
-                        "item_id": 1879961838941862935,
+                        "item_id": 1879963223845612397,
                         "type": "Flashcard",
                         "title": "Cronograma Exacto de los 4 Expositores (10:00 Minutos)",
                         "front": "Detalle la asignación temática y distribución temporal de los 4 expositores para la ponencia.",
                         "back": "1. <b>Expositor 1 (00:00 - 02:30 | Slides 1 a 3):</b> Introducción y Escatología.<br>Tema: La muerte como quiebre ontológico en la Hélade, modelo de Van Gennep, la psyche homérica y la topografía mítica del Hades.<br>2. <b>Expositor 2 (02:30 - 05:00 | Slides 4 a 6):</b> La Arquitectura del Tríptico Ritual.<br>Tema: Contención del míasma, la Próthesis en el oikos, la Ékfora antes del amanecer y la Sepultura/Banquete Perideipnon.<br>3. <b>Expositor 3 (05:00 - 07:30 | Slides 7 a 9):</b> Conflicto Político, Leyes de Solón y Memoria.<br>Tema: Restricciones de Solón al duelo aristocrático, estelas del Cerámico, motivo de la dexiosis y el discurso de Pericles.<br>4. <b>Expositor 4 (07:30 - 10:00 | Slides 10 a 12):</b> Síntesis Ética y Conexión con MED836.<br>Tema: Diálogo con el duelo contemporáneo, desamparo simbólico hospitalario y cierre formal en 10:00 exactos."
                     },
                     {
-                        "item_id": 1879961838943081009,
+                        "item_id": 1879963223845784691,
                         "type": "ClozeCard",
                         "title": "Banco de Preguntas Estratégicas para la Defensa Oral (Q&A)",
                         "text": "Preparación para la ronda de preguntas del profesor y ayudantes:<br>- Pregunta: ¿Por qué Solón restringió el luto de las mujeres y no el de los hombres?<br>- Respuesta clave: Porque el lamento femenino ({{c1::$\\text{góos}$}}) era el vehículo emocional que movilizaba {{c2::el honor aristocrático del clan ($\\text{génos}$) hacia venganzas de sangre}}, mientras que la polis naciente necesitaba imponer la ley comunitaria por encima de la venganza privada.<br>- Pregunta: ¿Qué enseña la dexiosis a la bioética contemporánea?<br>- Respuesta clave: Que el final de la vida no es un fracaso técnico que deba ocultarse, sino un {{c3::acontecimiento relacional digno de memoria y despedida compartida}}."
@@ -3659,7 +3659,7 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838911183689,
+                        "item_id": 1879963223815247325,
                         "type": "ClozeCard",
                         "title": "Sentido Moral del Óbolo de Caronte",
                         "text": "La moneda colocada en la boca o mano del difunto era el óbolo.<br>Lejos de un mero peaje mercantil para Caronte, funcionaba como una {{c1::credencial cívica y moral}} que acreditaba que el muerto tenía {{c2::parientes solventes que ejecutaron las honras sagradas}}."
@@ -3681,7 +3681,7 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838911947015,
+                        "item_id": 1879963223816047586,
                         "type": "ClozeCard",
                         "title": "Los Ríos del Hades y el Guía de Almas",
                         "text": "El dios que conduce las almas al inframundo es {{c1::Hermes Psicopompo}}.<br>Los ríos sagrados del Hades son:<br>- El {{c2::Aqueronte}} (del dolor).<br>- La {{c3::Estigia}} (del juramento sagrado e inviolable).<br>- El {{c4::Lete}} (del olvido).<br>- El Flegetonte (de fuego) y el Cocito (de los lamentos)."
@@ -3703,7 +3703,7 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838913449983,
+                        "item_id": 1879963223817006946,
                         "type": "Flashcard",
                         "title": "Las Reformas Suntuarias de Solón (594 a.C.)",
                         "front": "Enumere las restricciones que impuso Solón al duelo y su objetivo político.",
@@ -3726,7 +3726,7 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838914616834,
+                        "item_id": 1879963223819456103,
                         "type": "ClozeCard",
                         "title": "Hitos del Luto y Fiesta de los Chytroi",
                         "text": "Visitas del calendario fúnebre: al tercer día ({{c1::*trita*}}), noveno día ({{c2::*énata*}}), trigésimo (*triakostia*) y al año (*eníausia*).<br>En las fiestas Antesterias se celebraba el día de los {{c3::*Chytroi* (las ollas)}}, ofreciendo gachas a las sombras que visitaban la ciudad."
@@ -3748,13 +3748,13 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838915733006,
+                        "item_id": 1879963223819887791,
                         "type": "ClozeCard",
                         "title": "El Motivo Iconográfico de la Dexiosis",
                         "text": "En las estelas fúnebres de mármol del Cerámico, el apretón solemne de manos entre el difunto y el deudo se llama {{c1::*dexiosis*}}.<br>Encarna el *ethos* sereno y la {{c2::*kalokagathía*}}, preservando la memoria imperecedera (*mneme*)."
                     },
                     {
-                        "item_id": 1879961838916195270,
+                        "item_id": 1879963223820609000,
                         "type": "Flashcard",
                         "title": "Análisis Formal de la Estela de Hegeso",
                         "front": "Describa la Estela de Hegeso y explique por qué rechaza el patetismo de la muerte biológica.",
@@ -3777,7 +3777,7 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838917125814,
+                        "item_id": 1879963223822265149,
                         "type": "Flashcard",
                         "title": "Muerte Ritual Helénica vs Muerte Hospitalaria Moderna",
                         "front": "Compare la tecnología ritual griega con la gestión hospitalaria contemporánea.",
@@ -3800,13 +3800,13 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838918862814,
+                        "item_id": 1879963223823601759,
                         "type": "ClozeCard",
                         "title": "Estructura Cronométrica de 4 Expositores",
                         "text": "Distribución estricta de la ponencia (10:00 exactos, 2:30 por expositor):<br>- Turno I (0:00 - 2:30): {{c1::Expositor 1}} (Finitud homérica, Odisea, míasma vs ta nomizómena).<br>- Turno II (2:30 - 5:00): {{c2::Expositor 2}} (Próthesis, ékfora, sepultura, choai y perídeipnon).<br>- Turno III (5:00 - 7:30): {{c3::Expositor 3}} (Lekythos, cámara ciega, leyes de Solón y dexiosis).<br>- Turno IV (7:30 - 10:00): {{c4::Expositor 4}} (Desamparo contemporáneo, Tres Tesis y plenario)."
                     },
                     {
-                        "item_id": 1879961838919617388,
+                        "item_id": 1879963223824649354,
                         "type": "Flashcard",
                         "title": "Las Tres Tesis Vertebrales Finales",
                         "front": "Enuncie las tres tesis académicas conclusivas de la ponencia.",
@@ -3828,7 +3828,7 @@ const SEED_COURSES = [
                 "desired_retention": 0.85,
                 "cards": [
                     {
-                        "item_id": 1879961838920461905,
+                        "item_id": 1879963223825579021,
                         "type": "ClozeCard",
                         "title": "Criterios de Evaluación Oficial MED836",
                         "text": "La rúbrica de evaluación para la ponencia oral universitaria exige:<br>1. <b>Ajuste cronométrico estricto:</b> La disertación debe durar exactamente {{c1::10 minutos (10:00)}} repartidos equitativamente entre los 4 expositores (2:30 c/u).<br>2. <b>Dominio conceptual:</b> Manejo fluido de los conceptos griegos sin lectura mecánica: {{c2::$\\text{prothesis}, \\text{ekphora}, \\text{psyche}, \\text{eidolon}, \\text{miasma}, \\text{dexiosis}, \\text{mneme}$}}.<br>3. <b>Integración con la medicina y bioética (MED836):</b> Analizar cómo los ritos antiguos ilustran la necesidad humana universal de {{c3::contención simbólica del duelo y dignidad del cadáver}}."
@@ -3991,7 +3991,7 @@ class MorphismApp {
         }
 
         // Courses (v7 migration)
-        const savedCourses = localStorage.getItem("morphism_courses_v8");
+        const savedCourses = localStorage.getItem("morphism_courses_v9");
         if (savedCourses) {
             try {
                 this.courses = JSON.parse(savedCourses);
@@ -4002,15 +4002,15 @@ class MorphismApp {
             this.courses = JSON.parse(JSON.stringify(SEED_COURSES));
         }
 
-        const activeName = localStorage.getItem("morphism_active_course_v8");
+        const activeName = localStorage.getItem("morphism_active_course_v9");
         this.currentCourse = this.courses.find(c => c.name === activeName) || this.courses[0];
     }
 
     _saveStorage() {
         localStorage.setItem("morphism_theme", this.activeThemeId);
-        localStorage.setItem("morphism_courses_v8", JSON.stringify(this.courses));
+        localStorage.setItem("morphism_courses_v9", JSON.stringify(this.courses));
         if (this.currentCourse) {
-            localStorage.setItem("morphism_active_course_v8", this.currentCourse.name);
+            localStorage.setItem("morphism_active_course_v9", this.currentCourse.name);
         }
     }
 
@@ -4335,6 +4335,8 @@ class MorphismApp {
         const pieces = [];
         let lastIdx = 0;
         let i = 0;
+        const cleanMath = (s) => (s || "").replace(/</g, ' \\lt ').replace(/>/g, ' \\gt ');
+
         while (i < text.length) {
             const slice = text.slice(i);
             const m = slice.match(pattern);
@@ -4372,7 +4374,8 @@ class MorphismApp {
                 const prefix = text.slice(lastIdx, start);
                 if (inMath) {
                     if (prefix.trim()) {
-                        pieces.push(isDisplay ? `$\\displaystyle ${prefix}$` : `$${prefix}$`);
+                        const cm = cleanMath(prefix);
+                        pieces.push(isDisplay ? `$\\displaystyle ${cm}$` : `$${cm}$`);
                     }
                 } else {
                     pieces.push(prefix);
@@ -4385,10 +4388,11 @@ class MorphismApp {
                 } else {
                     const ans = cParts[0].trim();
                     if (inMath) {
+                        const ca = cleanMath(ans);
                         pieces.push(
                             isDisplay
-                                ? `<span class="cloze-revealed">$\\displaystyle ${ans}$</span>`
-                                : `<span class="cloze-revealed">$${ans}$</span>`
+                                ? `<span class="cloze-revealed">$\\displaystyle ${ca}$</span>`
+                                : `<span class="cloze-revealed">$${ca}$</span>`
                         );
                     } else {
                         pieces.push(`<span class="cloze-revealed">${ans}</span>`);
@@ -4404,7 +4408,8 @@ class MorphismApp {
         const suffix = text.slice(lastIdx);
         if (inMath) {
             if (suffix.trim()) {
-                pieces.push(isDisplay ? `$\\displaystyle ${suffix}$` : `$${suffix}$`);
+                const cs = cleanMath(suffix);
+                pieces.push(isDisplay ? `$\\displaystyle ${cs}$` : `$${cs}$`);
             }
         } else {
             pieces.push(suffix);
@@ -4436,23 +4441,29 @@ class MorphismApp {
     _formatContent(raw) {
         if (!raw) return "";
 
-        // 1. Normalize escaped newlines (literal \n, \r\n, /n) into real newlines
-        let text = raw.replace(/\\r\\n|\\n|\\r|\/n/g, '\n');
+        // Tokenize into math blocks, pre-formatted display containers, and plain text
+        // Math blocks ($$...$$ and $...$) are protected so LaTeX commands (\nabla, \right, \rho, \nu, etc.) are NEVER corrupted
+        const tokenRegex = /(\$\$[\s\S]*?\$\$|\$[^\$]+?\$|<div class="math-display-container">[\s\S]*?<\/div>|<table[\s\S]*?<\/table>|<pre[\s\S]*?<\/pre>|<ul[\s\S]*?<\/ul>|<ol[\s\S]*?<\/ol>)/g;
+        const parts = raw.split(tokenRegex);
 
-        // 2. Sanitize < and > inside math blocks so HTML doesn't parse them as tags
-        text = text.replace(/(\$\$[\s\S]*?\$\$|\$[^\$]+?\$)/g, (block) => {
-            return block.replace(/</g, ' \\lt ').replace(/>/g, ' \\gt ');
-        });
-
-        // 3. For any text outside math blocks, preserve HTML structure but convert newlines to <br>
-        const parts = text.split(/(\$\$[\s\S]*?\$\$|<div class="math-display-container">[\s\S]*?<\/div>|<table[\s\S]*?<\/table>|<pre[\s\S]*?<\/pre>|<ul[\s\S]*?<\/ul>|<ol[\s\S]*?<\/ol>)/g);
         return parts.map((part) => {
             if (!part) return "";
-            if (part.startsWith('$$') && part.endsWith('$$')) return part;
+
+            // Display math ($$...$$): preserve LaTeX commands exactly, only sanitize < and > for HTML safety
+            if (part.startsWith('$$') && part.endsWith('$$')) {
+                return part.replace(/</g, ' \\lt ').replace(/>/g, ' \\gt ');
+            }
+            // Inline math ($...$): preserve LaTeX commands exactly, only sanitize < and > for HTML safety
+            if (part.startsWith('$') && part.endsWith('$')) {
+                return part.replace(/</g, ' \\lt ').replace(/>/g, ' \\gt ');
+            }
+            // Pre-wrapped math display containers or raw HTML tables/lists/code blocks
             if (part.startsWith('<div class="math-display-container">')) return part;
             if (/^<(table|pre|ul|ol)\b/i.test(part)) return part;
 
-            return part.replace(/\n\n+/g, '<br><br>').replace(/\n/g, '<br>');
+            // Plain text outside math: normalize real line breaks to <br> without touching backslashes
+            let text = part.replace(/\r\n|\r/g, '\n');
+            return text.replace(/\n\n+/g, '<br><br>').replace(/\n/g, '<br>');
         }).join("");
     }
 

@@ -51,10 +51,10 @@ if os.path.exists(chart_vendor):
     shutil.copyfile(chart_vendor, chart_root)
 
 # Update storage keys to ensure automatic migration on mobile
-for old_v in ['"morphism_courses"', '"morphism_courses_v2"', '"morphism_courses_v3"', '"morphism_courses_v4"', '"morphism_courses_v5"', '"morphism_courses_v6"', '"morphism_courses_v7"']:
-    content = content.replace(old_v, '"morphism_courses_v8"')
-for old_v in ['"morphism_active_course"', '"morphism_active_course_v2"', '"morphism_active_course_v3"', '"morphism_active_course_v4"', '"morphism_active_course_v5"', '"morphism_active_course_v6"', '"morphism_active_course_v7"']:
-    content = content.replace(old_v, '"morphism_active_course_v8"')
+for old_v in ['"morphism_courses"', '"morphism_courses_v2"', '"morphism_courses_v3"', '"morphism_courses_v4"', '"morphism_courses_v5"', '"morphism_courses_v6"', '"morphism_courses_v7"', '"morphism_courses_v8"']:
+    content = content.replace(old_v, '"morphism_courses_v9"')
+for old_v in ['"morphism_active_course"', '"morphism_active_course_v2"', '"morphism_active_course_v3"', '"morphism_active_course_v4"', '"morphism_active_course_v5"', '"morphism_active_course_v6"', '"morphism_active_course_v7"', '"morphism_active_course_v8"']:
+    content = content.replace(old_v, '"morphism_active_course_v9"')
 
 # Update restore message
 content = content.replace(

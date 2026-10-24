@@ -268,7 +268,7 @@ class TestMorphismPlus(unittest.TestCase):
             self.assertIn(f"{theme_id}:", app_js)
         self.assertIn("canvas_bg", app_js)
         self.assertIn("grid_color", app_js)
-        self.assertIn("morphism_courses_v8", app_js)
+        self.assertIn("morphism_courses_v9", app_js)
 
         # 4. Check MainActivity.java has Javascript back handler integration
         with open("android/app/src/main/java/org/morphism/srs/plus/MainActivity.java", "r", encoding="utf-8") as f:
@@ -327,6 +327,52 @@ class TestMorphismPlus(unittest.TestCase):
                         # Ensure no stray slash-n intended as newline
                         slash_n_matches = re.findall(r'(?:^|[\.\:\;\?\!\s])\/n(?:[\s\-\dA-Z]|$)', val)
                         self.assertEqual(len(slash_n_matches), 0, f"Stray /n found in {p} card {card.get('id')}: {slash_n_matches}")
+
+    def test_nabla_and_rieles_math_format_integrity(self):
+        """Verify that app.js _formatContent never mutates \nabla into abla or \right into ight."""
+        import subprocess
+        # Test node execution of _formatContent logic directly from app.js
+        node_script = """
+        const fs = require('fs');
+        const code = fs.readFileSync('android/app/src/main/assets/app.js', 'utf8');
+
+        // Extract _formatContent implementation
+        const startMarker = '_formatContent(raw) {';
+        const start = code.indexOf(startMarker);
+        if (start === -1) throw new Error('Could not find _formatContent in app.js');
+        const end = code.indexOf('_renderCardFront() {', start);
+        const formatContentSrc = 'function ' + code.substring(start, end).trim();
+        eval(formatContentSrc);
+
+        const testNabla = '$$\\\\nabla \\\\times \\\\mathbf{E} = -\\\\frac{\\\\partial \\\\mathbf{B}}{\\\\partial t}$$ y $\\\\nabla \\\\cdot \\\\mathbf{B} = 0$';
+        const outNabla = _formatContent(testNabla);
+        if (outNabla.includes('abla') && !outNabla.includes('\\\\nabla')) {
+            throw new Error('Nabla was corrupted into abla: ' + outNabla);
+        }
+        if (!outNabla.includes('\\\\nabla')) {
+            throw new Error('Nabla was stripped: ' + outNabla);
+        }
+
+        const testStep4 = 'Potencia: $$P_{\\\\text{dis}} = I^2 R = \\\\left(\\\\frac{v B L}{R}\\\\right)^2 R = \\\\frac{v^2 B^2 L^2}{R}$$';
+        const outStep4 = _formatContent(testStep4);
+        if (outStep4.includes('ight') && !outStep4.includes('\\\\right')) {
+            throw new Error('Right was corrupted into ight: ' + outStep4);
+        }
+        if (!outStep4.includes('\\\\right')) {
+            throw new Error('Right was stripped: ' + outStep4);
+        }
+
+        const testFrac = 'Evaluando en $x_n = 1/n$: $f_n(1/n) = 1/2$ con $\\\\rho$ y $\\\\nu$.';
+        const outFrac = _formatContent(testFrac);
+        if (!outFrac.includes('1/n') || !outFrac.includes('\\\\rho') || !outFrac.includes('\\\\nu')) {
+            throw new Error('Math symbols corrupted: ' + outFrac);
+        }
+
+        console.log('NODE_FORMAT_CONTENT_TEST_PASSED');
+        """
+        res = subprocess.run(["node", "-e", node_script], capture_output=True, text=True)
+        self.assertEqual(res.returncode, 0, f"Node formatContent test failed: {res.stderr}\n{res.stdout}")
+        self.assertIn("NODE_FORMAT_CONTENT_TEST_PASSED", res.stdout)
 
 if __name__ == "__main__":
     unittest.main()

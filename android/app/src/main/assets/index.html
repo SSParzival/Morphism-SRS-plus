@@ -773,14 +773,15 @@
             vertical-align: middle !important;
         }
 
+        /* Inline math responsive protection: never clips long inline equations */
         mjx-container[jax="SVG"]:not([display="true"]) {
+            display: inline-block !important;
             max-width: 100% !important;
             overflow-x: auto !important;
             overflow-y: hidden !important;
             vertical-align: -0.22em !important;
             -webkit-overflow-scrolling: touch !important;
             touch-action: pan-x pan-y !important;
-            display: inline-block !important;
             box-sizing: border-box !important;
             padding: 3px 2px !important;
             margin: 0 1px !important;
@@ -788,6 +789,7 @@
 
         mjx-container[jax="SVG"]:not([display="true"]) > svg {
             max-width: none !important;
+            vertical-align: -0.15em !important;
         }
 
         /* Seamless math display flex row for cloze deletions inside formulas */

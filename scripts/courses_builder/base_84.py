@@ -299,11 +299,11 @@ def build_electricidad_magnetismo_course() -> Course:
     n21.add_card(ProofSequenceCard("Conservación de Energía en Barra Deslizante sobre Rieles",
         r"Demostrar que la potencia mecánica suministrada a una barra deslizante perpendicular a rieles coincide con la disipada por Joule.",
         [
-            r"FEM inducida de movimiento: $\mathcal{E} = v B L$, corriente $I = \frac{\mathcal{E}}{R} = \frac{v B L}{R}$.",
-            r"Fuerza magnética de frenado de Lorentz: $F_m = I L B = \frac{v B^2 L^2}{R}$.",
-            r"Potencia mecánica requerida: $P_{\text{mec}} = F_m v = \frac{v^2 B^2 L^2}{R}$.",
-            r"Potencia disipada en la resistencia: $P_{\text{dis}} = I^2 R = \left(\frac{v B L}{R}\right)^2 R = \frac{v^2 B^2 L^2}{R}$.",
-            r"Se verifica estrictamente: $P_{\text{mec}} = P_{\text{dis}}$."
+            r"<b>FEM inducida de movimiento y corriente:</b><br>$$\mathcal{E} = v B L \implies I = \frac{\mathcal{E}}{R} = \frac{v B L}{R}$$",
+            r"<b>Fuerza magnética de frenado de Lorentz:</b><br>$$F_m = I L B = \frac{v B^2 L^2}{R}$$",
+            r"<b>Potencia mecánica requerida suministrada:</b><br>$$P_{\text{mec}} = F_m v = \frac{v^2 B^2 L^2}{R}$$",
+            r"<b>Potencia eléctrica disipada por Joule en la resistencia:</b><br>$$P_{\text{dis}} = I^2 R = \left(\frac{v B L}{R}\right)^2 R = \frac{v^2 B^2 L^2}{R}$$",
+            r"<b>Conclusión del balance energético:</b><br>Se verifica estrictamente que $P_{\text{mec}} = P_{\text{dis}} \quad \blacksquare$"
         ]))
     n21.add_card(Flashcard("Disco de Faraday (Generador Homopolar)",
         r"Un disco conductor de radio $R$ gira con velocidad angular constante $\omega$ en un campo magnético uniforme paralelo a su eje $\mathbf{B} = B\hat{z}$. Calcule la FEM inducida entre el centro y el borde.",
