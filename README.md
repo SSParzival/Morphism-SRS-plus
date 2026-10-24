@@ -10,13 +10,13 @@ It builds upon the original *Morphism SRS* by adding full Linux desktop integrat
 
 | Feature | Original Morphism SRS | Morphism SRS Plus ⚡ |
 | :--- | :--- | :--- |
-| **Theme System** | Hardcoded dark CSS | **Configurable JSON Theme Engine** (`themes/*.json`) with 7 built-in themes + live on-the-fly switching |
-| **Linux Compatibility** | Relative paths break from outside cwd | Canonical path resolution (`app_paths.py`), Linux font stacks (`Inter`, `Ubuntu`, `DejaVu Sans`), `.desktop` file & icon installer |
+| **Theme System** | Hardcoded dark CSS | **Configurable JSON Theme Engine** (`themes/*.json`) with 8 built-in themes (featuring **Bisexual Midnight** default) + live on-the-fly switching |
+| **Linux & Wayland** | Relative paths break; high CPU canvas; RADV warnings | Native Wayland & KDE Plasma 6 support, fractional scale `PassThrough`, OpenGL viewport hardware acceleration, XDG cache compliance, `.desktop` & menu launcher |
 | **Offline Vector MathJax** | CDN fallback / Missing `tex-svg.js` | **100% Bundled Offline MathJax 3 SVG bundle** (`assets/tex-svg.js`) |
 | **Retrievability Plots** | Missing `chart.js` (blank graphs) | **Bundled Chart.js 4.4 UMD** (`assets/chart.js`), fully rendered decay curves & histograms |
 | **Card Types** | Flashcards, Proof Sequence | Flashcards, Proof Sequence, and **Cloze Deletion (`{{c1::answer::hint}}`)** |
 | **Review Session UX** | No undo, abrupt exit | **Undo Last Rating (`Ctrl+Z`)**, **Session Completion Summary** with statistics & quotes |
-| **Graph Explorer** | Manual panning only | **Real-Time Graph Search Bar**, Zoom Controls (`Zoom In`, `Zoom Out`, `1:1`, `Fit View`), Cycle-safe auto layout |
+| **Graph Explorer** | Manual panning only | **Real-Time Graph Search Bar**, Zoom Controls (`Zoom In`, `Zoom Out`, `1:1`, `Fit View`), Middle-click canvas drag, Cycle-safe auto layout |
 | **Course Portability** | Manual file copying | **Single-file `.morphism` / `.zip` Course Package** import & export |
 | **Scratchbook** | Basic text editor | Live preview with theme variables, word & char counter, export to `.md` / `.html` |
 
@@ -28,13 +28,14 @@ Configure or add themes simply by editing or dropping `.json` files into the `th
 
 The app automatically detects all themes and provides instant live switching from the top toolbar:
 
-1. **Dark Modern (Obsidian)**: Deep obsidian background with sleek indigo glow.
-2. **Catppuccin Mocha**: Elegant pastel dark theme beloved by developers and Linux users.
-3. **Nord (Arctic)**: Arctic slate and cold blue palette designed for calm study.
-4. **Dracula**: Classic high-contrast dark theme with vibrant purple and cyan accents.
-5. **Tokyo Night**: Sleek cyberpunk theme inspired by Tokyo nightlife.
-6. **Solarized Dark**: Warm, low-contrast palette gentle on the eyes during late-night proof sessions.
-7. **GitHub Light**: Crystal clear, high-contrast light theme engineered for daytime study.
+1. **Bisexual Midnight 💖💜💙 (Default)**: Deep pure black `#000000` background with glowing pink (`#F02A8C`), deep violet (`#3D2148`), and subtle blue (`#78A9FF`) accents matching VS Code and Alacritty.
+2. **Dark Modern (Obsidian)**: Deep obsidian background with sleek indigo glow.
+3. **Catppuccin Mocha**: Elegant pastel dark theme beloved by developers and Linux users.
+4. **Nord (Arctic)**: Arctic slate and cold blue palette designed for calm study.
+5. **Dracula**: Classic high-contrast dark theme with vibrant purple and cyan accents.
+6. **Tokyo Night**: Sleek cyberpunk theme inspired by Tokyo nightlife.
+7. **Solarized Dark**: Warm, low-contrast palette gentle on the eyes during late-night proof sessions.
+8. **GitHub Light**: Crystal clear, high-contrast light theme engineered for daytime study.
 
 ### Creating a Custom JSON Theme
 Create a file `themes/my_custom_theme.json`:
@@ -106,17 +107,21 @@ This installs `morphism-srs-plus.desktop` and the high-resolution vector icon in
 
 | Shortcut | Context | Action |
 | :--- | :--- | :--- |
+| **Alt + 1 / 2 / 3 / 4** | Global | Switch Ledger View: **Courses**, **Explorer**, **Review**, **Stats** |
+| **Ctrl + F** or **Ctrl + K** | Global | Jump to Explorer search bar & filter notes in real-time |
+| **Ctrl + S** | Global | Save active course and scheduling state |
+| **Ctrl + N** | Explorer | Create a new Note dialog |
+| **Ctrl + +** / **Ctrl + -** | Explorer | Zoom canvas in / out |
+| **Ctrl + 0** | Explorer | Reset canvas zoom to 1:1 |
+| **Ctrl + Shift + F** | Explorer | Fit all nodes cleanly into viewport |
+| **Middle Click Drag** | Explorer | Smooth high-frequency canvas panning |
 | **Space** / **Return** | Review | Reveal Solution (Front) / Rate **Good** (Back) |
 | **Ctrl + Z** | Review | **Undo Last Rating** & restore card state |
-| **1** | Review | Rate **Again** |
-| **2** | Review | Rate **Hard** |
-| **3** | Review | Rate **Good** |
-| **4** | Review | Rate **Easy** |
+| **1** / **2** / **3** / **4** | Review | Rate **Again**, **Hard**, **Good**, **Easy** |
 | **Ctrl + Shift + K** | Editor | Insert **Cloze Deletion** `{{c1::answer}}` |
 | **Ctrl + M** | Editor | Insert Math display block `$$ ... $$` |
 | **Ctrl + /** | Editor | Insert Fraction `\frac{a}{b}` |
-| **Ctrl + B** | Editor | Bold `<b>...</b>` |
-| **Ctrl + I** | Editor | Italic `<i>...</i>` |
+| **Ctrl + B** / **Ctrl + I** | Editor | Bold `<b>...</b>` / Italic `<i>...</i>` |
 | **Ctrl + Return** | Editor | Insert `<br>` line break |
 
 ---
