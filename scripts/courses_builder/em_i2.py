@@ -336,7 +336,7 @@ def build_electricidad_magnetismo_course() -> Course:
         r"\n- FEM inducida por movimiento: $$\mathcal{E} = {{c1::B L v::fuerza electromotriz}}$$."
         r"\n- Corriente inducida: $$I = \frac{\mathcal{E}}{R} = \frac{B L v}{R}$$."
         r"\n- Fuerza magnética de frenado sobre la barra: $$F_x = -I L B = {{c2::-\frac{B^2 L^2}{R}v::fuerza retardadora proporcional a v}}$$."
-        r"\n- Ecuación de movimiento: $m \frac{dv}{dt} = -\frac{B^2 L^2}{R}v \implies v(t) = {{c3::v_0 e^{-t/\tau_m}::decaimiento exponencial}}$$, con tiempo característico $\tau_m = \frac{m R}{B^2 L^2}$."))
+        r"\n- Ecuación de movimiento: $$m \frac{dv}{dt} = -\frac{B^2 L^2}{R}v \implies v(t) = {{c3::v_0 e^{-t/\tau_m}::decaimiento exponencial}}$$, con tiempo característico $\tau_m = \frac{m R}{B^2 L^2}$."))
     course.notes.append(n19)
 
     # --------------------------------------------------------------------------

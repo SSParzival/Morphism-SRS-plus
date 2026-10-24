@@ -1,11 +1,16 @@
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 import sys
 import tempfile
 import unittest
 from urllib.request import Request, urlopen
+
+# Ensure loopback traffic bypasses proxies
+os.environ["no_proxy"] = "127.0.0.1,localhost"
+os.environ["NO_PROXY"] = "127.0.0.1,localhost"
 
 SRC_DIR = Path(__file__).resolve().parent.parent / "src"
 if str(SRC_DIR) not in sys.path:

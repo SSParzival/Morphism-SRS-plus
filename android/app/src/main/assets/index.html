@@ -737,6 +737,27 @@
             max-width: none !important;
         }
 
+        /* Seamless math display flex row for cloze deletions inside formulas */
+        .math-display-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin: 0.8em 0;
+            max-width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+            box-sizing: border-box;
+            padding: 4px 2px;
+        }
+
+        .math-display-container mjx-container[jax="SVG"]:not([display="true"]) {
+            vertical-align: middle !important;
+            margin: 0 !important;
+        }
+
         /* Tables, Pre, Code, Images */
         table {
             border-collapse: collapse;
@@ -1076,8 +1097,8 @@
 
                 <div style="display:flex; gap:8px; margin-bottom:16px;">
                     <label class="btn-sm btn-outline" style="flex:1; text-align:center; cursor:pointer;">
-                        📥 Importar (.json)
-                        <input type="file" id="file-import-course" accept=".json,.morphism,.zip" style="display:none;">
+                        📥 Importar (.json / .mdsl)
+                        <input type="file" id="file-import-course" accept=".json,.morphism,.zip,.mdsl,.txt" style="display:none;">
                     </label>
                     <button class="btn-sm btn-outline" id="btn-reset-demo-courses" style="flex:1;">🔄 Cursos Ejemplo</button>
                 </div>
@@ -1208,8 +1229,9 @@
             <div class="form-group">
                 <label>Tipo de Nota:</label>
                 <select id="inp-note-type">
-                    <option value="standard">Nota Estándar (Flashcards o Cloze)</option>
+                    <option value="standard">Nota Estándar (Flashcard)</option>
                     <option value="serial_sequence">Secuencia Serial (Prueba paso a paso)</option>
+                    <option value="cloze">Cloze Deletion (Fórmula o Definición)</option>
                 </select>
             </div>
             <div class="form-group">

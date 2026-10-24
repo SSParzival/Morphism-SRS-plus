@@ -106,7 +106,7 @@ def build_quimica_course() -> Course:
         r"\n- Constante en concentraciones molares: $$K_c = \frac{[C]^c [D]^d}{[A]^a [B]^b}$$"
         r"\n- Constante en presiones parciales: $$K_p = \frac{P_C^c P_D^d}{P_A^a P_B^b}$$"
         r"\n- Relación termodinámica ideal: $$K_p = {{c1::K_c (R T)^{\Delta n_{\text{gas}}}::conversión Kc a Kp}}$$"
-        r"donde $\Delta n_{\text{gas}} = {{c2::(c + d) - (a + b)::variación de moles gaseosos}}$$, y $R = 0.08206 \text{ atm}\cdot\text{L}/(\text{mol}\cdot\text{K})$."))
+        r"\ndonde $\Delta n_{\text{gas}} = {{c2::(c + d) - (a + b)::variación de moles gaseosos}}$, y $R = 0.08206 \text{ atm}\cdot\text{L}/(\text{mol}\cdot\text{K})$."))
     n6.add_card(Flashcard("Equilibrios Heterogéneos y Omisión de Sólidos y Líquidos Puros",
         r"¿Por qué los sólidos puros (s) y los líquidos puros (l) no se incluyen en las expresiones de $K_c$ o $K_p$?",
         r"En termodinámica química, las constantes de equilibrio se escriben en términos de <b>actividades químicas</b> ($a_i$).<br>"

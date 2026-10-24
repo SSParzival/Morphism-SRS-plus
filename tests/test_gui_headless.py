@@ -4,6 +4,7 @@ import unittest
 
 os.environ["QT_QPA_PLATFORM"] = "offscreen"
 os.environ["MESA_DEBUG"] = "silent"
+os.environ["QTWEBENGINE_CHROMIUM_FLAGS"] = "--no-sandbox --disable-gpu"
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC_DIR = os.path.join(BASE_DIR, "src")

@@ -186,10 +186,19 @@ class ClozeCard(ReviewObject):
                         res.append(f"<span class='cloze-bracket'>[{hint}]</span>")
                     else:
                         ans = m.group(1).split("::", 1)[0].strip()
-                        res.append(f"<span class='cloze-revealed'>{delim}{ans}{delim}</span>")
+                        if is_display:
+                            res.append(f"<span class='cloze-revealed'>$\\displaystyle {ans}$</span>")
+                        else:
+                            res.append(f"<span class='cloze-revealed'>${ans}$</span>")
                 elif p.strip():
-                    res.append(f"{delim}{p}{delim}")
-            return "".join(res)
+                    if is_display:
+                        res.append(f"$\\displaystyle {p}$")
+                    else:
+                        res.append(f"${p}$")
+            content = "".join(res)
+            if is_display:
+                return f"<div class='math-display-container'>{content}</div>"
+            return content
 
         out = re.sub(r"(\$\$[\s\S]*?\$\$|\$[^\$]+?\$)", math_repl, text)
 

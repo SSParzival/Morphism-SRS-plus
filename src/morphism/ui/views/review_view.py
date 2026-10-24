@@ -234,6 +234,22 @@ def build_mathjax_html_template() -> str:
         mjx-container[jax="SVG"]:not([display="true"]) > svg {{
             max-width: none !important;
         }}
+        .math-display-container {{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin: 1em 0;
+            max-width: 100%;
+            overflow-x: auto;
+            box-sizing: border-box;
+            padding: 4px 2px;
+        }}
+        .math-display-container mjx-container[jax="SVG"]:not([display="true"]) {{
+            vertical-align: middle !important;
+            margin: 0 !important;
+        }}
         mjx-container[jax="SVG"]::-webkit-scrollbar,
         .proof-step::-webkit-scrollbar,
         .past-step-item::-webkit-scrollbar,

@@ -376,13 +376,15 @@ class TouchGraphView {
                 (note.tags && note.tags.some(t => t.toLowerCase().includes(this.searchQuery)))
             );
 
+            const mode = this._getNoteMode(note);
+
             // Search highlight glow
             if (matchesSearch) {
                 ctx.save();
                 ctx.shadowColor = theme.accent || "#F02A8C";
                 ctx.shadowBlur = 20;
                 ctx.fillStyle = theme.accent || "#F02A8C";
-                this._drawRoundRect(ctx, nx - 3, ny - 3, this.nodeWidth + 6, this.nodeHeight + 6, this.nodeRadius + 2);
+                this._drawNodeShape(ctx, nx, ny, this.nodeWidth, this.nodeHeight, mode, 3);
                 ctx.fill();
                 ctx.restore();
             }
@@ -393,8 +395,7 @@ class TouchGraphView {
             grad.addColorStop(1, isDue ? "#16050b" : (theme.node_bg_end || "#07030A"));
 
             ctx.fillStyle = grad;
-            ctx.beginPath();
-            this._drawRoundRect(ctx, nx, ny, this.nodeWidth, this.nodeHeight, this.nodeRadius);
+            this._drawNodeShape(ctx, nx, ny, this.nodeWidth, this.nodeHeight, mode, 0);
             ctx.fill();
 
             // Border
@@ -412,15 +413,15 @@ class TouchGraphView {
             ctx.fillStyle = theme.text || "#F7F1F8";
             ctx.font = "bold 13px -apple-system, Roboto, sans-serif";
             const title = note.title || "Untitled";
-            const isMultiline = this._drawNodeTitle(ctx, title, nx + 12, ny + 12, this.nodeWidth - 24, isDue);
+            const isMultiline = this._drawNodeTitle(ctx, title, nx + 14, ny + 12, this.nodeWidth - 28, isDue);
 
             // Subtitle / cards info
             const cardCount = note.cards ? note.cards.length : 0;
-            const typeLabel = note.note_type === "serial_sequence" ? "📜 Serial Seq" : "🧩 Note";
+            const typeLabel = mode === "serial" ? "⚡ Serial Seq" : (mode === "cloze" ? "✂️ Cloze" : "🧩 Standard");
             ctx.fillStyle = isDue ? "#FF8B9D" : "#94a3b8";
             ctx.font = "11px -apple-system, Roboto, sans-serif";
             const subY = isMultiline ? (ny + 58) : (ny + 46);
-            ctx.fillText(`${typeLabel} • ${cardCount} card(s)`, nx + 12, subY);
+            ctx.fillText(`${typeLabel} • ${cardCount} card(s)`, nx + 14, subY);
 
             // Due Badge
             if (isDue) {
@@ -484,6 +485,43 @@ class TouchGraphView {
 
         ctx.restore();
         return false;
+    }
+
+    _getNoteMode(note) {
+        if (note.review_mode) return note.review_mode;
+        if (note.note_type === "serial_sequence" || note.note_type === "serial") return "serial";
+        if (note.note_type === "cloze") return "cloze";
+        if (note.cards && note.cards.length > 0) {
+            if (note.cards.some(c => c.type === "ProofSequenceCard")) return "serial";
+            if (note.cards.some(c => c.type === "ClozeCard")) return "cloze";
+        }
+        return "standard";
+    }
+
+    _drawNodeShape(ctx, x, y, w, h, mode, pad = 0) {
+        const px = x - pad;
+        const py = y - pad;
+        const pw = w + pad * 2;
+        const ph = h + pad * 2;
+
+        ctx.beginPath();
+        if (mode === "cloze") {
+            // Pill / Ellipse shape matching Proto 2 Cloze Note
+            this._drawRoundRect(ctx, px, py, pw, ph, ph / 2);
+        } else if (mode === "serial") {
+            // Diamond-beveled hexagon shape matching Proto 2 Serial Proof Sequence
+            const bevel = 18;
+            ctx.moveTo(px + bevel, py);
+            ctx.lineTo(px + pw - bevel, py);
+            ctx.lineTo(px + pw, py + ph / 2);
+            ctx.lineTo(px + pw - bevel, py + ph);
+            ctx.lineTo(px + bevel, py + ph);
+            ctx.lineTo(px, py + ph / 2);
+            ctx.closePath();
+        } else {
+            // Standard rounded rectangle matching Proto 2 Standard Note
+            this._drawRoundRect(ctx, px, py, pw, ph, this.nodeRadius + (pad > 0 ? 2 : 0));
+        }
     }
 
     _drawRoundRect(ctx, x, y, width, height, radius) {

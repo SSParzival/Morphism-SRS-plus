@@ -18,6 +18,21 @@ from morphism.core import course_storage
 
 class TestMorphismPlus(unittest.TestCase):
 
+    def setUp(self):
+        import tempfile
+        self.tmp_dir = tempfile.TemporaryDirectory()
+        self.orig_courses_dir = course_storage.COURSES_DIR
+        self.orig_scheduling_dir = course_storage.SCHEDULING_DIR
+        course_storage.COURSES_DIR = os.path.join(self.tmp_dir.name, "Courses")
+        course_storage.SCHEDULING_DIR = os.path.join(self.tmp_dir.name, "scheduling")
+        os.makedirs(course_storage.COURSES_DIR, exist_ok=True)
+        os.makedirs(course_storage.SCHEDULING_DIR, exist_ok=True)
+
+    def tearDown(self):
+        course_storage.COURSES_DIR = self.orig_courses_dir
+        course_storage.SCHEDULING_DIR = self.orig_scheduling_dir
+        self.tmp_dir.cleanup()
+
     def test_paths_and_bundled_assets(self):
         """Verify that offline assets exist and are non-empty."""
         self.assertTrue(os.path.exists(ASSETS_DIR), "assets/ directory should exist")
@@ -77,8 +92,8 @@ class TestMorphismPlus(unittest.TestCase):
         front_m = cloze_math.get_html_front()
         back_m = cloze_math.get_html_back()
         self.assertNotIn(r"<span class='cloze-bracket'>[hint]</span>$$", front_m)
-        self.assertIn(r"$$\mathbf{A} \times \mathbf{B} = $$<span class='cloze-bracket'>[hint]</span>", front_m)
-        self.assertIn(r"<span class='cloze-revealed'>$$\mathbf{C}$$</span>", back_m)
+        self.assertIn(r"<div class='math-display-container'>$\displaystyle \mathbf{A} \times \mathbf{B} = $<span class='cloze-bracket'>[hint]</span></div>", front_m)
+        self.assertIn(r"<span class='cloze-revealed'>$\displaystyle \mathbf{C}$</span>", back_m)
 
     def test_search_and_filter(self):
         """Verify note search matching across title, tags, and cards."""
@@ -146,7 +161,7 @@ class TestMorphismPlus(unittest.TestCase):
         self.assertEqual(len(loaded.edges), 1)
 
         # Test package export
-        pkg_path = os.path.join(APP_BASE_DIR, "test_pkg.morphism")
+        pkg_path = os.path.join(self.tmp_dir.name, "test_pkg.morphism")
         try:
             course_storage.export_course_package_zip(loaded, pkg_path)
             self.assertTrue(os.path.exists(pkg_path))
