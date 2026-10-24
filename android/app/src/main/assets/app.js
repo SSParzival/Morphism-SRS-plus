@@ -17,7 +17,11 @@ const THEMES = {
         due_border: "#FF667D",
         good_btn: "#1C3C28",
         good_border: "#80D6A3",
-        good_text: "#A5E6BC"
+        good_text: "#A5E6BC",
+        canvas_bg: "#000000",
+        grid_color: "#1C1024",
+        node_bg_start: "#171019",
+        node_bg_end: "#07030A"
     },
     catppuccin_mocha: {
         name: "Catppuccin Mocha ☕",
@@ -34,7 +38,11 @@ const THEMES = {
         due_border: "#f38ba8",
         good_btn: "#1e3a2f",
         good_border: "#a6e3a1",
-        good_text: "#a6e3a1"
+        good_text: "#a6e3a1",
+        canvas_bg: "#1e1e2e",
+        grid_color: "#313244",
+        node_bg_start: "#313244",
+        node_bg_end: "#181825"
     },
     nord: {
         name: "Nord ❄️",
@@ -51,7 +59,11 @@ const THEMES = {
         due_border: "#bf616a",
         good_btn: "#2c3e35",
         good_border: "#a3be8c",
-        good_text: "#a3be8c"
+        good_text: "#a3be8c",
+        canvas_bg: "#2e3440",
+        grid_color: "#434c5e",
+        node_bg_start: "#434c5e",
+        node_bg_end: "#3b4252"
     },
     dracula: {
         name: "Dracula 🧛",
@@ -68,7 +80,11 @@ const THEMES = {
         due_border: "#ff5555",
         good_btn: "#1f3a2b",
         good_border: "#50fa7b",
-        good_text: "#50fa7b"
+        good_text: "#50fa7b",
+        canvas_bg: "#282a36",
+        grid_color: "#44475a",
+        node_bg_start: "#44475a",
+        node_bg_end: "#21222c"
     },
     dark_modern: {
         name: "Dark Modern 🌌",
@@ -85,7 +101,11 @@ const THEMES = {
         due_border: "#ef4444",
         good_btn: "#064e3b",
         good_border: "#10b981",
-        good_text: "#10b981"
+        good_text: "#10b981",
+        canvas_bg: "#0b0f19",
+        grid_color: "#1f2937",
+        node_bg_start: "#1f2937",
+        node_bg_end: "#111827"
     },
     github_light: {
         name: "GitHub Light ☀️",
@@ -102,7 +122,11 @@ const THEMES = {
         due_border: "#cf222e",
         good_btn: "#dafbe1",
         good_border: "#1a7f37",
-        good_text: "#1a7f37"
+        good_text: "#1a7f37",
+        canvas_bg: "#f6f8fa",
+        grid_color: "#d0d7de",
+        node_bg_start: "#ffffff",
+        node_bg_end: "#f0f2f5"
     }
 };
 
@@ -3966,8 +3990,8 @@ class MorphismApp {
             this.activeThemeId = savedTheme;
         }
 
-        // Courses
-        const savedCourses = localStorage.getItem("morphism_courses_v6");
+        // Courses (v7 migration)
+        const savedCourses = localStorage.getItem("morphism_courses_v7");
         if (savedCourses) {
             try {
                 this.courses = JSON.parse(savedCourses);
@@ -3978,15 +4002,15 @@ class MorphismApp {
             this.courses = JSON.parse(JSON.stringify(SEED_COURSES));
         }
 
-        const activeName = localStorage.getItem("morphism_active_course_v6");
+        const activeName = localStorage.getItem("morphism_active_course_v7");
         this.currentCourse = this.courses.find(c => c.name === activeName) || this.courses[0];
     }
 
     _saveStorage() {
         localStorage.setItem("morphism_theme", this.activeThemeId);
-        localStorage.setItem("morphism_courses_v6", JSON.stringify(this.courses));
+        localStorage.setItem("morphism_courses_v7", JSON.stringify(this.courses));
         if (this.currentCourse) {
-            localStorage.setItem("morphism_active_course_v6", this.currentCourse.name);
+            localStorage.setItem("morphism_active_course_v7", this.currentCourse.name);
         }
     }
 
@@ -4442,14 +4466,16 @@ class MorphismApp {
         backContainer.innerHTML = "";
         backContainer.style.display = 'none';
 
+        const safeTitle = this._formatContent(card.title || 'Pregunta');
+
         if (card.type === 'ClozeCard') {
             const raw = card.text || "";
             const frontHtml = this._processCloze(raw, false);
-            frontContainer.innerHTML = `<div class="card-title">${card.title}</div><div class="card-body">${this._formatContent(frontHtml)}</div>`;
+            frontContainer.innerHTML = `<div class="card-title">${safeTitle}</div><div class="card-body">${this._formatContent(frontHtml)}</div>`;
         } else if (card.type === 'ProofSequenceCard') {
-            frontContainer.innerHTML = `<div class="card-title">${card.title}</div><div class="card-body"><strong>Premisa / Teorema a demostrar:</strong><br>${this._formatContent(card.premise)}</div>`;
+            frontContainer.innerHTML = `<div class="card-title">${safeTitle}</div><div class="card-body"><strong>Premisa / Teorema a demostrar:</strong><br>${this._formatContent(card.premise || '')}</div>`;
         } else {
-            frontContainer.innerHTML = `<div class="card-title">${card.title || 'Pregunta'}</div><div class="card-body">${this._formatContent(card.front || '')}</div>`;
+            frontContainer.innerHTML = `<div class="card-title">${safeTitle}</div><div class="card-body">${this._formatContent(card.front || '')}</div>`;
         }
 
         this._typesetMath([frontContainer]);
@@ -4460,18 +4486,37 @@ class MorphismApp {
         this.isShowingBack = true;
 
         const card = this.currentReviewCard;
+        const frontContainer = document.getElementById('review-front-content');
         const backContainer = document.getElementById('review-back-content');
-        backContainer.style.display = 'block';
+        const safeTitle = this._formatContent(card.title || 'Pregunta');
+        const elementsToTypeset = [];
 
         if (card.type === 'ClozeCard') {
             const raw = card.text || "";
             const backHtml = this._processCloze(raw, true);
-            backContainer.innerHTML = `<hr class="divider"><div class="card-body">${this._formatContent(backHtml)}</div>`;
+            // Reveal in place directly on the front container
+            frontContainer.innerHTML = `<div class="card-title">${safeTitle}</div><div class="card-body">${this._formatContent(backHtml)}</div>`;
+            elementsToTypeset.push(frontContainer);
+
+            // If there is distinct extra notes in card.back, show below divider
+            const hasExtraBack = card.back && card.back.trim() && card.back.trim() !== raw.trim() && card.back.trim() !== (card.front || "").trim();
+            if (hasExtraBack) {
+                backContainer.style.display = 'block';
+                backContainer.innerHTML = `<hr class="divider"><div class="card-body">${this._formatContent(card.back)}</div>`;
+                elementsToTypeset.push(backContainer);
+            } else {
+                backContainer.style.display = 'none';
+                backContainer.innerHTML = "";
+            }
         } else if (card.type === 'ProofSequenceCard') {
+            backContainer.style.display = 'block';
             const steps = (card.steps || []).map((s, idx) => `<li class="proof-step"><b>Paso ${idx+1}:</b> ${this._formatContent(s)}</li>`).join("");
             backContainer.innerHTML = `<hr class="divider"><div class="card-body"><strong>Demostración Completa:</strong><ol class="proof-list" style="padding-left:18px; margin-top:8px;">${steps}</ol></div>`;
+            elementsToTypeset.push(backContainer);
         } else {
+            backContainer.style.display = 'block';
             backContainer.innerHTML = `<hr class="divider"><div class="card-body">${this._formatContent(card.back || '')}</div>`;
+            elementsToTypeset.push(backContainer);
         }
 
         // Show rating buttons with forecasts
@@ -4486,7 +4531,7 @@ class MorphismApp {
         document.getElementById('forecast-good').textContent = forecasts[Rating.Good];
         document.getElementById('forecast-easy').textContent = forecasts[Rating.Easy];
 
-        this._typesetMath([backContainer]);
+        this._typesetMath(elementsToTypeset);
     }
 
     rateCurrentCard(rating) {
@@ -4619,24 +4664,34 @@ class MorphismApp {
 
         txt.value = localStorage.getItem("morphism_scratch") || "\\textbf{Apuntes rápidos / Teorema:}\n\nSea $f: X \\to Y$ continua y $X$ compacto. Entonces $f(X)$ es compacto.";
 
-        const update = () => {
+        let debounceTimer = null;
+        const update = (immediate = false) => {
             const val = txt.value;
             localStorage.setItem("morphism_scratch", val);
-            prev.innerHTML = val.replace(/\n/g, '<br>');
+            prev.innerHTML = this._formatContent(val);
             count.textContent = `${val.length} car.`;
-            this._typesetMath();
+            
+            if (immediate) {
+                if (debounceTimer) clearTimeout(debounceTimer);
+                this._typesetMath([prev]);
+            } else {
+                if (debounceTimer) clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(() => {
+                    this._typesetMath([prev]);
+                }, 120);
+            }
         };
 
-        txt.addEventListener('input', update);
+        txt.addEventListener('input', () => update(false));
         if (btnClear) {
             btnClear.onclick = () => {
                 if (confirm("¿Limpiar el borrador?")) {
                     txt.value = "";
-                    update();
+                    update(true);
                 }
             };
         }
-        update();
+        update(true);
     }
 
     insertMath(snippet) {
@@ -4677,7 +4732,7 @@ class MorphismApp {
         grid.innerHTML = "";
         for (let i = 0; i < 70; i++) {
             const cell = document.createElement('div');
-            cell.style.cssText = "aspect-ratio:1; background:var(--surface-bg); border-radius:3px;";
+            cell.style.cssText = "aspect-ratio:1; min-height:14px; height:14px; background:var(--surface-bg); border-radius:3px;";
             const rnd = Math.random();
             if (rnd > 0.8) {
                 cell.style.background = 'var(--accent)';
@@ -4700,18 +4755,53 @@ class MorphismApp {
             const isCurrent = this.currentCourse && this.currentCourse.name === c.name;
             const div = document.createElement('div');
             div.className = `course-card ${isCurrent ? 'active-course' : ''}`;
-            div.innerHTML = `
-                <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
-                    <div style="font-weight:bold; font-size:15px; color:var(--text-color); min-width:0; flex:1; overflow-wrap:break-word; word-break:break-word;">${c.name}</div>
-                    ${isCurrent ? '<span style="font-size:11px; font-weight:bold; color:var(--accent); border:1px solid var(--accent); padding:2px 8px; border-radius:10px; flex-shrink:0;">ACTIVO</span>' : ''}
-                </div>
-                <div style="font-size:13px; color:var(--text-muted); margin:6px 0;">${c.notes.length} conceptos matemáticos</div>
-                <div style="display:flex; gap:8px; margin-top:10px; flex-wrap:wrap;">
-                    <button class="btn-sm btn-primary" onclick="window.app._selectCourse('${c.name}')">${isCurrent ? 'Abrir Grafo' : 'Seleccionar'}</button>
-                    <button class="btn-sm btn-outline" onclick="window.app._exportCourseJson('${c.name}')">Exportar JSON</button>
-                    ${!isCurrent && this.courses.length > 1 ? `<button class="btn-sm btn-outline" style="color:#FF667D; border-color:#FF667D;" onclick="window.app._deleteCourse('${c.name}')">🗑️</button>` : ''}
-                </div>
-            `;
+            
+            const headerDiv = document.createElement('div');
+            headerDiv.style.cssText = "display:flex; justify-content:space-between; align-items:center; gap:8px;";
+            
+            const titleDiv = document.createElement('div');
+            titleDiv.style.cssText = "font-weight:bold; font-size:15px; color:var(--text-color); min-width:0; flex:1; overflow-wrap:anywhere; word-break:break-word;";
+            titleDiv.textContent = c.name;
+            headerDiv.appendChild(titleDiv);
+            
+            if (isCurrent) {
+                const activeBadge = document.createElement('span');
+                activeBadge.style.cssText = "font-size:11px; font-weight:bold; color:var(--accent); border:1px solid var(--accent); padding:2px 8px; border-radius:10px; flex-shrink:0;";
+                activeBadge.textContent = "ACTIVO";
+                headerDiv.appendChild(activeBadge);
+            }
+            div.appendChild(headerDiv);
+
+            const countDiv = document.createElement('div');
+            countDiv.style.cssText = "font-size:13px; color:var(--text-muted); margin:6px 0;";
+            countDiv.textContent = `${(c.notes || []).length} conceptos matemáticos`;
+            div.appendChild(countDiv);
+
+            const actionsDiv = document.createElement('div');
+            actionsDiv.style.cssText = "display:flex; gap:8px; margin-top:10px; flex-wrap:wrap;";
+
+            const btnSelect = document.createElement('button');
+            btnSelect.className = "btn-sm btn-primary";
+            btnSelect.textContent = isCurrent ? "Abrir Grafo" : "Seleccionar";
+            btnSelect.onclick = () => this._selectCourse(c.name);
+            actionsDiv.appendChild(btnSelect);
+
+            const btnExport = document.createElement('button');
+            btnExport.className = "btn-sm btn-outline";
+            btnExport.textContent = "Exportar JSON";
+            btnExport.onclick = () => this._exportCourseJson(c.name);
+            actionsDiv.appendChild(btnExport);
+
+            if (!isCurrent && this.courses.length > 1) {
+                const btnDel = document.createElement('button');
+                btnDel.className = "btn-sm btn-outline";
+                btnDel.style.cssText = "color:#FF667D; border-color:#FF667D;";
+                btnDel.textContent = "🗑️";
+                btnDel.onclick = () => this._deleteCourse(c.name);
+                actionsDiv.appendChild(btnDel);
+            }
+
+            div.appendChild(actionsDiv);
             list.appendChild(div);
         });
     }
@@ -5060,3 +5150,25 @@ class MorphismApp {
 window.addEventListener('DOMContentLoaded', () => {
     window.app = new MorphismApp();
 });
+
+// Android System Back Button Handler
+window.onAndroidBackPressed = function() {
+    // 1. Close any open modal overlay
+    const openModal = document.querySelector('.modal-overlay.open');
+    if (openModal) {
+        openModal.classList.remove('open');
+        return true;
+    }
+
+    // 2. If user is in Review, Courses, Stats, or Scratch, return to Graph tab
+    const activeTab = document.querySelector('.nav-tab.active');
+    if (activeTab && activeTab.dataset.tab !== 'graph') {
+        if (window.app && typeof window.app.switchTab === 'function') {
+            window.app.switchTab('graph');
+            return true;
+        }
+    }
+
+    // 3. Allow Android to exit app when already at main graph
+    return false;
+};

@@ -41,9 +41,11 @@ class TouchGraphView {
     resize() {
         const dpr = window.devicePixelRatio || 1;
         const rect = this.canvas.getBoundingClientRect();
-        this.canvas.width = rect.width * dpr;
-        this.canvas.height = rect.height * dpr;
         this.dpr = dpr;
+        this.cssWidth = rect.width;
+        this.cssHeight = rect.height;
+        this.canvas.width = Math.round(rect.width * dpr);
+        this.canvas.height = Math.round(rect.height * dpr);
         this.render();
     }
 
@@ -69,10 +71,9 @@ class TouchGraphView {
     }
 
     _screenToWorld(screenX, screenY) {
-        const dpr = this.dpr || 1;
         return {
-            x: (screenX * dpr - this.offsetX) / this.scale,
-            y: (screenY * dpr - this.offsetY) / this.scale
+            x: (screenX - this.offsetX) / this.scale,
+            y: (screenY - this.offsetY) / this.scale
         };
     }
 
@@ -108,8 +109,8 @@ class TouchGraphView {
                 this.nodeDragOffset = { x: world.x - (clicked.x || 0), y: world.y - (clicked.y || 0) };
             } else {
                 this.isPanning = true;
-                this.startPanX = e.clientX * this.dpr - this.offsetX;
-                this.startPanY = e.clientY * this.dpr - this.offsetY;
+                this.startPanX = e.clientX - this.offsetX;
+                this.startPanY = e.clientY - this.offsetY;
             }
         } else if (this.pointers.size === 2) {
             // Pinch to zoom initiated
@@ -136,8 +137,8 @@ class TouchGraphView {
                 this.draggedNode.y = Math.round(world.y - this.nodeDragOffset.y);
                 this.render();
             } else if (this.isPanning) {
-                this.offsetX = e.clientX * this.dpr - this.startPanX;
-                this.offsetY = e.clientY * this.dpr - this.startPanY;
+                this.offsetX = e.clientX - this.startPanX;
+                this.offsetY = e.clientY - this.startPanY;
                 this.render();
             }
         } else if (this.pointers.size === 2 && this.initialPinchDistance) {
@@ -179,8 +180,8 @@ class TouchGraphView {
         } else if (this.pointers.size === 1) {
             const remaining = Array.from(this.pointers.values())[0];
             this.isPanning = true;
-            this.startPanX = remaining.x * this.dpr - this.offsetX;
-            this.startPanY = remaining.y * this.dpr - this.offsetY;
+            this.startPanX = remaining.x - this.offsetX;
+            this.startPanY = remaining.y - this.offsetY;
         }
 
         this.render();
@@ -214,8 +215,8 @@ class TouchGraphView {
         }
 
         const rect = this.canvas.getBoundingClientRect();
-        const w = rect.width * (this.dpr || 1);
-        const h = rect.height * (this.dpr || 1);
+        const w = rect.width;
+        const h = rect.height;
 
         const boundsW = (maxX - minX) + 100;
         const boundsH = (maxY - minY) + 100;
@@ -294,26 +295,30 @@ class TouchGraphView {
 
     render() {
         const ctx = this.ctx;
-        const w = this.canvas.width;
-        const h = this.canvas.height;
-        const theme = window.AppTheme || {
-            canvas_bg: "#000000",
-            grid_color: "#1C1024",
-            node_bg_start: "#171019",
-            node_bg_end: "#07030A",
-            node_border: "#80D6A3",
-            due_border: "#F02A8C",
-            edge_color: "#B47AD0",
-            text: "#F7F1F8",
-            accent: "#F02A8C"
+        const dpr = this.dpr || 1;
+        const w = this.cssWidth || (this.canvas.width / dpr);
+        const h = this.cssHeight || (this.canvas.height / dpr);
+        const appTheme = window.AppTheme || {};
+        const theme = {
+            canvas_bg: appTheme.canvas_bg || appTheme.bg_color || "#000000",
+            grid_color: appTheme.grid_color || appTheme.border_color || "#1C1024",
+            node_bg_start: appTheme.node_bg_start || appTheme.card_bg || "#171019",
+            node_bg_end: appTheme.node_bg_end || appTheme.surface_bg || "#07030A",
+            node_border: appTheme.node_border || "#80D6A3",
+            due_border: appTheme.due_border || "#F02A8C",
+            edge_color: appTheme.edge_color || "#B47AD0",
+            text: appTheme.text || "#F7F1F8",
+            accent: appTheme.accent || "#F02A8C"
         };
 
         ctx.save();
-        ctx.fillStyle = theme.canvas_bg || "#000000";
+        ctx.scale(dpr, dpr); // Retina & high-DPI scaling
+
+        ctx.fillStyle = theme.canvas_bg;
         ctx.fillRect(0, 0, w, h);
 
         // Draw dot grid
-        ctx.fillStyle = theme.grid_color || "#1C1024";
+        ctx.fillStyle = theme.grid_color;
         const gridStep = 40 * this.scale;
         const startX = (this.offsetX % gridStep);
         const startY = (this.offsetY % gridStep);

@@ -28,25 +28,33 @@
             padding: 0;
             width: 100%;
             max-width: 100%;
-            height: 100vh;
+            height: 100%;
+            min-height: 100vh;
+            min-height: 100dvh;
             overflow-x: hidden;
             overflow-y: hidden;
             background-color: var(--bg-color);
             color: var(--text-color);
             font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
             display: flex;
             flex-direction: column;
         }
 
         /* Top Header */
         header {
-            height: 54px;
+            min-height: 54px;
+            height: calc(54px + env(safe-area-inset-top, 0px));
+            padding-top: env(safe-area-inset-top, 0px);
+            padding-left: calc(10px + env(safe-area-inset-left, 0px));
+            padding-right: calc(10px + env(safe-area-inset-right, 0px));
             background: var(--surface-bg);
             border-bottom: 1px solid var(--border-color);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 10px;
             z-index: 100;
             width: 100%;
             max-width: 100%;
@@ -76,7 +84,8 @@
             font-weight: bold;
             background: rgba(240, 42, 140, 0.15);
             color: var(--accent);
-            padding: 3px 8px;
+            padding: 4px 8px;
+            min-height: 26px;
             border-radius: 12px;
             border: 1px solid var(--accent);
             min-width: 0;
@@ -86,6 +95,8 @@
             text-overflow: ellipsis;
             cursor: pointer;
             flex-shrink: 1;
+            display: inline-flex;
+            align-items: center;
         }
 
         .header-actions {
@@ -101,7 +112,8 @@
             color: var(--text-color);
             font-size: 12px;
             font-weight: bold;
-            padding: 5px 8px;
+            padding: 6px 10px;
+            min-height: 32px;
             cursor: pointer;
             border-radius: 8px;
             display: flex;
@@ -134,14 +146,18 @@
 
         /* Bottom Tab Navigation */
         nav {
-            height: 60px;
+            min-height: 60px;
+            height: calc(60px + env(safe-area-inset-bottom, 0px));
             background: var(--surface-bg);
             border-top: 1px solid var(--border-color);
             display: flex;
             align-items: center;
             justify-content: space-around;
             z-index: 100;
-            padding-bottom: env(safe-area-inset-bottom);
+            padding-bottom: env(safe-area-inset-bottom, 0px);
+            padding-left: env(safe-area-inset-left, 0px);
+            padding-right: env(safe-area-inset-right, 0px);
+            box-sizing: border-box;
         }
 
         .nav-tab {
@@ -180,6 +196,9 @@
             font-weight: 800;
             border-radius: 10px;
             padding: 1px 6px;
+            min-width: 16px;
+            text-align: center;
+            line-height: 1.2;
         }
 
         /* Graph Canvas Screen */
@@ -235,6 +254,7 @@
             color: var(--text-color);
             border-radius: 10px;
             padding: 8px 8px;
+            min-height: 40px;
             font-size: 12px;
             font-weight: bold;
             display: flex;
@@ -254,8 +274,11 @@
             color: #ffffff;
             border: none;
             padding: 9px 12px;
+            min-height: 40px;
             font-size: 13px;
             flex: 1.6 1 auto;
+            justify-content: center;
+        }
             justify-content: center;
         }
 
@@ -355,9 +378,9 @@
         .card-body {
             font-size: 15px;
             line-height: 1.6;
-            overflow-wrap: break-word;
+            overflow-wrap: anywhere;
             word-wrap: break-word;
-            word-break: normal;
+            word-break: break-word;
             max-width: 100%;
             box-sizing: border-box;
         }
@@ -366,35 +389,44 @@
             width: 100%;
             max-width: 100%;
             box-sizing: border-box;
-            overflow-wrap: break-word;
-            word-break: normal;
+            overflow-wrap: anywhere;
+            word-break: break-word;
         }
 
         .cloze-bracket {
             color: #78A9FF;
             font-weight: bold;
-            padding: 2px 6px;
+            padding: 3px 8px;
+            margin: 0 2px;
+            min-height: 26px;
             background: rgba(120, 169, 255, 0.15);
             border-radius: 6px;
             border: 1px dashed #78A9FF;
             cursor: pointer;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             max-width: 100%;
-            overflow-wrap: break-word;
+            overflow-wrap: anywhere;
             word-break: break-word;
             vertical-align: middle;
+            touch-action: manipulation;
         }
 
         .cloze-revealed {
             color: #80D6A3;
             font-weight: bold;
-            padding: 2px 6px;
+            padding: 3px 8px;
+            margin: 0 2px;
+            min-height: 26px;
             background: rgba(128, 214, 163, 0.2);
             border-radius: 6px;
             border: 1px solid #80D6A3;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             max-width: 100%;
-            overflow-wrap: break-word;
+            overflow-wrap: anywhere;
             word-break: break-word;
             vertical-align: middle;
         }
@@ -410,6 +442,17 @@
         .proof-step {
             margin-bottom: 10px;
             padding: 8px 12px;
+            border-left: 3px solid #80D6A3;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 6px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            touch-action: pan-x pan-y;
+            max-width: 100%;
+            box-sizing: border-box;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
             border-left: 3px solid #80D6A3;
             background: rgba(255, 255, 255, 0.03);
             border-radius: 6px;
@@ -521,6 +564,13 @@
             cursor: pointer;
             text-align: center;
             box-sizing: border-box;
+            transition: opacity 0.2s;
+        }
+
+        .btn-undo:disabled {
+            opacity: 0.35;
+            cursor: default;
+            pointer-events: none;
         }
 
         /* Generic Modals */
@@ -701,7 +751,7 @@
 
         /* ========================================================
            MathJax 3 Responsive Engine Fix
-           Guarantees that equations never clip horizontally
+           Guarantees that equations never clip horizontally or vertically
            ======================================================== */
         mjx-container[jax="SVG"][display="true"] {
             display: block !important;
@@ -710,7 +760,7 @@
             max-width: 100% !important;
             overflow-x: auto !important;
             overflow-y: hidden !important;
-            padding: 6px 2px !important;
+            padding: 6px 4px !important;
             -webkit-overflow-scrolling: touch !important;
             touch-action: pan-x pan-y !important;
             box-sizing: border-box !important;
@@ -729,8 +779,11 @@
             overflow-y: hidden !important;
             vertical-align: -0.22em !important;
             -webkit-overflow-scrolling: touch !important;
+            touch-action: pan-x pan-y !important;
             display: inline-block !important;
             box-sizing: border-box !important;
+            padding: 3px 2px !important;
+            margin: 0 1px !important;
         }
 
         mjx-container[jax="SVG"]:not([display="true"]) > svg {
@@ -740,64 +793,85 @@
         /* Seamless math display flex row for cloze deletions inside formulas */
         .math-display-container {
             display: flex;
+            flex-direction: row;
             align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
+            justify-content: safe center;
+            flex-wrap: nowrap;
             gap: 6px;
             margin: 0.8em 0;
+            width: 100%;
             max-width: 100%;
             overflow-x: auto;
             overflow-y: hidden;
             -webkit-overflow-scrolling: touch;
+            touch-action: pan-x pan-y;
             box-sizing: border-box;
-            padding: 4px 2px;
+            padding: 6px 4px;
+        }
+
+        /* Safe centering without negative overflow clipping */
+        .math-display-container::before,
+        .math-display-container::after {
+            content: '';
+            margin: auto;
         }
 
         .math-display-container mjx-container[jax="SVG"]:not([display="true"]) {
             vertical-align: middle !important;
             margin: 0 !important;
+            flex-shrink: 0;
         }
 
-        /* Tables, Pre, Code, Images */
+        .math-display-container .cloze-bracket,
+        .math-display-container .cloze-revealed {
+            flex-shrink: 0;
+        }
+
+        /* Tables, Pre, Code, Images with full Theme Adaptability */
         table {
             border-collapse: collapse;
             width: 100%;
             margin: 12px 0;
-            background: rgba(15, 23, 42, 0.6);
+            background: var(--surface-bg);
             display: block;
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
+            touch-action: pan-x pan-y;
             max-width: 100%;
             box-sizing: border-box;
+            border-radius: 8px;
         }
 
         th, td {
             border: 1px solid var(--border-color);
-            padding: 6px 10px;
+            padding: 8px 12px;
             text-align: left;
             min-width: 60px;
+            color: var(--text-color);
         }
 
         pre {
-            background: rgba(0, 0, 0, 0.4);
-            padding: 10px;
+            background: var(--surface-bg);
+            color: var(--text-color);
+            padding: 12px;
             border-radius: 8px;
             border: 1px solid var(--border-color);
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
+            touch-action: pan-x pan-y;
             max-width: 100%;
             box-sizing: border-box;
             font-size: 13px;
         }
 
         code {
-            background: rgba(255, 255, 255, 0.08);
-            color: var(--accent-hover);
-            padding: 2px 5px;
+            background: rgba(240, 42, 140, 0.12);
+            color: var(--accent);
+            padding: 2px 6px;
             border-radius: 4px;
             font-family: monospace;
             font-size: 0.9em;
-            overflow-wrap: break-word;
+            overflow-wrap: anywhere;
             word-break: break-word;
         }
 
@@ -891,13 +965,29 @@
             .header-logo-text {
                 font-size: 13px;
             }
+            .header-course-badge {
+                max-width: 80px;
+                font-size: 9px;
+                padding: 2px 4px;
+            }
             .header-btn {
                 padding: 4px 6px;
                 font-size: 11px;
             }
+            .graph-action-dock {
+                left: 4px;
+                right: 4px;
+                gap: 4px;
+                max-width: calc(100% - 8px);
+            }
             .dock-btn {
                 font-size: 10px;
-                padding: 6px 4px;
+                padding: 6px 3px;
+                min-height: 36px;
+            }
+            .dock-btn-primary {
+                padding: 6px 6px;
+                font-size: 11px;
             }
             .btn-rating {
                 height: 46px;

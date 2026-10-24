@@ -239,5 +239,41 @@ class TestMorphismPlus(unittest.TestCase):
                             )
         self.assertGreaterEqual(total_cards_checked, 200)
 
+    def test_android_assets_and_responsive_css(self):
+        """Verify Android assets, CSS responsive rules, themes completeness, and back button handler."""
+        # 1. Check index.html responsive & safe area rules
+        with open("android/app/src/main/assets/index.html", "r", encoding="utf-8") as f:
+            html = f.read()
+
+        self.assertIn("env(safe-area-inset-top", html)
+        self.assertIn("env(safe-area-inset-bottom", html)
+        self.assertIn(".math-display-container::before", html)
+        self.assertIn("overflow-wrap: anywhere", html)
+        self.assertIn("touch-action: pan-x pan-y", html)
+
+        # 2. Check graph.js Retina / High-DPI scaling
+        with open("android/app/src/main/assets/graph.js", "r", encoding="utf-8") as f:
+            graph_js = f.read()
+
+        self.assertIn("ctx.scale(dpr, dpr)", graph_js)
+        self.assertIn("this.cssWidth", graph_js)
+        self.assertIn("this.cssHeight", graph_js)
+
+        # 3. Check app.js themes completeness and back button handler
+        with open("android/app/src/main/assets/app.js", "r", encoding="utf-8") as f:
+            app_js = f.read()
+
+        self.assertIn("window.onAndroidBackPressed", app_js)
+        for theme_id in ["bisexual_midnight", "catppuccin_mocha", "nord", "dracula", "dark_modern", "github_light"]:
+            self.assertIn(f"{theme_id}:", app_js)
+        self.assertIn("canvas_bg", app_js)
+        self.assertIn("grid_color", app_js)
+        self.assertIn("morphism_courses_v7", app_js)
+
+        # 4. Check MainActivity.java has Javascript back handler integration
+        with open("android/app/src/main/java/org/morphism/srs/plus/MainActivity.java", "r", encoding="utf-8") as f:
+            main_activity = f.read()
+        self.assertIn("window.onAndroidBackPressed", main_activity)
+
 if __name__ == "__main__":
     unittest.main()
