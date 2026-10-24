@@ -38,7 +38,7 @@
 
         /* Top Header */
         header {
-            height: 52px;
+            height: 54px;
             background: var(--surface-bg);
             border-bottom: 1px solid var(--border-color);
             display: flex;
@@ -54,30 +54,36 @@
             color: var(--accent);
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
         }
 
         .header-course-badge {
             font-size: 12px;
+            font-weight: bold;
             background: rgba(240, 42, 140, 0.15);
             color: var(--accent);
-            padding: 3px 8px;
+            padding: 4px 10px;
             border-radius: 12px;
             border: 1px solid var(--accent);
-            max-width: 140px;
+            max-width: 150px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            cursor: pointer;
         }
 
-        .btn-icon {
-            background: transparent;
-            border: none;
+        .header-btn {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border-color);
             color: var(--text-color);
-            font-size: 18px;
-            padding: 6px;
+            font-size: 13px;
+            font-weight: bold;
+            padding: 6px 10px;
             cursor: pointer;
             border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
 
         /* View Container */
@@ -104,7 +110,7 @@
 
         /* Bottom Tab Navigation */
         nav {
-            height: 58px;
+            height: 60px;
             background: var(--surface-bg);
             border-top: 1px solid var(--border-color);
             display: flex;
@@ -136,14 +142,14 @@
         }
 
         .nav-tab .icon {
-            font-size: 20px;
+            font-size: 19px;
             margin-bottom: 2px;
         }
 
         .tab-badge {
             position: absolute;
-            top: 6px;
-            right: 25%;
+            top: 4px;
+            right: 22%;
             background: var(--accent);
             color: #ffffff;
             font-size: 10px;
@@ -165,13 +171,13 @@
             top: 12px;
             left: 14px;
             right: 14px;
-            background: rgba(11, 7, 16, 0.85);
-            backdrop-filter: blur(10px);
+            background: rgba(11, 7, 16, 0.90);
+            backdrop-filter: blur(12px);
             border: 1px solid var(--border-color);
             border-radius: 20px;
             display: flex;
             align-items: center;
-            padding: 6px 14px;
+            padding: 7px 14px;
             z-index: 10;
         }
 
@@ -184,37 +190,43 @@
             outline: none;
         }
 
-        .floating-controls {
+        /* Bottom Action Dock for Graph */
+        .graph-action-dock {
             position: absolute;
-            bottom: 16px;
-            right: 16px;
+            bottom: 14px;
+            left: 14px;
+            right: 14px;
             display: flex;
-            flex-direction: column;
-            gap: 10px;
+            gap: 8px;
             z-index: 10;
+            align-items: center;
+            justify-content: space-between;
         }
 
-        .fab {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background: var(--card-bg);
-            color: var(--accent);
+        .dock-btn {
+            background: var(--surface-bg);
             border: 1px solid var(--border-color);
+            color: var(--text-color);
+            border-radius: 12px;
+            padding: 10px 14px;
+            font-size: 13px;
+            font-weight: bold;
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+            gap: 6px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.6);
             cursor: pointer;
+            backdrop-filter: blur(8px);
         }
 
-        .fab.fab-primary {
+        .dock-btn-primary {
             background: var(--accent);
             color: #ffffff;
-            width: 52px;
-            height: 52px;
-            font-size: 22px;
+            border: none;
+            padding: 11px 18px;
+            font-size: 14px;
+            flex-grow: 1;
+            justify-content: center;
         }
 
         /* Review Screen */
@@ -227,25 +239,59 @@
             align-items: center;
         }
 
+        .review-progress-bar {
+            width: 100%;
+            max-width: 600px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            margin-bottom: 12px;
+            overflow: hidden;
+        }
+
+        .review-progress-fill {
+            height: 100%;
+            background: var(--accent);
+            width: 0%;
+            transition: width 0.3s;
+        }
+
         .review-card {
             width: 100%;
             max-width: 600px;
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 16px;
-            padding: 20px;
+            padding: 22px;
             margin-bottom: 20px;
             box-shadow: 0 8px 24px rgba(0,0,0,0.4);
             user-select: text;
         }
 
-        .card-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--accent);
+        .card-header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 12px;
             border-bottom: 1px solid var(--border-color);
-            padding-bottom: 6px;
+            padding-bottom: 8px;
+        }
+
+        .card-type-chip {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 10px;
+            text-transform: uppercase;
+            background: rgba(240, 42, 140, 0.15);
+            color: var(--accent);
+        }
+
+        .card-title {
+            font-size: 19px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 10px;
         }
 
         .card-body {
@@ -256,9 +302,9 @@
         .cloze-bracket {
             color: #78A9FF;
             font-weight: bold;
-            padding: 2px 6px;
+            padding: 2px 8px;
             background: rgba(120, 169, 255, 0.15);
-            border-radius: 4px;
+            border-radius: 6px;
             border: 1px dashed #78A9FF;
             cursor: pointer;
         }
@@ -266,15 +312,15 @@
         .cloze-revealed {
             color: #80D6A3;
             font-weight: bold;
-            padding: 2px 6px;
+            padding: 2px 8px;
             background: rgba(128, 214, 163, 0.2);
-            border-radius: 4px;
+            border-radius: 6px;
             border: 1px solid #80D6A3;
         }
 
         .proof-step {
-            margin-bottom: 8px;
-            padding: 8px 10px;
+            margin-bottom: 10px;
+            padding: 10px 12px;
             border-left: 3px solid #80D6A3;
             background: rgba(255, 255, 255, 0.03);
             border-radius: 6px;
@@ -284,7 +330,7 @@
             border: 0;
             height: 1px;
             background: var(--border-color);
-            margin: 16px 0;
+            margin: 18px 0;
         }
 
         /* Review Buttons Controls */
@@ -306,8 +352,8 @@
         }
 
         .btn-rating {
-            height: 52px;
-            border-radius: 10px;
+            height: 56px;
+            border-radius: 12px;
             border: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
@@ -316,6 +362,11 @@
             font-weight: bold;
             font-size: 13px;
             cursor: pointer;
+            transition: transform 0.1s;
+        }
+
+        .btn-rating:active {
+            transform: scale(0.96);
         }
 
         .btn-again { background: #4D1D24; color: #FF8B9D; border-color: #FF667D; }
@@ -323,9 +374,16 @@
         .btn-good  { background: #1C3C28; color: #A5E6BC; border-color: #80D6A3; }
         .btn-easy  { background: #1A2C4A; color: #A5C5FF; border-color: #78A9FF; }
 
-        .btn-rating .forecast {
-            font-size: 10px;
+        .btn-rating .subtext {
+            font-size: 9px;
             opacity: 0.8;
+            margin-top: 1px;
+            font-weight: normal;
+        }
+
+        .btn-rating .forecast {
+            font-size: 11px;
+            font-weight: bold;
             margin-top: 2px;
         }
 
@@ -339,16 +397,22 @@
             border: none;
             width: 100%;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
         .btn-undo {
             background: transparent;
             color: var(--text-muted);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
+            border-radius: 10px;
             padding: 8px;
-            font-size: 12px;
+            font-size: 13px;
+            font-weight: bold;
             cursor: pointer;
+            text-align: center;
         }
 
         /* Generic Modals */
@@ -358,12 +422,13 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.75);
             display: none;
             align-items: center;
             justify-content: center;
             z-index: 500;
-            padding: 20px;
+            padding: 16px;
+            backdrop-filter: blur(4px);
         }
 
         .modal-overlay.open {
@@ -372,34 +437,80 @@
 
         .modal-box {
             width: 100%;
-            max-width: 440px;
+            max-width: 480px;
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 20px;
-            max-height: 85vh;
+            border-radius: 18px;
+            padding: 22px;
+            max-height: 88vh;
             overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
         }
 
-        .theme-option {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px 14px;
+        .modal-title {
+            margin-top: 0;
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: bold;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
             background: var(--surface-bg);
             border: 1px solid var(--border-color);
+            color: var(--text-color);
             border-radius: 10px;
-            margin-bottom: 8px;
-            font-weight: bold;
+            padding: 10px;
+            font-size: 14px;
+            outline: none;
+            font-family: inherit;
+        }
+
+        .form-group textarea {
+            min-height: 80px;
+            resize: vertical;
+            font-family: monospace;
+        }
+
+        /* Math Palette */
+        .math-palette {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 10px;
+        }
+
+        .math-chip {
+            background: var(--surface-bg);
+            border: 1px solid var(--border-color);
+            color: var(--accent);
+            font-size: 13px;
+            font-family: monospace;
+            padding: 5px 9px;
+            border-radius: 6px;
             cursor: pointer;
+            font-weight: bold;
         }
 
-        .theme-option.active {
-            border-color: var(--accent);
-            box-shadow: 0 0 10px rgba(240, 42, 140, 0.3);
+        .math-chip:active {
+            background: var(--accent);
+            color: #ffffff;
         }
 
-        /* Scratchbook & Stats View */
+        /* Scrollable Content Pages */
         .scrollable-view {
             padding: 16px;
             overflow-y: auto;
@@ -410,19 +521,19 @@
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 12px;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
         .stat-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 14px;
+            border-radius: 14px;
+            padding: 16px;
             text-align: center;
         }
 
         .stat-val {
-            font-size: 24px;
+            font-size: 26px;
             font-weight: 800;
             color: var(--accent);
         }
@@ -431,37 +542,27 @@
             font-size: 12px;
             color: var(--text-muted);
             margin-top: 4px;
-        }
-
-        .heatmap-container {
-            display: grid;
-            grid-template-columns: repeat(14, 1fr);
-            gap: 4px;
-            margin-top: 12px;
-        }
-
-        .heatmap-cell {
-            aspect-ratio: 1;
-            background: var(--surface-bg);
-            border-radius: 3px;
+            font-weight: 600;
         }
 
         .course-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 14px;
+            border-radius: 14px;
+            padding: 16px;
             margin-bottom: 12px;
+            transition: border-color 0.2s;
         }
 
         .course-card.active-course {
             border-color: var(--accent);
+            box-shadow: 0 0 14px rgba(240, 42, 140, 0.25);
         }
 
         .btn-sm {
-            padding: 6px 12px;
+            padding: 8px 14px;
             font-size: 12px;
-            border-radius: 6px;
+            border-radius: 8px;
             border: none;
             cursor: pointer;
             font-weight: bold;
@@ -471,6 +572,28 @@
             background: transparent;
             color: var(--text-color);
             border: 1px solid var(--border-color);
+        }
+
+        /* Guide Dialog Styling */
+        .guide-section {
+            background: var(--surface-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 14px;
+            margin-bottom: 12px;
+        }
+
+        .guide-section h4 {
+            margin: 0 0 6px 0;
+            color: var(--accent);
+            font-size: 14px;
+        }
+
+        .guide-section p {
+            margin: 0;
+            font-size: 13px;
+            color: var(--text-color);
+            line-height: 1.5;
         }
     </style>
 
@@ -494,10 +617,11 @@
     <header>
         <div class="header-title">
             <span>⚡ Morphism+</span>
-            <span class="header-course-badge" id="lbl-active-course">Default</span>
+            <span class="header-course-badge" id="lbl-active-course" title="Toca para cambiar de curso">Default</span>
         </div>
-        <div style="display:flex; align-items:center; gap:6px;">
-            <button class="btn-icon" id="btn-theme-selector" title="Tema">🎨</button>
+        <div style="display:flex; align-items:center; gap:8px;">
+            <button class="header-btn" id="btn-open-guide">❓ Ayuda</button>
+            <button class="header-btn" id="btn-theme-selector">🎨 Tema</button>
         </div>
     </header>
 
@@ -507,42 +631,81 @@
         <div class="view-page active" id="view-graph">
             <div class="graph-search-bar">
                 <span style="margin-right:8px; opacity:0.6;">🔍</span>
-                <input type="text" id="txt-graph-search" placeholder="Buscar conceptos o fórmulas...">
+                <input type="text" id="txt-graph-search" placeholder="Buscar teoremas, fórmulas o conceptos...">
             </div>
+
             <canvas id="graph-canvas"></canvas>
-            <div class="floating-controls">
-                <button class="fab fab-primary" id="btn-review-due" title="Repasar Pendientes">🎯</button>
-                <button class="fab" id="btn-add-note" title="Nueva Nota">+</button>
-                <button class="fab" id="btn-auto-layout" title="Auto Organizar">⚡</button>
-                <button class="fab" id="btn-fit-graph" title="Ajustar">⛶</button>
+
+            <!-- Bottom Floating Action Dock with Clear Text Labels -->
+            <div class="graph-action-dock">
+                <button class="dock-btn dock-btn-primary" id="btn-review-due">
+                    🎯 Repasar (<span id="fab-due-count">0</span>)
+                </button>
+                <button class="dock-btn" id="btn-add-note">
+                    ➕ Nota
+                </button>
+                <button class="dock-btn" id="btn-auto-layout" title="Organizar de forma jerárquica">
+                    ⚡ Auto
+                </button>
+                <button class="dock-btn" id="btn-fit-graph" title="Encuadrar todo en pantalla">
+                    ⛶ Centrar
+                </button>
             </div>
         </div>
 
         <!-- 2. Review Page -->
         <div class="view-page" id="view-review">
             <div class="review-container">
+                <div class="review-progress-bar">
+                    <div class="review-progress-fill" id="review-progress-fill"></div>
+                </div>
+
                 <div id="review-empty-state" style="text-align:center; padding:50px 20px;">
-                    <div style="font-size:36px; margin-bottom:12px;">☕</div>
-                    <div style="font-size:18px; font-weight:bold; color:var(--accent);">No hay repaso activo</div>
-                    <div style="font-size:14px; color:var(--text-muted); margin-top:6px;">Selecciona una nota en el Explorador o pulsa 🎯 para empezar.</div>
+                    <div style="font-size:42px; margin-bottom:12px;">☕</div>
+                    <div style="font-size:19px; font-weight:bold; color:var(--accent);">No hay repaso activo en este curso</div>
+                    <div style="font-size:14px; color:var(--text-muted); margin-top:8px; line-height:1.5;">
+                        Toca cualquier concepto en el <b>Explorador</b> para repasar esa nota,<br>o pulsa <b>🎯 Repasar</b> para estudiar las tarjetas pendientes.
+                    </div>
+                    <button class="btn-primary" style="margin-top:20px;" onclick="window.app.switchTab('graph')">🗺️ Ir al Explorador</button>
                 </div>
 
                 <div class="review-card" id="review-card-container" style="display:none;">
-                    <div style="font-size:12px; color:var(--text-muted); margin-bottom:6px;" id="review-card-header">Note</div>
+                    <div class="card-header-bar">
+                        <span id="review-card-note-title" style="font-size:13px; font-weight:bold; color:var(--text-muted);">Note</span>
+                        <span class="card-type-chip" id="review-card-type-chip">Card</span>
+                    </div>
                     <div id="review-front-content"></div>
                     <div id="review-back-content" style="display:none;"></div>
                 </div>
             </div>
 
             <div class="review-controls" id="review-bottom-controls" style="display:none;">
-                <button class="btn-primary" id="btn-show-answer">Mostrar Solución</button>
+                <button class="btn-primary" id="btn-show-answer">👁️ Mostrar Solución</button>
+
                 <div class="btn-rating-grid" id="rating-buttons-row" style="display:none;">
-                    <button class="btn-rating btn-again" id="btn-again">Again<span class="forecast" id="forecast-again">10m</span></button>
-                    <button class="btn-rating btn-hard" id="btn-hard">Hard<span class="forecast" id="forecast-hard">1d</span></button>
-                    <button class="btn-rating btn-good" id="btn-good">Good<span class="forecast" id="forecast-good">3d</span></button>
-                    <button class="btn-rating btn-easy" id="btn-easy">Easy<span class="forecast" id="forecast-easy">7d</span></button>
+                    <button class="btn-rating btn-again" id="btn-again">
+                        Again
+                        <span class="subtext">Olvidado</span>
+                        <span class="forecast" id="forecast-again">10m</span>
+                    </button>
+                    <button class="btn-rating btn-hard" id="btn-hard">
+                        Hard
+                        <span class="subtext">Difícil</span>
+                        <span class="forecast" id="forecast-hard">1d</span>
+                    </button>
+                    <button class="btn-rating btn-good" id="btn-good">
+                        Good
+                        <span class="subtext">Correcto</span>
+                        <span class="forecast" id="forecast-good">3d</span>
+                    </button>
+                    <button class="btn-rating btn-easy" id="btn-easy">
+                        Easy
+                        <span class="subtext">Fácil</span>
+                        <span class="forecast" id="forecast-easy">7d</span>
+                    </button>
                 </div>
-                <button class="btn-undo" id="btn-undo" disabled>↩ Deshacer Última Calificación</button>
+
+                <button class="btn-undo" id="btn-undo" disabled>↩ Deshacer Última Calificación (Undo)</button>
             </div>
         </div>
 
@@ -551,11 +714,17 @@
             <div class="scrollable-view">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
                     <h3 style="margin:0; color:var(--accent);">📚 Cursos de Matemáticas</h3>
-                    <label class="btn-sm btn-primary" style="display:flex; align-items:center; cursor:pointer;">
-                        📥 Importar
+                    <button class="btn-sm btn-primary" id="btn-new-course">➕ Nuevo Curso</button>
+                </div>
+
+                <div style="display:flex; gap:8px; margin-bottom:16px;">
+                    <label class="btn-sm btn-outline" style="flex:1; text-align:center; cursor:pointer;">
+                        📥 Importar (.json)
                         <input type="file" id="file-import-course" accept=".json,.morphism,.zip" style="display:none;">
                     </label>
+                    <button class="btn-sm btn-outline" id="btn-reset-demo-courses" style="flex:1;">🔄 Cursos Ejemplo</button>
                 </div>
+
                 <div id="courses-list-container"></div>
             </div>
         </div>
@@ -563,7 +732,7 @@
         <!-- 4. Stats Page -->
         <div class="view-page" id="view-stats">
             <div class="scrollable-view">
-                <h3 style="margin-top:0; color:var(--accent);">📈 Rendimiento FSRS</h3>
+                <h3 style="margin-top:0; color:var(--accent);">📈 Rendimiento del Algoritmo FSRS</h3>
                 <div class="stats-grid">
                     <div class="stat-card">
                         <div class="stat-val" id="stat-total-cards">0</div>
@@ -583,9 +752,9 @@
                     </div>
                 </div>
 
-                <div class="stat-card" style="text-align:left;">
-                    <div style="font-weight:bold; font-size:14px; margin-bottom:6px;">Actividad de Repaso (Últimos Días)</div>
-                    <div class="heatmap-container" id="stats-heatmap-grid"></div>
+                <div class="stat-card" style="text-align:left; margin-bottom:16px;">
+                    <div style="font-weight:bold; font-size:14px; margin-bottom:6px;">Actividad de Repaso Reciente</div>
+                    <div class="heatmap-container" id="stats-heatmap-grid" style="display:grid; grid-template-columns:repeat(14, 1fr); gap:4px; margin-top:10px;"></div>
                 </div>
             </div>
         </div>
@@ -597,9 +766,29 @@
                     <h3 style="margin:0; color:var(--accent);">✏️ Scratchbook Matemático</h3>
                     <span id="scratch-counter" style="font-size:12px; color:var(--text-muted);">0 car.</span>
                 </div>
-                <textarea id="scratch-editor" style="width:100%; height:160px; background:var(--card-bg); color:var(--text-color); border:1px solid var(--border-color); border-radius:10px; padding:12px; font-family:monospace; font-size:14px; outline:none; resize:none;"></textarea>
-                <div style="font-size:13px; font-weight:bold; color:var(--text-muted); margin:12px 0 6px 0;">Vista Previa MathJax:</div>
-                <div id="scratch-preview" style="flex:1; background:var(--card-bg); border:1px solid var(--border-color); border-radius:10px; padding:14px; overflow-y:auto; user-select:text;"></div>
+
+                <!-- Math Quick Palette -->
+                <div class="math-palette">
+                    <button class="math-chip" onclick="window.app.insertMath('$$ $$')">$$ $$</button>
+                    <button class="math-chip" onclick="window.app.insertMath('\\frac{a}{b}')">\frac{a}{b}</button>
+                    <button class="math-chip" onclick="window.app.insertMath('\\sqrt{x}')">\sqrt{x}</button>
+                    <button class="math-chip" onclick="window.app.insertMath('\\int')">\int</button>
+                    <button class="math-chip" onclick="window.app.insertMath('\\sum')">\sum</button>
+                    <button class="math-chip" onclick="window.app.insertMath('\\to')">\to</button>
+                    <button class="math-chip" onclick="window.app.insertMath('\\in')">\in</button>
+                    <button class="math-chip" onclick="window.app.insertMath('\\forall')">\forall</button>
+                    <button class="math-chip" onclick="window.app.insertMath('\\exists')">\exists</button>
+                    <button class="math-chip" onclick="window.app.insertMath('\\mathbb{R}')">\mathbb{R}</button>
+                    <button class="math-chip" onclick="window.app.insertMath('\\mathbb{C}')">\mathbb{C}</button>
+                </div>
+
+                <textarea id="scratch-editor" style="width:100%; height:140px; background:var(--card-bg); color:var(--text-color); border:1px solid var(--border-color); border-radius:12px; padding:12px; font-family:monospace; font-size:14px; outline:none; resize:none;"></textarea>
+
+                <div style="display:flex; justify-content:space-between; align-items:center; margin:12px 0 6px 0;">
+                    <span style="font-size:13px; font-weight:bold; color:var(--text-muted);">Vista Previa MathJax:</span>
+                    <button class="btn-sm btn-outline" id="btn-clear-scratch">Limpiar</button>
+                </div>
+                <div id="scratch-preview" style="flex:1; background:var(--card-bg); border:1px solid var(--border-color); border-radius:12px; padding:14px; overflow-y:auto; user-select:text;"></div>
             </div>
         </div>
     </main>
@@ -629,22 +818,85 @@
         </button>
     </nav>
 
-    <!-- Theme Modal -->
+    <!-- Modal: Theme Selector -->
     <div class="modal-overlay" id="modal-theme">
         <div class="modal-box">
-            <h3 style="margin-top:0; color:var(--accent);">🎨 Seleccionar Tema</h3>
+            <div class="modal-title">🎨 Seleccionar Tema</div>
             <div id="theme-options-list"></div>
             <button class="btn-primary" style="margin-top:14px;" onclick="document.getElementById('modal-theme').classList.remove('open')">Cerrar</button>
         </div>
     </div>
 
-    <!-- Node Details Bottom Sheet -->
+    <!-- Modal: Node Details & Actions -->
     <div class="modal-overlay" id="modal-node-details">
         <div class="modal-box">
-            <h3 id="modal-node-title" style="margin-top:0; color:var(--accent);">Nota</h3>
-            <div id="modal-node-info" style="color:var(--text-muted); font-size:14px; line-height:1.6; margin-bottom:16px;"></div>
+            <div class="modal-title" id="modal-node-title">Concepto</div>
+            <div id="modal-node-info" style="color:var(--text-muted); font-size:14px; line-height:1.6; margin-bottom:14px;"></div>
+            <div id="modal-node-cards-preview" style="margin-bottom:16px; max-height:140px; overflow-y:auto;"></div>
             <button class="btn-primary" id="btn-review-this-node" style="margin-bottom:8px;">▶ Repasar Esta Nota</button>
-            <button class="btn-sm btn-outline" style="width:100%; height:42px;" onclick="document.getElementById('modal-node-details').classList.remove('open')">Cerrar</button>
+            <button class="btn-sm btn-outline" id="btn-add-card-to-node" style="width:100%; height:40px; margin-bottom:8px;">➕ Añadir Tarjeta a esta Nota</button>
+            <button class="btn-sm btn-outline" id="btn-delete-node" style="width:100%; height:40px; color:#FF667D; border-color:#FF667D; margin-bottom:8px;">🗑️ Eliminar Nota</button>
+            <button class="btn-sm btn-outline" style="width:100%; height:40px;" onclick="document.getElementById('modal-node-details').classList.remove('open')">Cerrar</button>
+        </div>
+    </div>
+
+    <!-- Modal: Add Note -->
+    <div class="modal-overlay" id="modal-add-note">
+        <div class="modal-box">
+            <div class="modal-title">➕ Nueva Nota Matemática</div>
+            <div class="form-group">
+                <label>Título del Concepto o Teorema:</label>
+                <input type="text" id="inp-note-title" placeholder="Ej: Teorema de Cayley-Hamilton">
+            </div>
+            <div class="form-group">
+                <label>Tipo de Nota:</label>
+                <select id="inp-note-type">
+                    <option value="standard">Nota Estándar (Flashcards o Cloze)</option>
+                    <option value="serial_sequence">Secuencia Serial (Prueba paso a paso)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Primera Tarjeta (Pregunta o Enunciado):</label>
+                <textarea id="inp-card-front" placeholder="Pregunta, teorema o texto con cloze {{c1::respuesta::pista}}"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Solución o Demostración:</label>
+                <textarea id="inp-card-back" placeholder="Respuesta, demostración o detalles..."></textarea>
+            </div>
+            <button class="btn-primary" id="btn-confirm-add-note" style="margin-bottom:8px;">Guardar Nota</button>
+            <button class="btn-sm btn-outline" style="width:100%; height:40px;" onclick="document.getElementById('modal-add-note').classList.remove('open')">Cancelar</button>
+        </div>
+    </div>
+
+    <!-- Modal: User Guide & Help -->
+    <div class="modal-overlay" id="modal-guide">
+        <div class="modal-box">
+            <div class="modal-title">❓ Guía de Uso — Morphism SRS Plus</div>
+            
+            <div class="guide-section">
+                <h4>🗺️ 1. El Grafo Conceptual</h4>
+                <p>Las matemáticas se construyen sobre prerrequisitos. Los nodos representan conceptos o teoremas, y las flechas indican dependencias. <b>Usa 2 dedos para hacer zoom y 1 dedo para mover el lienzo.</b></p>
+            </div>
+
+            <div class="guide-section">
+                <h4>🧩 2. Tarjetas Cloze Deletion</h4>
+                <p>Usa la sintaxis <code>{{c1::respuesta::pista}}</code> para memorizar fórmulas ocultando partes clave. Al repasar, toca el corchete para revelar la solución.</p>
+            </div>
+
+            <div class="guide-section">
+                <h4>🧠 3. Calificaciones FSRS</h4>
+                <p><b>Again (1):</b> No recordabas la respuesta.<br>
+                   <b>Hard (2):</b> Costó mucho recordarla.<br>
+                   <b>Good (3):</b> Respuesta correcta con esfuerzo normal.<br>
+                   <b>Easy (4):</b> Totalmente dominada y trivial.</p>
+            </div>
+
+            <div class="guide-section">
+                <h4>🔄 4. Sincronización con PC</h4>
+                <p>En la pestaña <b>📚 Cursos</b> puedes importar y exportar tus archivos <code>.json</code> para estudiar en tu PC o en el móvil manteniendo tus notas.</p>
+            </div>
+
+            <button class="btn-primary" style="margin-top:10px;" onclick="document.getElementById('modal-guide').classList.remove('open')">Entendido</button>
         </div>
     </div>
 

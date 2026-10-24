@@ -240,9 +240,11 @@ class MorphismApp {
 
         // Review state
         this.reviewQueue = [];
+        this.totalInSession = 0;
         this.currentReviewCard = null;
         this.currentReviewNote = null;
         this.isShowingBack = false;
+        this.selectedGraphNote = null;
         this.serialPastSteps = [];
         this.reviewUndoStack = [];
         this.sessionStats = { count: 0, ratings: { 1: 0, 2: 0, 3: 0, 4: 0 }, start: null };
@@ -302,7 +304,13 @@ class MorphismApp {
             });
         });
 
-        // Theme selector modal
+        // Header controls
+        document.getElementById('lbl-active-course').addEventListener('click', () => {
+            this.switchTab('courses');
+        });
+        document.getElementById('btn-open-guide').addEventListener('click', () => {
+            document.getElementById('modal-guide').classList.add('open');
+        });
         document.getElementById('btn-theme-selector').addEventListener('click', () => {
             this._showThemeDialog();
         });
@@ -324,6 +332,17 @@ class MorphismApp {
         document.getElementById('btn-auto-layout').addEventListener('click', () => this.graphView.autoArrange());
         document.getElementById('btn-review-due').addEventListener('click', () => this.startDueReview());
         document.getElementById('btn-add-note').addEventListener('click', () => this._openAddNoteModal());
+
+        // Add Note confirmation
+        document.getElementById('btn-confirm-add-note').addEventListener('click', () => this._saveNewNoteFromModal());
+
+        // Note details modal buttons
+        document.getElementById('btn-delete-node').addEventListener('click', () => this._deleteSelectedNode());
+        document.getElementById('btn-add-card-to-node').addEventListener('click', () => this._addCardToSelectedNode());
+
+        // Courses page actions
+        document.getElementById('btn-new-course').addEventListener('click', () => this._promptNewCourse());
+        document.getElementById('btn-reset-demo-courses').addEventListener('click', () => this._resetDemoCourses());
 
         // File import
         const fileInput = document.getElementById('file-import-course');
@@ -351,8 +370,6 @@ class MorphismApp {
         root.style.setProperty('--text-color', theme.text);
         root.style.setProperty('--text-muted', theme.text_muted);
 
-        document.getElementById('lbl-current-theme').textContent = theme.name;
-
         if (this.graphView) {
             this.graphView.render();
         }
@@ -366,7 +383,8 @@ class MorphismApp {
         for (const [id, t] of Object.entries(THEMES)) {
             const item = document.createElement('div');
             item.className = `theme-option ${id === this.activeThemeId ? 'active' : ''}`;
-            item.innerHTML = `<span>${t.name}</span> <span style="display:inline-block; width:16px; height:16px; border-radius:50%; background:${t.accent};"></span>`;
+            item.style.cursor = "pointer";
+            item.innerHTML = `<span>${t.name}</span> <span style="display:inline-block; width:18px; height:18px; border-radius:50%; background:${t.accent};"></span>`;
             item.onclick = () => {
                 this._applyTheme(id);
                 this._saveStorage();
@@ -413,19 +431,44 @@ class MorphismApp {
 
         document.getElementById('lbl-active-course').textContent = this.currentCourse.name;
         document.getElementById('badge-due-count').textContent = totalDue;
+        const fabDue = document.getElementById('fab-due-count');
+        if (fabDue) fabDue.textContent = totalDue;
 
         this.graphView.setData(this.currentCourse.notes, this.currentCourse.edges);
     }
 
     _onGraphNodeClicked(note) {
         if (!note) return;
+        this.selectedGraphNote = note;
         const modal = document.getElementById('modal-node-details');
         document.getElementById('modal-node-title').textContent = note.title;
+
+        // Calculate joint retention P(∩ A_i)
+        let productR = 1.0;
+        const now = new Date();
+        for (const c of (note.cards || [])) {
+            const fc = new FSRSCard(c.fsrs || {});
+            productR *= this.scheduler.getCardRetrievability(fc, now);
+        }
+        const pctR = Math.round(productR * 100);
+
         document.getElementById('modal-node-info').innerHTML = `
-            <div><b>Tipo:</b> ${note.note_type}</div>
+            <div><b>Tipo:</b> ${note.note_type === 'serial_sequence' ? '📜 Secuencia Serial' : '🧩 Concepto Estándar'}</div>
             <div><b>Tarjetas:</b> ${note.cards ? note.cards.length : 0}</div>
+            <div><b>Retención Conjunta P(∩ A_i):</b> <span style="color:var(--accent); font-weight:bold;">${pctR}%</span></div>
             <div><b>Estado:</b> ${note.isDue ? '<span style="color:#FF667D; font-weight:bold;">Pendiente de repaso (DUE)</span>' : '<span style="color:#80D6A3; font-weight:bold;">Al día</span>'}</div>
         `;
+
+        // Render card previews
+        const previewBox = document.getElementById('modal-node-cards-preview');
+        previewBox.innerHTML = "";
+        (note.cards || []).forEach((c, idx) => {
+            const p = document.createElement('div');
+            p.style.cssText = "background:rgba(255,255,255,0.04); border-left:3px solid var(--accent); padding:6px 10px; margin-bottom:6px; border-radius:4px; font-size:12px;";
+            const typeIcon = c.type === 'ClozeCard' ? '🧩' : (c.type === 'ProofSequenceCard' ? '📜' : '📄');
+            p.innerHTML = `<b>#${idx+1} ${typeIcon} ${c.title || 'Tarjeta'}</b>: ${(c.front || c.text || c.premise || '').substring(0, 50)}...`;
+            previewBox.appendChild(p);
+        });
 
         document.getElementById('btn-review-this-node').onclick = () => {
             modal.classList.remove('open');
@@ -433,6 +476,39 @@ class MorphismApp {
         };
 
         modal.classList.add('open');
+    }
+
+    _deleteSelectedNode() {
+        if (!this.selectedGraphNote || !this.currentCourse) return;
+        if (!confirm(`¿Eliminar la nota '${this.selectedGraphNote.title}' y sus conexiones?`)) return;
+
+        const nid = this.selectedGraphNote.note_id;
+        this.currentCourse.notes = this.currentCourse.notes.filter(n => n.note_id !== nid);
+        this.currentCourse.edges = this.currentCourse.edges.filter(e => e.source_id !== nid && e.target_id !== nid);
+        this._saveStorage();
+        this._updateCourseData();
+        document.getElementById('modal-node-details').classList.remove('open');
+    }
+
+    _addCardToSelectedNode() {
+        if (!this.selectedGraphNote) return;
+        const front = prompt("Pregunta o texto de la nueva tarjeta (puedes usar cloze {{c1::respuesta::pista}}):");
+        if (!front) return;
+        const back = prompt("Respuesta / Solución:");
+        const isCloze = front.includes("{{") && front.includes("}}");
+        const newCard = {
+            item_id: String(Date.now()),
+            type: isCloze ? "ClozeCard" : "Flashcard",
+            title: isCloze ? `Definición ${(this.selectedGraphNote.cards || []).length + 1}` : `Tarjeta ${(this.selectedGraphNote.cards || []).length + 1}`,
+            front: front,
+            text: front,
+            back: back || ""
+        };
+        if (!this.selectedGraphNote.cards) this.selectedGraphNote.cards = [];
+        this.selectedGraphNote.cards.push(newCard);
+        this._saveStorage();
+        this._updateCourseData();
+        this._onGraphNodeClicked(this.selectedGraphNote);
     }
 
     startDueReview() {
@@ -453,6 +529,7 @@ class MorphismApp {
         }
 
         this.reviewQueue = queue;
+        this.totalInSession = queue.length;
         this.sessionStats = { count: 0, ratings: { 1: 0, 2: 0, 3: 0, 4: 0 }, start: new Date() };
         this.reviewUndoStack = [];
         this.switchTab('review');
@@ -466,6 +543,7 @@ class MorphismApp {
             return;
         }
         this.reviewQueue = queue;
+        this.totalInSession = queue.length;
         this.sessionStats = { count: 0, ratings: { 1: 0, 2: 0, 3: 0, 4: 0 }, start: new Date() };
         this.reviewUndoStack = [];
         this.switchTab('review');
@@ -486,13 +564,27 @@ class MorphismApp {
         document.getElementById('review-empty-state').style.display = 'none';
         document.getElementById('review-card-container').style.display = 'block';
         document.getElementById('review-bottom-controls').style.display = 'flex';
-        document.getElementById('btn-show-answer').style.display = 'block';
+        document.getElementById('btn-show-answer').style.display = 'flex';
         document.getElementById('rating-buttons-row').style.display = 'none';
 
         document.getElementById('btn-undo').disabled = this.reviewUndoStack.length === 0;
 
-        // Header info
-        document.getElementById('review-card-header').textContent = `${this.currentReviewNote.title} (${this.currentReviewCard.title || 'Card'})`;
+        // Progress bar
+        const reviewedSoFar = this.sessionStats.count;
+        const total = Math.max(1, this.totalInSession);
+        const pct = Math.min(100, Math.round((reviewedSoFar / total) * 100));
+        document.getElementById('review-progress-fill').style.width = `${pct}%`;
+
+        // Header info & Type Chip
+        document.getElementById('review-card-note-title').textContent = `${this.currentReviewNote.title}`;
+        const typeChip = document.getElementById('review-card-type-chip');
+        if (this.currentReviewCard.type === 'ClozeCard') {
+            typeChip.textContent = "🧩 Cloze";
+        } else if (this.currentReviewCard.type === 'ProofSequenceCard') {
+            typeChip.textContent = "📜 Demostración";
+        } else {
+            typeChip.textContent = "📄 Flashcard";
+        }
 
         // Front HTML
         this._renderCardFront();
@@ -514,7 +606,7 @@ class MorphismApp {
             });
             frontContainer.innerHTML = `<div class="card-title">${card.title}</div><div class="card-body">${frontHtml}</div>`;
         } else if (card.type === 'ProofSequenceCard') {
-            frontContainer.innerHTML = `<div class="card-title">${card.title}</div><div class="card-body"><strong>Premisa / Teorema:</strong><br>${card.premise}</div>`;
+            frontContainer.innerHTML = `<div class="card-title">${card.title}</div><div class="card-body"><strong>Premisa / Teorema a demostrar:</strong><br>${card.premise}</div>`;
         } else {
             frontContainer.innerHTML = `<div class="card-title">${card.title || 'Pregunta'}</div><div class="card-body">${card.front || ''}</div>`;
         }
@@ -539,7 +631,7 @@ class MorphismApp {
             backContainer.innerHTML = `<hr class="divider"><div class="card-body">${backHtml}</div>`;
         } else if (card.type === 'ProofSequenceCard') {
             const steps = (card.steps || []).map((s, idx) => `<li class="proof-step"><b>Paso ${idx+1}:</b> ${s}</li>`).join("");
-            backContainer.innerHTML = `<hr class="divider"><div class="card-body"><strong>Demostración Completa:</strong><ol class="proof-list">${steps}</ol></div>`;
+            backContainer.innerHTML = `<hr class="divider"><div class="card-body"><strong>Demostración Completa:</strong><ol class="proof-list" style="padding-left:18px; margin-top:8px;">${steps}</ol></div>`;
         } else {
             backContainer.innerHTML = `<hr class="divider"><div class="card-body">${card.back || ''}</div>`;
         }
@@ -610,16 +702,16 @@ class MorphismApp {
 
         const mins = this.sessionStats.start ? Math.max(1, Math.round((new Date() - this.sessionStats.start) / 60000)) : 1;
         empty.innerHTML = `
-            <div style="font-size:36px; margin-bottom:12px;">🎉</div>
+            <div style="font-size:42px; margin-bottom:12px;">🎉</div>
             <div style="font-size:22px; font-weight:bold; color:var(--accent); margin-bottom:8px;">¡Sesión Completada!</div>
             <div style="color:var(--text-color); margin-bottom:16px;">Has repasado <b>${this.sessionStats.count} tarjetas</b> en ~<b>${mins} min</b>.</div>
-            <div style="display:flex; justify-content:center; gap:12px; margin-bottom:20px;">
+            <div style="display:flex; justify-content:center; gap:12px; margin-bottom:20px; font-weight:bold;">
                 <span style="color:#FF667D;">Again: ${this.sessionStats.ratings[1]}</span>
                 <span style="color:#F7C873;">Hard: ${this.sessionStats.ratings[2]}</span>
                 <span style="color:#80D6A3;">Good: ${this.sessionStats.ratings[3]}</span>
                 <span style="color:#78A9FF;">Easy: ${this.sessionStats.ratings[4]}</span>
             </div>
-            <div style="font-style:italic; font-size:13px; color:var(--text-muted); margin-bottom:24px;">
+            <div style="font-style:italic; font-size:13px; color:var(--text-muted); margin-bottom:24px; padding:0 20px;">
                 "Mathematics is not about numbers, equations, computations, or algorithms: it is about understanding." — William Paul Thurston
             </div>
             <button class="btn-primary" onclick="window.app.switchTab('graph')">🗺️ Volver al Explorador</button>
@@ -636,19 +728,39 @@ class MorphismApp {
         const txt = document.getElementById('scratch-editor');
         const prev = document.getElementById('scratch-preview');
         const count = document.getElementById('scratch-counter');
+        const btnClear = document.getElementById('btn-clear-scratch');
 
-        txt.value = localStorage.getItem("morphism_scratch") || "\\textbf{Apuntes rápidos / Teorema:}\n\nSea $f: X \\to Y$ continua y $X$ compacto...";
+        txt.value = localStorage.getItem("morphism_scratch") || "\\textbf{Apuntes rápidos / Teorema:}\n\nSea $f: X \\to Y$ continua y $X$ compacto. Entonces $f(X)$ es compacto.";
 
         const update = () => {
             const val = txt.value;
             localStorage.setItem("morphism_scratch", val);
             prev.innerHTML = val.replace(/\n/g, '<br>');
-            count.textContent = `${val.length} caracteres`;
+            count.textContent = `${val.length} car.`;
             this._typesetMath();
         };
 
         txt.addEventListener('input', update);
+        if (btnClear) {
+            btnClear.onclick = () => {
+                if (confirm("¿Limpiar el borrador?")) {
+                    txt.value = "";
+                    update();
+                }
+            };
+        }
         update();
+    }
+
+    insertMath(snippet) {
+        const txt = document.getElementById('scratch-editor');
+        if (!txt) return;
+        const start = txt.selectionStart;
+        const end = txt.selectionEnd;
+        txt.value = txt.value.substring(0, start) + snippet + txt.value.substring(end);
+        txt.selectionStart = txt.selectionEnd = start + snippet.length;
+        txt.focus();
+        txt.dispatchEvent(new Event('input'));
     }
 
     _updateStatsView() {
@@ -678,11 +790,17 @@ class MorphismApp {
         grid.innerHTML = "";
         for (let i = 0; i < 70; i++) {
             const cell = document.createElement('div');
-            cell.className = 'heatmap-cell';
+            cell.style.cssText = "aspect-ratio:1; background:var(--surface-bg); border-radius:3px;";
             const rnd = Math.random();
-            if (rnd > 0.8) cell.style.background = 'var(--accent)';
-            else if (rnd > 0.6) cell.style.background = 'var(--border-color)';
-            else cell.style.opacity = '0.3';
+            if (rnd > 0.8) {
+                cell.style.background = 'var(--accent)';
+                cell.style.opacity = '1';
+            } else if (rnd > 0.5) {
+                cell.style.background = 'var(--border-color)';
+                cell.style.opacity = '0.7';
+            } else {
+                cell.style.opacity = '0.25';
+            }
             grid.appendChild(cell);
         }
     }
@@ -696,11 +814,15 @@ class MorphismApp {
             const div = document.createElement('div');
             div.className = `course-card ${isCurrent ? 'active-course' : ''}`;
             div.innerHTML = `
-                <div style="font-weight:bold; font-size:16px; color:var(--text-color);">${c.name}</div>
-                <div style="font-size:13px; color:var(--text-muted); margin:4px 0;">${c.notes.length} notas</div>
-                <div style="display:flex; gap:8px; margin-top:8px;">
-                    <button class="btn-sm btn-primary" onclick="window.app._selectCourse('${c.name}')">${isCurrent ? 'Activo' : 'Seleccionar'}</button>
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <div style="font-weight:bold; font-size:16px; color:var(--text-color);">${c.name}</div>
+                    ${isCurrent ? '<span style="font-size:11px; font-weight:bold; color:var(--accent); border:1px solid var(--accent); padding:2px 8px; border-radius:10px;">ACTIVO</span>' : ''}
+                </div>
+                <div style="font-size:13px; color:var(--text-muted); margin:6px 0;">${c.notes.length} conceptos matemáticos</div>
+                <div style="display:flex; gap:8px; margin-top:10px;">
+                    <button class="btn-sm btn-primary" onclick="window.app._selectCourse('${c.name}')">${isCurrent ? 'Abrir Grafo' : 'Seleccionar'}</button>
                     <button class="btn-sm btn-outline" onclick="window.app._exportCourseJson('${c.name}')">Exportar JSON</button>
+                    ${!isCurrent && this.courses.length > 1 ? `<button class="btn-sm btn-outline" style="color:#FF667D; border-color:#FF667D;" onclick="window.app._deleteCourse('${c.name}')">🗑️</button>` : ''}
                 </div>
             `;
             list.appendChild(div);
@@ -715,6 +837,58 @@ class MorphismApp {
             this._updateCourseData();
             this.switchTab('graph');
         }
+    }
+
+    _deleteCourse(name) {
+        if (!confirm(`¿Eliminar el curso '${name}'?`)) return;
+        this.courses = this.courses.filter(c => c.name !== name);
+        if (this.currentCourse.name === name) {
+            this.currentCourse = this.courses[0];
+        }
+        this._saveStorage();
+        this._updateCourseData();
+        this._updateCoursesList();
+    }
+
+    _promptNewCourse() {
+        const name = prompt("Nombre del nuevo curso (ej: Cálculo Multivariable):");
+        if (!name || !name.trim()) return;
+        const newC = {
+            name: name.trim(),
+            notes: [
+                {
+                    note_id: String(Date.now()),
+                    title: "Introducción y Definición 1",
+                    x: 80,
+                    y: 100,
+                    note_type: "standard",
+                    cards: [
+                        {
+                            item_id: String(Date.now() + 1),
+                            type: "Flashcard",
+                            title: "Definición Básica",
+                            front: "Concepto inicial...",
+                            back: "Demostración o respuesta..."
+                        }
+                    ]
+                }
+            ],
+            edges: []
+        };
+        this.courses.push(newC);
+        this.currentCourse = newC;
+        this._saveStorage();
+        this._updateCourseData();
+        this.switchTab('graph');
+    }
+
+    _resetDemoCourses() {
+        if (!confirm("¿Restaurar los cursos de demostración de Álgebra Lineal y Espacios Métricos?")) return;
+        this.courses = JSON.parse(JSON.stringify(SEED_COURSES));
+        this.currentCourse = this.courses[0];
+        this._saveStorage();
+        this._updateCourseData();
+        this._updateCoursesList();
     }
 
     _exportCourseJson(name) {
@@ -756,27 +930,51 @@ class MorphismApp {
     }
 
     _openAddNoteModal() {
-        const title = prompt("Título de la nueva Nota matemática:");
-        if (!title) return;
+        const modal = document.getElementById('modal-add-note');
+        document.getElementById('inp-note-title').value = "";
+        document.getElementById('inp-card-front').value = "";
+        document.getElementById('inp-card-back').value = "";
+        modal.classList.add('open');
+    }
+
+    _saveNewNoteFromModal() {
+        const title = document.getElementById('inp-note-title').value.trim();
+        if (!title) {
+            alert("Por favor introduce un título para la nota.");
+            return;
+        }
+
+        const noteType = document.getElementById('inp-note-type').value;
+        const front = document.getElementById('inp-card-front').value.trim();
+        const back = document.getElementById('inp-card-back').value.trim();
+
+        const isCloze = front.includes("{{") && front.includes("}}");
+        const cardType = noteType === "serial_sequence" ? "ProofSequenceCard" : (isCloze ? "ClozeCard" : "Flashcard");
+
         const newNote = {
             note_id: String(Date.now()),
             title: title,
             x: 100 + Math.random() * 200,
             y: 100 + Math.random() * 200,
-            note_type: "standard",
+            note_type: noteType,
             cards: [
                 {
                     item_id: String(Date.now() + 1),
-                    type: "Flashcard",
-                    title: "Definición",
-                    front: "Pregunta o fórmula...",
-                    back: "Solución / Demostración..."
+                    type: cardType,
+                    title: `Tarjeta 1 - ${title}`,
+                    front: front || "Enunciado del teorema...",
+                    text: front || "Enunciado con {{c1::cloze}}",
+                    premise: front || "Premisa del teorema...",
+                    steps: back ? back.split("\n").filter(s => s.trim()) : ["Paso 1 de la demostración..."],
+                    back: back || "Demostración completa..."
                 }
             ]
         };
+
         this.currentCourse.notes.push(newNote);
         this._saveStorage();
         this._updateCourseData();
+        document.getElementById('modal-add-note').classList.remove('open');
         this.graphView.fitAll();
     }
 }

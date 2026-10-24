@@ -6,7 +6,8 @@ from datetime import datetime, timezone
 from PySide6.QtWidgets import (QApplication, QMainWindow, QStackedWidget, 
                                QToolBar, QWidget, QVBoxLayout, QHBoxLayout, 
                                QLabel, QPushButton, QMessageBox, QInputDialog, QTabBar,
-                               QDialog, QListWidget, QListWidgetItem, QLineEdit, QComboBox)
+                               QDialog, QListWidget, QListWidgetItem, QLineEdit, QComboBox,
+                               QTabWidget, QTextBrowser)
 from PySide6.QtCore import Qt, QSize
 from PySide6.QtGui import QAction, QIcon, QKeySequence, QShortcut
 
@@ -164,6 +165,101 @@ class ReviewSummaryDialog(QDialog):
         layout.addWidget(btn_ok)
 
 
+class HelpGuideDialog(QDialog):
+    """Interactive User Guide & Shortcuts Reference dialog."""
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setWindowTitle("❓ User Guide & Shortcuts Reference — Morphism SRS Plus")
+        self.resize(680, 520)
+
+        layout = QVBoxLayout(self)
+        layout.setContentsMargins(16, 16, 16, 16)
+        layout.setSpacing(12)
+
+        tabs = QTabWidget()
+
+        # Tab 1: Knowledge Graph
+        tab_graph = QTextBrowser()
+        tab_graph.setOpenExternalLinks(True)
+        tab_graph.setHtml("""
+            <h3 style='color:#38bdf8;'>🗺️ Knowledge Graph Navigation & Gestures</h3>
+            <ul>
+                <li><b>Arrastrar Lienzo (Pan):</b> Clic y arrastre con el <b>botón central del ratón</b> o arrastre en zona vacía del fondo.</li>
+                <li><b>Zoom Centrado:</b> Rueda del ratón (centrado bajo el cursor), o atajos <code>Ctrl++</code>, <code>Ctrl+-</code>, <code>Ctrl+0</code>.</li>
+                <li><b>Ajustar Todo:</b> Pulsa <code>⛶ Fit View</code> o <code>Ctrl+Shift+F</code> para encuadrar todos los nodos.</li>
+                <li><b>Crear Prerrequisito:</b> Arrastra desde el círculo conector de un nodo hasta el nodo objetivo.</li>
+                <li><b>Menú de Nodo:</b> Clic derecho en cualquier nodo para editar, ver retención FSRS o eliminar conexiones.</li>
+                <li><b>Auto-Organizar:</b> Pulsa <code>⚡ Auto Layout</code> para ordenar los nodos de izquierda a derecha según sus dependencias.</li>
+                <li><b>Snapping:</b> Activa el botón 🧲 para alinear nodos automáticamente a la cuadrícula.</li>
+            </ul>
+        """)
+        tabs.addTab(tab_graph, "🗺️ Graph Navigation")
+
+        # Tab 2: Cloze & Math
+        tab_math = QTextBrowser()
+        tab_math.setHtml("""
+            <h3 style='color:#10b981;'>🧩 Cloze Deletions & LaTeX Formulas</h3>
+            <p>Morphism SRS Plus incluye soporte para tarjetas de relleno de huecos (Cloze Deletions) ideales para definiciones y teoremas.</p>
+            <h4>Sintaxis de Cloze:</h4>
+            <pre style='background:#1e293b; color:#38bdf8; padding:8px; border-radius:6px;'>{{c1::respuesta::pista opcional}}</pre>
+            <p><b>Ejemplo:</b><br>
+            <code>Un espacio métrico $(X, d)$ es {{c1::completo::propiedad}} si toda sucesión de Cauchy converge en $X$.</code></p>
+            <ul>
+                <li><b>En el anverso:</b> Muestra <code>[propiedad]</code> o <code>[...]</code>.</li>
+                <li><b>En el reverso:</b> Revela la respuesta en verde resaltado con MathJax.</li>
+                <li><b>Atajo en editor:</b> Pulsa <code>Ctrl+Shift+K</code> para insertar cloze rápidamente sobre el texto seleccionado.</li>
+            </ul>
+        """)
+        tabs.addTab(tab_math, "🧩 Cloze & LaTeX")
+
+        # Tab 3: Shortcuts
+        tab_shortcuts = QTextBrowser()
+        tab_shortcuts.setHtml("""
+            <h3 style='color:#f59e0b;'>⌨️ Global Keyboard Shortcuts</h3>
+            <table width='100%' border='1' cellspacing='0' cellpadding='6' style='border-color:#334155;'>
+                <tr style='background:#1e293b; color:#38bdf8;'><th>Atajo</th><th>Contexto</th><th>Acción</th></tr>
+                <tr><td><b>Alt + 1 / 2 / 3 / 4</b></td><td>Global</td><td>Cambiar pestaña: Cursos, Explorador, Repaso, Estadísticas</td></tr>
+                <tr><td><b>Ctrl + F</b> / <b>Ctrl + K</b></td><td>Global</td><td>Enfocar buscador en tiempo real de conceptos y fórmulas</td></tr>
+                <tr><td><b>Ctrl + S</b></td><td>Global</td><td>Guardar curso actual y estado FSRS en disco</td></tr>
+                <tr><td><b>Ctrl + N</b></td><td>Explorador</td><td>Crear nueva Nota matemática</td></tr>
+                <tr><td><b>Ctrl + + / - / 0</b></td><td>Explorador</td><td>Zoom In, Zoom Out, Zoom 1:1</td></tr>
+                <tr><td><b>Ctrl + Shift + F</b></td><td>Explorador</td><td>Encuadre total (Fit All Viewport)</td></tr>
+                <tr><td><b>Espacio / Enter</b></td><td>Repaso</td><td>Mostrar respuesta / Calificar <b>Good</b></td></tr>
+                <tr><td><b>1 / 2 / 3 / 4</b></td><td>Repaso</td><td>Calificar: <b>Again</b>, <b>Hard</b>, <b>Good</b>, <b>Easy</b></td></tr>
+                <tr><td><b>Ctrl + Z</b></td><td>Repaso</td><td><b>Deshacer</b> última calificación (restituye tarjeta y estado previo)</td></tr>
+                <tr><td><b>Delete / Backspace</b></td><td>Explorador</td><td>Eliminar nodo seleccionado</td></tr>
+            </table>
+        """)
+        tabs.addTab(tab_shortcuts, "⌨️ Shortcuts")
+
+        # Tab 4: Android App & Sync
+        tab_android = QTextBrowser()
+        tab_android.setHtml("""
+            <h3 style='color:#ec4899;'>📱 Android App (.apk) & Sync</h3>
+            <p>Morphism SRS Plus incluye una aplicación nativa para Android (< 1 MB) con el tema Bisexual Midnight, lienzo multitáctil con zoom de 2 dedos y motor FSRS offline.</p>
+            <h4>Instalación en tu móvil:</h4>
+            <ol>
+                <li>Copia el archivo <code>morphism-srs-plus.apk</code> a tu teléfono o instala vía ADB:
+                    <pre style='background:#1e293b; color:#10b981; padding:6px; border-radius:4px;'>adb install morphism-srs-plus.apk</pre>
+                </li>
+                <li>Toca el archivo en tu explorador de archivos para instalarlo.</li>
+            </ol>
+            <h4>Sincronizar tus cursos:</h4>
+            <ul>
+                <li>En la pestaña <b>📚 Courses</b>, pulsa <b>📤 Export Course JSON</b> para guardar tu curso.</li>
+                <li>Pásalo al móvil y ábrelo desde la opción <b>📥 Importar</b> de la app Android.</li>
+            </ul>
+        """)
+        tabs.addTab(tab_android, "📱 Android App")
+
+        layout.addWidget(tabs)
+
+        btn_close = QPushButton("Close Guide")
+        btn_close.setStyleSheet("background-color: #6366f1; color: white; font-weight: bold; padding: 8px 16px; border-radius: 6px;")
+        btn_close.clicked.connect(self.accept)
+        layout.addWidget(btn_close)
+
+
 class MainWindow(QMainWindow):
     """Morphism SRS Plus - Main window with Top Ledger Navigation, Themes, and Explorer Graph."""
 
@@ -245,6 +341,11 @@ class MainWindow(QMainWindow):
         btn_scratch.setCursor(Qt.PointingHandCursor)
         btn_scratch.clicked.connect(self._open_scratchbook_dialog)
         ledger_bar.addWidget(btn_scratch)
+
+        btn_guide = QPushButton("❓ Help & Guide")
+        btn_guide.setCursor(Qt.PointingHandCursor)
+        btn_guide.clicked.connect(self._open_help_guide_dialog)
+        ledger_bar.addWidget(btn_guide)
 
         ledger_bar.addSpacing(16)
 
@@ -610,6 +711,10 @@ class MainWindow(QMainWindow):
             self.scratchbook_window.show()
             self.scratchbook_window.raise_()
             self.scratchbook_window.activateWindow()
+
+    def _open_help_guide_dialog(self):
+        dlg = HelpGuideDialog(self)
+        dlg.exec()
 
     def _next_review_card(self):
         self.review_view.set_undo_available(len(self.review_undo_stack) > 0)

@@ -11,7 +11,7 @@ if BASE_DIR not in sys.path:
 
 from PySide6.QtWidgets import QApplication
 from theme_manager import ThemeManager
-from main import MainWindow
+from main import MainWindow, HelpGuideDialog
 from models import NoteNode, Flashcard, ClozeCard
 from node_editor_dialog import NodeEditorDialog
 from due_forecast_dialog import DueForecastDialog
@@ -52,6 +52,9 @@ class TestGUIHeadless(unittest.TestCase):
 
         scratch = ScratchbookDialog()
         self.assertIsNotNone(scratch)
+
+        guide = HelpGuideDialog()
+        self.assertIsNotNone(guide)
 
 if __name__ == "__main__":
     unittest.main()
