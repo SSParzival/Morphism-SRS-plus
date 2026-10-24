@@ -6,16 +6,16 @@ os.environ["QT_QPA_PLATFORM"] = "offscreen"
 os.environ["MESA_DEBUG"] = "silent"
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-if BASE_DIR not in sys.path:
-    sys.path.insert(0, BASE_DIR)
+SRC_DIR = os.path.join(BASE_DIR, "src")
+for p in [BASE_DIR, SRC_DIR]:
+    if p not in sys.path:
+        sys.path.insert(0, p)
 
 from PySide6.QtWidgets import QApplication
-from theme_manager import ThemeManager
-from main import MainWindow, HelpGuideDialog
-from models import NoteNode, Flashcard, ClozeCard
-from node_editor_dialog import NodeEditorDialog
-from due_forecast_dialog import DueForecastDialog
-from scratchbook_dialog import ScratchbookDialog
+from morphism.core.theme_manager import ThemeManager
+from morphism.app import MainWindow, HelpGuideDialog
+from morphism.core.models import NoteNode, Flashcard, ClozeCard
+from morphism.ui.dialogs import NodeEditorDialog, DueForecastDialog, ScratchbookDialog
 
 class TestGUIHeadless(unittest.TestCase):
 

@@ -1,8 +1,25 @@
 # Morphism SRS Plus ⚡
 
-**Morphism SRS Plus** is an advanced, high-performance, cross-platform Spaced Repetition System designed specifically for **Mathematics, Formal Logic, and Proof Sequences**. 
+<div align="center">
 
-It builds upon the original *Morphism SRS* by adding full Linux desktop integration, an extensible **JSON-based Theme Engine**, bundled offline MathJax 3 vector rendering and Chart.js analytics, **Cloze Deletion** cards, real-time graph search, **Undo Rating**, course package exports (`.morphism`), and numerous efficiency optimizations.
+[![Fork of VAMarques/Morphism-SRS](https://img.shields.io/badge/Fork_of-VAMarques%2FMorphism--SRS-blue?logo=github&style=flat-square)](https://github.com/VAMarques/Morphism-SRS)
+[![GitHub Repository](https://img.shields.io/badge/GitHub-SSParzival%2FMorphism--SRS--plus-181717?logo=github&style=flat-square)](https://github.com/SSParzival/Morphism-SRS-plus)
+[![Python 3.10+](https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.14-3776AB?logo=python&logoColor=white&style=flat-square)](https://www.python.org/)
+[![GUI Framework](https://img.shields.io/badge/GUI-PySide6%20%7C%20Qt%206-41CD52?logo=qt&logoColor=white&style=flat-square)](https://www.qt.io/)
+[![Android Release](https://img.shields.io/badge/Android-APK%20Release%20Ready-3DDC84?logo=android&logoColor=white&style=flat-square)](morphism-srs-plus.apk)
+[![FSRS Engine](https://img.shields.io/badge/Algorithm-FSRS%20v5-blueviolet?style=flat-square)](https://github.com/open-spaced-repetition/fsrs)
+[![License: GPL-3.0](https://img.shields.io/badge/License-GPL--3.0-orange.svg?style=flat-square)](LICENSE)
+
+**An advanced, high-performance, cross-platform Spaced Repetition System designed specifically for Mathematics, Formal Logic, and Multi-Step Proof Sequences.**
+
+[✨ Features](#-whats-new-in-morphism-srs-plus) •
+[🎨 Themes](#-built-in-json-themes) •
+[🚀 Desktop Setup](#-quick-start-on-linux) •
+[📲 Android APK](#-android-mobile-app) •
+[🏗️ Architecture](#️-clean-modular-architecture) •
+[📚 Course Catalog](#-enriched-exam-courses-included)
+
+</div>
 
 ---
 
@@ -199,8 +216,8 @@ Morphism-SRS-plus/
 │   │   ├── em_i2.py                   # Electricidad y Magnetismo I2 (FIS1533)
 │   │   ├── real_i3.py                 # Análisis Real I3 (MAT2514)
 │   │   ├── quimica_i2.py              # Química para Ingenieros I2 (QIM100E)
-│   │   └── ofg_muerte.py              # Ritos Funerarios Grecia Antigua (MED836)
-│   ├── build_courses_data.py          # Course generation generator
+│   │   ├── ofg_muerte.py              # Ritos Funerarios Grecia Antigua (MED836)
+│   │   └── base_84.py                 # Base foundational syllabus definitions
 │   ├── generate_massive_courses.py    # Complete exam course compiler
 │   ├── update_android_app.py          # Android seed courses & asset synchronization
 │   ├── build_apk.sh                   # Standalone Android APK build toolchain
@@ -210,8 +227,9 @@ Morphism-SRS-plus/
 ├── android/                           # Complete Android AAPT2/D8 source tree
 ├── Courses/                           # 4 enriched official courses (JSON format)
 ├── themes/                            # JSON theme definitions (including Bisexual Midnight)
+├── tests/                             # Headless & unit test suite
 ├── morphism-srs-plus.apk              # Pre-compiled standalone Android APK
-├── main.py                            # Backward-compatible root entry point
+├── main.py                            # Clean application entry point
 ├── run.sh                             # Fast root launcher
 └── build_apk.sh                       # Root APK compilation shortcut
 ```

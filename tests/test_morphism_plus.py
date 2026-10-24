@@ -2,17 +2,19 @@ import os
 import sys
 import unittest
 
-# Ensure Morphism-SRS-plus is on path
+# Ensure Morphism-SRS-plus and src are on path
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-if BASE_DIR not in sys.path:
-    sys.path.insert(0, BASE_DIR)
+SRC_DIR = os.path.join(BASE_DIR, "src")
+for p in [BASE_DIR, SRC_DIR]:
+    if p not in sys.path:
+        sys.path.insert(0, p)
 
-from app_paths import (BASE_DIR as APP_BASE_DIR, ASSETS_DIR, COURSES_DIR, 
-                       THEMES_DIR, CHART_JS, MATHJAX_SVG_JS)
-from theme_manager import ThemeManager
-from models import Flashcard, ProofSequenceCard, ClozeCard, NoteNode, NoteEdge, Course, ReviewLogRecord
-from scheduler_manager import SchedulerManager
-import course_storage
+from morphism.core.app_paths import (BASE_DIR as APP_BASE_DIR, ASSETS_DIR, COURSES_DIR, 
+                                     THEMES_DIR, CHART_JS, MATHJAX_SVG_JS)
+from morphism.core.theme_manager import ThemeManager
+from morphism.core.models import Flashcard, ProofSequenceCard, ClozeCard, NoteNode, NoteEdge, Course, ReviewLogRecord
+from morphism.core.scheduler_manager import SchedulerManager
+from morphism.core import course_storage
 
 class TestMorphismPlus(unittest.TestCase):
 

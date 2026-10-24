@@ -12,8 +12,8 @@ Total: 84 Notes, ~190 Cards, 84 Edges.
 
 import os
 import json
-from models import Course, NoteNode, NoteEdge, Flashcard, ClozeCard, ProofSequenceCard
-from course_storage import save_course, COURSES_DIR
+from morphism.core.models import Course, NoteNode, NoteEdge, Flashcard, ClozeCard, ProofSequenceCard
+from morphism.core.course_storage import save_course, COURSES_DIR
 
 # ==============================================================================
 # CURSO 1: ELECTRICIDAD Y MAGNETISMO (I2)
