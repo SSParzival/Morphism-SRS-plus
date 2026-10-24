@@ -184,55 +184,84 @@ Morphism SRS Plus introduces first-class Cloze Deletion cards:
 
 ---
 
-## 🏗️ Clean Modular Architecture
+## 🏗️ Clean Modular Architecture & Proto 2 Integration
 
-Morphism SRS Plus has been reorganized into a modular, clean package hierarchy with backward-compatible root entry points:
+Morphism SRS Plus integrates both the modular **Morphism Plus** production engine and the complete **Prototype 2 (SQLite v2 & DSL)** architecture:
 
 ```
 Morphism-SRS-plus/
 ├── src/
-│   └── morphism/
-│       ├── core/                      # Domain logic, models, storage, themes, FSRS scheduler
-│       │   ├── app_paths.py           # Canonical paths & XDG compliance
-│       │   ├── course_storage.py      # JSON serialization & .morphism course packages
-│       │   ├── models.py              # Course, NoteNode, Flashcard, ClozeCard, ProofSequenceCard
-│       │   ├── scheduler_manager.py   # FSRS engine adapter & interval calculations
-│       │   ├── theme_manager.py       # JSON theme loader & dynamic QSS generator
-│       │   └── styles.py              # Theme styling bridge
-│       ├── ui/
-│       │   ├── views/                 # Full-window interactive views
-│       │   │   ├── graph_view.py      # OpenGL-accelerated node/edge canvas with zoom & search
-│       │   │   ├── review_view.py     # Flashcard, Proof sequence & Cloze review widget
-│       │   │   ├── courses_widget.py  # Drag-and-drop course and folder organizer
-│       │   │   └── stats_widget.py    # Retrievability charts & study heatmap
-│       │   └── dialogs/               # Modeless & modal dialogs
-│       │       ├── node_editor_dialog.py        # MathJax live preview card & node editor
-│       │       ├── scratchbook_dialog.py        # Side-by-side scratchpad with vector preview
-│       │       ├── retrievability_plot_dialog.py# Chart.js decay curve analyzer
-│       │       └── due_forecast_dialog.py       # Future due date calendar forecast
-│       └── app.py                     # Main application window & Qt lifecycle
+│   ├── morphism/                      # Morphism Plus production engine (JSON/Package backed)
+│   │   ├── core/                      # Domain logic, models, storage, themes, FSRS scheduler
+│   │   │   ├── app_paths.py           # Canonical paths & XDG compliance
+│   │   │   ├── course_storage.py      # JSON serialization & .morphism course packages
+│   │   │   ├── models.py              # Course, NoteNode, Flashcard, ClozeCard, ProofSequenceCard
+│   │   │   ├── scheduler_manager.py   # FSRS engine adapter & interval calculations
+│   │   │   ├── theme_manager.py       # JSON theme loader & dynamic QSS generator
+│   │   │   └── styles.py              # Theme styling bridge
+│   │   └── ui/                        # Full-window interactive views & dialogs
+│   │       ├── views/                 # Graph, Review, Courses, and Stats views
+│   │       └── dialogs/               # Node Editor, Scratchbook, Retrievability, Due Forecast
+│   └── morphism_srs/                  # Proto 2 Architecture (SQLite v2 & Microservices)
+│       ├── controllers/               # ReviewSessionController, ExplorerController, BrowserController
+│       ├── domain/                    # Atomic Cards, NoteReviewMode (standard | serial | cloze)
+│       ├── services/
+│       │   ├── dsl_compiler/          # Declarative Morphism DSL (.mdsl) Lexer, Parser & Compiler
+│       │   ├── import_export/         # .mpkg (Morphism Package) & JSON import/export services
+│       │   ├── safe_html.py           # HTML sanitizer preserving LaTeX math blocks
+│       │   └── mobile_server.py       # WiFi HTTP/WebSocket sync server & QR generator
+│       ├── storage/                   # SQLite v2 UnitOfWork, schema_v2.sql & repositories
+│       └── theming/ & web_engine/     # QSS templates & shared QWebEngineProfile
+├── specZ/                             # Complete Prototype 2 Whitepapers & Technical Specs
+│   ├── 01_ARCHITECTURE_AND_PROJECT_STRUCTURE.md
+│   ├── 02_DATABASE_AND_SQL_SPECIFICATION.md
+│   ├── 03_THEMING_QSS_AND_CSS_ARCHITECTURE.md
+│   ├── 04_MATHJAX_AND_WEBENGINE_PERFORMANCE.md
+│   ├── 05_SCHEDULING_AND_REVIEW_ENGINE.md
+│   ├── 06_DSL_COMPILER_AND_IMPORT_EXPORT.md
+│   ├── 07_UI_VIEWS_AND_MASS_BROWSER_SPEC.md
+│   ├── 08_MOBILE_COMPANION_AND_ROADMAP.md
+│   └── tags_default.csv               # 2,000 standard scientific tags in English
+├── to_import/                         # Example Morphism DSL (.mdsl) deck files
+├── tools/
+│   └── migrate_proto1.py              # Bi-directional migration between JSON decks & SQLite v2
 ├── scripts/
-│   ├── courses_builder/               # Modular exam course builders
-│   │   ├── em_i2.py                   # Electricidad y Magnetismo I2 (FIS1533)
-│   │   ├── real_i3.py                 # Análisis Real I3 (MAT2514)
-│   │   ├── quimica_i2.py              # Química para Ingenieros I2 (QIM100E)
-│   │   ├── ofg_muerte.py              # Ritos Funerarios Grecia Antigua (MED836)
-│   │   └── base_84.py                 # Base foundational syllabus definitions
+│   ├── courses_builder/               # Modular exam course builders (FIS1533, MAT2514, QIM100E, MED836)
 │   ├── generate_massive_courses.py    # Complete exam course compiler
 │   ├── update_android_app.py          # Android seed courses & asset synchronization
 │   ├── build_apk.sh                   # Standalone Android APK build toolchain
 │   ├── run.sh                         # Linux/macOS launcher
-│   ├── setup.sh                       # Virtual environment & dependency installer
 │   └── install_desktop.sh             # Linux XDG desktop integration
 ├── android/                           # Complete Android AAPT2/D8 source tree
 ├── Courses/                           # 4 enriched official courses (JSON format)
 ├── themes/                            # JSON theme definitions (including Bisexual Midnight)
-├── tests/                             # Headless & unit test suite
-├── morphism-srs-plus.apk              # Pre-compiled standalone Android APK
-├── main.py                            # Clean application entry point
+├── tests/                             # Unified 34-test test suite (Morphism Plus + Proto 2)
+├── morphism-srs-plus.apk              # Pre-compiled standalone Android APK (928 KB)
+├── main.py                            # Multi-target application entry point
+├── run_proto2.py                      # Dedicated Proto 2 application launcher
 ├── run.sh                             # Fast root launcher
 └── build_apk.sh                       # Root APK compilation shortcut
 ```
+
+### Running Proto 2
+To launch the Proto 2 SQLite v2 interface:
+```bash
+./run_proto2.py
+# or
+python main.py --proto2
+```
+
+---
+
+## 🔬 MathJax 3 Offline Engine & Mathematical Notation Fixes
+
+Morphism SRS Plus features a hardened, offline vector MathJax 3 rendering engine designed for rigorous mathematical study:
+
+1. **Cloze Delimiter Separation inside Math**: Clozes written inside LaTeX (`$$\mathbf{A} = {{c1::\mathbf{B}}}$$` or `$\nabla \times \mathbf{E} = {{c1::\mathbf{0}}}$`) automatically split LaTeX delimiters around the cloze tag. The HTML `<span>` tag is kept outside the TeX parser, eliminating TeX syntax crashes and ensuring both math expressions compile with zero errors.
+2. **Built-in Shorthand Macro Catalog**: 30+ standard shorthand macros pre-configured offline (`\RR`, `\CC`, `\NN`, `\ZZ`, `\QQ`, `\FF`, `\norm{x}`, `\abs{x}`, `\inner{u, v}`, `\parens{x}`, `\Hom`, `\Ker`, `\Im`, `\Aut`, `\End`, `\id`, `\tensor`, `\d`, etc.).
+3. **Sequential Promise Queue**: `_typesetMath` employs a serialized promise chain preventing `MathJax is already running` race conditions when switching cards or revealing answers rapidly.
+4. **Memory Leak Prevention**: Selective `MathJax.typesetClear()` isolates target containers before rendering new content, preventing dead DOM node buildup.
+5. **No Horizontal Clipping**: Equations of any width (including wide matrices, Frobenius series, and Maxwell derivations) render at full vector sharpness with smooth horizontal touch-scrolling and sleek non-intrusive scrollbars.
 
 ---
 

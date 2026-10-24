@@ -72,6 +72,14 @@ class TestMorphismPlus(unittest.TestCase):
         self.assertEqual(d["type"], "ClozeCard")
         self.assertEqual(d["title"], "Euler Formula")
 
+        # Test cloze inside math block cleanly splits math delimiters
+        cloze_math = ClozeCard("Math Cloze", r"$$\mathbf{A} \times \mathbf{B} = {{c1::\mathbf{C}::hint}}$$")
+        front_m = cloze_math.get_html_front()
+        back_m = cloze_math.get_html_back()
+        self.assertNotIn(r"<span class='cloze-bracket'>[hint]</span>$$", front_m)
+        self.assertIn(r"$$\mathbf{A} \times \mathbf{B} = $$<span class='cloze-bracket'>[hint]</span>", front_m)
+        self.assertIn(r"<span class='cloze-revealed'>$$\mathbf{C}$$</span>", back_m)
+
     def test_search_and_filter(self):
         """Verify note search matching across title, tags, and cards."""
         note = NoteNode(title="Linear Transformations and Kernels", tags=["algebra", "matrices"])

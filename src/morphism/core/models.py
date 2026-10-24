@@ -162,24 +162,55 @@ class ClozeCard(ReviewObject):
     def get_title(self) -> str:
         return self.title
 
-    def get_html_front(self) -> str:
-        def repl(match):
-            parts = match.group(1).split("::", 1)
-            if len(parts) >= 2:
-                hint = parts[1].strip()
-                return f"<span class='cloze-bracket'>[{hint}]</span>"
-            return "<span class='cloze-bracket'>[...]</span>"
+    @staticmethod
+    def _process_cloze_math(text: str, is_back: bool) -> str:
+        if not text:
+            return ""
 
-        front_text = re.sub(r"\{\{c\d+::(.*?)\}\}", repl, self.text, flags=re.DOTALL)
+        def math_repl(math_match):
+            block = math_match.group(0)
+            is_display = block.startswith("$$")
+            delim = "$$" if is_display else "$"
+            inner = block[len(delim):-len(delim)]
+            if not re.search(r"\{\{c\d+::", inner):
+                return block
+
+            parts = re.split(r"(\{\{c\d+::.*?\}\})", inner, flags=re.DOTALL)
+            res = []
+            for p in parts:
+                m = re.match(r"^\{\{c\d+::(.*?)\}\}$", p, flags=re.DOTALL)
+                if m:
+                    if not is_back:
+                        c_parts = m.group(1).split("::", 1)
+                        hint = c_parts[1].strip() if len(c_parts) > 1 else "..."
+                        res.append(f"<span class='cloze-bracket'>[{hint}]</span>")
+                    else:
+                        ans = m.group(1).split("::", 1)[0].strip()
+                        res.append(f"<span class='cloze-revealed'>{delim}{ans}{delim}</span>")
+                elif p.strip():
+                    res.append(f"{delim}{p}{delim}")
+            return "".join(res)
+
+        out = re.sub(r"(\$\$[\s\S]*?\$\$|\$[^\$]+?\$)", math_repl, text)
+
+        def text_repl(m):
+            if not is_back:
+                c_parts = m.group(1).split("::", 1)
+                hint = c_parts[1].strip() if len(c_parts) > 1 else "..."
+                return f"<span class='cloze-bracket'>[{hint}]</span>"
+            else:
+                ans = m.group(1).split("::", 1)[0]
+                return f"<span class='cloze-revealed'>{ans}</span>"
+
+        out = re.sub(r"\{\{c\d+::(.*?)\}\}", text_repl, out, flags=re.DOTALL)
+        return out
+
+    def get_html_front(self) -> str:
+        front_text = self._process_cloze_math(self.text, is_back=False)
         return f"<div class='card-title'>{self.title}</div><div class='card-body'>{front_text}</div>"
 
     def get_html_back(self) -> str:
-        def repl(match):
-            parts = match.group(1).split("::", 1)
-            answer = parts[0]
-            return f"<span class='cloze-revealed'>{answer}</span>"
-
-        back_text = re.sub(r"\{\{c\d+::(.*?)\}\}", repl, self.text, flags=re.DOTALL)
+        back_text = self._process_cloze_math(self.text, is_back=True)
         return f"<div class='card-body'>{back_text}</div>"
 
     def to_dict(self, include_scheduling: bool = True) -> Dict[str, Any]:

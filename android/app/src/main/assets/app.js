@@ -4161,12 +4161,64 @@ class MorphismApp {
         this._renderCardFront();
     }
 
+    _processCloze(text, isBack) {
+        if (!text) return "";
+        let out = text;
+        // 1. Separate cloze deletions that appear INSIDE LaTeX math blocks ($$...$$ and $...$)
+        out = out.replace(/(\$\$[\s\S]*?\$\$|\$[^\$]+?\$)/g, (mathBlock) => {
+            const isDisplay = mathBlock.startsWith("$$");
+            const delim = isDisplay ? "$$" : "$";
+            const inner = mathBlock.slice(delim.length, -delim.length);
+            if (!/\{\{c\d+::/.test(inner)) return mathBlock;
+
+            const parts = inner.split(/(\{\{c\d+::.*?\}\})/g);
+            let res = "";
+            for (let i = 0; i < parts.length; i++) {
+                const p = parts[i];
+                const m = p.match(/^\{\{c\d+::(.*?)\}\}$/);
+                if (m) {
+                    if (!isBack) {
+                        const cParts = m[1].split("::");
+                        const hint = cParts.length > 1 ? cParts[1].trim() : "...";
+                        res += `<span class="cloze-bracket" onclick="window.app.showAnswer()">[${hint}]</span>`;
+                    } else {
+                        const ans = m[1].split("::")[0].trim();
+                        res += `<span class="cloze-revealed">${delim}${ans}${delim}</span>`;
+                    }
+                } else if (p.trim().length > 0) {
+                    res += `${delim}${p}${delim}`;
+                }
+            }
+            return res;
+        });
+
+        // 2. Process any remaining cloze deletions in standard text
+        if (!isBack) {
+            out = out.replace(/\{\{c\d+::(.*?)\}\}/gs, (match, p1) => {
+                const parts = p1.split("::");
+                const hint = parts.length > 1 ? parts[1].trim() : "...";
+                return `<span class="cloze-bracket" onclick="window.app.showAnswer()">[${hint}]</span>`;
+            });
+        } else {
+            out = out.replace(/\{\{c\d+::(.*?)\}\}/gs, (match, p1) => {
+                const answer = p1.split("::")[0];
+                return `<span class="cloze-revealed">${answer}</span>`;
+            });
+        }
+        return out;
+    }
+
     _formatContent(raw) {
         if (!raw) return "";
-        if (/<(p|div|br|table|ul|ol|li)\b/i.test(raw)) {
-            return raw;
+        // Sanitize < and > inside math blocks so HTML doesn't parse them as tags
+        let text = raw.replace(/(\$\$[\s\S]*?\$\$|\$[^\$]+?\$)/g, (block) => {
+            return block.replace(/</g, ' \\lt ').replace(/>/g, ' \\gt ');
+        });
+
+        if (/<(p|div|br|table|ul|ol|li)\b/i.test(text)) {
+            return text;
         }
-        return raw.split(/(\$\$[\s\S]*?\$\$)/g).map((part) => {
+        return text.split(/(\$\$[\s\S]*?\$\$)/g).map((part) => {
             if (part.startsWith('$$') && part.endsWith('$$')) {
                 return part;
             }
@@ -4183,11 +4235,7 @@ class MorphismApp {
 
         if (card.type === 'ClozeCard') {
             const raw = card.text || "";
-            const frontHtml = raw.replace(/\{\{c\d+::(.*?)\}\}/gs, (match, p1) => {
-                const parts = p1.split("::");
-                const hint = parts.length > 1 ? parts[1].trim() : "...";
-                return `<span class="cloze-bracket" onclick="window.app.showAnswer()">[${hint}]</span>`;
-            });
+            const frontHtml = this._processCloze(raw, false);
             frontContainer.innerHTML = `<div class="card-title">${card.title}</div><div class="card-body">${this._formatContent(frontHtml)}</div>`;
         } else if (card.type === 'ProofSequenceCard') {
             frontContainer.innerHTML = `<div class="card-title">${card.title}</div><div class="card-body"><strong>Premisa / Teorema a demostrar:</strong><br>${this._formatContent(card.premise)}</div>`;
@@ -4208,10 +4256,7 @@ class MorphismApp {
 
         if (card.type === 'ClozeCard') {
             const raw = card.text || "";
-            const backHtml = raw.replace(/\{\{c\d+::(.*?)\}\}/gs, (match, p1) => {
-                const answer = p1.split("::")[0];
-                return `<span class="cloze-revealed">${answer}</span>`;
-            });
+            const backHtml = this._processCloze(raw, true);
             backContainer.innerHTML = `<hr class="divider"><div class="card-body">${this._formatContent(backHtml)}</div>`;
         } else if (card.type === 'ProofSequenceCard') {
             const steps = (card.steps || []).map((s, idx) => `<li class="proof-step"><b>Paso ${idx+1}:</b> ${this._formatContent(s)}</li>`).join("");
@@ -4302,10 +4347,35 @@ class MorphismApp {
         `;
     }
 
-    _typesetMath() {
-        if (window.MathJax && window.MathJax.typesetPromise) {
-            window.MathJax.typesetPromise().catch(err => console.log(err));
+    _typesetMath(elements) {
+        if (!window.MathJax) return Promise.resolve();
+
+        if (!this._typesetQueue) {
+            this._typesetQueue = Promise.resolve();
         }
+
+        const targets = elements || [
+            document.getElementById('review-front-content'),
+            document.getElementById('review-back-content'),
+            document.getElementById('scratch-preview')
+        ].filter(Boolean);
+
+        this._typesetQueue = this._typesetQueue
+            .then(() => {
+                if (window.MathJax.typesetClear && targets.length > 0) {
+                    try {
+                        window.MathJax.typesetClear(targets);
+                    } catch (e) {
+                        console.warn("MathJax typesetClear warning:", e);
+                    }
+                }
+                if (window.MathJax.typesetPromise) {
+                    return window.MathJax.typesetPromise(targets);
+                }
+            })
+            .catch(err => console.warn("MathJax typesetQueue error:", err));
+
+        return this._typesetQueue;
     }
 
     _setupScratchbook() {
